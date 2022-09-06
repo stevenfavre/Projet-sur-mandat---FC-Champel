@@ -1,3 +1,8 @@
+<?php
+session_start(['cookie_lifetime' => 3600,]);
+require_once "functions/steven_fonctions.php";
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -18,30 +23,14 @@
         <div class="col-md-8 col-xl-6 text-center mx-auto">
           <p class="fw-bold text-success mb-2">Liste des matchs</p>
           <h3 class="fw-bold">Match du tournoi :&nbsp;</h3>
+          <?php 
+          afficherSalleEtDate($_GET['id_tournoi']);
+          ?>
         </div>
       </div>
-      <div class="row row-cols-1 row-cols-md-2 mx-auto" style="max-width: 900px;">
-        <div class="col d-xl-flex justify-content-xl-center align-items-xl-center mb-5">
-          <h5 class="fw-bold text-center">Score : 0 - 0</h5>
-        </div>
-        <div class="col d-md-flex align-items-md-end align-items-lg-center mb-5">
-          <div>
-            <h5 class="fw-bold">Team B - Team D</h5>
-            <p class="text-muted mb-4">Lieu :&nbsp;<br>Date :&nbsp;<br></p>
-          </div>
-        </div>
-      </div>
-      <div class="row row-cols-1 row-cols-md-2 mx-auto" style="max-width: 900px;">
-        <div class="col text-center d-xl-flex order-md-last justify-content-xl-center align-items-xl-center mb-5">
-          <h5 class="fw-bold text-center">Score : 0 - 0</h5>
-        </div>
-        <div class="col d-md-flex align-items-md-end align-items-lg-center mb-5">
-          <div>
-            <h5 class="fw-bold">Team A - Team B</h5>
-            <p class="text-muted mb-4">Lieu :&nbsp;<br>Date :&nbsp;<br></p>
-          </div>
-        </div>
-      </div>
+      <?php
+      afficherMatch($_GET['id_tournoi']);
+      ?>
     </div>
   </section>
   <?php include_once('default_pages/footer.php'); ?>

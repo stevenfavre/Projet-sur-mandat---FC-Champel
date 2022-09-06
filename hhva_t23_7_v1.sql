@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : hhva.myd.infomaniak.com
--- Généré le :  jeu. 01 sep. 2022 à 13:31
+-- Généré le :  mar. 06 sep. 2022 à 11:24
 -- Version du serveur :  10.4.21-MariaDB-1:10.4.21+maria~stretch-log
 -- Version de PHP :  7.4.30
 
@@ -35,6 +35,14 @@ CREATE TABLE `Adresse` (
   `NPA_Adresse` int(4) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Déchargement des données de la table `Adresse`
+--
+
+INSERT INTO `Adresse` (`ID_Adresse`, `Rue_Adresse`, `Localite_Adresse`, `NPA_Adresse`) VALUES
+(1, 'Rue Le-Corbusier 1', 'Genève', 1208),
+(2, 'Route des Jeunes 10', 'Grand-Lancy', 1212);
+
 -- --------------------------------------------------------
 
 --
@@ -47,6 +55,14 @@ CREATE TABLE `Club` (
   `Url_Image_Club` varchar(255) DEFAULT NULL,
   `FK_ID_Adresse` int(5) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Déchargement des données de la table `Club`
+--
+
+INSERT INTO `Club` (`ID_Club`, `Nom_Club`, `Url_Image_Club`, `FK_ID_Adresse`) VALUES
+(1, 'FC Champel', 'FC_Champel.png', 1),
+(2, 'Servette FC', 'Servette_FC.svg', 2);
 
 -- --------------------------------------------------------
 
@@ -62,19 +78,15 @@ CREATE TABLE `Equipe` (
   `FK_ID_Groupe` int(5) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- --------------------------------------------------------
-
 --
--- Structure de la table `Equipe_Match`
+-- Déchargement des données de la table `Equipe`
 --
 
-CREATE TABLE `Equipe_Match` (
-  `ID_Equipe_Match` int(5) NOT NULL,
-  `FK_ID_Equipe_L` int(5) NOT NULL,
-  `FK_ID_Equipe_V` int(5) NOT NULL,
-  `But_Equipe_Local` int(1) NOT NULL,
-  `But_Equipe_Visiteur` int(1) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+INSERT INTO `Equipe` (`ID_Equipe`, `Nom_Equipe`, `Degres_Equipe`, `FK_ID_Club`, `FK_ID_Groupe`) VALUES
+(1, 'Champel FC 1', 'D2', 1, 1),
+(2, 'Servette FC 1', 'D1', 2, 2),
+(3, 'Champel FC 1', 'D1', 1, 2),
+(4, 'Servette FC 1', 'D2', 2, 1);
 
 -- --------------------------------------------------------
 
@@ -86,6 +98,14 @@ CREATE TABLE `Groupe` (
   `ID_Groupe` int(5) NOT NULL,
   `Nom_Groupe` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Déchargement des données de la table `Groupe`
+--
+
+INSERT INTO `Groupe` (`ID_Groupe`, `Nom_Groupe`) VALUES
+(1, 'Groupe A'),
+(2, 'Groupe B');
 
 -- --------------------------------------------------------
 
@@ -114,10 +134,22 @@ CREATE TABLE `Matchs` (
   `Heure_Fin_Match` time NOT NULL,
   `Duree_Match` int(3) NOT NULL,
   `Type_Match` varchar(25) NOT NULL,
+  `But_Local_Match` int(3) NOT NULL,
+  `But_Visiteur_Match` int(3) NOT NULL,
+  `FK_ID_Local` int(5) NOT NULL,
+  `FK_ID_Visiteur` int(5) NOT NULL,
   `FK_ID_Groupe` int(5) NOT NULL,
   `FK_ID_Tournoi` int(5) NOT NULL,
   `FK_ID_Terrain` int(5) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Déchargement des données de la table `Matchs`
+--
+
+INSERT INTO `Matchs` (`ID_Match`, `Date_Match`, `Heure_Debut_Match`, `Heure_Fin_Match`, `Duree_Match`, `Type_Match`, `But_Local_Match`, `But_Visiteur_Match`, `FK_ID_Local`, `FK_ID_Visiteur`, `FK_ID_Groupe`, `FK_ID_Tournoi`, `FK_ID_Terrain`) VALUES
+(1, '2022-09-24', '09:00:00', '09:12:00', 12, 'Pool', 0, 0, 1, 4, 1, 1, 1),
+(2, '2022-09-24', '10:00:00', '10:12:00', 12, 'Pool', 0, 0, 2, 3, 2, 1, 2);
 
 -- --------------------------------------------------------
 
@@ -131,6 +163,14 @@ CREATE TABLE `Salle` (
   `Statut_Salle` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Déchargement des données de la table `Salle`
+--
+
+INSERT INTO `Salle` (`ID_Salle`, `Nom_Salle`, `Statut_Salle`) VALUES
+(1, 'Salle 1', 1),
+(2, 'Salle 2', 1);
+
 -- --------------------------------------------------------
 
 --
@@ -140,8 +180,17 @@ CREATE TABLE `Salle` (
 CREATE TABLE `Terrain` (
   `ID_Terrain` int(5) NOT NULL,
   `Numero_Terrain` int(2) NOT NULL,
-  `Statut_Terrain` varchar(25) NOT NULL
+  `Statut_Terrain` varchar(25) NOT NULL,
+  `FK_ID_Salle_T` int(5) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Déchargement des données de la table `Terrain`
+--
+
+INSERT INTO `Terrain` (`ID_Terrain`, `Numero_Terrain`, `Statut_Terrain`, `FK_ID_Salle_T`) VALUES
+(1, 1, 'Disponible', 1),
+(2, 1, 'Disponible', 2);
 
 -- --------------------------------------------------------
 
@@ -155,6 +204,14 @@ CREATE TABLE `Tournoi` (
   `Date_Fin_Tournoi` date NOT NULL,
   `FK_ID_Salle` int(5) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Déchargement des données de la table `Tournoi`
+--
+
+INSERT INTO `Tournoi` (`ID_Tournoi`, `Date_Debut_Tournoi`, `Date_Fin_Tournoi`, `FK_ID_Salle`) VALUES
+(1, '2022-09-24', '2022-09-25', 1),
+(2, '2022-10-01', '2022-10-02', 2);
 
 --
 -- Index pour les tables déchargées
@@ -182,14 +239,6 @@ ALTER TABLE `Equipe`
   ADD KEY `FK_ID_Groupe_Equipe` (`FK_ID_Groupe`);
 
 --
--- Index pour la table `Equipe_Match`
---
-ALTER TABLE `Equipe_Match`
-  ADD PRIMARY KEY (`ID_Equipe_Match`),
-  ADD KEY `FK_ID_EQUIPE_L` (`FK_ID_Equipe_L`),
-  ADD KEY `FK_ID_EQUIPE_V` (`FK_ID_Equipe_V`);
-
---
 -- Index pour la table `Groupe`
 --
 ALTER TABLE `Groupe`
@@ -210,7 +259,9 @@ ALTER TABLE `Matchs`
   ADD PRIMARY KEY (`ID_Match`),
   ADD KEY `FK_ID_Groupe` (`FK_ID_Groupe`),
   ADD KEY `FK_ID_Tournoi_Match` (`FK_ID_Tournoi`),
-  ADD KEY `FK_ID_Terrain` (`FK_ID_Terrain`);
+  ADD KEY `FK_ID_Terrain` (`FK_ID_Terrain`),
+  ADD KEY `FK_ID_Equipe_L` (`FK_ID_Local`),
+  ADD KEY `FK_ID_Equipe_V` (`FK_ID_Visiteur`);
 
 --
 -- Index pour la table `Salle`
@@ -222,7 +273,8 @@ ALTER TABLE `Salle`
 -- Index pour la table `Terrain`
 --
 ALTER TABLE `Terrain`
-  ADD PRIMARY KEY (`ID_Terrain`);
+  ADD PRIMARY KEY (`ID_Terrain`),
+  ADD KEY `FK_ID_Salle_T` (`FK_ID_Salle_T`);
 
 --
 -- Index pour la table `Tournoi`
@@ -239,31 +291,25 @@ ALTER TABLE `Tournoi`
 -- AUTO_INCREMENT pour la table `Adresse`
 --
 ALTER TABLE `Adresse`
-  MODIFY `ID_Adresse` int(5) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID_Adresse` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT pour la table `Club`
 --
 ALTER TABLE `Club`
-  MODIFY `ID_Club` int(5) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID_Club` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT pour la table `Equipe`
 --
 ALTER TABLE `Equipe`
-  MODIFY `ID_Equipe` int(5) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT pour la table `Equipe_Match`
---
-ALTER TABLE `Equipe_Match`
-  MODIFY `ID_Equipe_Match` int(5) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID_Equipe` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT pour la table `Groupe`
 --
 ALTER TABLE `Groupe`
-  MODIFY `ID_Groupe` int(5) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID_Groupe` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT pour la table `Inscription_Tournoi`
@@ -275,25 +321,25 @@ ALTER TABLE `Inscription_Tournoi`
 -- AUTO_INCREMENT pour la table `Matchs`
 --
 ALTER TABLE `Matchs`
-  MODIFY `ID_Match` int(5) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID_Match` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT pour la table `Salle`
 --
 ALTER TABLE `Salle`
-  MODIFY `ID_Salle` int(5) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID_Salle` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT pour la table `Terrain`
 --
 ALTER TABLE `Terrain`
-  MODIFY `ID_Terrain` int(5) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID_Terrain` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT pour la table `Tournoi`
 --
 ALTER TABLE `Tournoi`
-  MODIFY `ID_Tournoi` int(5) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID_Tournoi` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Contraintes pour les tables déchargées
@@ -313,13 +359,6 @@ ALTER TABLE `Equipe`
   ADD CONSTRAINT `FK_ID_Groupe_Equipe` FOREIGN KEY (`FK_ID_Groupe`) REFERENCES `Groupe` (`ID_Groupe`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Contraintes pour la table `Equipe_Match`
---
-ALTER TABLE `Equipe_Match`
-  ADD CONSTRAINT `FK_ID_EQUIPE_L` FOREIGN KEY (`FK_ID_Equipe_L`) REFERENCES `Equipe` (`ID_Equipe`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `FK_ID_EQUIPE_V` FOREIGN KEY (`FK_ID_Equipe_V`) REFERENCES `Equipe` (`ID_Equipe`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
 -- Contraintes pour la table `Inscription_Tournoi`
 --
 ALTER TABLE `Inscription_Tournoi`
@@ -330,9 +369,17 @@ ALTER TABLE `Inscription_Tournoi`
 -- Contraintes pour la table `Matchs`
 --
 ALTER TABLE `Matchs`
+  ADD CONSTRAINT `FK_ID_Equipe_L` FOREIGN KEY (`FK_ID_Local`) REFERENCES `Equipe` (`ID_Equipe`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `FK_ID_Equipe_V` FOREIGN KEY (`FK_ID_Visiteur`) REFERENCES `Equipe` (`ID_Equipe`),
   ADD CONSTRAINT `FK_ID_Groupe` FOREIGN KEY (`FK_ID_Groupe`) REFERENCES `Groupe` (`ID_Groupe`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `FK_ID_Terrain` FOREIGN KEY (`FK_ID_Terrain`) REFERENCES `Terrain` (`ID_Terrain`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `FK_ID_Tournoi_Match` FOREIGN KEY (`FK_ID_Tournoi`) REFERENCES `Tournoi` (`ID_Tournoi`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Contraintes pour la table `Terrain`
+--
+ALTER TABLE `Terrain`
+  ADD CONSTRAINT `FK_ID_Salle_T` FOREIGN KEY (`FK_ID_Salle_T`) REFERENCES `Salle` (`ID_Salle`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Contraintes pour la table `Tournoi`
