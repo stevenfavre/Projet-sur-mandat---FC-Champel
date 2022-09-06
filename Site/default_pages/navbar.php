@@ -11,7 +11,7 @@
                 <li class="nav-item"><a class="nav-link" href="tournois.php">Tournois</a></li>
                 <li class="nav-item"><a class="nav-link" href="inscription_tournoi.php">Equipes</a></li>
             </ul>
-            <a class="btn btn-primary shadow" role="button" href="login.php">Log in</a>
+            <a class="btn btn-primary shadow" role="button" href="login.php" style="margin-right: 1%;">Log in</a>
             <a class="btn btn-primary shadow" role="button" href="signup.php">Sign up</a>
         </div>
     </div>

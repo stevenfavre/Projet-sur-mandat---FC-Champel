@@ -10,8 +10,13 @@ function afficherMatch($tournoi)
         if ($t['ID_Match'] % 2 == 0) {
             echo "<div class=\"row row-cols-1 row-cols-md-2 mx-auto\" style=\"max-width: 900px;\">";
             echo "<div class=\"col d-xl-flex justify-content-xl-center align-items-xl-center mb-5\">";
-            echo "<h5 class=\"fw-bold text-center\">Score : " . $t['But_Local_Match'] . " - " . $t['But_Visiteur_Match'] . "</h5>";
+            echo "<h5 class=\"fw-bold text-center\">Score : " . $t['But_Local_Match'] . " - " . $t['But_Visiteur_Match'] . "</h5>
+            <button type=\"submit\" name=\"submit\" class=\"btn btn-warning\"value=\"m-" . $t['ID_Match'] . "\" style=\"margin-left: 5%;\">
+            <svg xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\" fill=\"currentColor\" class=\"bi bi-pen\" viewBox=\"0 0 16 16\">
+            <path d=\"m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001zm-.644.766a.5.5 0 0 0-.707 0L1.95 11.756l-.764 3.057 3.057-.764L14.44 3.854a.5.5 0 0 0 0-.708l-1.585-1.585z\"/>
+            </svg></button>";
             echo "</div>";
+
             echo "<div class=\"col d-md-flex align-items-md-end align-items-lg-center mb-5\">";
             echo "<div>";
             echo "<h5 class=\"fw-bold\">" . returnNameEquipe($t['FK_ID_Local']) . " - " . returnNameEquipe($t['FK_ID_Visiteur']) . "</h5>";
@@ -21,7 +26,11 @@ function afficherMatch($tournoi)
         } else {
             echo "<div class=\"row row-cols-1 row-cols-md-2 mx-auto\" style=\"max-width: 900px;\">";
             echo "<div class=\"col text-center d-xl-flex order-md-last justify-content-xl-center align-items-xl-center mb-5\">";
-            echo "<h5 class=\"fw-bold text-center\">Score : " . $t['But_Local_Match'] . " - " . $t['But_Visiteur_Match'] . "</h5>";
+            echo "<h5 class=\"fw-bold text-center\">Score : " . $t['But_Local_Match'] . " - " . $t['But_Visiteur_Match'] . "</h5>
+            <button type=\"submit\" name=\"submit\" class=\"btn btn-warning\"value=\"m-" . $t['ID_Match'] . "\" style=\"margin-left: 5%;\">
+            <svg xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\" fill=\"currentColor\" class=\"bi bi-pen\" viewBox=\"0 0 16 16\">
+            <path d=\"m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001zm-.644.766a.5.5 0 0 0-.707 0L1.95 11.756l-.764 3.057 3.057-.764L14.44 3.854a.5.5 0 0 0 0-.708l-1.585-1.585z\"/>
+            </svg></button>";
             echo "</div>";
             echo "<div class=\"col d-md-flex align-items-md-end align-items-lg-center mb-5\">";
             echo "<div>";
@@ -99,13 +108,16 @@ function selectTerrainWithID($id_terrain)
 }
 
 // Permet d'afficher les informationsd'un tournoi, comme la salle et la date du tournoi grâce à son id_terrain
-function afficherSalleEtDate($id_tournoi){
-    foreach (selectAllTournoi() as $tournoi){
-        echo "<h4 class=\"fw-bold\">Salle : " . selectSalleWithIDTerrain($tournoi['FK_ID_Terain']) . "&nbsp;</h4>";
+function afficherSalleEtDate($id_tournoi)
+{
+    foreach (selectAllTournoi() as $tournoi) {
+        echo "<h4 class=\"fw-bold\">Salle : " . selectIDSalleWithIDTerrain($tournoi['FK_ID_Terain']) . "&nbsp;</h4>";
     }
 }
 
-function selectAllTournoi(){
+// Permet de retourner la liste de tout les tournois 
+function selectAllTournoi()
+{
     try {
         $db = connectDB();
         $sql = "SELECT * FROM `Tournoi`;";
@@ -118,10 +130,11 @@ function selectAllTournoi(){
     }
 }
 
-/* function selectSalleWithIDTerrain($id_salle){
+function selectIDSalleWithIDTerrain($id_terrain)
+{
     try {
         $db = connectDB();
-        $sql = "SELECT * FROM `Salle` WHERE `ID_Terrain` = " . $id_salle . ";";
+        $sql = "SELECT * FROM `Salle` WHERE `ID_Terrain` = " . $id_terrain . ";";
         $request = $db->prepare($sql);
         $request->execute();
         return $request->fetchAll(PDO::FETCH_ASSOC);
@@ -129,6 +142,4 @@ function selectAllTournoi(){
         echo "<script>alert(\"" . $e->getMessage() . "\");</script>";
         debug();
     }
-} */
-
-
+}

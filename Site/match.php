@@ -23,14 +23,16 @@ require_once "functions/steven_fonctions.php";
         <div class="col-md-8 col-xl-6 text-center mx-auto">
           <p class="fw-bold text-success mb-2">Liste des matchs</p>
           <h3 class="fw-bold">Match du tournoi :&nbsp;</h3>
-          <?php 
-          afficherSalleEtDate($_GET['id_tournoi']);
+          <?php
+          // afficherSalleEtDate($_GET['id_tournoi']);
           ?>
         </div>
       </div>
-      <?php
-      afficherMatch($_GET['id_tournoi']);
-      ?>
+      <form action="details_match.php" method="post">
+        <?php
+        afficherMatch($_GET['id_tournoi']);
+        ?>
+      </form>
     </div>
   </section>
   <?php include_once('default_pages/footer.php'); ?>
