@@ -182,7 +182,6 @@ function updateUpScore($id_match, $localORvisiteur)
 // Permet de réduire le score de l'équipe fournit en paramètres
 function updateDownScore($id_match, $localORvisiteur)
 {
-
     try {
         $db = connectDB();
 
@@ -197,5 +196,35 @@ function updateDownScore($id_match, $localORvisiteur)
     } catch (\Throwable $e) {
         echo "<script>alert(\"Update DownScore failed! type: " . $localORvisiteur . " - " . $e->getMessage() . "\");</script>";
         debug();
+    }
+}
+
+// Permet de créer un match dans la bsase de données
+function insertMatch($date_match, $heure_debut, $heure_fin, $duree_match, $type_match, $fk_id_local, $fk_id_visiteur, $fk_id_groupe, $fk_id_tournoi, $fk_id_terrain)
+{
+    try {
+        $db = connectDB();
+        $sql = "INSERT INTO `Matchs` (`ID_Match`, `Date_Match`, `Heure_Debut_Match`, `Heure_Fin_Match`, `Duree_Match`, `Type_Match`, `But_Local_Match`,`But_Visiteur_Match`, `FK_ID_Local`, `FK_ID_Visiteur`, `FK_ID_Groupe`, `FK_ID_Tournoi`, `FK_ID_Terrain`)
+        VALUES (`null`, '$date_match', '$heure_debut', '$heure_fin', '$duree_match', '$type_match', '$fk_id_local', '$fk_id_visiteur', '$fk_id_groupe', '$fk_id_tournoi',  '$fk_id_terrain');";
+        $request = $db->prepare($sql);
+        $request->execute();
+    } catch (\Throwable $e) {
+        debug();
+    }
+}
+
+// Permet d'afficher tout les tournois 
+function affichageAllTournois()
+{
+    // Pour chaque tournoi, les afficher de la manière suivante
+    foreach (selectAllTournoi() as $tournoi) {
+        echo "<div class=\"col mb-4\">
+          <div><a href=\"match.php?id_tournoi=" . $tournoi['ID_Tournoi'] . "\"><img class=\"rounded img-fluid shadow w-100 fit-cover\" src=\"assets/img/products/2173435-silhouette-joueur-de-football-tir-rapide-un-ballon-sur-un-fond-blanc-illustration-vectoriel.jpg\" style=\"height: 250px;\"></a>
+            <div class=\"py-4\">
+              <h4 class=\"fw-bold\">Tournoi du " . $tournoi['Date_Debut_Tournoi'] . "</h4>
+              <p class=\"text-muted\">Ce tournoi est organisé à [nom_salle].</p>
+            </div>
+          </div>
+        </div>";
     }
 }

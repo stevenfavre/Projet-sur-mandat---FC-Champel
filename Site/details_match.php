@@ -6,11 +6,7 @@ $submit = filter_input(INPUT_GET, 'submit');
 
 if (substr($submit, 0, 1) == 'm') { // S'il s'agit de l'affichage d'un match
     refreshSessionMatch(selectMatchWithID(substr($submit, 2)));
-} elseif (
-    substr($submit, 0, 1) == 'U'
-    && $_SESSION['match']['But_Local_Match'] != 0
-    && $_SESSION['match']['But_Visiteur_Match'] != 0
-) { // S'il s'agit d'une augmentation du score
+} elseif (substr($submit, 0, 1) == 'U') { // S'il s'agit d'une augmentation du score
     updateUpScore($_SESSION['match']['ID_Match'], $submit[1]);
     refreshSessionMatch(selectMatchWithID($_SESSION['match']['ID_Match']));
 } elseif (
