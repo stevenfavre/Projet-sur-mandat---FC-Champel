@@ -1,3 +1,34 @@
+<?php
+session_start(['cookie_lifetime' => 3600,]);
+require_once "./functions/steven_fonctions.php";
+
+$submit = filter_input(INPUT_GET, 'submit');
+
+if (substr($submit, 0, 1) == 'm') { // S'il s'agit de l'affichage d'un match
+    refreshSessionMatch(selectMatchWithID(substr($submit, 2)));
+} elseif (
+    substr($submit, 0, 1) == 'U'
+    && $_SESSION['match']['But_Local_Match'] != 0
+    && $_SESSION['match']['But_Visiteur_Match'] != 0
+) { // S'il s'agit d'une augmentation du score
+    updateUpScore($_SESSION['match']['ID_Match'], $submit[1]);
+    refreshSessionMatch(selectMatchWithID($_SESSION['match']['ID_Match']));
+} elseif (
+    substr($submit, 0, 1) == 'D'
+    && $_SESSION['match']['But_Local_Match'] != 0
+    && $_SESSION['match']['But_Visiteur_Match'] != 0
+) { // S'il s'agit d'une réduction du score
+    updateDownScore($_SESSION['match']['ID_Match'], $submit[1]);
+    refreshSessionMatch(selectMatchWithID($_SESSION['match']['ID_Match']));
+}
+
+function refreshSessionMatch($matchs)
+{
+    foreach ($matchs as $match)
+        $_SESSION['match'] = $match;
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -17,7 +48,7 @@
             <div class="row pt-5">
                 <div class="col-md-8 col-xl-6 text-center text-md-start mx-auto">
                     <div class="text-center">
-                        <h1 class="fw-bold">Détail du match de : </h1>
+                        <h2 class="fw-bold">Détail du match de : <?php echo $_SESSION['match']['Date_Match']; ?></h2>
                     </div>
                 </div>
             </div>
@@ -25,59 +56,54 @@
     </header>
     <section class="py-5">
         <div class="container">
-            <table class="table">
-                <thead>
-                    <td class="text-center">
-                        <h2>Equipe A</h2>
-                    </td>
-                    <td>
+            <form action="details_match.php" action="get">
+                <table class="table">
+                    <thead>
+                        <td class="text-center">
+                            <h3><?php echo returnNameEquipe($_SESSION['match']['FK_ID_Local']); ?></h3>
+                        </td>
+                        <td class="text-center">
+                            <h3><?php echo returnNameEquipe($_SESSION['match']['FK_ID_Visiteur']); ?></h3>
+                        </td>
 
-                    </td>
-                    <td class="text-center">
-                        <h2>Equipe B</h2>
-                    </td>
+                    </thead>
+                    <tr>
+                        <td class="text-center">
+                            <button type="submit" class="btn btn-primary btn-xs" name="submit" value="UL<?php echo $_SESSION['match']['FK_ID_Local']; ?>">
+                                <ion-icon name="chevron-up-outline"></ion-icon>
+                            </button>
+                        </td>
+                        <td class="text-center">
+                            <button type="submit" class="btn btn-primary btn-xs" name="submit" value="UV<?php echo $_SESSION['match']['FK_ID_Visiteur']; ?>">
+                                <ion-icon name="chevron-up-outline"></ion-icon>
+                            </button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <h3 class="text-center"><?php echo $_SESSION['match']['But_Local_Match']; ?></h3>
+                        </td>
+                        <td>
+                            <h3 class="text-center"><?php echo $_SESSION['match']['But_Visiteur_Match']; ?></h3>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="text-center">
+                            <button type="submit" class="btn btn-primary btn-xs" name="submit" value="DL<?php echo $_SESSION['match']['FK_ID_Local']; ?>">
+                                <ion-icon name="chevron-down-outline"></ion-icon>
+                            </button>
+                        </td>
+                        <td class="text-center">
+                            <button type="submit" class="btn btn-primary btn-xs" name="submit" value="DV<?php echo $_SESSION['match']['FK_ID_Visiteur']; ?>">
+                                <ion-icon name="chevron-down-outline"></ion-icon>
+                            </button>
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+        <div class="container">
 
-                </thead>
-                <tr>
-                    <td class="text-center">
-                        <button type="submit" class="btn btn-primary btn-xs" value="L-UP">
-                            <ion-icon name="chevron-up-outline"></ion-icon>
-                        </button>
-                    </td>
-                    <td>
-
-                    </td>
-                    <td class="text-center">
-                        <button type="submit" class="btn btn-primary btn-xs" value="V-UP">
-                            <ion-icon name="chevron-up-outline"></ion-icon>
-                        </button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <h3 class="text-center">0</h3>
-                    </td>
-                    <td></td>
-                    <td>
-                        <h3 class="text-center">0</h3>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="text-center">
-                        <button type="submit" class="btn btn-primary btn-xs" value="L-DOWN">
-                            <ion-icon name="chevron-down-outline"></ion-icon>
-                        </button>
-                    </td>
-                    <td>
-
-                    </td>
-                    <td class="text-center">
-                        <button type="submit" class="btn btn-primary btn-xs" value="V-DOWN">
-                            <ion-icon name="chevron-down-outline"></ion-icon>
-                        </button>
-                    </td>
-                </tr>
-            </table>
         </div>
     </section>
     <?php include_once('default_pages/footer.php'); ?>

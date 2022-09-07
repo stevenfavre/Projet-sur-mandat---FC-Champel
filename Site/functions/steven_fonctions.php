@@ -57,6 +57,21 @@ function selectAllMatchTournoi($id_tournoi)
     }
 }
 
+// Permet de retourner un match grâce à son id
+function selectMatchWithID($id_match)
+{
+    try {
+        $db = connectDB();
+        $sql = "SELECT * FROM `Matchs` WHERE `ID_Match` = " . $id_match . ";";
+        $request = $db->prepare($sql);
+        $request->execute();
+        return $request->fetchAll(PDO::FETCH_ASSOC);
+    } catch (\Throwable $e) {
+        echo "<script>alert(\" Select du match id : " . $id_match . " + " . $e->getMessage() . "\");</script>";
+        debug();
+    }
+}
+
 // Permet de retourner le nom de l'équipe
 function returnNameEquipe($id_equipe)
 {
@@ -77,7 +92,7 @@ function selectEquipeWithID($id_equipe)
         $request->execute();
         return $request->fetchAll(PDO::FETCH_ASSOC);
     } catch (\Throwable $e) {
-        echo "<script>alert(\"" . $e->getMessage() . "\");</script>";
+        echo "<script>alert(\"Select de l'equipe id: " . $id_equipe . " + " . $e->getMessage() . "\");</script>";
         debug();
     }
 }
@@ -140,6 +155,47 @@ function selectIDSalleWithIDTerrain($id_terrain)
         return $request->fetchAll(PDO::FETCH_ASSOC);
     } catch (\Throwable $e) {
         echo "<script>alert(\"" . $e->getMessage() . "\");</script>";
+        debug();
+    }
+}
+
+// Permet d'augmenter le score de l'équipe fournit en paramètres
+function updateUpScore($id_match, $localORvisiteur)
+{
+    try {
+        $db = connectDB();
+
+        if ($localORvisiteur == "L") {
+            $sql = "UPDATE Matchs SET But_Local_Match = But_Local_Match + 1 WHERE ID_Match = " . $id_match . ";";
+        } else {
+            $sql = "UPDATE `Matchs` SET `But_Visiteur_Match` = `But_Visiteur_Match` + 1 WHERE `ID_Match` = " . $id_match . ";";
+        }
+
+        $request = $db->prepare($sql);
+        $request->execute();
+    } catch (\Throwable $e) {
+        echo "<script>alert(\"" . $e->getMessage() . "\");</script>";
+        debug();
+    }
+}
+
+// Permet de réduire le score de l'équipe fournit en paramètres
+function updateDownScore($id_match, $localORvisiteur)
+{
+
+    try {
+        $db = connectDB();
+
+        if ($localORvisiteur == "L") {
+            $sql = "UPDATE Matchs SET But_Local_Match = But_Local_Match - 1 WHERE ID_Match = " . $id_match . ";";
+        } else {
+            $sql = "UPDATE Matchs SET But_Visiteur_Match = But_Visiteur_Match - 1 WHERE ID_Match = " . $id_match . ";";
+        }
+
+        $request = $db->prepare($sql);
+        $request->execute();
+    } catch (\Throwable $e) {
+        echo "<script>alert(\"Update DownScore failed! type: " . $localORvisiteur . " - " . $e->getMessage() . "\");</script>";
         debug();
     }
 }

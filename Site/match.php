@@ -28,7 +28,7 @@ require_once "functions/steven_fonctions.php";
           ?>
         </div>
       </div>
-      <form action="details_match.php" method="post">
+      <form action="details_match.php" method="get">
         <?php
         afficherMatch($_GET['id_tournoi']);
         ?>
