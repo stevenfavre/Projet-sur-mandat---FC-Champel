@@ -8,9 +8,7 @@
     $dbName = "hhva_t23_7_v1";
     $dbUser = "hhva_t23_7_v1";
     $dbPwd = "91qrBzoXMA";
-
     static $bdd = null;
-
     if ($bdd === null) {
         $bdd = new PDO("mysql:host=$dbServer;dbname=$dbName;charset=utf8", $dbUser, $dbPwd);
         $bdd->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);

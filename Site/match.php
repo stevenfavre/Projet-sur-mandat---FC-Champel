@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-  <title>Liste des matchs</title>
+  <title>Services - Brand</title>
   <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800&amp;display=swap">
   <link rel="stylesheet" href="assets/fonts/ionicons.min.css">
@@ -18,10 +18,6 @@
         <div class="col-md-8 col-xl-6 text-center mx-auto">
           <p class="fw-bold text-success mb-2">Liste des matchs</p>
           <h3 class="fw-bold">Match du tournoi :&nbsp;</h3>
-          <a class="btn btn-primary shadow" role="button" href="creer_match.php?id_tournoi=<?php echo $_GET['id_tournoi']; ?>">Créer un match</a>
-          <?php
-          // afficherSalleEtDate($_GET['id_tournoi']);
-          ?>
         </div>
       </div>
       <div class="row row-cols-1 row-cols-md-2 mx-auto" style="max-width: 900px;">

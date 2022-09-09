@@ -31,8 +31,8 @@ if (isset($_POST['submit'])) {
     <div class="container py-5">
       <div class="row mb-5">
         <div class="col-md-8 col-xl-6 text-center mx-auto">
-          <p class="fw-bold text-success mb-2">Inscription</p>
-          <h2 class="fw-bold">Inscrivez-vous au prochain tournoi</h2>
+          <p class="fw-bold text-success mb-2">Inscription Equipe</p>
+          <h2 class="fw-bold">Inscrivez une équipe</h2>
         </div>
       </div>
       <div class="row d-flex justify-content-center">
@@ -51,6 +51,8 @@ if (isset($_POST['submit'])) {
               </select>
               <br /><br />
               <div><button class="btn btn-primary shadow d-block w-100" type="submit" name="submit">S'inscrire</button></div>
+              <br /><br />
+              <a class="btn btn-primary shadow" role="button" href="inscription_nouvel_equipe.php">Inscrire une équipe</a>
               <br /><br />
               <div><button class="btn btn-primary shadow d-block w-100" type="reset" name="reset">Annuler</button></div>
             </form>

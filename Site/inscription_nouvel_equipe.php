@@ -31,8 +31,8 @@ if (isset($_POST['submit'])) {
     <div class="container py-5">
       <div class="row mb-5">
         <div class="col-md-8 col-xl-6 text-center mx-auto">
-          <p class="fw-bold text-success mb-2">Inscription</p>
-          <h2 class="fw-bold">Inscrivez-vous au prochain tournoi</h2>
+          <p class="fw-bold text-success mb-2">Inscription Equipe</p>
+          <h2 class="fw-bold">Inscrivez une nouvelle équipe</h2>
         </div>
       </div>
       <div class="row d-flex justify-content-center">
@@ -45,15 +45,21 @@ if (isset($_POST['submit'])) {
                 <?php selection_tournoi_incription($ID_Tournoi) ?>
               </select>
               <br /><br />
-              <p class="fw-bold text-success mb-2">Choisissez votre équipe</p>
-              <select name="FK_ID_Equipe" id="listeIdTournoi">
-                <?php selection_equipe_incription($IdEquipe) ?>
-              </select>
-              <br /><br />
-              <div><button class="btn btn-primary shadow d-block w-100" type="submit" name="submit">S'inscrire</button></div>
-              <br /><br />
-              <div><button class="btn btn-primary shadow d-block w-100" type="reset" name="reset">Annuler</button></div>
-            </form>
+              <p class="fw-bold text-success mb-2">Saisir infos nouvelle équipe</p>
+              <form action="#" class="p-3 p-xl-4" method="post">
+                <div class="mb-3"><input class="form-control" type="text" id="champ" name="Nom" placeholder="Nom equipe"></div>
+                <div class="mb-3"><input class="form-control" type="text" id="champ" name="Degre" placeholder="Degrés equipe"></div>
+                <label for="text">Club equipe</label>
+                <select name="ID_Club" id="listeIdTournoi">
+                  <?php selection_salle_tournoi($ID_Salle); ?>
+                </select>
+                <br /><br />
+                <div><button class="btn btn-primary shadow d-block w-100" type="submit" name="submit">Inscrire</button></div>
+                <br /><br />
+                <div><button class="btn btn-primary shadow d-block w-100" type="reset" name="reset">Annuler</button></div>
+                <!--  <div class="mb-3"><input class="form-control" type="text" id="salle-1" name="FK_ID_Salle" placeholder=""></div>
+               <div><input class="btn btn-primary shadow d-block w-100" type="submit" name="submit" placeholder=""></div> -->
+              </form>
           </div>
         </div>
         <div class="col-md-4 col-xl-4 d-flex justify-content-center justify-content-xl-start">
