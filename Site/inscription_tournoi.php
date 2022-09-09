@@ -1,25 +1,10 @@
-<?php
-include('./functions/dbconnection.php');
-include('./functions/tournoi.php');
-
-
-
-//echo $_POST['submit'];
-
-if (isset($_POST['submit'])) {
-  $FK_ID_Tournoi = $_POST['FK_ID_Tournoi'];
-  $FK_ID_Equipe = $_POST['FK_ID_Equipe'];
-  inscription_equipe_tournoi($FK_ID_Tournoi, $FK_ID_Equipe);
-}
-?>
 <!DOCTYPE html>
 <html lang="en">
-
 
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-  <title>Inscription - Tournois</title>
+  <title>Contacts - Brand</title>
   <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800&amp;display=swap">
   <link rel="stylesheet" href="assets/fonts/ionicons.min.css">
@@ -38,21 +23,18 @@ if (isset($_POST['submit'])) {
       <div class="row d-flex justify-content-center">
         <div class="col-md-6 col-xl-4">
           <div>
-            <form action="inscription_tournoi.php" class="p-3 p-xl-4" method="post">
-
-              <p class="fw-bold text-success mb-2">Choisissez la date du tournoi auquel vous voulez participer</p>
-              <select name="FK_ID_Tournoi" id="listeIdTournoi">
-                <?php selection_tournoi_incription($ID_Tournoi) ?>
-              </select>
+            <form class="p-3 p-xl-4" method="post">
+              <div class="mb-3"><input class="form-control" type="text" id="name-1" name="name" placeholder="Name"></div>
+              <div class="mb-3"><input class="form-control" type="email" id="email-1" name="email" placeholder="Email"></div>
+              <div class="mb-3"><textarea class="form-control" id="message-1" name="message" rows="6" placeholder="Message"></textarea></div>
+              <div><button class="btn btn-primary shadow d-block w-100" type="submit">Envoyer</button></div>
               <br /><br />
-              <p class="fw-bold text-success mb-2">Choisissez votre équipe</p>
-              <select name="FK_ID_Equipe" id="listeIdTournoi">
-                <?php selection_equipe_incription($IdEquipe) ?>
-              </select>
+              <div><a href="Formulaire_insertion_club.php">Insertion des clubs</a></div>
               <br /><br />
-              <div><button class="btn btn-primary shadow d-block w-100" type="submit" name="submit">S'inscrire</button></div>
+              <div><a href="Formulaire_modification_club.php">Modification des clubs</a></div>
               <br /><br />
-              <div><button class="btn btn-primary shadow d-block w-100" type="reset" name="reset">Annuler</button></div>
+              <div><a href="Formulaire_suppression_club.php">Suppression des clubs</a></div>
+              <br /><br />
             </form>
           </div>
         </div>
