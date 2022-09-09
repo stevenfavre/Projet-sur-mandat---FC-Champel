@@ -28,6 +28,13 @@
               <div class="mb-3"><input class="form-control" type="email" id="email-1" name="email" placeholder="Email"></div>
               <div class="mb-3"><textarea class="form-control" id="message-1" name="message" rows="6" placeholder="Message"></textarea></div>
               <div><button class="btn btn-primary shadow d-block w-100" type="submit">Envoyer</button></div>
+              <br /><br />
+              <div><a href="Formulaire_insertion_club.php">Insertion des clubs</a></div>
+              <br /><br />
+              <div><a href="Formulaire_modification_club.php">Modification des clubs</a></div>
+              <br /><br />
+              <div><a href="Formulaire_suppression_club.php">Suppression des clubs</a></div>
+              <br /><br />
             </form>
           </div>
         </div>
