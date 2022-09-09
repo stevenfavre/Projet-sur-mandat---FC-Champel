@@ -52,7 +52,7 @@ if (isset($_POST['submit'])) {
               <br /><br />
               <div><button class="btn btn-primary shadow d-block w-100" type="submit" name="submit">S'inscrire</button></div>
               <br /><br />
-              <a class="btn btn-primary shadow" role="button" href="inscription_nouvel_equipe.php">Inscrire une équipe</a>
+              <a class="btn btn-primary shadow" role="button" href="inscription_nouvel_equipe.php">Inscrire une nouvelle équipe</a>
               <br /><br />
               <div><button class="btn btn-primary shadow d-block w-100" type="reset" name="reset">Annuler</button></div>
             </form>

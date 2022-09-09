@@ -48,7 +48,10 @@ if (isset($_POST['submit'])) {
               <p class="fw-bold text-success mb-2">Saisir infos nouvelle équipe</p>
               <form action="#" class="p-3 p-xl-4" method="post">
                 <div class="mb-3"><input class="form-control" type="text" id="champ" name="Nom" placeholder="Nom equipe"></div>
-                <div class="mb-3"><input class="form-control" type="text" id="champ" name="Degre" placeholder="Degrés equipe"></div>
+                <label for="text">Degrés equipe</label>
+                <select name="ID_Club" id="listeIdTournoi">
+                  <?php selection_salle_tournoi($ID_Salle); ?>
+                </select>
                 <label for="text">Club equipe</label>
                 <select name="ID_Club" id="listeIdTournoi">
                   <?php selection_salle_tournoi($ID_Salle); ?>

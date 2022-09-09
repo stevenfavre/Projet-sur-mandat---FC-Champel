@@ -7,7 +7,7 @@ function insertion_tournoi($Date_debut, $Date_fin, $Fk_ID_Salle)
     try {
         $bdd = connectDB();
         $reponse = $bdd->query("SET NAMES 'utf8'");
-        $reponse = $bdd->query("INSERT INTO `tournoi` (`ID_Tournoi`, `Date_Debut_Tournoi`, `Date_Fin_Tournoi`, `FK_ID_Salle`) VALUES (NULL, '" . $Date_debut . "', '" . $Date_fin . "', '" . $Fk_ID_Salle . "')");
+        $reponse = $bdd->query("INSERT INTO Tournoi (`ID_Tournoi`, `Date_Debut_Tournoi`, `Date_Fin_Tournoi`, `FK_ID_Salle`) VALUES (NULL, '" . $Date_debut . "', '" . $Date_fin . "', '" . $Fk_ID_Salle . "')");
 
         echo "L'insertion a été correctement réalisée.<br><br>";
         echo "Que voulez-vous faire maintenant?<br>";
@@ -55,7 +55,7 @@ function update_tournoi($IdTournoi, $Date_debut, $Date_fin, $Fk_ID_Salle)
     $bdd = connectDB();
     $reponse = $bdd->query("SET NAMES 'utf8'");
 
-    $reponse = $bdd->query("UPDATE `tournoi` SET Date_Debut_Tournoi = '$Date_debut', Date_Fin_Tournoi = '$Date_fin', FK_ID_SALLE = '$Fk_ID_Salle' WHERE  `tournoi`.`ID_Tournoi` = '$IdTournoi'");
+    $reponse = $bdd->query("UPDATE Tournoi SET Date_Debut_Tournoi = '$Date_debut', Date_Fin_Tournoi = '$Date_fin', FK_ID_SALLE = '$Fk_ID_Salle' WHERE ID_Tournoi = '$IdTournoi'");
     echo "Le tournoi a bien été modifié.";
     echo "<br /><br />";
     echo "<a href='messages.php'>Retour à la page d'accueil...</a>";
@@ -70,7 +70,7 @@ function afficher_infos_equipes_inscrites($Num)
 
     $bdd->query("SET NAMES 'utf8'");
 
-    $sql = "SELECT e.Nom_Equipe, e.Degres_Equipe, g.Nom_Groupe, c.Nom_Club, Statut_Inscription_Tournoi  FROM `inscription_tournoi` AS i JOIN equipe AS e ON e.ID_Equipe = i.FK_ID_Equipe JOIN groupe as g ON g.ID_Groupe = e.FK_ID_Groupe JOIN club as c ON c.ID_Club = e.FK_ID_Club WHERE FK_ID_Tournoi = " . $Num;
+    $sql = "SELECT e.Nom_Equipe, e.Degres_Equipe, g.Nom_Groupe, c.Nom_Club, Statut_Inscription_Tournoi  FROM Inscription_Tournoi AS i JOIN Equipe AS e ON e.ID_Equipe = i.FK_ID_Equipe JOIN Groupe as g ON g.ID_Groupe = e.FK_ID_Groupe JOIN Club as c ON c.ID_Club = e.FK_ID_Club WHERE FK_ID_Tournoi = " . $Num;
     $req = $bdd->prepare($sql);
 
     $req->execute();
@@ -84,14 +84,13 @@ function afficher_infos_equipes_inscrites($Num)
         <td><ul>" .  $data['Statut_Inscription_Tournoi'] . "</ul></td></tr>";
     }
     return null;
-    
 }
 function update_equipes_du_tournoi($IdTournoi)
 {
     $bdd = connectDB();
     $bdd->query("SET NAMES 'utf8'");
 
-    $reponse = $bdd->query("SELECT * FROM inscription_tournoi ORDER BY ID_Inscription_Tournoi ASC");
+    $reponse = $bdd->query("SELECT * FROM Inscription_Tournoi ORDER BY ID_Inscription_Tournoi ASC");
     $reponse->setFetchMode(PDO::FETCH_BOTH);
 
     while ($donnees = $reponse->fetch()) {
@@ -121,7 +120,7 @@ function afficher_tournoi()
 
     $bdd = connectDB();
 
-    $reponse = $bdd->query("SELECT * FROM tournoi");
+    $reponse = $bdd->query("SELECT * FROM Tournoi");
     $reponse->setFetchMode(PDO::FETCH_BOTH);
 
     $donneesTournois = $reponse->fetch();
@@ -132,7 +131,7 @@ function inscription_equipe_tournoi($FK_ID_Tournoi, $FK_ID_Equipe)
 {
     $bdd = connectDB();
     $reponse = $bdd->query("SET NAMES 'utf8'");
-    $reponse = $bdd->query("INSERT INTO `inscription_tournoi` (`ID_Inscription_Tournoi`, `Date_Inscription_Tournoi`, `Statut_Inscription_Tournoi`, `FK_ID_Tournoi`, `FK_ID_Equipe`) VALUES (NULL, '" . date('y-m-d') . "', 'En attente', '" . $FK_ID_Tournoi . "', '" . $FK_ID_Equipe . "')");
+    $reponse = $bdd->query("INSERT INTO Inscription_Tournoi (`ID_Inscription_Tournoi`, `Date_Inscription_Tournoi`, `Statut_Inscription_Tournoi`, `FK_ID_Tournoi`, `FK_ID_Equipe`) VALUES (NULL, '" . date('y-m-d') . "', 'En attente', '" . $FK_ID_Tournoi . "', '" . $FK_ID_Equipe . "')");
 
     echo "L'insertion a été correctement réalisée.<br><br>";
     echo "Que voulez-vous faire maintenant?<br>";
