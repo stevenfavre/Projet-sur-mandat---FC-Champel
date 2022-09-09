@@ -44,7 +44,9 @@ function refreshSessionMatch($matchs)
             <div class="row pt-5">
                 <div class="col-md-8 col-xl-6 text-center text-md-start mx-auto">
                     <div class="text-center">
-                        <h2 class="fw-bold">Détail du match de : <?php echo $_SESSION['match']['Date_Match']; ?></h2>
+                        <h2 class="fw-bold">Détail du match du : <?php echo $_SESSION['match']['Date_Match']; ?></h2>
+                        <p class="fw-bold text-success mb-2"><?php echo $_SESSION['match']['Heure_Debut_Match'] . " -> " . $_SESSION['match']['Heure_Fin_Match']?></p>
+                        <p class="fw-bold text-success mb-2"><?php echo "Catégorie : " . $_SESSION['match']['Type_Match']?></p>
                     </div>
                 </div>
             </div>
@@ -63,7 +65,7 @@ function refreshSessionMatch($matchs)
                         </td>
 
                     </thead>
-                    <tr>
+                    <tr style="height:15%">
                         <td class="text-center">
                             <button type="submit" class="btn btn-primary btn-xs" name="submit" value="UL<?php echo $_SESSION['match']['FK_ID_Local']; ?>">
                                 <ion-icon name="chevron-up-outline"></ion-icon>
@@ -75,7 +77,7 @@ function refreshSessionMatch($matchs)
                             </button>
                         </td>
                     </tr>
-                    <tr>
+                    <tr style="height:15%">
                         <td>
                             <h3 class="text-center"><?php echo $_SESSION['match']['But_Local_Match']; ?></h3>
                         </td>
@@ -83,7 +85,7 @@ function refreshSessionMatch($matchs)
                             <h3 class="text-center"><?php echo $_SESSION['match']['But_Visiteur_Match']; ?></h3>
                         </td>
                     </tr>
-                    <tr>
+                    <tr style="height:15%">
                         <td class="text-center">
                             <button type="submit" class="btn btn-primary btn-xs" name="submit" value="DL<?php echo $_SESSION['match']['FK_ID_Local']; ?>">
                                 <ion-icon name="chevron-down-outline"></ion-icon>

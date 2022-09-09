@@ -200,15 +200,16 @@ function updateDownScore($id_match, $localORvisiteur)
 }
 
 // Permet de créer un match dans la bsase de données
-function insertMatch($date_match, $heure_debut, $heure_fin, $duree_match, $type_match, $fk_id_local, $fk_id_visiteur, $fk_id_groupe, $fk_id_tournoi, $fk_id_terrain)
+function insertMatch($date_match, $heure_debut, $heure_fin, $duree_match, $type_match, $fk_id_local, $fk_id_visiteur, $fk_id_tournoi, $fk_id_terrain, $fk_id_groupe = 1)
 {
     try {
         $db = connectDB();
-        $sql = "INSERT INTO `Matchs` (`ID_Match`, `Date_Match`, `Heure_Debut_Match`, `Heure_Fin_Match`, `Duree_Match`, `Type_Match`, `But_Local_Match`,`But_Visiteur_Match`, `FK_ID_Local`, `FK_ID_Visiteur`, `FK_ID_Groupe`, `FK_ID_Tournoi`, `FK_ID_Terrain`)
-        VALUES (`null`, '$date_match', '$heure_debut', '$heure_fin', '$duree_match', '$type_match', '$fk_id_local', '$fk_id_visiteur', '$fk_id_groupe', '$fk_id_tournoi',  '$fk_id_terrain');";
+        $sql = "INSERT INTO `Matchs` (`ID_Match`, `Date_Match`, `Heure_Debut_Match`, `Heure_Fin_Match`, `Duree_Match`, `Type_Match`, `But_Local_Match`, `But_Visiteur_Match`, `FK_ID_Local`, `FK_ID_Visiteur`, `FK_ID_Groupe`, `FK_ID_Tournoi`, `FK_ID_Terrain`)
+        VALUES (NULL,  '$date_match', '$heure_debut', '$heure_fin', '$duree_match', '$type_match', '0', '0' , '$fk_id_local', '$fk_id_visiteur', '$fk_id_groupe', '$fk_id_tournoi',  '$fk_id_terrain');";
         $request = $db->prepare($sql);
         $request->execute();
     } catch (\Throwable $e) {
+        echo "<script>alert(\"" . $e->getMessage() . "\");</script>";
         debug();
     }
 }
@@ -228,3 +229,50 @@ function affichageAllTournois()
         </div>";
     }
 }
+
+// Permet d'afficher les 
+function afficherSelectMatch($id_tournoi)
+{
+    // Select de l'équipe local
+    echo "<select name=\"equipe-local\" class=\"form-control mb-3\" id=\"local\">";
+    afficher_option_equipes($id_tournoi);
+    echo "</select>";
+
+    // Select de l'équipe visiteur
+    echo "<select name=\"equipe-visiteur\" class=\"form-control mb-3\" id=\"visiteur\">";
+    afficher_option_equipes($id_tournoi);
+    echo "</select>";
+
+    // Select du terrain à utiliser
+    echo "<select name=\"terrain\" class=\"form-control mb-3\" >";
+    afficher_option_terrain($id_tournoi);
+    echo "</select>";
+}
+
+// Permet d'afficher les options des équipes à inscrire
+function afficher_option_equipes($id_tournoi)
+{
+    $bdd = connectDB();
+    $sql = "SELECT i.FK_ID_Equipe, e.Nom_Equipe FROM `Inscription_Tournoi` AS i JOIN Equipe AS e ON e.ID_Equipe = i.FK_ID_Equipe WHERE FK_ID_Tournoi = " . $id_tournoi;
+    $req = $bdd->prepare($sql);
+    $req->execute();
+    $reponse = $req->fetchAll();
+
+    foreach ($reponse as $data)
+        echo "<option value=\"" . $data['FK_ID_Equipe'] . "\">" . $data['Nom_Equipe'] . "</option>";
+}
+
+// Permet d'afficher les options des terrains
+function afficher_option_terrain($id_tournoi)
+{
+    $bdd = connectDB();
+    $sql = "SELECT t.ID_Terrain, t.Numero_Terrain FROM `Terrain` AS t JOIN Salle AS s ON t.FK_ID_Salle_T = s.ID_Salle JOIN Tournoi AS tou ON tou.FK_ID_Salle = s.ID_Salle WHERE tou.ID_Tournoi = " . $id_tournoi;
+    $req = $bdd->prepare($sql);
+    $req->execute();
+    $reponse = $req->fetchAll();
+
+    foreach ($reponse as $data)
+        echo "<option value=\"" . $data['ID_Terrain'] . "\">" . $data['Numero_Terrain'] . "</option>";
+}
+
+
