@@ -116,5 +116,22 @@ function selection_club($idClub)
     $bdd = null;
 }
 
+function affichage_logo()
+{
+
+    $bdd = connectDB();
+    $bdd->query("SET NAMES 'utf8'");
+
+    $reponseDesClubs = $bdd->query("SELECT `Url_Image_Club`FROM `club`");
+    $reponseDesClubs->setFetchMode(PDO::FETCH_ASSOC);
+
+    $donneesDesclubs = $reponseDesClubs->fetchAll();
+    foreach ($donneesDesclubs as $donnees) {
+        echo 'Logo <img style="height="200px" ; width="200px"" src="assets\img\team\\' . $donnees['Url_Image_Club'] . '" alt="' . $donnees['Url_Image_Club'] . '" ><br />';
+    }
+
+    $bdd = null;
+}
+
 
 ?>

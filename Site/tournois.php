@@ -1,8 +1,3 @@
-<?php
-
-require_once './functions/steven_fonctions.php'
-
-?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -26,7 +21,22 @@ require_once './functions/steven_fonctions.php'
         </div>
       </div>
       <div class="row row-cols-1 row-cols-md-2 mx-auto" style="max-width: 900px;">
-        <?php affichageAllTournois(); ?>
+        <div class="col mb-4">
+          <div><a href="#"><img class="rounded img-fluid shadow w-100 fit-cover" src="assets/img/products/2173435-silhouette-joueur-de-football-tir-rapide-un-ballon-sur-un-fond-blanc-illustration-vectoriel.jpg" style="height: 250px;"></a>
+            <div class="py-4">
+              <h4 class="fw-bold">Tournoi du 20.08.22</h4>
+              <p class="text-muted">Ce tournoi est organisé à [nom_salle], il comprend ces différentes équipes. [noms_équipes]</p>
+            </div>
+          </div>
+        </div>
+        <div class="col mb-4">
+          <div><a href="#"><img class="rounded img-fluid shadow w-100 fit-cover" src="assets/img/products/2173435-silhouette-joueur-de-football-tir-rapide-un-ballon-sur-un-fond-blanc-illustration-vectoriel.jpg" style="height: 250px;"></a>
+            <div class="py-4">
+              <h4 class="fw-bold">Tournoi du 06.08.22</h4>
+              <p class="text-muted">Ce tournoi est organisé à [nom_salle], il comprend ces différentes équipes. [noms_équipes]<br></p>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </section>

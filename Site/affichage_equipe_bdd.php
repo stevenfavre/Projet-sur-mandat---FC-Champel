@@ -31,7 +31,7 @@ require_once('./functions/Fonctions_Sofian.php');
                 <div class="col-md-6 col-xl-4">
                     <div>
                         <form class="p-3 p-xl-4" method="post">
-                            <div class="mb-3"><input class="form-control" type="text" id="name-1" name="name" placeholder="Logo club"></div>
+                            <div> <?php affichage_logo() ?> </div>
                         </form>
                     </div>
                 </div>
