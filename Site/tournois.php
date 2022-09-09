@@ -1,11 +1,5 @@
-<?php
-include('./functions/dbconnection.php');
-include('./functions/tournoi.php');
-?>
-
 <!DOCTYPE html>
 <html lang="en">
-
 
 <head>
   <meta charset="utf-8">
@@ -22,13 +16,7 @@ include('./functions/tournoi.php');
     <div class="container py-5">
       <div class="row mb-5">
         <div class="col-md-8 col-xl-6 text-center mx-auto">
-          <h1 class="fw-bold">Tournois</h1>
-          <br /><br />
-          <a class="btn btn-primary shadow" role="button" href="creer_tournoi.php">Créer un tournoi</a>
-          <a class="btn btn-primary shadow" role="button" href="modifier_tournoi.php">Modifier un tournoi</a>
-          <a class="btn btn-primary shadow" role="button" href="supprimer_tournoi.php">Annuler un tournoi</a>
-          <br /><br />
-          <p class="text-muted">&nbsp;<a href="afficher_equipe_tournoi.php">Equipes inscrites</a></p>
+          <h2 class="fw-bold">Tournois</h2>
           <p class="text-muted w-lg-50">Différents tournois géré grâce à notre système.&nbsp;</p>
         </div>
       </div>
@@ -45,8 +33,6 @@ include('./functions/tournoi.php');
           <div><a href="#"><img class="rounded img-fluid shadow w-100 fit-cover" src="assets/img/products/2173435-silhouette-joueur-de-football-tir-rapide-un-ballon-sur-un-fond-blanc-illustration-vectoriel.jpg" style="height: 250px;"></a>
             <div class="py-4">
               <h4 class="fw-bold">Tournoi du 06.08.22</h4>
-              <?php afficher_tournoi(); ?>
-
               <p class="text-muted">Ce tournoi est organisé à [nom_salle], il comprend ces différentes équipes. [noms_équipes]<br></p>
             </div>
           </div>
@@ -58,7 +44,6 @@ include('./functions/tournoi.php');
   <script src="assets/js/jquery.min.js"></script>
   <script src="assets/bootstrap/js/bootstrap.min.js"></script>
   <script src="assets/js/script.min.js"></script>
-
 </body>
 
 </html>
