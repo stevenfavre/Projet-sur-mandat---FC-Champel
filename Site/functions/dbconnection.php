@@ -2,7 +2,7 @@
 // session_start(['cookie_lifetime' => 3600,]);
 
 // Fonction permettant de faire la connection à la base de donnée
-/* function connectDB()
+function connectDB()
 {
     $dbServer = "hhva.myd.infomaniak.com";
     $dbName = "hhva_t23_7_v1";
@@ -16,9 +16,9 @@
         $bdd->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     }
     return $bdd;
-} */
+}
 
-function connectDB()
+/* function connectDB()
 {
     $dbServer = "localhost";
     $dbName = "hhva_t23_7_v1";
@@ -32,4 +32,4 @@ function connectDB()
         $bdd->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     }
     return $bdd;
-}
+} */

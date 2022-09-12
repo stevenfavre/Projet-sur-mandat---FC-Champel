@@ -38,7 +38,7 @@ require_once('./functions/Fonctions_Sofian.php');
                 <?php affichage_equipe() ?>
             </div>
             <br /><br />
-            <a href="../Site/inscription_tournoi.php">Retour à la page d'insciription au tournoi</a>
+            <a href="../Site/inscription_tournoi.php">Retour à la page d'inscription au tournoi</a>
         </div>
     </section>
     <?php include_once('default_pages/footer.php'); ?>
