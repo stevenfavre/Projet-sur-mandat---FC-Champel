@@ -3,11 +3,10 @@
 require_once('./functions/dbconnection.php');
 require_once('./functions/Fonctions_Sofian.php');
 
-$idClub = filter_input(INPUT_POST, 'ID_Club');
+$idEquipe = filter_input(INPUT_POST, 'ID_Equipe');
 
-
-if (!empty($idClub)) {
-    suppression_club($idClub);
+if (!empty($idEquipe)) {
+    suppression_equipes($idEquipe);
 }
 
 ?>
@@ -18,7 +17,7 @@ if (!empty($idClub)) {
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>Suppression de club</title>
+    <title>Suppression d'équipe</title>
     <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800&amp;display=swap">
     <link rel="stylesheet" href="assets/fonts/ionicons.min.css">
@@ -31,21 +30,19 @@ if (!empty($idClub)) {
             <div class="row mb-5">
                 <div class="col-md-8 col-xl-6 text-center mx-auto">
                     <p class="fw-bold text-success mb-2">Suppression</p>
-                    <h2 class="fw-bold">Supprimez les clubs en indiquant leur idenfifiant</h2>
+                    <h2 class="fw-bold">Supprimez les équipes en indiquant leur idenfifiant</h2>
                 </div>
             </div>
             <div class="row d-flex justify-content-center">
                 <div class="col-md-6 col-xl-4">
                     <div>
                         <form action="#" class="p-3 p-xl-4" method="post">
-                            <p class="fw-bold text-success mb-2">Liste des Identifiants des clubs</p>
-                            <select name="ID_Club" id="ID_Club">
-                                <?php selection_club($idClub) ?>
+                            <p class="fw-bold text-success mb-2">Liste des Identifiants des équipes</p>
+                            <select name="ID_Equipe" id="id_equipe">
+                                <?php selection_equipe($idEquipe) ?>
                             </select>
                             <br /><br />
                             <div><input class="btn btn-primary shadow d-block w-100" value='Envoyer' type="submit"></div>
-                            <br /><br />
-                            <a href="./Formulaire_suppression_equipe.php">Supprimer une équipe du club</a>
                             <br /><br />
                             <a href="./inscription_tournoi.php">Retour à la page d'insciription au tournoi</a>
                         </form>
