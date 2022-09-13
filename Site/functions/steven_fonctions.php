@@ -145,6 +145,30 @@ function selectAllTournoi()
     }
 }
 
+// Permet de retourner la liste de tout les tournois 
+function selectTournoiWithID($id_tournoi)
+{
+    try {
+        $db = connectDB();
+        $sql = "SELECT * FROM `Tournoi` WHERE ID_Tournoi = " . $id_tournoi;
+        $request = $db->prepare($sql);
+        $request->execute();
+        return $request->fetchAll(PDO::FETCH_ASSOC);
+    } catch (\Throwable $e) {
+        echo "<script>alert(\"" . $e->getMessage() . "\");</script>";
+        debug();
+    }
+}
+
+// Permet de retourner la date du tournoi
+function getDateTournoi($tournoi)
+{
+    foreach (selectTournoiWithID($tournoi) as $t) {
+        return $t['Date_Debut_Tournoi'];
+    }
+}
+
+//
 function selectIDSalleWithIDTerrain($id_terrain)
 {
     try {

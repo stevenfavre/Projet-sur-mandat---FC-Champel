@@ -1,13 +1,8 @@
 <?php
 include('./functions/dbconnection.php');
 include('./functions/tournoi.php');
+include('./functions/steven_fonctions.php');
 
-
-
-//echo $_POST['submit'];
-
-if (isset($_POST['submit'])) {
-}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -15,7 +10,7 @@ if (isset($_POST['submit'])) {
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-  <title>Home - Brand</title>
+  <title>Equipe du tournoi</title>
   <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800&amp;display=swap">
   <link rel="stylesheet" href="assets/fonts/ionicons.min.css">
@@ -29,7 +24,7 @@ if (isset($_POST['submit'])) {
     <div class="container bg-primary-gradient py-5">
       <div class="row">
         <div class="col-md-8 col-xl-6 text-center mx-auto">
-          <h3 class="fw-bold text-success mb-2">Tournoi du 07.09.2022</h3>
+          <h3 class="fw-bold text-success mb-2">Tournoi du <?php echo getDateTournoi($_GET['id_tournoi']); ?></h3>
           <h1 class="fw-bold">Equipes inscrites au tournoi</h1>
         </div>
       </div>
@@ -84,7 +79,7 @@ if (isset($_POST['submit'])) {
                     </td>
                   </tr>
                 </tbody>
-                <?php afficher_infos_equipes_inscrites(3) ?>
+                <?php afficher_infos_equipes_inscrites($_GET['id_tournoi']) ?>
               </table>
               <br /><br />
               <a class="btn btn-primary shadow" role="button" href="modifier_equipe_tournoi.php">Modifier</a>

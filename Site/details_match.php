@@ -45,8 +45,9 @@ function refreshSessionMatch($matchs)
                 <div class="col-md-8 col-xl-6 text-center text-md-start mx-auto">
                     <div class="text-center">
                         <h2 class="fw-bold">Détail du match du : <?php echo $_SESSION['match']['Date_Match']; ?></h2>
-                        <p class="fw-bold text-success mb-2"><?php echo $_SESSION['match']['Heure_Debut_Match'] . " -> " . $_SESSION['match']['Heure_Fin_Match']?></p>
-                        <p class="fw-bold text-success mb-2"><?php echo "Catégorie : " . $_SESSION['match']['Type_Match']?></p>
+                        <p class="fw-bold text-success mb-2"><?php echo "Numéro du tournoi : " . $_SESSION['match']['FK_ID_Tournoi'] ?></p>
+                        <p class="fw-bold text-success mb-2"><?php echo $_SESSION['match']['Heure_Debut_Match'] . " -> " . $_SESSION['match']['Heure_Fin_Match'] ?></p>
+                        <p class="fw-bold text-success mb-2"><?php echo "Catégorie : " . $_SESSION['match']['Type_Match'] ?></p>
                     </div>
                 </div>
             </div>

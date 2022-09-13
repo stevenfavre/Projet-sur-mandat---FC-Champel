@@ -7,8 +7,12 @@ include('./functions/tournoi.php');
 //echo $_POST['submit'];
 
 if (isset($_POST['submit'])) {
+  $IDStatutTournois = $_POST['ID_Inscription_Tournoi'];
+
+  update_statut_equipes_tournoi($IDStatutTournois);
 }
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -50,13 +54,28 @@ if (isset($_POST['submit'])) {
               <!-- <div class="bs-icon-lg d-flex justify-content-center align-items-center mb-3 bs-icon" style="top: 1rem;right: 1rem;position: absolute;"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-bezier"> -->
               <path fill-rule="evenodd" d="M0 10.5A1.5 1.5 0 0 1 1.5 9h1A1.5 1.5 0 0 1 4 10.5v1A1.5 1.5 0 0 1 2.5 13h-1A1.5 1.5 0 0 1 0 11.5v-1zm1.5-.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1zm10.5.5A1.5 1.5 0 0 1 13.5 9h1a1.5 1.5 0 0 1 1.5 1.5v1a1.5 1.5 0 0 1-1.5 1.5h-1a1.5 1.5 0 0 1-1.5-1.5v-1zm1.5-.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1zM6 4.5A1.5 1.5 0 0 1 7.5 3h1A1.5 1.5 0 0 1 10 4.5v1A1.5 1.5 0 0 1 8.5 7h-1A1.5 1.5 0 0 1 6 5.5v-1zM7.5 4a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1z"></path>
               <path d="M6 4.5H1.866a1 1 0 1 0 0 1h2.668A6.517 6.517 0 0 0 1.814 9H2.5c.123 0 .244.015.358.043a5.517 5.517 0 0 1 3.185-3.185A1.503 1.503 0 0 1 6 5.5v-1zm3.957 1.358A1.5 1.5 0 0 0 10 5.5v-1h4.134a1 1 0 1 1 0 1h-2.668a6.517 6.517 0 0 1 2.72 3.5H13.5c-.123 0-.243.015-.358.043a5.517 5.517 0 0 0-3.185-3.185z"></path>
+              <form action="modifier_equipe_tournoi.php" class="p-3 p-xl-4" method="post">
 
-              <table>
-                <tbody>
-                  <tr>
+                <table>
+                  <tbody>
+                    <tr>
+                      <td>
+                        <ul>
+                          <h5 class="fw-bold card-title">ID Inscription</h5>
+                          <select name="ID_Inscription_Tournoi" id="listeIdTournoi">
+                            <?php selection_inscription($IDStatutTournois); ?>
+                          </select>
+
+
+                        </ul>
+                      </td>
+                    </tr>
+
                     <td>
                       <ul>
                         <h5 class="fw-bold card-title">Equipe</h5>
+
+
                       </ul>
                     </td>
 
@@ -69,37 +88,35 @@ if (isset($_POST['submit'])) {
                       <ul>
                         <h5 class="fw-bold card-title">Club</h5>
 
+
                       </ul>
                     </td>
                     <td>
                       <ul>
                         <h5 class="fw-bold card-title">Groupe</h5>
+
                       </ul>
 
                     </td>
                     <td>
                       <ul>
                         <h5 class="fw-bold card-title">Statut</h5>
-                      </ul>
-                    </td>
 
-                    <td>
-                      <ul>
-                        <h5 class="fw-bold card-title">Statut (admin)</h5>
-                        <select name="Statut" id="listeIdTournoi">
-                          <option valeur="val">Validée</option>
-                          <option valeur="ref">Refusée</option>
-                        </select>
                       </ul>
                     </td>
-                  </tr>
-                </tbody>
-                <?php afficher_infos_equipes_inscrites(3) ?>
-              </table>
-              <br /><br />
-              <div><button class="btn btn-primary shadow" type="submit" name="submit">Modifier</button></div>
-              <br /><br />
-              <a class="btn btn-primary shadow" role="button" href="inscription_equipe.php">Inscrire une équipe</a>
+                    </tr>
+                  </tbody>
+
+                  <?php afficher_infos_equipes_inscrites_modif(3); ?>
+                </table>
+
+                <br /><br />
+
+                <div><button class="btn btn-primary shadow d-block w-100" type="submit" name="submit">Modifier</button></div>
+                <br /><br />
+                <a class="btn btn-primary shadow d-block w-100" role="button" href="inscription_equipe.php">Inscrire une équipe</a>
+
+              </form>
             </div>
             </svg>
           </div>
