@@ -3,37 +3,52 @@
 include_once('dbconnection.php');
 session_start(['cookie_lifetime' => 3600,]);
 
-function insertion_equipes($nomEquipe, $degreEquipe, $FK_ID_Club, $FK_ID_Groupe)
+function insertion_equipes($nomEquipe, $degreEquipe, $idClub)
 {
 
     $bdd = connectDB();
 
     $reponseDesEquipes = $bdd->query("SET NAMES 'utf8'");
-    $reponseDesEquipes = $bdd->query("INSERT INTO `Equipe` (`ID_Equipe`, `Nom_Equipe`, `Degres_Equipe`, `FK_ID_Club`, `FK_ID_Groupe`) VALUES (NULL,'$nomEquipe', '$degreEquipe', '$FK_ID_Club', '$FK_ID_Groupe')");
+    $reponseDesEquipes = $bdd->query("INSERT INTO `Equipe` (`Nom_Equipe`, `Degres_Equipe`, `FK_ID_Club`) VALUES ('$nomEquipe', '$degreEquipe', '$idClub')");
 
-    echo "<br /><br />";
 
     $bdd = null;
 }
 
-function modification_equipes($idEquipe, $nomEquipe, $degreEquipe)
+
+function modification_equipes($idEquipe, $nomEquipe, $degreEquipe, $actifEquipe)
 {
 
     $bdd = connectDB();
 
     $reponseDesEquipes = $bdd->query("SET NAMES 'utf8'");
-    $reponseDesEquipes = $bdd->query("UPDATE `Equipe` SET `Nom_Equipe`='$nomEquipe',`Degres_Equipe`='$degreEquipe' WHERE `ID_Equipe` = $idEquipe");
+    $reponseDesEquipes = $bdd->query("UPDATE `Equipe` SET `Nom_Equipe`='$nomEquipe',`Degres_Equipe`='$degreEquipe', `actif_Equipe`='$actifEquipe'  WHERE `ID_Equipe` = $idEquipe");
+}
+
+function afficher_info_equipe($nomEquipe)
+{
+    $bdd = connectDB();
+    $reponseDesEquipe = $bdd->query("SET NAMES 'utf8'");
+    $reponseDesEquipe = $bdd->query("SELECT `Nom_Equipe`, `Degres_Equipe` FROM `Equipe` WHERE `Nom_Equipe` = '$nomEquipe'");
+
+    while ($donneesDesEquipe = $reponseDesEquipe->fetch()) {
+        echo "Nom club : " . $donneesDesEquipe['Nom_Club'];
+        echo "<br /><br />";
+        echo "Logo club : " . $donneesDesEquipe['Url_Image_Club'];
+        echo "<br /><br />";
+    }
 }
 
 function suppression_equipes($idEquipe)
 {
     $bdd = connectDB();
 
-    $reponseDesEquipes = $bdd->query("SET NAMES 'utf8'");
-    $reponseDesEquipes = $bdd->query("DELETE FROM `Equipe` WHERE ID_Equipe = '$idEquipe'");
+    $reponseDesClubs = $bdd->query("SET NAMES 'utf8'");
+    $reponseDesClubs = $bdd->query("UPDATE `Equipe` SET `Actif_equipe` = 0 WHERE `Equipe`. `ID_Equipe` = '$idEquipe'");
 }
 
-function selection_equipe($idEquipe)
+
+function selection_equipe()
 {
     $bdd = connectDB();
     $bdd->query("SET NAMES 'utf8'");
@@ -42,7 +57,7 @@ function selection_equipe($idEquipe)
     $reponseDesEquipes->setFetchMode(PDO::FETCH_BOTH);
 
     while ($donnees = $reponseDesEquipes->fetch()) {
-        echo "<option value='" . $donnees['ID_Equipe'] . "'>" . $donnees['ID_Equipe'] . "</option>";
+        echo "<option value='" . $donnees['ID_Equipe'] . "'>" . $donnees['Nom_Equipe'] . "</option>";
     }
 
     $bdd = null;
@@ -54,7 +69,7 @@ function affichage_equipe()
     $bdd = connectDB();
     $bdd->query("SET NAMES 'utf8'");
 
-    $reponseDesEquipes = $bdd->query("SELECT `Nom_Equipe`, `Degres_Equipe` FROM `Equipe` WHERE 1");
+    $reponseDesEquipes = $bdd->query("SELECT `Nom_Equipe`, `Degres_Equipe` FROM `Equipe` WHERE `Actif_equipe` = 1");
     $reponseDesEquipes->setFetchMode(PDO::FETCH_BOTH);
 
     while ($donneesDesEquipes = $reponseDesEquipes->fetch()) {
@@ -69,28 +84,58 @@ function affichage_equipe()
     $bdd = null;
 }
 
-function insertion_club($nomClub, $urlImageClub, $FK_Id_Adresse)
+
+function insertion_adresse_club($rueAdresse, $localiteAdresse, $npaAdresse)
 {
 
     $bdd = connectDB();
 
+    $reponseDesAdresses = $bdd->query("SET NAMES 'utf8'");
+    $reponseDesAdresses = $bdd->query("INSERT INTO `Adresse`(`Rue_Adresse`, `Localite_Adresse`, `NPA_Adresse`) VALUES ('$rueAdresse','$localiteAdresse','$npaAdresse')");
+
+    return $bdd->lastInsertId();
+
+    $bdd = null;
+}
+
+function insertion_club($nomClub, $urlImageClub, $idAdresse)   /* soucres : https://stackoverflow.com/questions/45946593/getting-the-primary-key-id-of-the-last-inserted-row-to-run-multiple-insert-opera */
+{
+
+    $bdd = connectDB();
+
+
     $reponseDesClubs = $bdd->query("SET NAMES 'utf8'");
-    $reponseDesClubs = $bdd->query("INSERT INTO `Club` (`ID_Club`, `Nom_Club`, `Url_Image_Club`, `FK_ID_Adresse`) VALUES (NULL,'$nomClub', '$urlImageClub', '$FK_Id_Adresse')");
+    $reponseDesClubs = $bdd->query("INSERT INTO `Club` (`Nom_Club`, `Url_Image_Club`, `FK_ID_Adresse`) VALUES ('$nomClub', '$urlImageClub', '$idAdresse')");
 
     echo "<br /><br />";
 
     $bdd = null;
 }
 
-function modification_club($idClub, $nomClub, $urlImageClub)
+
+function modification_club($nomClub, $urlImageClub, $idClub, $actifClub)
 {
 
     $bdd = connectDB();
 
     $reponseDesClubs = $bdd->query("SET NAMES 'utf8'");
-    $reponseDesClubs = $bdd->query("UPDATE `Club` SET `Nom_Club` = '$nomClub', `Url_Image_Club` = ' $urlImageClub' WHERE `club`.`ID_Club` = '$idClub'");
+    $reponseDesClubs = $bdd->query("UPDATE `Club` SET `Nom_Club` = '$nomClub', `Url_Image_Club` = '$urlImageClub', `Actif_club` = '$actifClub'  WHERE `club`.`ID_Club` = '$idClub'");
 
     $bdd = null;
+}
+
+function afficher_info_club($nomClub)
+{
+    $bdd = connectDB();
+    $reponseDesClubs = $bdd->query("SET NAMES 'utf8'");
+    $reponseDesClubs = $bdd->query("SELECT `Nom_Club`, `Url_Image_Club` FROM `club` WHERE `Nom_Club` = '$nomClub'");
+
+    while ($donneesDesClubs = $reponseDesClubs->fetch()) {
+        echo "Nom club : " . $donneesDesClubs['Nom_Club'];
+        echo "<br /><br />";
+        echo "Logo club : " . $donneesDesClubs['Url_Image_Club'];
+        echo "<br /><br />";
+    }
 }
 
 function suppression_club($idClub)
@@ -98,10 +143,23 @@ function suppression_club($idClub)
     $bdd = connectDB();
 
     $reponseDesClubs = $bdd->query("SET NAMES 'utf8'");
-    $reponseDesClubs = $bdd->query("DELETE FROM `Club` WHERE ID_Club = '$idClub'");
+    $reponseDesClubs = $bdd->query("UPDATE `Club` SET `Actif_club` = 0 WHERE `ID_Club` = '$idClub'");
 }
 
-function selection_club($idClub)
+function afficher_ClubActif()
+{
+    $bdd = connectDB();
+
+    $reponseDesClubs = $bdd->query("SET NAMES 'utf8'");
+    $reponseDesClubs = $bdd->query("SELECT `Nom_Club` FROM `Club` WHERE `Actif_club` = 1");
+
+    while ($donneesDesClubs = $reponseDesClubs->fetch()) {
+        echo "Nom club : " . $donneesDesClubs['Nom_Club'];
+        echo "<br /><br />";
+    }
+}
+
+function selection_club()
 {
     $bdd = connectDB();
     $bdd->query("SET NAMES 'utf8'");
@@ -110,7 +168,7 @@ function selection_club($idClub)
     $reponseDesClubs->setFetchMode(PDO::FETCH_BOTH);
 
     while ($donneesDesClubs = $reponseDesClubs->fetch()) {
-        echo "<option value='" . $donneesDesClubs['ID_Club'] . "'>" . $donneesDesClubs['ID_Club'] . "</option>";
+        echo "<option value='" . $donneesDesClubs['ID_Club'] . "'>" . $donneesDesClubs['Nom_Club'] . "</option>";
     }
 
     $bdd = null;
@@ -132,6 +190,7 @@ function affichage_logo()
 
     $bdd = null;
 }
+
 
 
 ?>
