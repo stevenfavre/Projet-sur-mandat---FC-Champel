@@ -1,6 +1,22 @@
 <?php
 session_start(['cookie_lifetime' => 3600,]);
 require_once "functions/steven_fonctions.php";
+
+if (!empty($_GET['id_tournoi']))
+  $_SESSION['id_tournoi'] = $_GET['id_tournoi'];
+
+$submit = filter_input(INPUT_GET, 'submit');
+
+$arr = explode("-", $submit, 3);
+$id_match = $arr[0];
+$up_down = $arr[1];
+$local_visiteur = $arr[2];
+
+if ($up_down == 'U') { // S'il s'agit d'une augmentation du score
+  updateUpScore($id_match, $local_visiteur);
+} elseif ($up_down == 'D') { // S'il s'agit d'une réduction du score
+  updateDownScore($id_match, $local_visiteur);
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -22,24 +38,49 @@ require_once "functions/steven_fonctions.php";
         <div class="col-md-8 col-xl-6 text-center mx-auto">
           <p class="fw-bold text-success mb-2">Liste des matchs</p>
           <h3 class="fw-bold">Match du tournoi :&nbsp;</h3>
-          <p class="text-muted">&nbsp;<a href="afficher_equipe_tournoi.php?id_tournoi=<?php echo $_GET['id_tournoi']; ?>">Equipes inscrites</a></p>
-          <a class="btn btn-primary shadow" role="button" href="creer_match.php?id_tournoi=<?php echo $_GET['id_tournoi']; ?>">Créer un match</a>
+          <p class="text-muted">&nbsp;<a href="afficher_equipe_tournoi.php?id_tournoi=<?php echo $_SESSION['id_tournoi']; ?>">Equipes inscrites</a></p>
+          <a class="btn btn-primary shadow" role="button" href="creer_match.php?id_tournoi=<?php echo $_SESSION['id_tournoi']; ?>">Créer un match</a>
+          <br><br>
+          <input type="text" id="recherche" onkeyup="Recherche()" placeholder="Recherche..." title="Rechercher un match">
           <?php
           // afficherSalleEtDate($_GET['id_tournoi']);
           ?>
         </div>
       </div>
-      <form action="details_match.php" method="get">
-        <?php
-        afficherMatch($_GET['id_tournoi']);
-        ?>
-      </form>
+      <div id="divContenu">
+        <form action="match.php" method="get">
+          <?php
+          afficherMatch($_SESSION['id_tournoi']);
+          ?>
+        </form>
+      </div>
     </div>
   </section>
   <?php include_once('default_pages/footer.php'); ?>
+  <script>
+    function Recherche() {
+      var input, filter, div, div2, a, i, txtValue;
+      input = document.getElementById("recherche");
+      filter = input.value.toUpperCase();
+      div = document.getElementById("divContenu");
+      div2 = div.getElementsByTagName("div");
+      alert('container ' + div2.length);
+      for (i = 0; i < div2.length; i++) {
+        a = div2[i].getElementsByTagName("h6")[0];
+        txtValue = a.textContent || a.innerText;
+        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+          div2[i].style.display = "";
+        } else {
+          div2[i].style.display = "none";
+        }
+      }
+    }
+  </script>
   <script src="assets/js/jquery.min.js"></script>
   <script src="assets/bootstrap/js/bootstrap.min.js"></script>
   <script src="assets/js/script.min.js"></script>
+  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 </body>
 
 </html>

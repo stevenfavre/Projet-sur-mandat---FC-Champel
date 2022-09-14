@@ -68,12 +68,12 @@ function refreshSessionMatch($matchs)
                     </thead>
                     <tr style="height:15%">
                         <td class="text-center">
-                            <button type="submit" class="btn btn-primary btn-xs" name="submit" value="UL<?php echo $_SESSION['match']['FK_ID_Local']; ?>">
+                            <button type="submit" class="btn btn-primary btn-sm" name="submit" value="UL<?php echo $_SESSION['match']['FK_ID_Local']; ?>">
                                 <ion-icon name="chevron-up-outline"></ion-icon>
                             </button>
                         </td>
                         <td class="text-center">
-                            <button type="submit" class="btn btn-primary btn-xs" name="submit" value="UV<?php echo $_SESSION['match']['FK_ID_Visiteur']; ?>">
+                            <button type="submit" class="btn btn-primary btn-sm" name="submit" value="UV<?php echo $_SESSION['match']['FK_ID_Visiteur']; ?>">
                                 <ion-icon name="chevron-up-outline"></ion-icon>
                             </button>
                         </td>
@@ -88,12 +88,12 @@ function refreshSessionMatch($matchs)
                     </tr>
                     <tr style="height:15%">
                         <td class="text-center">
-                            <button type="submit" class="btn btn-primary btn-xs" name="submit" value="DL<?php echo $_SESSION['match']['FK_ID_Local']; ?>">
+                            <button type="submit" class="btn btn-primary btn-sm" name="submit" value="DL<?php echo $_SESSION['match']['FK_ID_Local']; ?>">
                                 <ion-icon name="chevron-down-outline"></ion-icon>
                             </button>
                         </td>
                         <td class="text-center">
-                            <button type="submit" class="btn btn-primary btn-xs" name="submit" value="DV<?php echo $_SESSION['match']['FK_ID_Visiteur']; ?>">
+                            <button type="submit" class="btn btn-primary btn-sm" name="submit" value="DV<?php echo $_SESSION['match']['FK_ID_Visiteur']; ?>">
                                 <ion-icon name="chevron-down-outline"></ion-icon>
                             </button>
                         </td>

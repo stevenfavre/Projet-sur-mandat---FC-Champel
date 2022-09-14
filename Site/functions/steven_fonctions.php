@@ -7,38 +7,33 @@ function afficherMatch($tournoi)
 {
     // Pour chaque produit, les afficher de la manière suivante
     foreach (selectAllMatchTournoi($tournoi) as $t) {
-        if ($t['ID_Match'] % 2 == 0) {
-            echo "<div class=\"row row-cols-1 row-cols-md-2 mx-auto\" style=\"max-width: 900px;\">";
-            echo "<div class=\"col d-xl-flex justify-content-xl-center align-items-xl-center mb-5\">";
-            echo "<h5 class=\"fw-bold text-center\">Score : " . $t['But_Local_Match'] . " - " . $t['But_Visiteur_Match'] . "</h5>
-            <button type=\"submit\" name=\"submit\" class=\"btn btn-warning\"value=\"m-" . $t['ID_Match'] . "\" style=\"margin-left: 5%;\">
-            <svg xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\" fill=\"currentColor\" class=\"bi bi-pen\" viewBox=\"0 0 16 16\">
-            <path d=\"m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001zm-.644.766a.5.5 0 0 0-.707 0L1.95 11.756l-.764 3.057 3.057-.764L14.44 3.854a.5.5 0 0 0 0-.708l-1.585-1.585z\"/>
-            </svg></button>";
-            echo "</div>";
 
-            echo "<div class=\"col d-md-flex align-items-md-end align-items-lg-center mb-5\">";
-            echo "<div>";
-            echo "<h5 class=\"fw-bold\">" . returnNameEquipe($t['FK_ID_Local']) . " - " . returnNameEquipe($t['FK_ID_Visiteur']) . "</h5>";
-            echo "<p class=\"text-muted mb-4\">Terrain : " . $t['FK_ID_Terrain'] . "&nbsp;<br>Date : " . $t['Date_Match'] . "&nbsp;<br>
-            Heure de début : " . $t['Heure_Debut_Match'] . "&nbsp;<br>Heure de fin : " . $t['Heure_Fin_Match'] . "&nbsp;<br></p>";
-            echo "</div></div></div>";
-        } else {
-            echo "<div class=\"row row-cols-1 row-cols-md-2 mx-auto\" style=\"max-width: 900px;\">";
-            echo "<div class=\"col text-center d-xl-flex order-md-last justify-content-xl-center align-items-xl-center mb-5\">";
-            echo "<h5 class=\"fw-bold text-center\">Score : " . $t['But_Local_Match'] . " - " . $t['But_Visiteur_Match'] . "</h5>
-            <button type=\"submit\" name=\"submit\" class=\"btn btn-warning\"value=\"m-" . $t['ID_Match'] . "\" style=\"margin-left: 5%;\">
-            <svg xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\" fill=\"currentColor\" class=\"bi bi-pen\" viewBox=\"0 0 16 16\">
-            <path d=\"m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001zm-.644.766a.5.5 0 0 0-.707 0L1.95 11.756l-.764 3.057 3.057-.764L14.44 3.854a.5.5 0 0 0 0-.708l-1.585-1.585z\"/>
+        echo "<div class=\"row row-cols-1 row-cols-md-2 mx-auto\" style=\"max-width: 80%;\">";
+        echo "<div class=\"col text-center d-l-flex order-md-last justify-content-l-center align-items-l-center mb-2\">";
+        echo "<button type=\"submit\" class=\"btn btn-primary btn-sm\" name=\"submit\" style=\"padding: 0px 12px !important;\" value=\"" . $t['ID_Match'] . "-U-L\">
+            <svg xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\" fill=\"currentColor\" class=\"bi bi-chevron-compact-up\" viewBox=\"0 0 16 16\">
+            <path fill-rule=\"evenodd\" d=\"M7.776 5.553a.5.5 0 0 1 .448 0l6 3a.5.5 0 1 1-.448.894L8 6.56 2.224 9.447a.5.5 0 1 1-.448-.894l6-3z\"/>
             </svg></button>";
-            echo "</div>";
-            echo "<div class=\"col d-md-flex align-items-md-end align-items-lg-center mb-5\">";
-            echo "<div>";
-            echo "<h5 class=\"fw-bold\">" . returnNameEquipe($t['FK_ID_Local']) . " - " . returnNameEquipe($t['FK_ID_Visiteur']) . "</h5>";
-            echo "<p class=\"text-muted mb-4\">Terrain : " . $t['FK_ID_Terrain'] . "&nbsp;<br>Date : " . $t['Date_Match'] . "&nbsp;<br>
-            Heure de début : " . $t['Heure_Debut_Match'] . "&nbsp;<br>Heure de fin : " . $t['Heure_Fin_Match'] . "&nbsp;<br></p>";
-            echo "</div></div></div>";
-        }
+        echo "<button type=\"submit\" class=\"btn btn-primary btn-sm\" name=\"submit\" style=\"padding: 0px 12px !important; margin-left: 1% !important;\" value=\"" . $t['ID_Match'] . "-U-V\">
+            <svg xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\" fill=\"currentColor\" class=\"bi bi-chevron-compact-up\" viewBox=\"0 0 16 16\">
+            <path fill-rule=\"evenodd\" d=\"M7.776 5.553a.5.5 0 0 1 .448 0l6 3a.5.5 0 1 1-.448.894L8 6.56 2.224 9.447a.5.5 0 1 1-.448-.894l6-3z\"/>
+            </svg></button>";
+        echo "<h6 class=\"fw-bold text-center\" style=\"margin-bottom: 0.5% !important; margin-top: 1% !important;\">" . $t['But_Local_Match'] . "&nbsp&nbsp &nbsp-&nbsp &nbsp&nbsp" . $t['But_Visiteur_Match'] . "</h6>
+            <button type=\"submit\" class=\"btn btn-primary btn-sm\" name=\"submit\" style=\"padding: 0px 12px !important;\" value=\"" . $t['ID_Match'] . "-D-L\">
+            <svg xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\" fill=\"currentColor\" class=\"bi bi-chevron-compact-down\" viewBox=\"0 0 16 16\">
+            <path fill-rule=\"evenodd\" d=\"M1.553 6.776a.5.5 0 0 1 .67-.223L8 9.44l5.776-2.888a.5.5 0 1 1 .448.894l-6 3a.5.5 0 0 1-.448 0l-6-3a.5.5 0 0 1-.223-.67z\"/>
+            </svg></button>";
+        echo "<button type=\"submit\" class=\"btn btn-primary btn-sm\" name=\"submit\" style=\"padding: 0px 12px !important; margin-left: 1% !important;\" value=\"" . $t['ID_Match'] . "-D-V\">
+            <svg xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\" fill=\"currentColor\" class=\"bi bi-chevron-compact-down\" viewBox=\"0 0 16 16\">
+            <path fill-rule=\"evenodd\" d=\"M1.553 6.776a.5.5 0 0 1 .67-.223L8 9.44l5.776-2.888a.5.5 0 1 1 .448.894l-6 3a.5.5 0 0 1-.448 0l-6-3a.5.5 0 0 1-.223-.67z\"/>
+            </svg></button>";
+        echo "</div>";
+        echo "<div class=\"col d-md-flex align-items-md-end align-items-lg-center mb-2\">";
+        echo "<div id=\"container\">";
+        echo "<h5 class=\"fw-bold\" id=\"h5Texte\">" . returnNameEquipe($t['FK_ID_Local']) . " / " . returnNameEquipe($t['FK_ID_Visiteur']) . "</h5>";
+        echo "<p class=\"text-muted mb-4\">Date : " . date("d.m.Y", strtotime($t['Date_Match'])) . " / Terrain : " . $t['FK_ID_Terrain'] . "&nbsp;<br>
+            Heure : " . $t['Heure_Debut_Match'] . "&nbsp;-> " . $t['Heure_Fin_Match'] . "&nbsp;<br></p>";
+        echo "</div></div></div>";
     }
 }
 
@@ -47,7 +42,7 @@ function selectAllMatchTournoi($id_tournoi)
 {
     try {
         $db = connectDB();
-        $sql = "SELECT * FROM `Matchs` WHERE `FK_ID_Tournoi` = " . $id_tournoi . ";";
+        $sql = "SELECT * FROM `Matchs` WHERE `FK_ID_Tournoi` = " . $id_tournoi . " AND `Actif_Match` = 1 ORDER BY `Date_Match`, `Heure_Debut_Match` ASC";
         $request = $db->prepare($sql);
         $request->execute();
         return $request->fetchAll(PDO::FETCH_ASSOC);
@@ -135,7 +130,7 @@ function selectAllTournoi()
 {
     try {
         $db = connectDB();
-        $sql = "SELECT * FROM `Tournoi`;";
+        $sql = "SELECT * FROM `Tournoi` ORDER BY `Date_Debut_Tournoi` ASC";
         $request = $db->prepare($sql);
         $request->execute();
         return $request->fetchAll(PDO::FETCH_ASSOC);
@@ -228,8 +223,8 @@ function insertMatch($date_match, $heure_debut, $heure_fin, $duree_match, $type_
 {
     try {
         $db = connectDB();
-        $sql = "INSERT INTO `Matchs` (`ID_Match`, `Date_Match`, `Heure_Debut_Match`, `Heure_Fin_Match`, `Duree_Match`, `Type_Match`, `But_Local_Match`, `But_Visiteur_Match`, `FK_ID_Local`, `FK_ID_Visiteur`, `FK_ID_Groupe`, `FK_ID_Tournoi`, `FK_ID_Terrain`)
-        VALUES (NULL,  '$date_match', '$heure_debut', '$heure_fin', '$duree_match', '$type_match', '0', '0' , '$fk_id_local', '$fk_id_visiteur', '$fk_id_groupe', '$fk_id_tournoi',  '$fk_id_terrain');";
+        $sql = "INSERT INTO `Matchs` (`ID_Match`, `Date_Match`, `Heure_Debut_Match`, `Heure_Fin_Match`, `Duree_Match`, `Type_Match`, `But_Local_Match`, `But_Visiteur_Match`, `FK_ID_Local`, `FK_ID_Visiteur`, `FK_ID_Groupe`, `FK_ID_Tournoi`, `FK_ID_Terrain`, `Actif_Match`)
+        VALUES (NULL,  '$date_match', '$heure_debut', '$heure_fin', '$duree_match', '$type_match', '0', '0' , '$fk_id_local', '$fk_id_visiteur', '$fk_id_groupe', '$fk_id_tournoi',  '$fk_id_terrain', 1);";
         $request = $db->prepare($sql);
         $request->execute();
     } catch (\Throwable $e) {
@@ -277,7 +272,7 @@ function afficherSelectMatch($id_tournoi)
 function afficher_option_equipes($id_tournoi)
 {
     $bdd = connectDB();
-    $sql = "SELECT i.FK_ID_Equipe, e.Nom_Equipe FROM `Inscription_Tournoi` AS i JOIN Equipe AS e ON e.ID_Equipe = i.FK_ID_Equipe WHERE FK_ID_Tournoi = " . $id_tournoi;
+    $sql = "SELECT i.FK_ID_Equipe, e.Nom_Equipe FROM `Inscription_Tournoi` AS i JOIN Equipe AS e ON e.ID_Equipe = i.FK_ID_Equipe WHERE FK_ID_Tournoi = " . $id_tournoi . " ORDER BY e.Nom_Equipe ASC";
     $req = $bdd->prepare($sql);
     $req->execute();
     $reponse = $req->fetchAll();
@@ -298,5 +293,3 @@ function afficher_option_terrain($id_tournoi)
     foreach ($reponse as $data)
         echo "<option value=\"" . $data['ID_Terrain'] . "\">" . $data['Numero_Terrain'] . "</option>";
 }
-
-
