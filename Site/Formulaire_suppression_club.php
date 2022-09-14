@@ -3,11 +3,10 @@
 require_once('./functions/dbconnection.php');
 require_once('./functions/Fonctions_Sofian.php');
 
-$idClub = filter_input(INPUT_POST, 'ID_Club');
+$nomClub = filter_input(INPUT_POST, 'Nom_Club');
 
-
-if (!empty($idClub)) {
-    suppression_club($idClub);
+if (!empty($nomClub)) {
+    suppression_club($nomClub);
 }
 
 ?>
@@ -31,21 +30,23 @@ if (!empty($idClub)) {
             <div class="row mb-5">
                 <div class="col-md-8 col-xl-6 text-center mx-auto">
                     <p class="fw-bold text-success mb-2">Suppression</p>
-                    <h2 class="fw-bold">Supprimez les clubs en indiquant leur idenfifiant</h2>
+                    <h2 class="fw-bold">Supprimez les clubs en indiquant leur noms</h2>
                 </div>
             </div>
             <div class="row d-flex justify-content-center">
                 <div class="col-md-6 col-xl-4">
                     <div>
                         <form action="#" class="p-3 p-xl-4" method="post">
-                            <p class="fw-bold text-success mb-2">Liste des Identifiants des clubs</p>
-                            <select name="ID_Club" id="ID_Club">
-                                <?php selection_club($idClub) ?>
+                            <p class="fw-bold text-success mb-2">Liste des noms des clubs</p>
+                            <select name="Nom_Club" id="Nom_ClubSelect">
+                                <?php selection_club($nomClub) ?>
                             </select>
                             <br /><br />
-                            <div><input class="btn btn-primary shadow d-block w-100" value='Envoyer' type="submit"></div>
+                            <div><input class="btn btn-primary shadow d-block w-100" value='Modifier' type="submit"></div>
                             <br /><br />
                             <a href="./Formulaire_suppression_equipe.php">Supprimer une équipe du club</a>
+                            <br /><br />
+                            <a href="./affichage_clubs_bdd.php">Affichage des clubs de notre base de données</a>
                             <br /><br />
                             <a href="./inscription_tournoi.php">Retour à la page d'insciription au tournoi</a>
                         </form>
