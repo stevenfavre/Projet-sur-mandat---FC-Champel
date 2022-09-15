@@ -46,8 +46,6 @@ if (!empty($nomClub)) {
                             <br /><br />
                             <a href="./Formulaire_suppression_equipe.php">Supprimer une équipe du club</a>
                             <br /><br />
-                            <a href="./affichage_club_actif.php">Affichage des clubs de notre base de données</a>
-                            <br /><br />
                             <a href="./inscription_tournoi.php">Retour à la page d'insciription au tournoi</a>
                         </form>
 
