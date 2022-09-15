@@ -7,15 +7,14 @@ $nomClub = filter_input(INPUT_POST,  'Nom_Club');
 $nomClubModif = filter_input(INPUT_POST,  'Nom_ClubModif');
 $actifClub = filter_input(INPUT_POST,  'Actif_club');
 
-$target_dir = "assets/img/team";
+$target_dir = "assets/img/team"; //sources : https://www.php.net/manual/en/function.move-uploaded-file.php
 
-print_r($_FILES);
 
-if (!empty($nomClubModif) || !empty($urlImageClub) || !empty($actifClub)) {
-    $target_file = $target_dir . basename($_FILES["Image_Club"]["name"]);
+if (!empty($nomClubModif) || !empty($urlImageClub) || !empty($actifClub)) { //sources : https://www.php.net/manual/en/function.move-uploaded-file.php
+    $target_file = $target_dir . basename($_FILES["Image_Club"]["name"]); //sources : https://www.php.net/manual/en/function.move-uploaded-file.php
 
-    if (move_uploaded_file($_FILES["Image_Club"]["tmp_name"], $target_file)) 
-        modification_club($nomClubModif, $target_file, $nomClub, $actifClub);
+    if (move_uploaded_file($_FILES["Image_Club"]["tmp_name"], $target_file)) //sources : https://www.php.net/manual/en/function.move-uploaded-file.php
+        modification_club($nomClubModif, $target_file, $nomClub, $actifClub); //sources : https://www.php.net/manual/en/function.move-uploaded-file.php
 }
 
 
@@ -58,7 +57,7 @@ if (!empty($nomClubModif) || !empty($urlImageClub) || !empty($actifClub)) {
                         <div>
                             <p class="fw-bold text-success mb-2">Modifications</p>
                             <div class="mb-3"><input class="form-control" type="text" id="Nom_ClubModif" name="Nom_ClubModif" placeholder="Nom du club"></div>
-                            <div class="mb-3"><input class="form-control" type="file" id="Image_Club" name="Image_Club" ></div>
+                            <div class="mb-3"><input class="form-control" type="file" id="Image_Club" name="Image_Club" ></div> <!-- sources : https://www.w3schools.com/php/php_file_upload.asp -->
                             <div class="mb-3"><input class="form-control" type="text" id="Actif_clubModif" name="Actif_club" placeholder="Statut du club"></div>
                             <div><input class="btn btn-primary shadow d-block w-100" value='Envoyer' type="submit"></div>
                             <br /><br />
@@ -88,7 +87,7 @@ if (!empty($nomClubModif) || !empty($urlImageClub) || !empty($actifClub)) {
     <script src="assets/js/script.min.js"></script>
 
     <script>
-        $('select').on('change', function() {
+        $('select').on('change', function() { 
 
             remplirFormulaire()
         });
