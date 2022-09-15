@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : hhva.myd.infomaniak.com
--- Généré le :  ven. 09 sep. 2022 à 16:20
+-- Généré le :  jeu. 15 sep. 2022 à 15:43
 -- Version du serveur :  10.4.21-MariaDB-1:10.4.21+maria~stretch-log
 -- Version de PHP :  7.4.30
 
@@ -41,7 +41,21 @@ CREATE TABLE `Adresse` (
 
 INSERT INTO `Adresse` (`ID_Adresse`, `Rue_Adresse`, `Localite_Adresse`, `NPA_Adresse`) VALUES
 (1, 'Rue Le-Corbusier 1', 'Genève', 1208),
-(2, 'Route des Jeunes 10', 'Grand-Lancy', 1212);
+(2, 'Route des Jeunes 10', 'Grand-Lancy', 1212),
+(3, 'Route du, Chem. du Pont-du-Centenaire 78', 'Plan-les-Ouates', 1228),
+(4, 'Rue de Vermont 33', 'Genève', 1202),
+(5, 'Rte de Veyrier 51', 'Carouge', 1227),
+(6, 'Rte de l\'Etraz 201', 'Versoix', 1290),
+(7, 'Rte de Frontenex 68', 'Genève', 1208),
+(8, 'Rte de Colovrex 58', 'Le Grand-Saconnex', 1218),
+(9, 'Prom. Général Guisan 12', 'Morges', 1110),
+(10, 'Rte de Vireloup', 'Collex-bossy', 1239),
+(11, 'Av. Louis-Pictet 17', 'Vernier', 1214),
+(12, 'Chem. de la Brenaz 15', 'Puplinge', 1241),
+(13, 'Chem. de la Bâtie 2-4', 'Genève', 1213),
+(14, 'Av. Louis-Rendu 11', 'Meyrin', 1217),
+(15, 'Ruisseau des Eaux Froides', 'Dardagny', 1283),
+(16, 'Chem. du Champs-de-la-Grange', 'Meinier', 1252);
 
 -- --------------------------------------------------------
 
@@ -53,16 +67,32 @@ CREATE TABLE `Club` (
   `ID_Club` int(5) NOT NULL,
   `Nom_Club` varchar(50) NOT NULL,
   `Url_Image_Club` varchar(255) DEFAULT NULL,
-  `FK_ID_Adresse` int(5) NOT NULL
+  `FK_ID_Adresse` int(5) DEFAULT NULL,
+  `Actif_Club` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `Club`
 --
 
-INSERT INTO `Club` (`ID_Club`, `Nom_Club`, `Url_Image_Club`, `FK_ID_Adresse`) VALUES
-(1, 'FC Champel', 'FC_Champel.png', 1),
-(2, 'Servette FC', 'raf,750x1000,075,t,FFFFFF_97ab1c12de.jpg', 2);
+INSERT INTO `Club` (`ID_Club`, `Nom_Club`, `Url_Image_Club`, `FK_ID_Adresse`, `Actif_Club`) VALUES
+(1, 'FC Champel', 'FC_Champel.png', 1, 1),
+(2, 'Servette FC', 'raf,750x1000,075,t,FFFFFF_97ab1c12de.jpg', 2, 1),
+(3, 'FC ESIG ', 'https://login2.sig-ge.ch/adfs/portal/images/logo.png', 2, 1),
+(4, 'FC Etoile-Carouge', 'Etoile_Carouge_FC.png', 5, 1),
+(5, 'FC Plan-Les-Ouates', 'FC_Plan_Les_Ouates.png', 3, 1),
+(6, 'FC Versoix', 'FC_Versoix.png', 6, 1),
+(7, 'UGS', 'UGS.png', 7, 1),
+(8, 'FC Grand-Saconnex', 'FC_Grand_Saconnex.png', 8, 1),
+(9, 'FC Forward Morges', 'FC_Forward_Morges.png', 9, 1),
+(10, 'FC Collex-Bossy', 'FC_Collex_Bossy.png', 10, 1),
+(11, 'FC Vernier', 'FC_Vernier.png', 11, 1),
+(12, 'CS Interstar', 'CS_Interstar.png', 4, 1),
+(13, 'FC Puplinge', 'FC_Puplinge.png', 12, 1),
+(14, 'CS Italien', 'CS_Italien.png', 13, 1),
+(15, 'FC Meyrin', 'FC_Meyrin.png', 14, 1),
+(16, 'FC Donzelle', 'FC_Donzelle.png', 15, 1),
+(17, 'US Meinier', 'US_Meinier.png', 16, 1);
 
 -- --------------------------------------------------------
 
@@ -75,18 +105,34 @@ CREATE TABLE `Equipe` (
   `Nom_Equipe` varchar(50) NOT NULL,
   `Degres_Equipe` varchar(5) NOT NULL,
   `FK_ID_Club` int(5) NOT NULL,
-  `FK_ID_Groupe` int(5) NOT NULL
+  `FK_ID_Groupe` int(5) DEFAULT NULL,
+  `Actif_Equipe` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `Equipe`
 --
 
-INSERT INTO `Equipe` (`ID_Equipe`, `Nom_Equipe`, `Degres_Equipe`, `FK_ID_Club`, `FK_ID_Groupe`) VALUES
-(1, 'Champel FC 1', 'D2', 1, 1),
-(2, 'Servette FC 1', 'D1', 2, 2),
-(3, 'Champel FC 1', 'D1', 1, 2),
-(4, 'Servette FC 1', 'D2', 2, 1);
+INSERT INTO `Equipe` (`ID_Equipe`, `Nom_Equipe`, `Degres_Equipe`, `FK_ID_Club`, `FK_ID_Groupe`, `Actif_Equipe`) VALUES
+(1, 'Champel FC 1', 'D2', 1, 1, 1),
+(2, 'Servette FC 1', 'D1', 2, 2, 1),
+(3, 'Champel FC 1', 'D1', 1, 2, 1),
+(4, 'Servette FC 1', 'D2', 2, 1, 1),
+(5, 'FC ESIG 1', 'D1', 1, 2, 1),
+(6, 'FC Etoile-Carouge - Junior D', 'D', 4, 1, 1),
+(7, 'FC Plan-Les-Ouates - Junior D', 'D', 5, 1, 1),
+(8, 'FC Versoix - Junior D', 'D', 6, 1, 1),
+(9, 'UGS - Junior D', 'D', 7, 1, 1),
+(10, 'FC Grand-Saconnex - Junior D', 'D', 8, 2, 1),
+(11, 'FC Forward-Morges - Junior D', 'D', 9, 2, 1),
+(12, 'FC Collex-Bossy - Junior D', 'D', 10, 2, 1),
+(13, 'FC Vernier - Junior D', 'D', 11, 2, 1),
+(14, 'CS Interstar - Junior D', 'D', 12, 3, 1),
+(15, 'FC Puplinge - Junior D', 'D', 13, 3, 1),
+(16, 'CS Italien - Junior D', 'D', 14, 3, 1),
+(17, 'FC Meyrin - Junior D', 'D', 15, 4, 1),
+(18, 'FC Donzelle - Junior D', 'D', 16, 4, 1),
+(19, 'US Meinier - Junior D', 'D', 17, 4, 1);
 
 -- --------------------------------------------------------
 
@@ -105,7 +151,11 @@ CREATE TABLE `Groupe` (
 
 INSERT INTO `Groupe` (`ID_Groupe`, `Nom_Groupe`) VALUES
 (1, 'Groupe A'),
-(2, 'Groupe B');
+(2, 'Groupe B'),
+(3, 'Groupe C'),
+(4, 'Groupe D'),
+(5, 'Groupe E'),
+(6, 'Groupe F');
 
 -- --------------------------------------------------------
 
@@ -127,7 +177,15 @@ CREATE TABLE `Inscription_Tournoi` (
 
 INSERT INTO `Inscription_Tournoi` (`ID_Inscription_Tournoi`, `Date_Inscription_Tournoi`, `Statut_Inscription_Tournoi`, `FK_ID_Tournoi`, `FK_ID_Equipe`) VALUES
 (1, '2022-09-24', 'En attente', 1, 1),
-(2, '2022-09-24', 'En attente', 1, 2);
+(2, '2022-09-24', 'En attente', 1, 2),
+(3, '2022-09-12', 'En attente', 3, 1),
+(5, '2022-09-12', 'En attente', 3, 2),
+(6, '2022-09-12', 'En attente', 1, 1),
+(7, '2022-09-12', 'En attente', 1, 1),
+(8, '2022-09-12', 'Validée', 2, 1),
+(9, '2022-09-12', 'Validée', 2, 4),
+(10, '2022-09-13', 'Validée', 1, 15),
+(11, '2022-09-13', 'Validée', 1, 18);
 
 -- --------------------------------------------------------
 
@@ -171,16 +229,23 @@ CREATE TABLE `Matchs` (
   `FK_ID_Visiteur` int(5) NOT NULL,
   `FK_ID_Groupe` int(5) DEFAULT NULL,
   `FK_ID_Tournoi` int(5) NOT NULL,
-  `FK_ID_Terrain` int(5) NOT NULL
+  `FK_ID_Terrain` int(5) NOT NULL,
+  `Actif_Match` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `Matchs`
 --
 
-INSERT INTO `Matchs` (`ID_Match`, `Date_Match`, `Heure_Debut_Match`, `Heure_Fin_Match`, `Duree_Match`, `Type_Match`, `But_Local_Match`, `But_Visiteur_Match`, `FK_ID_Local`, `FK_ID_Visiteur`, `FK_ID_Groupe`, `FK_ID_Tournoi`, `FK_ID_Terrain`) VALUES
-(1, '2022-09-24', '09:00:00', '09:12:00', 12, 'Pool', 0, 7, 1, 4, 1, 1, 1),
-(2, '2022-09-24', '10:00:00', '10:12:00', 12, 'Pool', 7, 4, 2, 3, 2, 1, 2);
+INSERT INTO `Matchs` (`ID_Match`, `Date_Match`, `Heure_Debut_Match`, `Heure_Fin_Match`, `Duree_Match`, `Type_Match`, `But_Local_Match`, `But_Visiteur_Match`, `FK_ID_Local`, `FK_ID_Visiteur`, `FK_ID_Groupe`, `FK_ID_Tournoi`, `FK_ID_Terrain`, `Actif_Match`) VALUES
+(1, '2022-09-24', '09:00:00', '09:12:00', 12, 'Pool', 4, 10, 1, 4, 1, 1, 1, 1),
+(2, '2022-09-24', '10:00:00', '10:12:00', 12, 'Pool', 7, 10, 2, 3, 2, 1, 2, 1),
+(5, '2022-09-25', '11:22:00', '11:33:00', 0, 'Pool', 2, 4, 1, 2, 1, 1, 1, 1),
+(6, '2022-10-01', '11:22:00', '11:33:00', 0, 'Pool', 4, 0, 1, 4, 1, 2, 2, 1),
+(7, '2022-10-15', '11:00:00', '11:10:00', 0, 'Pool', 0, 3, 2, 1, 1, 3, 1, 1),
+(8, '2022-09-24', '11:30:00', '11:40:00', 0, 'Poul', 6, 2, 1, 1, 1, 1, 1, 1),
+(9, '2022-09-25', '11:22:00', '11:33:00', 0, 'Poul', 1, 3, 15, 18, 1, 1, 1, 1),
+(10, '2022-09-25', '11:33:00', '11:44:00', 0, 'poul', 2, 3, 1, 15, 1, 1, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -503,7 +568,8 @@ CREATE TABLE `Tournoi` (
 
 INSERT INTO `Tournoi` (`ID_Tournoi`, `Date_Debut_Tournoi`, `Date_Fin_Tournoi`, `FK_ID_Salle`) VALUES
 (1, '2022-09-24', '2022-09-25', 1),
-(2, '2022-10-01', '2022-10-02', 2);
+(2, '2022-10-01', '2022-10-02', 2),
+(3, '2022-10-15', '2022-10-16', 1);
 
 --
 -- Index pour les tables déchargées
@@ -599,31 +665,31 @@ ALTER TABLE `Tournoi`
 -- AUTO_INCREMENT pour la table `Adresse`
 --
 ALTER TABLE `Adresse`
-  MODIFY `ID_Adresse` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `ID_Adresse` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT pour la table `Club`
 --
 ALTER TABLE `Club`
-  MODIFY `ID_Club` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `ID_Club` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT pour la table `Equipe`
 --
 ALTER TABLE `Equipe`
-  MODIFY `ID_Equipe` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `ID_Equipe` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT pour la table `Groupe`
 --
 ALTER TABLE `Groupe`
-  MODIFY `ID_Groupe` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `ID_Groupe` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT pour la table `Inscription_Tournoi`
 --
 ALTER TABLE `Inscription_Tournoi`
-  MODIFY `ID_Inscription_Tournoi` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `ID_Inscription_Tournoi` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT pour la table `Joueur`
@@ -635,7 +701,7 @@ ALTER TABLE `Joueur`
 -- AUTO_INCREMENT pour la table `Matchs`
 --
 ALTER TABLE `Matchs`
-  MODIFY `ID_Match` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `ID_Match` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT pour la table `pays`
@@ -659,7 +725,7 @@ ALTER TABLE `Terrain`
 -- AUTO_INCREMENT pour la table `Tournoi`
 --
 ALTER TABLE `Tournoi`
-  MODIFY `ID_Tournoi` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `ID_Tournoi` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- Contraintes pour les tables déchargées
