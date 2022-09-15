@@ -29,9 +29,9 @@ require_once('./functions/Fonctions_Sofian.php');
             </div>
             <div class="row d-flex justify-content-center">
                 <div class="col-md-6 col-xl-4">
-                <h2 class="fw-bold">Liste des clubs</h2>
+                    <h2 class="fw-bold">Liste des clubs</h2>
+                    <?php afficher_ClubActif() ?>
                 </div>
-                <?php afficher_ClubActif() ?>
             </div>
             <br /><br />
             <a href="../Site/Formulaire_suppression_club.php">Retour à la page de suppression d'un club</a>

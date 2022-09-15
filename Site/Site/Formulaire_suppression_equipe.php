@@ -3,8 +3,7 @@
 require_once('./functions/dbconnection.php');
 require_once('./functions/Fonctions_Sofian.php');
 
-$idEquipe = filter_input(INPUT_POST, 'ID_Equipe');
-
+$idEquipe = filter_input(INPUT_POST, 'Nom_Equipe');
 
 if (!empty($idEquipe)) {
     suppression_equipes($idEquipe);
@@ -18,7 +17,7 @@ if (!empty($idEquipe)) {
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>Contacts - Brand</title>
+    <title>Suppression de club</title>
     <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800&amp;display=swap">
     <link rel="stylesheet" href="assets/fonts/ionicons.min.css">
@@ -31,21 +30,21 @@ if (!empty($idEquipe)) {
             <div class="row mb-5">
                 <div class="col-md-8 col-xl-6 text-center mx-auto">
                     <p class="fw-bold text-success mb-2">Suppression</p>
-                    <h2 class="fw-bold">Supprimez les équipes en indiquant leur idenfifiant</h2>
+                    <h2 class="fw-bold">Supprimez les équipes en indiquant leur noms</h2>
                 </div>
             </div>
             <div class="row d-flex justify-content-center">
                 <div class="col-md-6 col-xl-4">
                     <div>
                         <form action="#" class="p-3 p-xl-4" method="post">
-                            <p class="fw-bold text-success mb-2">Liste des Identifiants des équipes</p>
-                            <select name="ID_Equipe" id="id_equipe">
-                                <?php selection_equipe($idEquipe) ?>
+                            <p class="fw-bold text-success mb-2">Liste des noms des équipes</p>
+                            <select name="Nom_Equipe" id="Nom_EquipeSelect">
+                                <?php selection_equipe() ?>
                             </select>
                             <br /><br />
-                            <div><input class="btn btn-primary shadow d-block w-100" value='Envoyer' type="submit"></div>
+                            <div><input class="btn btn-primary shadow d-block w-100" value='Supprimer' type="submit"></div>
                             <br /><br />
-                            <a href="../Site/inscription_tournoi.php">Retour à la page d'insciription au tournoi</a>
+                            <a href="./inscription_tournoi.php">Retour à la page d'insciription au tournoi</a>
                         </form>
 
                     </div>

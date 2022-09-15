@@ -53,7 +53,7 @@ function selection_equipe()
     $bdd = connectDB();
     $bdd->query("SET NAMES 'utf8'");
 
-    $reponseDesEquipes = $bdd->query("SELECT * FROM Equipe ORDER BY ID_Equipe ASC");
+    $reponseDesEquipes = $bdd->query("SELECT * FROM Equipe WHERE `Actif_equipe` = 1  ORDER BY ID_Equipe ASC");
     $reponseDesEquipes->setFetchMode(PDO::FETCH_BOTH);
 
     while ($donnees = $reponseDesEquipes->fetch()) {
@@ -63,25 +63,56 @@ function selection_equipe()
     $bdd = null;
 }
 
-function affichage_equipe()
+function affichage_equipe($fkIdClub)
 {
+    try {
+        $bdd = connectDB();
+        $bdd->query("SET NAMES 'utf8'");
 
-    $bdd = connectDB();
-    $bdd->query("SET NAMES 'utf8'");
+        $reponseDesEquipes = $bdd->query("SELECT `Nom_Equipe`, `Degres_Equipe` FROM `Equipe` WHERE `Actif_equipe` = 1 AND `FK_ID_Club` = " . $fkIdClub);
+        $reponseDesEquipes->setFetchMode(PDO::FETCH_BOTH);
 
-    $reponseDesEquipes = $bdd->query("SELECT `Nom_Equipe`, `Degres_Equipe` FROM `Equipe` WHERE `Actif_equipe` = 1");
-    $reponseDesEquipes->setFetchMode(PDO::FETCH_BOTH);
+        while ($donneesDesEquipes = $reponseDesEquipes->fetch()) {
 
-    while ($donneesDesEquipes = $reponseDesEquipes->fetch()) {
+            echo "<br />";
+            echo "Nom de l'équipe : " . $donneesDesEquipes['Nom_Equipe'];
+            echo "<br />";
+            echo "Degré de l'équipe (niveau) : " . $donneesDesEquipes['Degres_Equipe'];
+            echo "<br />";
+        }
 
-        echo "<br />";
-        echo "Nom de l'équipe : " . $donneesDesEquipes['Nom_Equipe'];
-        echo "<br />";
-        echo "Degré de l'équipe (niveau) : " . $donneesDesEquipes['Degres_Equipe'];
-        echo "<br />";
+        $bdd = null;
+    } catch (\Throwable $th) {
+        echo $th->getMessage();
     }
+}
 
-    $bdd = null;
+/* function affichage_equipe_div()
+{
+    echo "<div class=\"row d-flex justify-content-center\">";
+    echo "</div>";
+    echo "<div class=\"col-md-6 col-xl-4\">";
+    echo "<h2 class=\"fw-bold\">Liste des équipes</h2>";
+    echo "</div>";
+    echo "<form class=\"p-3 p-xl-4\" method=\"post\">";
+    echo "<br /><br />";
+
+    foreach (selection_club_sans_Option() as $Club) {
+
+        echo '<div class=\"row d-flex justify-content-center\"> <img style="height: 200px; width: 200px;" src="assets\img\team\\' . $Club['Url_Image_Club'] . '"></div>';
+        echo "</form></div>";
+        affichage_equipe($Club['ID_Club']);
+        echo "</div>";
+        echo "</div>";
+    }
+} */
+function affichage_equipe_div()
+{
+    foreach (selection_club_sans_Option() as $Club) {
+
+        echo '<div class=\"row d-flex justify-content-center\"> <img style="height: 200px; width: 200px;" src="assets\img\team\\' . $Club['Url_Image_Club'] . '"></div>';
+        affichage_equipe($Club['ID_Club']);
+    }
 }
 
 
@@ -152,9 +183,9 @@ function afficher_ClubActif()
 
     $reponseDesClubs = $bdd->query("SET NAMES 'utf8'");
     $reponseDesClubs = $bdd->query("SELECT `Nom_Club` FROM `Club` WHERE `Actif_club` = 1");
-
+    echo "<h4 class=\"fw-bold\">Noms</h4> ";
     while ($donneesDesClubs = $reponseDesClubs->fetch()) {
-        echo "Nom club : " . $donneesDesClubs['Nom_Club'];
+        echo $donneesDesClubs['Nom_Club'];
         echo "<br /><br />";
     }
 }
@@ -164,7 +195,7 @@ function selection_club()
     $bdd = connectDB();
     $bdd->query("SET NAMES 'utf8'");
 
-    $reponseDesClubs = $bdd->query("SELECT * FROM Club ORDER BY ID_Club ASC");
+    $reponseDesClubs = $bdd->query("SELECT * FROM Club WHERE `Actif_club` = 1 ORDER BY ID_Club ASC");
     $reponseDesClubs->setFetchMode(PDO::FETCH_BOTH);
 
     while ($donneesDesClubs = $reponseDesClubs->fetch()) {
@@ -172,6 +203,19 @@ function selection_club()
     }
 
     $bdd = null;
+}
+
+function selection_club_sans_Option()
+{
+    $bdd = connectDB();
+    $bdd->query("SET NAMES 'utf8'");
+
+    $reponseDesClubs = $bdd->query("SELECT * FROM Club WHERE `Actif_club` = 1 ORDER BY ID_Club ASC");
+    $reponseDesClubs->setFetchMode(PDO::FETCH_ASSOC);
+
+    $bdd = null;
+
+    return $reponseDesClubs;
 }
 
 function affichage_logo()
