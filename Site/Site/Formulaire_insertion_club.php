@@ -1,22 +1,25 @@
 <?php
 
 require_once('./functions/Fonctions_Sofian.php');
-
 $nomClub = filter_input(INPUT_POST,  'Nom_Club');
-$urlImageClub = filter_input(INPUT_POST,  'Url_Image_Club');
 $rueAdresse = filter_input(INPUT_POST,  'Rue_Adresse');
 $localiteAdresse = filter_input(INPUT_POST,  'Localite_Adresse');
 $npaAdresse = filter_input(INPUT_POST,  'NPA_Adresse');
 
+$target_dir = "assets/img/team";
 
 
-if (!empty($nomClub) && !empty($urlImageClub) && !empty($rueAdresse) && !empty($localiteAdresse) && !empty($npaAdresse)) {
+  
+if (!empty($nomClub) && !empty($rueAdresse) && !empty($localiteAdresse) && !empty($npaAdresse)) {
+    $target_file = $target_dir . basename($_FILES["Image_Club"]["name"]);
 
-    $idAdresse = insertion_adresse_club($rueAdresse, $localiteAdresse, $npaAdresse);
+    if (move_uploaded_file($_FILES["Image_Club"]["tmp_name"], $target_file)) {
+        $idAdresse = insertion_adresse_club($rueAdresse, $localiteAdresse, $npaAdresse);
+        insertion_club($nomClub,$target_file, $idAdresse);
+       
+    } 
 
-    insertion_club($nomClub, $urlImageClub, $idAdresse);
-}
-
+} 
 ?>
 
 <!DOCTYPE html>
@@ -44,12 +47,12 @@ if (!empty($nomClub) && !empty($urlImageClub) && !empty($rueAdresse) && !empty($
             <div class="row d-flex justify-content-center">
                 <div class="col-md-6 col-xl-4">
                     <div>
-                        <form action="#" class="p-3 p-xl-4" method="post">
+                        <form action="#" class="p-3 p-xl-4" method="post"  enctype="multipart/form-data">
                             <div class="mb-3"><input class="form-control" type="text" id="Nom_Club" name="Nom_Club" placeholder="Nom du club "></div>
-                            <div class="mb-3"><input class="form-control" type="text" id="Url_Image_Club" name="Url_Image_Club" placeholder="Url de l'image du logo du club"></div>
+                            <div class="mb-3"><input class="form-control" type="file" id="Image_Club" name="Image_Club" ></div>
                             <div class="mb-3"><input class="form-control" type="text" id="Rue_Adresse" name="Rue_Adresse" placeholder="Rue du club"></div>
                             <div class="mb-3"><input class="form-control" type="text" id="Localite_Adresse" name="Localite_Adresse" placeholder="Localite du club"></div>
-                            <div class="mb-3"><input class="form-control" type="text" id="NPA_Adresse" name="NPA_Adresse" placeholder="NPA du club"></div>
+                            <div class="mb-3"><input class="form-control" type="number" id="NPA_Adresse" name="NPA_Adresse" placeholder="NPA du club"></div>
                             <br /><br />
                             <div><input class="btn btn-primary shadow d-block w-100" value='Envoyer' type="submit"></div>
                             <br /><br />

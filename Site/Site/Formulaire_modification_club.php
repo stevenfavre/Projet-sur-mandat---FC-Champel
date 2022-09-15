@@ -5,13 +5,17 @@ require_once('./functions/Fonctions_Sofian.php');
 
 $nomClub = filter_input(INPUT_POST,  'Nom_Club');
 $nomClubModif = filter_input(INPUT_POST,  'Nom_ClubModif');
-$urlImageClub = filter_input(INPUT_POST,  'Url_Image_Club');
 $actifClub = filter_input(INPUT_POST,  'Actif_club');
 
+$target_dir = "assets/img/team";
 
+print_r($_FILES);
 
 if (!empty($nomClubModif) || !empty($urlImageClub) || !empty($actifClub)) {
-    modification_club($nomClubModif, $urlImageClub, $nomClub, $actifClub);
+    $target_file = $target_dir . basename($_FILES["Image_Club"]["name"]);
+
+    if (move_uploaded_file($_FILES["Image_Club"]["tmp_name"], $target_file)) 
+        modification_club($nomClubModif, $target_file, $nomClub, $actifClub);
 }
 
 
@@ -41,7 +45,7 @@ if (!empty($nomClubModif) || !empty($urlImageClub) || !empty($actifClub)) {
             </div>
             <div class="row d-flex justify-content-center">
                 <div class="col-md-6 col-xl-4">
-                    <form action="#" class="p-3 p-xl-4" method="post">
+                    <form action="#" class="p-3 p-xl-4" method="post" enctype="multipart/form-data">
                         <div>
 
                             <p class="fw-bold text-success mb-2">Informations actuelles avant les modifications</p>
@@ -54,7 +58,7 @@ if (!empty($nomClubModif) || !empty($urlImageClub) || !empty($actifClub)) {
                         <div>
                             <p class="fw-bold text-success mb-2">Modifications</p>
                             <div class="mb-3"><input class="form-control" type="text" id="Nom_ClubModif" name="Nom_ClubModif" placeholder="Nom du club"></div>
-                            <div class="mb-3"><input class="form-control" type="text" id="Url_Image_ClubModif" name="Url_Image_Club" placeholder="Url de l'Image Club"></div>
+                            <div class="mb-3"><input class="form-control" type="file" id="Image_Club" name="Image_Club" ></div>
                             <div class="mb-3"><input class="form-control" type="text" id="Actif_clubModif" name="Actif_club" placeholder="Statut du club"></div>
                             <div><input class="btn btn-primary shadow d-block w-100" value='Envoyer' type="submit"></div>
                             <br /><br />
@@ -102,7 +106,7 @@ if (!empty($nomClubModif) || !empty($urlImageClub) || !empty($actifClub)) {
                     console.log(parsedData)
 
                     nomClub.val(parsedData.Nom_Club)
-                    imgClub.attr("src", "assets/img/team/" + parsedData.Url_Image_Club)
+                    imgClub.attr("src", parsedData.Url_Image_Club)
                 },
                 error: function() {
                     alert("Une erreur est surevenue lors de la requete Ajax")
