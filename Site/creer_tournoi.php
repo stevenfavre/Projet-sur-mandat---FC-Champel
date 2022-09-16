@@ -2,21 +2,21 @@
   include('./functions/dbconnection.php');
   include('./functions/tournoi.php');
 
-  //echo $_POST['submit'];
-
+  $submit = null;
   if (isset($_POST['submit'])) {
-
-    $Date_debut = $_POST['Date_Debut_Tournoi'];
-    $Date_fin = $_POST['Date_Fin_Tournoi'];
-    $Fk_ID_Salle = $_POST['ID_Salle'];
-    insertion_tournoi($Date_debut, $Date_fin, $Fk_ID_Salle);
+    $submit = $_POST['submit'];
   }
+
+
+
+
   ?>
 
  <!DOCTYPE html>
  <html lang="en">
 
  <head>
+   <script src="https://kit.fontawesome.com/5a023d1c0f.js" crossorigin="anonymous"></script>
    <meta charset="utf-8">
    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
    <title>Création - Tournoi</title>
@@ -39,22 +39,37 @@
          <div class="col-md-6 col-xl-4">
            <div>
              <form action="creer_tournoi.php" class="p-3 p-xl-4" method="post">
-               <label for="text">Date de début</label>
+               <h6 class="fw-bold mb-0">Date de début</h6>
                <div class="mb-3"><input class="form-control" type="date" id="date-1" name="Date_Debut_Tournoi" placeholder="Date de début"></div>
-               <label for="text">Date de fin</label>
+               <h6 class="fw-bold mb-0">Date de fin</h6>
                <div class="mb-3"><input class="form-control" type="date" id="date-2" name="Date_Fin_Tournoi" placeholder="Date de fin"></div>
-               <label for="text">Salle Tournoi</label>
+               <h6 class="fw-bold mb-0">Salle tournoi</h6>
 
                <select name="ID_Salle" id="listeIdTournoi">
                  <?php selection_salle_tournoi($ID_Salle); ?>
                </select>
-               <br /><br />
-               <div><button class="btn btn-primary shadow d-block w-100" type="submit" name="submit">Créer tournoi</button></div>
+               <?php if ($submit == "ok") {
+
+                  $Date_debut = $_POST['Date_Debut_Tournoi'];
+                  $Date_fin = $_POST['Date_Fin_Tournoi'];
+                  $Fk_ID_Salle = $_POST['ID_Salle'];
+                  if (verificationDonneesTournois($Date_debut, $Date_fin)) {
+                    insertion_tournoi($Date_debut, $Date_fin, $Fk_ID_Salle);
+                  } else {
+                ?><script type="text/javascript">
+                     alert("Veuillez vérifier les informations");
+                   </script> <?php
+                            }
+                          } ?>
+
+               <div><button class="btn btn-primary shadow d-block w-100" type="submit" name="submit" value="ok">Créer tournoi</button></div>
+
                <br /><br />
                <div><button class="btn btn-primary shadow d-block w-100" type="reset" name="reset">Annuler</button></div>
-               <!--  <div class="mb-3"><input class="form-control" type="text" id="salle-1" name="FK_ID_Salle" placeholder=""></div>
-               <div><input class="btn btn-primary shadow d-block w-100" type="submit" name="submit" placeholder=""></div> -->
+
              </form>
+
+
            </div>
          </div>
          <div class="col-md-4 col-xl-4 d-flex justify-content-center justify-content-xl-start">

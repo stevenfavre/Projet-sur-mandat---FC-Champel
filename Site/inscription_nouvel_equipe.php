@@ -5,12 +5,11 @@ include('./functions/tournoi.php');
 
 
 //echo $_POST['submit'];
-
+$submit = null;
 if (isset($_POST['submit'])) {
-  $FK_ID_Tournoi = $_POST['FK_ID_Tournoi'];
-  $FK_ID_Equipe = $_POST['FK_ID_Equipe'];
-  inscription_equipe_tournoi($FK_ID_Tournoi, $FK_ID_Equipe);
+  $submit = $_POST['submit'];
 }
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -38,26 +37,42 @@ if (isset($_POST['submit'])) {
       <div class="row d-flex justify-content-center">
         <div class="col-md-6 col-xl-4">
           <div>
-            <form action="inscription_tournoi.php" class="p-3 p-xl-4" method="post">
+            <form action="inscription_nouvel_equipe.php" class="p-3 p-xl-4" method="post">
 
               <p class="fw-bold text-success mb-2">Choisissez la date du tournoi auquel vous voulez participer</p>
               <select name="FK_ID_Tournoi" id="listeIdTournoi">
-                <?php selection_tournoi_incription($ID_Tournoi) ?>
+                <?php selection_tournoi($IdTournoi); ?>
               </select>
               <br /><br />
               <p class="fw-bold text-success mb-2">Saisir infos nouvelle équipe</p>
               <form action="#" class="p-3 p-xl-4" method="post">
                 <div class="mb-3"><input class="form-control" type="text" id="champ" name="Nom" placeholder="Nom equipe"></div>
                 <label for="text">Degrés equipe</label>
-                <select name="ID_Club" id="listeIdTournoi">
-                  <?php selection_salle_tournoi($ID_Salle); ?>
+                <select name="ID_Equipe" id="listeIdTournoi">
+                  <?php selection_degre_equipe($ID_Equipe); ?>
                 </select>
                 <label for="text">Club equipe</label>
                 <select name="ID_Club" id="listeIdTournoi">
                   <?php selection_salle_tournoi($ID_Salle); ?>
                 </select>
+
+                <?php if ($submit == "ok") {
+
+                  $FK_ID_Tournoi = $_POST['FK_ID_Tournoi'];
+                  $FK_ID_Equipe = $_POST['ID_Equipe'];
+
+
+                  if (verificationDonneesTournois($FK_ID_Tournoi, $FK_ID_Equipe)) {
+                    inscription_equipe_tournoi($FK_ID_Tournoi, $FK_ID_Equipe);
+                  } else {
+                ?><script type="text/javascript">
+                      alert("Veuillez vérifier les informations");
+                    </script> <?php
+                            }
+                          } ?>
+
                 <br /><br />
-                <div><button class="btn btn-primary shadow d-block w-100" type="submit" name="submit">Inscrire</button></div>
+                <div><button class="btn btn-primary shadow d-block w-100" type="submit" name="submit" value="ok">Inscrire</button></div>
                 <br /><br />
                 <div><button class="btn btn-primary shadow d-block w-100" type="reset" name="reset">Annuler</button></div>
                 <!--  <div class="mb-3"><input class="form-control" type="text" id="salle-1" name="FK_ID_Salle" placeholder=""></div>

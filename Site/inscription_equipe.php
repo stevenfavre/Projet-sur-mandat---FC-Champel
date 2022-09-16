@@ -6,10 +6,9 @@ include('./functions/tournoi.php');
 
 //echo $_POST['submit'];
 
+$submit = null;
 if (isset($_POST['submit'])) {
-  $FK_ID_Tournoi = $_POST['FK_ID_Tournoi'];
-  $FK_ID_Equipe = $_POST['FK_ID_Equipe'];
-  inscription_equipe_tournoi($FK_ID_Tournoi, $FK_ID_Equipe);
+  $submit = $_POST['submit'];
 }
 ?>
 <!DOCTYPE html>
@@ -38,19 +37,33 @@ if (isset($_POST['submit'])) {
       <div class="row d-flex justify-content-center">
         <div class="col-md-6 col-xl-4">
           <div>
-            <form action="inscription_tournoi.php" class="p-3 p-xl-4" method="post">
+            <form action="inscription_equipe.php" class="p-3 p-xl-4" method="post">
 
               <p class="fw-bold text-success mb-2">Choisissez la date du tournoi auquel vous voulez participer</p>
               <select name="FK_ID_Tournoi" id="listeIdTournoi">
-                <?php selection_tournoi_incription($ID_Tournoi) ?>
+                <?php selection_tournoi($IdTournoi); ?>
               </select>
               <br /><br />
               <p class="fw-bold text-success mb-2">Choisissez votre équipe</p>
               <select name="FK_ID_Equipe" id="listeIdTournoi">
                 <?php selection_equipe_incription($IdEquipe) ?>
               </select>
+
+              <?php if ($submit == "ok") {
+
+                $FK_ID_Tournoi = $_POST['FK_ID_Tournoi'];
+                $FK_ID_Equipe = $_POST['FK_ID_Equipe'];
+                if (verificationDonneesTournois($FK_ID_Tournoi, $FK_ID_Equipe)) {
+                  inscription_equipe_tournoi($FK_ID_Tournoi, $FK_ID_Equipe);;
+                } else {
+              ?><script type="text/javascript">
+                    alert("Veuillez vérifier les informations");
+                  </script> <?php
+                          }
+                        } ?>
+
               <br /><br />
-              <div><button class="btn btn-primary shadow d-block w-100" type="submit" name="submit">S'inscrire</button></div>
+              <div><button class="btn btn-primary shadow d-block w-100" type="submit" name="submit" value="ok">S'inscrire</button></div>
               <br /><br />
               <a class="btn btn-primary shadow" role="button" href="inscription_nouvel_equipe.php">Inscrire une nouvelle équipe</a>
               <br /><br />
