@@ -1,7 +1,7 @@
 <?php
 
-require_once('./functions/dbconnection.php');
-require_once('./functions/Fonctions_Sofian.php');
+require_once('./functions/dbconnection.php'); //Fait appel à la page se trouve la connexion à la BDD.
+require_once('./functions/Fonctions_Sofian.php'); //Fait appel à la page où se trouvent les fonction 
 
 $nomClub = filter_input(INPUT_POST, 'Nom_Club');
 
@@ -45,8 +45,6 @@ if (!empty($nomClub)) {
                             <div><input class="btn btn-primary shadow d-block w-100" value='Modifier' type="submit"></div>
                             <br /><br />
                             <a href="./Formulaire_suppression_equipe.php">Supprimer une équipe du club</a>
-                            <br /><br />
-                            <a href="./affichage_clubs_bdd.php">Affichage des clubs de notre base de données</a>
                             <br /><br />
                             <a href="./inscription_tournoi.php">Retour à la page d'insciription au tournoi</a>
                         </form>

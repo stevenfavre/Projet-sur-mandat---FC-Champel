@@ -1,17 +1,20 @@
 <?php
 
-require_once('./functions/dbconnection.php');
-require_once('./functions/Fonctions_Sofian.php');
+require_once('./functions/dbconnection.php'); //Fait appel à la page se trouve la connexion à la BDD.
+require_once('./functions/Fonctions_Sofian.php'); //Fait appel à la page où se trouvent les fonction 
 
 $nomClub = filter_input(INPUT_POST,  'Nom_Club');
 $nomClubModif = filter_input(INPUT_POST,  'Nom_ClubModif');
-$urlImageClub = filter_input(INPUT_POST,  'Url_Image_Club');
 $actifClub = filter_input(INPUT_POST,  'Actif_club');
 
+$target_dir = "assets/img/team/"; //sources : https://www.php.net/manual/en/function.move-uploaded-file.php
 
 
-if (!empty($nomClubModif) || !empty($urlImageClub) || !empty($actifClub)) {
-    modification_club($nomClubModif, $urlImageClub, $nomClub, $actifClub);
+if (!empty($nomClubModif) || !empty($urlImageClub) || !empty($actifClub)) { //sources : https://www.php.net/manual/en/function.move-uploaded-file.php
+    $target_file = $target_dir . basename($_FILES["Image_Club"]["name"]); //sources : https://www.php.net/manual/en/function.move-uploaded-file.php
+
+    if (move_uploaded_file($_FILES["Image_Club"]["tmp_name"], $target_file)) //sources : https://www.php.net/manual/en/function.move-uploaded-file.php
+        modification_club($nomClubModif, $_FILES["Image_Club"]["name"], $nomClub, $actifClub); //sources : https://www.php.net/manual/en/function.move-uploaded-file.php
 }
 
 
@@ -41,7 +44,7 @@ if (!empty($nomClubModif) || !empty($urlImageClub) || !empty($actifClub)) {
             </div>
             <div class="row d-flex justify-content-center">
                 <div class="col-md-6 col-xl-4">
-                    <form action="#" class="p-3 p-xl-4" method="post">
+                    <form action="#" class="p-3 p-xl-4" method="post" enctype="multipart/form-data">
                         <div>
 
                             <p class="fw-bold text-success mb-2">Informations actuelles avant les modifications</p>
@@ -50,19 +53,17 @@ if (!empty($nomClubModif) || !empty($urlImageClub) || !empty($actifClub)) {
                             </select>
                             <br /><br />
                             <div class="mb-3"><img id="imgClub"></div>
-
                         </div>
                         <div>
                             <p class="fw-bold text-success mb-2">Modifications</p>
                             <div class="mb-3"><input class="form-control" type="text" id="Nom_ClubModif" name="Nom_ClubModif" placeholder="Nom du club"></div>
-                            <div class="mb-3"><input class="form-control" type="text" id="Url_Image_ClubModif" name="Url_Image_Club" placeholder="Url de l'Image Club"></div>
-                            <div class="mb-3"><input class="form-control" type="text" id="Actfi_clubModif" name="Actif_club" placeholder="Statut du club"></div>
+                            <div class="mb-3"><input class="form-control" type="file" id="Image_Club" name="Image_Club"></div> <!-- sources : https://www.w3schools.com/php/php_file_upload.asp -->
+                            <div class="mb-3"><input class="form-control" type="text" id="Actif_clubModif" name="Actif_club" placeholder="Statut du club"></div>
                             <div><input class="btn btn-primary shadow d-block w-100" value='Envoyer' type="submit"></div>
                             <br /><br />
                             <a href="./Formulaire_modification_equipe.php">Modifier une équipe du club</a>
                             <br /><br />
                             <a href="./inscription_tournoi.php">Retour à la page d'insciription au tournoi</a>
-
                         </div>
                     </form>
                 </div>
@@ -86,7 +87,7 @@ if (!empty($nomClubModif) || !empty($urlImageClub) || !empty($actifClub)) {
     <script src="assets/js/script.min.js"></script>
 
     <script>
-        $('select').on('change', function() {
+        $('select').on('change', function() { // sources pour ce script : avec l'aide de Sebastien 
 
             remplirFormulaire()
         });

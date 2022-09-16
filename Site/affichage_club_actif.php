@@ -15,7 +15,6 @@ require_once('./functions/Fonctions_Sofian.php'); //Fait appel à la page où se
     <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800&amp;display=swap">
     <link rel="stylesheet" href="assets/fonts/ionicons.min.css">
-    <link rel="stylesheet" href="../Site/css_Sofian.min.css">
 </head>
 
 <body style="/*background: url(&quot;design.jpg&quot;);*/background-position: 0 -60px;">
@@ -30,8 +29,9 @@ require_once('./functions/Fonctions_Sofian.php'); //Fait appel à la page où se
             </div>
             <div class="row d-flex justify-content-center">
                 <div class="col-md-6 col-xl-4">
-                    <h2 class="fw-bold">Liste des equipes</h2>
-                    <?php affichage_equipe(); ?>
+                    <h2 class="fw-bold">Liste des clubs</h2>
+                    <br /><br />
+                    <?php afficher_ClubActif() ?>
                 </div>
             </div>
             <br /><br />

@@ -1,22 +1,24 @@
 <?php
 
-require_once('./functions/Fonctions_Sofian.php');
+require_once('./functions/Fonctions_Sofian.php'); //Fait appel à la page où se trouvent les fonction
 
 $nomClub = filter_input(INPUT_POST,  'Nom_Club');
-$urlImageClub = filter_input(INPUT_POST,  'Url_Image_Club');
 $rueAdresse = filter_input(INPUT_POST,  'Rue_Adresse');
 $localiteAdresse = filter_input(INPUT_POST,  'Localite_Adresse');
 $npaAdresse = filter_input(INPUT_POST,  'NPA_Adresse');
 
+$target_dir = "assets/img/team/"; //sources : https://www.php.net/manual/en/function.move-uploaded-file.php
 
 
-if (!empty($nomClub) && !empty($urlImageClub) && !empty($rueAdresse) && !empty($localiteAdresse) && !empty($npaAdresse)) {
 
-    $idAdresse = insertion_adresse_club($rueAdresse, $localiteAdresse, $npaAdresse);
+if (!empty($nomClub) && !empty($rueAdresse) && !empty($localiteAdresse) && !empty($npaAdresse)) { //sources : https://www.php.net/manual/en/function.move-uploaded-file.php
+    $target_file = $target_dir . basename($_FILES["Image_Club"]["name"]); //sources : https://www.php.net/manual/en/function.move-uploaded-file.php
 
-    insertion_club($nomClub, $urlImageClub, $idAdresse);
+    if (move_uploaded_file($_FILES["Image_Club"]["tmp_name"], $target_file)) { //sources : https://www.php.net/manual/en/function.move-uploaded-file.php
+        $idAdresse = insertion_adresse_club($rueAdresse, $localiteAdresse, $npaAdresse);
+        insertion_club($nomClub, $_FILES["Image_Club"]["name"], $idAdresse);
+    }
 }
-
 ?>
 
 <!DOCTYPE html>
@@ -44,16 +46,19 @@ if (!empty($nomClub) && !empty($urlImageClub) && !empty($rueAdresse) && !empty($
             <div class="row d-flex justify-content-center">
                 <div class="col-md-6 col-xl-4">
                     <div>
-                        <form action="#" class="p-3 p-xl-4" method="post">
+                        <form action="#" class="p-3 p-xl-4" method="post" enctype="multipart/form-data">
+                            <!-- sources : https://www.w3schools.com/php/php_file_upload.asp -->
                             <div class="mb-3"><input class="form-control" type="text" id="Nom_Club" name="Nom_Club" placeholder="Nom du club "></div>
-                            <div class="mb-3"><input class="form-control" type="text" id="Url_Image_Club" name="Url_Image_Club" placeholder="Url de l'image du logo du club"></div>
+                            <div class="mb-3"><input class="form-control" type="file" id="Image_Club" name="Image_Club"></div>
                             <div class="mb-3"><input class="form-control" type="text" id="Rue_Adresse" name="Rue_Adresse" placeholder="Rue du club"></div>
                             <div class="mb-3"><input class="form-control" type="text" id="Localite_Adresse" name="Localite_Adresse" placeholder="Localite du club"></div>
-                            <div class="mb-3"><input class="form-control" type="text" id="NPA_Adresse" name="NPA_Adresse" placeholder="NPA du club"></div>
+                            <div class="mb-3"><input class="form-control" type="number" id="NPA_Adresse" name="NPA_Adresse" placeholder="NPA du club"></div>
                             <br /><br />
                             <div><input class="btn btn-primary shadow d-block w-100" value='Envoyer' type="submit"></div>
                             <br /><br />
                             <a href="./Formulaire_insertion_equipe.php">Insérer une équipe du club</a>
+                            <br /><br />
+                            <a href="./affichage_club_actif.php">Affichage les clubs de notre base de données</a>
                             <br /><br />
                             <a href="./inscription_tournoi.php">Retour à la page d'insciription au tournoi</a>
                         </form>

@@ -1,13 +1,16 @@
 <?php
 
-require_once('./functions/dbconnection.php');
-require_once('./functions/Fonctions_Sofian.php');
+
+require_once('./functions/dbconnection.php'); //Fait appel à la page se trouve la connexion à la BDD.
+require_once('./functions/Fonctions_Sofian.php'); //Fait appel à la page où se trouvent les fonction 
 
 $idEquipe = filter_input(INPUT_POST,  'ID_Equipe');
 $nomEquipe = filter_input(INPUT_POST,  'Nom_Equipe');
 $degreEquipe = filter_input(INPUT_POST,  'Degres_Equipe');
 $actifEquipe = filter_input(INPUT_POST,  'Actif_equipe');
 
+
+//Cette partie vérifie si les champs à modifier ne sont pas vide, si les champs ne sont pas vide la fonction de modification s'applique.
 if (!empty($idEquipe) || !empty($nomEquipe) || !empty($degreEquipe) || !empty($actifEquipe)) {
     modification_equipes($idEquipe, $nomEquipe, $degreEquipe, $actifEquipe);
 }
@@ -40,14 +43,13 @@ if (!empty($idEquipe) || !empty($nomEquipe) || !empty($degreEquipe) || !empty($a
                 <div class="col-md-6 col-xl-4">
                     <form action="#" class="p-3 p-xl-4" method="post">
                         <div>
-
                             <p class="fw-bold text-success mb-2">Informations actuelles avant les modifications</p>
-                            <select name="ID_Equipe" id="Nom_EquipeSelect" onchange="affichageSelectEquipe()">>
+                            <select name="ID_Equipe" id="Nom_EquipeSelect" onchange="affichageSelectEquipe()">
+                                <!--appel de la fonciton ajax et Java Script -->
                                 <?php selection_equipe() ?>
                             </select>
                             <br /><br />
-                            <div class="mb-3"><input class="form-control" type="text" id="Degres_EquipeModif" readonly placeholder="degré de l'équipe"></div>
-
+                            <div class="mb-3"><input class="form-control" type="text" id="Degres_EquipeModif"></div>
                         </div>
                         <div>
                             <p class="fw-bold text-success mb-2">Modifications</p>
@@ -55,6 +57,8 @@ if (!empty($idEquipe) || !empty($nomEquipe) || !empty($degreEquipe) || !empty($a
                             <div class="mb-3"><input class="form-control" type="text" id="Degres_EquipeModif" name="Degres_Equipe" placeholder="Degré de l'équipe"></div>
                             <div class="mb-3"><input class="form-control" type="text" id="Actfi_equipeModif" name="Actif_equipe" placeholder="Statut de l'équipe"></div>
                             <div><input class="btn btn-primary shadow d-block w-100" value='Envoyer' type="submit"></div>
+                            <br /><br />
+                            <a href="./Formulaire_modification_club.php">Retour à la page de modification d'un club</a>
                             <br /><br />
                             <a href="./inscription_tournoi.php">Retour à la page d'insciription au tournoi</a>
                     </form>
@@ -67,7 +71,6 @@ if (!empty($idEquipe) || !empty($nomEquipe) || !empty($degreEquipe) || !empty($a
                         <path d="M3.654 1.328a.678.678 0 0 0-1.015-.063L1.605 2.3c-.483.484-.661 1.169-.45 1.77a17.568 17.568 0 0 0 4.168 6.608 17.569 17.569 0 0 0 6.608 4.168c.601.211 1.286.033 1.77-.45l1.034-1.034a.678.678 0 0 0-.063-1.015l-2.307-1.794a.678.678 0 0 0-.58-.122l-2.19.547a1.745 1.745 0 0 1-1.657-.459L5.482 8.062a1.745 1.745 0 0 1-.46-1.657l.548-2.19a.678.678 0 0 0-.122-.58L3.654 1.328zM1.884.511a1.745 1.745 0 0 1 2.612.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.678.678 0 0 0 .178.643l2.457 2.457a.678.678 0 0 0 .644.178l2.189-.547a1.745 1.745 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.634 18.634 0 0 1-7.01-4.42 18.634 18.634 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877L1.885.511z"></path>
                         </svg>
                     </div>
-
                 </div>
             </div>
         </div>
@@ -81,28 +84,29 @@ if (!empty($idEquipe) || !empty($nomEquipe) || !empty($degreEquipe) || !empty($a
     <script src="assets/js/script.min.js"></script>
 
     <script>
-        $('select').on('change', function() {
+        $('select').on('change', function() { // sources pour ce script : avec l'aide de Sebastien 
 
             remplirFormulaire()
         });
-        let nomEquipe = $("#Nom_EquipeModif")
+        let nomEquipe = $("#Nom_EquipeModif") //stockage du nom et du degré de l'équipe
         let degreEquipe = $("#Degres_EquipeModif")
         affichageSelectEquipe()
 
         function affichageSelectEquipe() {
             let equipeSelect = $("#Nom_EquipeSelect").val()
             $.ajax({
-                url: 'functions/requetes_ajax2.php?nomEquipe=' + equipeSelect,
+                url: 'functions/requetes_ajax2.php?nomEquipe=' + equipeSelect, //appel de la fonction ajax
                 type: "GET",
                 success: function(data) {
-                    let parsedData = JSON.parse(data)
+                    let parsedData = JSON.parse(data) //affichage en cas de réussite de la fonction Ajax
                     console.log(parsedData)
 
+
                     nomEquipe.val(parsedData.Nom_Equipe)
-                    degreEquipe.val(parsedData.Degres_Equipe)
+                    degreEquipe.attr("value", parsedData.Degres_Equipe)
                 },
                 error: function() {
-                    alert("Une erreur est surevenue lors de la requete Ajax")
+                    alert("Une erreur est surevenue lors de la requete Ajax") //Message d'erreur si la fonction Ajax ne s'execute pas
                 }
             })
         }
