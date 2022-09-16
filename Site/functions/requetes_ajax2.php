@@ -2,10 +2,11 @@
 
 include_once('dbconnection.php');
 
-$nomEquipe = filter_input(INPUT_GET, "nomEquipe", FILTER_UNSAFE_RAW);
+//il s'agit d'ûne requête qui va chercher le nom et le degré de l'équipe en fonction de son Id qui est appelé dans mon formulaire de modification des équipes dans la partie ajax et Java Scrpit.
+$idEquipe = filter_input(INPUT_GET, "nomEquipe", FILTER_UNSAFE_RAW);
 
 $bdd = connectDB();
 $reponseDesEquipe = $bdd->query("SET NAMES 'utf8'");
-$reponseDesEquipe = $bdd->query("SELECT `Nom_Equipe`, `Degres_Equipe` FROM `equipe` WHERE `Nom_Equipe` = '$nomEquipe'");
+$reponseDesEquipe = $bdd->query("SELECT `Nom_Equipe`, `Degres_Equipe` FROM `equipe` WHERE `ID_Equipe` = '$idEquipe'");
 
 echo json_encode($reponseDesEquipe->fetch());

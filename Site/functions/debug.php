@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 //Permet de faire apparaitre une fenetre d'erreur en cas de besoin
 function debug($sObj = NULL)
@@ -11,5 +11,3 @@ function debug($sObj = NULL)
         echo '|' . $sObj . '|' . '\n';
     }
 }
-
-?>
