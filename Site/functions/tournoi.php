@@ -495,21 +495,9 @@ function afficher_toutes_demandes_inscrites()
         <td><ul><h5 class=\"fw-bold card-title\">Club</h5>" . $data['Nom_Club'] . "</ul></td>
         <td><ul><h5 class=\"fw-bold card-title\">Groupe</h5>" . $data['Nom_Groupe'] . "</ul></td>
         <td><ul><h5 class=\"fw-bold card-title\">Date tournoi</h5>" . date("d.m.Y", strtotime($data['Date_Debut_Tournoi'])) . "</ul></td>
-        <td><ul><h5 class=\"fw-bold card-title\">Statut</h5>";
-
-
-
-
-        if ($data['Statut_Inscription_Tournoi'] == "En attente") {
-            echo "<select name=\"Statut\" id=\"s\"><option valeur=\"ena\" selected>En attente</option>";
-            echo "<option valeur=\"val\">Valider</option>
-        
-            </select>";
-        } else {
-            echo $data['Statut_Inscription_Tournoi'] . "</ul></td></tr>";
-        }
-        echo "</ul></td></tr>";
+        <td><ul><h5 class=\"fw-bold card-title\">Statut</h5>" .  $data['Statut_Inscription_Tournoi'] . "</ul></td></tr>";
     }
+
     return null;
 }
 //fonction permetant de modifier le statut de l'inscription le faire passer de en attente à validé
@@ -520,11 +508,9 @@ function update_statut_equipes_tournoiTst()
     $bdd = connectDB();
     $bdd->query("SET NAMES 'utf8'");
 
-    $reponse = $bdd->query("UPDATE Inscription_Tournoi SET Statut_Inscription_Tournoi  = 'Validé' WHERE FK_ID_Equipe = '$IdInscriptionTournois'");
+    $reponse = $bdd->query("UPDATE `Inscription_Tournoi` SET `Statut_Inscription_Tournoi`  = 'Validé' WHERE `FK_ID_Equipe` = '$IdInscriptionTournois'");
     $reponse->setFetchMode(PDO::FETCH_BOTH);
 
-    while ($donnees = $reponse->fetch()) {
-    }
     return null;
 }
 //fonction permetant de modifier le statut de l'inscription le faire passer de validé à en attente
@@ -538,8 +524,7 @@ function update_statut_equipes()
     $reponse = $bdd->query("UPDATE Inscription_Tournoi SET Statut_Inscription_Tournoi  = 'En attente' WHERE FK_ID_Equipe = '$IdInscriptionTournois'");
     $reponse->setFetchMode(PDO::FETCH_BOTH);
 
-    while ($donnees = $reponse->fetch()) {
-    }
+
     return null;
 }
 //fonction permetant de modifier le statut de l'inscription le faire passer de validé à en attente en récupérant l'équipe choisie
@@ -553,8 +538,7 @@ function afficher_inscription_equipes()
     $reponse = $bdd->query("UPDATE Inscription_Tournoi SET Statut_Inscription_Tournoi  = 'Validé' WHERE FK_ID_Equipe = '$IdInscriptionTournois'");
     $reponse->setFetchMode(PDO::FETCH_BOTH);
 
-    while ($donnees = $reponse->fetch()) {
-    }
+
     return null;
 }
 //fonction permetant d'afficher les équipes inscirtes au tournoi

@@ -53,14 +53,16 @@ if (isset($_POST['submit'])) {
 
                 $FK_ID_Tournoi = $_POST['FK_ID_Tournoi'];
                 $FK_ID_Equipe = $_POST['FK_ID_Equipe'];
-                if (verificationDonneesTournois($FK_ID_Tournoi, $FK_ID_Equipe)) {
-                  inscription_equipe_tournoi($FK_ID_Tournoi, $FK_ID_Equipe);;
+                inscription_equipe_tournoi($FK_ID_Tournoi, $FK_ID_Equipe);
+                /*if (verificationDonneesTournois($FK_ID_Tournoi, $FK_ID_Equipe)) {
+                  inscription_equipe_tournoi($FK_ID_Tournoi, $FK_ID_Equipe);
                 } else {
               ?><script type="text/javascript">
                     alert("Veuillez vérifier les informations");
                   </script> <?php
                           }
-                        } ?>
+                         */
+              } ?>
 
               <br /><br />
               <div><button class="btn btn-primary shadow d-block w-100" type="submit" name="submit" value="ok">S'inscrire</button></div>

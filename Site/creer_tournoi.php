@@ -53,14 +53,16 @@
                   $Date_debut = $_POST['Date_Debut_Tournoi'];
                   $Date_fin = $_POST['Date_Fin_Tournoi'];
                   $Fk_ID_Salle = $_POST['ID_Salle'];
-                  if (verificationDonneesTournois($Date_debut, $Date_fin)) {
+                  insertion_tournoi($Date_debut, $Date_fin, $Fk_ID_Salle);
+                  /* if (verificationDonneesTournois($Date_debut, $Date_fin)) {
                     insertion_tournoi($Date_debut, $Date_fin, $Fk_ID_Salle);
                   } else {
                 ?><script type="text/javascript">
                      alert("Veuillez vérifier les informations");
                    </script> <?php
                             }
-                          } ?>
+                          */
+                }  ?>
 
                <div><button class="btn btn-primary shadow d-block w-100" type="submit" name="submit" value="ok">Créer tournoi</button></div>
 

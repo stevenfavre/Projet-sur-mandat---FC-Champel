@@ -24,7 +24,7 @@ function modification_equipes($idEquipe, $nomEquipe, $degreEquipe, $actifEquipe)
     $bdd = connectDB();
 
     $reponseDesEquipes = $bdd->query("SET NAMES 'utf8'");
-    $reponseDesEquipes = $bdd->query("UPDATE `Equipe` SET `Nom_Equipe`='$nomEquipe',`Degres_Equipe`='$degreEquipe', `actif_Equipe`='$actifEquipe'  WHERE `ID_Equipe` = $idEquipe");
+    $reponseDesEquipes = $bdd->query("UPDATE `Equipe` SET `Nom_Equipe`='$nomEquipe',`Degres_Equipe`='$degreEquipe', `Actif_Equipe`='$actifEquipe'  WHERE `ID_Equipe` = $idEquipe");
 }
 
 // Il s'agit d'un fonction qui va va effectuer une suppression logique des équipes en selectionnant leur noms, le statut de l'équipe sera modifier en 0 et elle ne sera donc pas visible sur le site mais elle le sera encore dans la BDD. 
@@ -59,7 +59,7 @@ function affichage_equipe()
         $bdd = connectDB();
         $bdd->query("SET NAMES 'utf8'");
 
-        $reponseDesEquipes = $bdd->query("SELECT `Nom_Equipe`, `Degres_Equipe` FROM `Equipe` WHERE `Actif_equipe` = 1");
+        $reponseDesEquipes = $bdd->query("SELECT `Nom_Equipe`, `Degres_Equipe` FROM `Equipe` WHERE `Actif_Equipe` = 1");
         $reponseDesEquipes->setFetchMode(PDO::FETCH_BOTH);
 
         while ($donneesDesEquipes = $reponseDesEquipes->fetch()) {
@@ -114,7 +114,7 @@ function modification_club($nomClub, $urlImageClub, $idClub, $actifClub)
     $bdd = connectDB();
 
     $reponseDesClubs = $bdd->query("SET NAMES 'utf8'");
-    $reponseDesClubs = $bdd->query("UPDATE `Club` SET `Nom_Club` = '$nomClub', `Url_Image_Club` = '$urlImageClub', `Actif_club` = '$actifClub'  WHERE `club`.`ID_Club` = '$idClub'");
+    $reponseDesClubs = $bdd->query("UPDATE `Club` SET `Nom_Club` = '$nomClub', `Url_Image_Club` = '$urlImageClub', `Actif_Club` = '$actifClub'  WHERE `Club`.`ID_Club` = '$idClub'");
 
     $bdd = null;
 }
@@ -134,7 +134,7 @@ function afficher_ClubActif()
     $bdd = connectDB();
 
     $reponseDesClubs = $bdd->query("SET NAMES 'utf8'");
-    $reponseDesClubs = $bdd->query("SELECT Nom_Club, Url_Image_Club, Rue_Adresse, Localite_Adresse, NPA_Adresse FROM club JOIN adresse on FK_ID_Adresse = ID_Adresse WHERE `Actif_club` = 1;"); //sources : https://yard.onl/sitelycee/cours/php/Lesjointuresinternes.html
+    $reponseDesClubs = $bdd->query("SELECT Nom_Club, Url_Image_Club, Rue_Adresse, Localite_Adresse, NPA_Adresse FROM Club JOIN Adresse on FK_ID_Adresse = ID_Adresse WHERE `Actif_Club` = 1;"); //sources : https://yard.onl/sitelycee/cours/php/Lesjointuresinternes.html
     while ($donneesDesClubs = $reponseDesClubs->fetch()) {
         echo "Nom : " . " " . $donneesDesClubs['Nom_Club'];
         echo "<br /><br />";
@@ -151,7 +151,7 @@ function selection_club()
     $bdd = connectDB();
     $bdd->query("SET NAMES 'utf8'");
 
-    $reponseDesClubs = $bdd->query("SELECT * FROM Club WHERE `Actif_club` = 1 ORDER BY ID_Club ASC");
+    $reponseDesClubs = $bdd->query("SELECT * FROM Club WHERE `Actif_Club` = 1 ORDER BY ID_Club ASC");
     $reponseDesClubs->setFetchMode(PDO::FETCH_BOTH);
 
     while ($donneesDesClubs = $reponseDesClubs->fetch()) {

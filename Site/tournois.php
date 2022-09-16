@@ -26,9 +26,7 @@ require_once './functions/steven_fonctions.php'
           <a class="btn btn-primary shadow" role="button" href="afficher_demandes.php">Inscriptions tournoi</a>
 
           <br /><br />
-          <p class="text-muted">&nbsp;<a href="modifier_equipe_tournoi.php">Equipes inscrites au tournoi du 14.09.2022</a></p>
-
-
+          
 
           <p class="text-muted w-lg-50">Différents tournois géré grâce à notre système.&nbsp;</p>
         </div>

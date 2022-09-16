@@ -97,10 +97,9 @@ if (isset($_POST['submit'])) {
                 </tr>
               </tbody>
               <?php if ($submit == "modifier") {
-
+                $_SESSION['id_inscription'] = $_POST['FK_ID_Equipe'];
                 update_statut_equipes_tournoiTst();
                 afficher_infos_equipes_selectionnee();
-                $_SESSION['id_inscription'] = $_POST['FK_ID_Equipe'];
               }
 
               ?>
