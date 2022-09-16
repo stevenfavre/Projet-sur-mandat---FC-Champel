@@ -27,7 +27,6 @@ require_once './functions/steven_fonctions.php'
           <a class="btn btn-primary shadow" role="button" href="modifier_tournoi.php">Modifier un tournoi</a>
           <a class="btn btn-primary shadow" role="button" href="supprimer_tournoi.php">Annuler un tournoi</a>
           <br /><br />
-          
           <p class="text-muted w-lg-50">Différents tournois géré grâce à notre système.&nbsp;</p>
         </div>
       </div>

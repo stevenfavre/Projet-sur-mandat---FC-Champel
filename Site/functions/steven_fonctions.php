@@ -105,12 +105,36 @@ function returnNumeroTerrain($id_terrain)
     return $numeroTerrain;
 }
 
+// Permet de retourner le nom de la salle
+function returnNameSalle($id_salle)
+{
+    $nomSalle = "";
+    foreach (selectSalleWithID($id_salle) as $salle) {
+        $nomSalle = $salle['Nom_Salle'];
+    }
+    return $nomSalle;
+}
+
 // Permet de retourner les informations d'un terrain grâce à son id_terrain
 function selectTerrainWithID($id_terrain)
 {
     try {
         $db = connectDB();
         $sql = "SELECT * FROM `Terrain` WHERE `ID_Terrain` = " . $id_terrain . ";";
+        $request = $db->prepare($sql);
+        $request->execute();
+        return $request->fetchAll(PDO::FETCH_ASSOC);
+    } catch (\Throwable $e) {
+        debug($e->getMessage());
+    }
+}
+
+// Permet de retourner les informations d'une salle grâce à son id_salle
+function selectSalleWithID($id_salle)
+{
+    try {
+        $db = connectDB();
+        $sql = "SELECT * FROM `Salle` WHERE `ID_Salle` = " . $id_salle . ";";
         $request = $db->prepare($sql);
         $request->execute();
         return $request->fetchAll(PDO::FETCH_ASSOC);
@@ -243,15 +267,15 @@ function affichageAllTournois()
         echo "<div class=\"col mb-4\">
           <div><a href=\"match.php?id_tournoi=" . $tournoi['ID_Tournoi'] . "\"><img class=\"rounded img-fluid shadow w-100 fit-cover\" src=\"assets/img/products/2173435-silhouette-joueur-de-football-tir-rapide-un-ballon-sur-un-fond-blanc-illustration-vectoriel.jpg\" style=\"height: 250px;\"></a>
             <div class=\"py-4\">
-              <h4 class=\"fw-bold\">Tournoi du " . $tournoi['Date_Debut_Tournoi'] . "</h4>
-              <p class=\"text-muted\">Ce tournoi est organisé à [nom_salle].</p>
+              <h4 class=\"fw-bold\">Tournoi du " . date("d.m.Y", strtotime($tournoi['Date_Debut_Tournoi'])) . "</h4>
+              <p class=\"text-muted\">Ce tournoi est organisé à la " . returnNameSalle($tournoi['FK_ID_Salle']) . ".</p>
             </div>
           </div>
         </div>";
     }
 }
 
-// Permet d'afficher les 
+// Permet d'afficher les select du match
 function afficherSelectMatch($id_tournoi)
 {
     // Select de l'équipe local

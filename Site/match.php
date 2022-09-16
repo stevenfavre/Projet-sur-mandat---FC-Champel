@@ -57,6 +57,8 @@ if ($up_down == 'U') { // S'il s'agit d'une augmentation du score
     </div>
   </section>
   <?php include_once('default_pages/footer.php'); ?>
+  <!-- Site d'aide pour la réalisation du filtrage des équipes 
+  https://www.w3schools.com/howto/howto_js_filter_lists.asp -->
   <script>
     function Recherche() {
       var input, filter, div, div2, a, i, txtValue;

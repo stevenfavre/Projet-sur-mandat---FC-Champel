@@ -39,16 +39,16 @@ if ($submitPost == 'modifier') {
     // Permet de faire l'insertion d'un match dans la base de données
     updateMatch($_SESSION['match']['ID_Match'], $id_local, $id_visiteur, $time_debut, $time_fin, $minutes, $type, $equipe_local, $equipe_visiteur);
     header("Location: match.php?id_tournoi=" . $_SESSION['match']['FK_ID_Tournoi']);
-} else if ($submitPost == 'activer') {
 
+} else if ($submitPost == 'activer') {
     updateActifMatch($_SESSION['match']['ID_Match'], 1);
     refreshSessionMatch();
 } else if ($submitPost == 'annuler') {
-
     updateActifMatch($_SESSION['match']['ID_Match'], 0);
     refreshSessionMatch();
 }
 
+// Fonction rafraichisant la session match avec les nouvelles informations
 function refreshSessionMatch()
 {
     $matchs = selectMatchWithID($_GET['id_match']);
@@ -76,7 +76,7 @@ function refreshSessionMatch()
             <div class="row pt-5">
                 <div class="col-md-8 col-xl-6 text-center text-md-start mx-auto">
                     <div class="text-center">
-                        <h2 class="fw-bold">Détail du match du : <?php echo $_SESSION['match']['Date_Match']; ?></h2>
+                        <h2 class="fw-bold">Détail du match du : <?php echo date("d.m.Y", strtotime($_SESSION['match']['Date_Match'])); ?></h2>
                     </div>
                 </div>
             </div>
@@ -99,15 +99,11 @@ function refreshSessionMatch()
                 </div>
                 <div class="mb-3 w-50 mx-auto">
                     <label for="time-debut">Heure de départ :</label>
-                    <input class="form-control" type="time" name="time-debut" min="08:00" max="19:00" value="<?php echo $_SESSION['match']['Heure_Debut_Match']; ?>" required>
-                </div>
-                <div class="mb-3 w-50 mx-auto">
-                    <label for="time-debut">Heure de départ :</label>
-                    <input class="form-control" type="time" name="time-debut" min="08:00" max="19:00" value="<?php echo $_SESSION['match']['Heure_Debut_Match']; ?>" required>
+                    <input class="form-control" type="time" name="time-debut" min="08:00" max="20:00" value="<?php echo $_SESSION['match']['Heure_Debut_Match']; ?>" required>
                 </div>
                 <div class="mb-3 w-50 mx-auto">
                     <label for="time-fin">Heure de fin :</label>
-                    <input class="form-control" type="time" name="time-fin" min="08:00" max="19:00" value="<?php echo $_SESSION['match']['Heure_Fin_Match']; ?>" required>
+                    <input class="form-control" type="time" name="time-fin" min="08:00" max="20:00" value="<?php echo $_SESSION['match']['Heure_Fin_Match']; ?>" required>
                 </div>
                 <div class="mb-3 w-50 mx-auto">
                     <label for="type-match">Type de match :</label>
