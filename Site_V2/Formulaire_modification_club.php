@@ -58,7 +58,12 @@ if (!empty($nomClubModif) || !empty($urlImageClub) || !empty($actifClub)) { //so
                             <p class="fw-bold text-success mb-2">Modifications</p>
                             <div class="mb-3"><input class="form-control" type="text" id="Nom_ClubModif" name="Nom_ClubModif" placeholder="Nom du club"></div>
                             <div class="mb-3"><input class="form-control" type="file" id="Image_Club" name="Image_Club"></div> <!-- sources : https://www.w3schools.com/php/php_file_upload.asp -->
-                            <div class="mb-3"><input class="form-control" type="text" id="Actif_clubModif" name="Actif_club" placeholder="Statut du club"></div>
+                            Statut
+                            <select name="Actif_club" id="Actif_clubModif" default value="1">
+                                <OPTION>0</option>
+                                <OPTION>1</option>
+                            </select>
+                            <br /><br />
                             <div><input class="btn btn-primary shadow d-block w-100" value='Envoyer' type="submit"></div>
                             <br /><br />
                             <a href="./Formulaire_modification_equipe.php">Modifier une équipe du club</a>
@@ -93,6 +98,7 @@ if (!empty($nomClubModif) || !empty($urlImageClub) || !empty($actifClub)) { //so
         });
         let nomClub = $("#Nom_ClubModif")
         let imgClub = $("#imgClub")
+        let actifClub = $("#Actif_clubModif")
         affichageSelect()
 
         function affichageSelect() {
@@ -106,6 +112,7 @@ if (!empty($nomClubModif) || !empty($urlImageClub) || !empty($actifClub)) { //so
 
                     nomClub.val(parsedData.Nom_Club)
                     imgClub.attr("src", "assets/img/team/" + parsedData.Url_Image_Club)
+                    actifClub.val(parsedData.Actif_club)
                 },
                 error: function() {
                     alert("Une erreur est surevenue lors de la requete Ajax")
