@@ -55,7 +55,12 @@ if (!empty($idEquipe) || !empty($nomEquipe) || !empty($degreEquipe) || !empty($a
                             <p class="fw-bold text-success mb-2">Modifications</p>
                             <div class="mb-3"><input class="form-control" type="text" id="Nom_EquipeModif" name="Nom_Equipe" placeholder="Nom de l'équipe"></div>
                             <div class="mb-3"><input class="form-control" type="text" id="Degres_EquipeModif" name="Degres_Equipe" placeholder="Degré de l'équipe"></div>
-                            <div class="mb-3"><input class="form-control" type="text" id="Actfi_equipeModif" name="Actif_equipe" placeholder="Statut de l'équipe"></div>
+                            Statut
+                            <select name="Actif_equipe" id="Actif_equipeModif">
+                                <OPTION>0</option>
+                                <OPTION>1</option>
+                            </select>
+                            <br /><br />
                             <div><input class="btn btn-primary shadow d-block w-100" value='Envoyer' type="submit"></div>
                             <br /><br />
                             <a href="./Formulaire_modification_club.php">Retour à la page de modification d'un club</a>

@@ -42,7 +42,7 @@ if (!empty($nomClub)) {
                                 <?php selection_club($nomClub) ?>
                             </select>
                             <br /><br />
-                            <div><input class="btn btn-primary shadow d-block w-100" value='Modifier' type="submit"></div>
+                            <div><input class="btn btn-primary shadow d-block w-100" value='Supprimer' type="submit"></div>
                             <br /><br />
                             <a href="./Formulaire_suppression_equipe.php">Supprimer une équipe du club</a>
                             <br /><br />
