@@ -9,11 +9,14 @@ $nomEquipe = filter_input(INPUT_POST,  'Nom_Equipe');
 $degreEquipe = filter_input(INPUT_POST,  'Degres_Equipe');
 $actifEquipe = filter_input(INPUT_POST,  'Actif_equipe');
 
+$error = "Veuillez remplir tous les champs pour effectuer une modification !";
 
 //Cette partie vérifie si les champs à modifier ne sont pas vide, si les champs ne sont pas vide la fonction de modification s'applique.
 if (!empty($idEquipe) || !empty($nomEquipe) || !empty($degreEquipe) || !empty($actifEquipe)) {
     modification_equipes($idEquipe, $nomEquipe, $degreEquipe, $actifEquipe);
+
 }
+
 
 ?>
 

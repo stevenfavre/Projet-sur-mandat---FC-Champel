@@ -8,6 +8,7 @@ $nomClubModif = filter_input(INPUT_POST,  'Nom_ClubModif');
 $actifClub = filter_input(INPUT_POST,  'Actif_club');
 
 $target_dir = "assets/img/team/"; //sources : https://www.php.net/manual/en/function.move-uploaded-file.php
+$errorMessage = "Veuillez remplir tous les champs pour effectuer une modification !";
 
 
 if (!empty($nomClubModif) || !empty($urlImageClub) || !empty($actifClub)) { //sources : https://www.php.net/manual/en/function.move-uploaded-file.php
@@ -15,6 +16,9 @@ if (!empty($nomClubModif) || !empty($urlImageClub) || !empty($actifClub)) { //so
 
     if (move_uploaded_file($_FILES["Image_Club"]["tmp_name"], $target_file)) //sources : https://www.php.net/manual/en/function.move-uploaded-file.php
         modification_club($nomClubModif, $_FILES["Image_Club"]["name"], $nomClub, $actifClub); //sources : https://www.php.net/manual/en/function.move-uploaded-file.php
+          else{
+            echo $errorMessage;
+          };  
 }
 
 
@@ -98,7 +102,6 @@ if (!empty($nomClubModif) || !empty($urlImageClub) || !empty($actifClub)) { //so
         });
         let nomClub = $("#Nom_ClubModif")
         let imgClub = $("#imgClub")
-        let actifClub = $("#Actif_clubModif")
         affichageSelect()
 
         function affichageSelect() {
@@ -112,7 +115,6 @@ if (!empty($nomClubModif) || !empty($urlImageClub) || !empty($actifClub)) { //so
 
                     nomClub.val(parsedData.Nom_Club)
                     imgClub.attr("src", "assets/img/team/" + parsedData.Url_Image_Club)
-                    actifClub.val(parsedData.Actif_club)
                 },
                 error: function() {
                     alert("Une erreur est surevenue lors de la requete Ajax")
