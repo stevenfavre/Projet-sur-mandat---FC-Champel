@@ -36,6 +36,7 @@ function suppression_equipes($idEquipe)
     $reponseDesClubs = $bdd->query("UPDATE `Equipe` SET `Actif_equipe` = 0 WHERE `Equipe`. `ID_Equipe` = '$idEquipe'");
 }
 
+
 // Il s'agit d'un fonction qui va mettre en place une liste déroulante dans le but de pouvoir sélectionner les équipes grâce à leurs noms.  
 function selection_equipe()
 {
@@ -50,6 +51,29 @@ function selection_equipe()
     }
 
     $bdd = null;
+}
+
+function selection_equipe_reactiver()
+{
+    $bdd = connectDB();
+    $bdd->query("SET NAMES 'utf8'");
+
+    $reponseDesClubs = $bdd->query("SELECT * FROM Equipe WHERE `Actif_equipe` = 0 ORDER BY ID_Equipe ASC");
+    $reponseDesClubs->setFetchMode(PDO::FETCH_BOTH);
+
+    while ($donneesDesClubs = $reponseDesClubs->fetch()) {
+        echo "<option value='" . $donneesDesClubs['ID_Equipe'] . "'>" . $donneesDesClubs['Nom_Equipe'] . "</option>";
+    }
+
+    $bdd = null;
+}
+
+function reactiver_equipe($idEquipe)
+{
+    $bdd = connectDB();
+
+    $reponseDesClubs = $bdd->query("SET NAMES 'utf8'");
+    $reponseDesClubs = $bdd->query("UPDATE `Equipe` SET `Actif_equipe` = 1 WHERE `ID_Equipe` = '$idEquipe'");
 }
 
 // Il s'agit d'un fonction qui va permettre d'afficher les noms et degrés des équipes si leur statut est égal à 1 ce qui signifie qu'elle sont visible sur le site.
@@ -128,6 +152,15 @@ function suppression_club($idClub)
     $reponseDesClubs = $bdd->query("UPDATE `Club` SET `Actif_club` = 0 WHERE `ID_Club` = '$idClub'");
 }
 
+//Il s'agir d'une fonction qui permet de remettre le statut d'un club inactif à 1, que qui le rend à nouveau visible sur le site en plus de la BDD. 
+function reactiver_club($idClub)
+{
+    $bdd = connectDB();
+
+    $reponseDesClubs = $bdd->query("SET NAMES 'utf8'");
+    $reponseDesClubs = $bdd->query("UPDATE `Club` SET `Actif_club` = 1 WHERE `ID_Club` = '$idClub'");
+}
+
 // Il s'agit d'un fonction qui va permettre d'afficher le nom, le logo, la rue la localité et le NPA de l'adresse des clubs qui ont comme statut 1 ce qui signifie qu'ils sont visibles sur le site. 
 function afficher_ClubActif()
 {
@@ -152,6 +185,21 @@ function selection_club()
     $bdd->query("SET NAMES 'utf8'");
 
     $reponseDesClubs = $bdd->query("SELECT * FROM Club WHERE `Actif_Club` = 1 ORDER BY ID_Club ASC");
+    $reponseDesClubs->setFetchMode(PDO::FETCH_BOTH);
+
+    while ($donneesDesClubs = $reponseDesClubs->fetch()) {
+        echo "<option value='" . $donneesDesClubs['ID_Club'] . "'>" . $donneesDesClubs['Nom_Club'] . "</option>";
+    }
+
+    $bdd = null;
+}
+
+function selection_club_reactiver()
+{
+    $bdd = connectDB();
+    $bdd->query("SET NAMES 'utf8'");
+
+    $reponseDesClubs = $bdd->query("SELECT * FROM Club WHERE `Actif_Club` = 0 ORDER BY ID_Club ASC");
     $reponseDesClubs->setFetchMode(PDO::FETCH_BOTH);
 
     while ($donneesDesClubs = $reponseDesClubs->fetch()) {
