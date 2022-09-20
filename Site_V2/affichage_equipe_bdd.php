@@ -30,18 +30,69 @@ require_once('./functions/Fonctions_Sofian.php'); //Fait appel à la page où se
             </div>
             <div class="row d-flex justify-content-center">
                 <div class="col-md-6 col-xl-4">
-                    <h2 class="fw-bold">Liste des equipes</h2>
-                    <?php affichage_equipe(); ?>
+                    <h2 class="fw-bold">Liste des équipes</h2>
+                    <br /><br />
+                    <select name="Nom_Equipe" id="Nom_EquipeASelectionner" onchange="affichageSelectionEquipe()">
+                        <?php selection_equipe(); ?>
+                    </select>
+                    <div id="concat"></div>
                 </div>
             </div>
             <br /><br />
-            <a href="../Site/inscription_tournoi.php">Retour à la page d'inscription au tournoi</a>
+            <a href="./inscription_tournoi.php">Retour à la page d'insciription au tournoi</a>
         </div>
     </section>
     <?php include_once('default_pages/footer.php'); ?>
     <script src="assets/js/jquery.min.js"></script>
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
     <script src="assets/js/script.min.js"></script>
+
+
+    <script>
+        $('select').on('change', function() {
+
+
+        });
+
+
+        affichageSelectionEquipe()
+
+        function affichageSelectionEquipe() {
+            $('#concat').empty();
+            let equipeSelect = $("#Nom_EquipeASelectionner").val()
+
+            $.ajax({
+                url: 'functions/requetes_ajax2.php?nomEquipe=' + equipeSelect,
+                type: "GET",
+                success: function(data) {
+
+                    let parsedData = JSON.parse(data)
+                    console.log(parsedData)
+
+                    let nomEquipe = parsedData[0]
+                    let degreEquipe = parsedData[1]
+
+                    var tabEquipe = '<br /><br /><table><tr><td><ul><h5 class="fw-bold card-title">Nom et degré</h5></ul></td><td>'
+                    tabEquipe += '<tr><td><ul>'
+                    tabEquipe += nomEquipe
+                    tabEquipe += '<tr><td><ul>'
+                    tabEquipe += degreEquipe
+                    tabEquipe += '</ul></td></tr></table>'
+                    $('#concat').append(tabEquipe);
+
+
+                },
+                error: function() {
+                    alert("Une erreur est surevenue lors de la requete Ajax")
+                }
+            })
+        }
+    </script>
+
+
+
+
+
 </body>
 
 </html>

@@ -4,10 +4,17 @@ require_once('./functions/dbconnection.php'); //Fait appel à la page se trouve 
 require_once('./functions/Fonctions_Sofian.php'); //Fait appel à la page où se trouvent les fonction 
 
 $nomClub = filter_input(INPUT_POST, 'Nom_Club');
+$nomClubReactiver = filter_input(INPUT_POST, 'Nom_ClubReactiver');
 
 if (!empty($nomClub)) {
     suppression_club($nomClub);
 }
+
+if (!empty($nomClubReactiver)) {
+    reactiver_club($nomClubReactiver);
+}
+
+
 
 ?>
 
@@ -39,16 +46,26 @@ if (!empty($nomClub)) {
                         <form action="#" class="p-3 p-xl-4" method="post">
                             <p class="fw-bold text-success mb-2">Liste des noms des clubs</p>
                             <select name="Nom_Club" id="Nom_ClubSelect">
-                                <?php selection_club($nomClub) ?>
+                                <?php selection_club() ?>
                             </select>
                             <br /><br />
                             <div><input class="btn btn-primary shadow d-block w-100" value='Supprimer' type="submit"></div>
-                            <br /><br />
-                            <a href="./Formulaire_suppression_equipe.php">Supprimer une équipe du club</a>
-                            <br /><br />
-                            <a href="./inscription_tournoi.php">Retour à la page d'insciription au tournoi</a>
+                            </select>
                         </form>
 
+                        <form action="#" class="p-3 p-xl-4" method="post">
+                            <p class="fw-bold text-success mb-2">Réactiver les clubs inactifs</p>
+                            <select name="Nom_ClubReactiver" id="Nom_ClubSelection">
+                                <?php selection_club_reactiver() ?>
+                            </select>
+                            <br /><br />
+                            <div><input class="btn btn-primary shadow d-block w-100" value='Réactiver' type="submit"></div>
+                            </select>
+                        </form>
+                        <br /><br />
+                        <a href="./Formulaire_suppression_equipe.php">Supprimer une équipe du club</a>
+                        <br /><br />
+                        <a href="./inscription_tournoi.php">Retour à la page d'insciription au tournoi</a>
                     </div>
                 </div>
                 <div class="col-md-4 col-xl-4 d-flex justify-content-center justify-content-xl-start">

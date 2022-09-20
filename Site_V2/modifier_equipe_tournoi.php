@@ -148,8 +148,6 @@ if (isset($_POST['submit'])) {
 
     });
 
-
-
     affichageSelect()
 
     function affichageSelect() {

@@ -3,10 +3,15 @@
 require_once('./functions/dbconnection.php'); //Fait appel à la page se trouve la connexion à la BDD.
 require_once('./functions/Fonctions_Sofian.php'); //Fait appel à la page où se trouvent les fonction 
 
-$idEquipe = filter_input(INPUT_POST, 'Nom_Equipe');
+$nomEquipe = filter_input(INPUT_POST, 'Nom_Equipe');
+$nomEquipeReactiver = filter_input(INPUT_POST, 'Nom_EquipeReactiver');
 
-if (!empty($idEquipe)) {
-    suppression_equipes($idEquipe);
+if (!empty($nomEquipe)) {
+    suppression_equipes($nomEquipe);
+}
+
+if (!empty($nomEquipeReactiver)) {
+    reactiver_equipe($nomEquipeReactiver);
 }
 
 ?>
@@ -43,10 +48,19 @@ if (!empty($idEquipe)) {
                             </select>
                             <br /><br />
                             <div><input class="btn btn-primary shadow d-block w-100" value='Supprimer' type="submit"></div>
-                            <br /><br />
-                            <a href="./inscription_tournoi.php">Retour à la page d'insciription au tournoi</a>
                         </form>
 
+                        <form action="#" class="p-3 p-xl-4" method="post">
+                            <p class="fw-bold text-success mb-2">Réactiver les équipes inactifs</p>
+                            <select name="Nom_EquipeReactiver" id="Nom_EquipeSelection">
+                                <?php selection_equipe_reactiver() ?>
+                            </select>
+                            <br /><br />
+                            <div><input class="btn btn-primary shadow d-block w-100" value='Réactiver' type="submit"></div>
+                            </select>
+                        </form>
+                        <br /><br />
+                        <a href="./inscription_tournoi.php">Retour à la page d'insciription au tournoi</a>
                     </div>
                 </div>
                 <div class="col-md-4 col-xl-4 d-flex justify-content-center justify-content-xl-start">

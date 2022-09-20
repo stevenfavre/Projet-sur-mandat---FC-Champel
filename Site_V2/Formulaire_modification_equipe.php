@@ -9,13 +9,17 @@ $nomEquipe = filter_input(INPUT_POST,  'Nom_Equipe');
 $degreEquipe = filter_input(INPUT_POST,  'Degres_Equipe');
 $actifEquipe = filter_input(INPUT_POST,  'Actif_equipe');
 
-$error = "Veuillez remplir tous les champs pour effectuer une modification !";
+$errorMessage = "Veuillez remplir tous les champs pour effectuer une modification !";
 
 //Cette partie vérifie si les champs à modifier ne sont pas vide, si les champs ne sont pas vide la fonction de modification s'applique.
-if (!empty($idEquipe) || !empty($nomEquipe) || !empty($degreEquipe) || !empty($actifEquipe)) {
-    modification_equipes($idEquipe, $nomEquipe, $degreEquipe, $actifEquipe);
 
+if (!empty($idEquipe) && !empty($nomEquipe) && !empty($degreEquipe) && ($actifEquipe) != null) {
+    modification_equipes($idEquipe, $nomEquipe, $degreEquipe, $actifEquipe);
+} else {
+    echo $errorMessage;
 }
+
+
 
 
 ?>
@@ -52,7 +56,7 @@ if (!empty($idEquipe) || !empty($nomEquipe) || !empty($degreEquipe) || !empty($a
                                 <?php selection_equipe() ?>
                             </select>
                             <br /><br />
-                            <div class="mb-3"><input class="form-control" type="text" id="Degres_EquipeModif"></div>
+                            <div class="mb-3"><input class="form-control" type="text" id="Degres_Equipe"></div>
                         </div>
                         <div>
                             <p class="fw-bold text-success mb-2">Modifications</p>
@@ -60,8 +64,8 @@ if (!empty($idEquipe) || !empty($nomEquipe) || !empty($degreEquipe) || !empty($a
                             <div class="mb-3"><input class="form-control" type="text" id="Degres_EquipeModif" name="Degres_Equipe" placeholder="Degré de l'équipe"></div>
                             Statut
                             <select name="Actif_equipe" id="Actif_equipeModif">
-                                <OPTION>0</option>
-                                <OPTION>1</option>
+                                <option>0</option>
+                                <option selected="selected">1</option>
                             </select>
                             <br /><br />
                             <div><input class="btn btn-primary shadow d-block w-100" value='Envoyer' type="submit"></div>
@@ -97,21 +101,22 @@ if (!empty($idEquipe) || !empty($nomEquipe) || !empty($degreEquipe) || !empty($a
             remplirFormulaire()
         });
         let nomEquipe = $("#Nom_EquipeModif") //stockage du nom et du degré de l'équipe
-        let degreEquipe = $("#Degres_EquipeModif")
+        let degreEquipe = $("#Degres_Equipe")
+        let degreEquipeModif = $("#Degres_EquipeModif")
         affichageSelectEquipe()
 
         function affichageSelectEquipe() {
             let equipeSelect = $("#Nom_EquipeSelect").val()
+            let degreEquipeSelect = $("#Degres_EquipeModif").val()
             $.ajax({
-                url: 'functions/requetes_ajax2.php?nomEquipe=' + equipeSelect, //appel de la fonction ajax
+                url: 'functions/requetes_ajax2.php?nomEquipe=' + equipeSelect + degreEquipeSelect, //appel de la fonction ajax
                 type: "GET",
                 success: function(data) {
                     let parsedData = JSON.parse(data) //affichage en cas de réussite de la fonction Ajax
-                    console.log(parsedData)
-
 
                     nomEquipe.val(parsedData.Nom_Equipe)
-                    degreEquipe.attr("value", parsedData.Degres_Equipe)
+                    degreEquipe.val(parsedData.Degres_Equipe)
+                    degreEquipeModif.val(parsedData.Degres_Equipe)
                 },
                 error: function() {
                     alert("Une erreur est surevenue lors de la requete Ajax") //Message d'erreur si la fonction Ajax ne s'execute pas

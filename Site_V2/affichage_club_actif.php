@@ -31,11 +31,14 @@ require_once('./functions/Fonctions_Sofian.php'); //Fait appel à la page où se
                 <div class="col-md-6 col-xl-4">
                     <h2 class="fw-bold">Liste des clubs</h2>
                     <br /><br />
-                    <?php afficher_ClubActif() ?>
+                    <select name="Nom_Club" id="Nom_ClubASelectionner" onchange="affichageSelectionClubs()">
+                        <?php selection_club(); ?>
+                    </select>
+                    <div id="concat"></div>
                 </div>
             </div>
             <br /><br />
-            <a href="../Site/inscription_tournoi.php">Retour à la page d'inscription au tournoi</a>
+            <a href="./inscription_tournoi.php">Retour à la page d'insciription au tournoi</a>
         </div>
     </section>
     <?php include_once('default_pages/footer.php'); ?>
@@ -43,5 +46,46 @@ require_once('./functions/Fonctions_Sofian.php'); //Fait appel à la page où se
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
     <script src="assets/js/script.min.js"></script>
 </body>
+
+<script>
+    $('select').on('change', function() {
+
+
+    });
+
+
+    affichageSelectionClubs()
+
+    function affichageSelectionClubs() {
+        $('#concat').empty();
+        let clubSelect = $("#Nom_ClubASelectionner").val()
+
+        $.ajax({
+            url: 'functions/requetes_ajax.php?IdClub=' + clubSelect,
+            type: "GET",
+            success: function(data) {
+
+                let parsedData = JSON.parse(data)
+                console.log(parsedData)
+
+                let nomClub = parsedData[0]
+                let imgClub = parsedData[1]
+
+                var tabClub = '<br /><br /><table><tr><td><ul><h5 class="fw-bold card-title">Nom et logo</h5></ul></td><td>'
+                tabClub += '<tr><td><ul>'
+                tabClub += nomClub
+                tabClub += '<tr><td><ul>'
+                tabClub += imgClub
+                tabClub += '</ul></td></tr></table>'
+                $('#concat').append(tabClub);
+
+
+            },
+            error: function() {
+                alert("Une erreur est surevenue lors de la requete Ajax")
+            }
+        })
+    }
+</script>
 
 </html>
