@@ -10,9 +10,10 @@
   if ($submit == "modifier") {
     update_activer_logique();
   }
+  if ($submit == "supprimer") {
+    update_suppresion_logique();
+  }
   ?>
-
-
  <!DOCTYPE html>
  <html lang="en">
 
@@ -29,27 +30,25 @@
  <body style="/*background: url(&quot;design.jpg&quot;);*/background-position: 0 -60px;">
    <?php include_once('default_pages/navbar.php'); ?>
 
-   <section class="py-5"></section>
-   <section>
+   <section class="py-5">
      <div class="container bg-primary-gradient py-5">
        <div class="row">
          <div class="col-md-8 col-xl-6 text-center mx-auto">
            <h2 class="fw-bold">Annulation d'un tournoi</h2>
-         </div>
+           </div>
        </div>
        <div class="card shadow-sm">
          <div class="card-body px-4 py-5 px-md-5">
          </div>
-         <path fill-rule="evenodd" d="M0 10.5A1.5 1.5 0 0 1 1.5 9h1A1.5 1.5 0 0 1 4 10.5v1A1.5 1.5 0 0 1 2.5 13h-1A1.5 1.5 0 0 1 0 11.5v-1zm1.5-.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1zm10.5.5A1.5 1.5 0 0 1 13.5 9h1a1.5 1.5 0 0 1 1.5 1.5v1a1.5 1.5 0 0 1-1.5 1.5h-1a1.5 1.5 0 0 1-1.5-1.5v-1zm1.5-.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1zM6 4.5A1.5 1.5 0 0 1 7.5 3h1A1.5 1.5 0 0 1 10 4.5v1A1.5 1.5 0 0 1 8.5 7h-1A1.5 1.5 0 0 1 6 5.5v-1zM7.5 4a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1z"></path>
+       <path fill-rule="evenodd" d="M0 10.5A1.5 1.5 0 0 1 1.5 9h1A1.5 1.5 0 0 1 4 10.5v1A1.5 1.5 0 0 1 2.5 13h-1A1.5 1.5 0 0 1 0 11.5v-1zm1.5-.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1zm10.5.5A1.5 1.5 0 0 1 13.5 9h1a1.5 1.5 0 0 1 1.5 1.5v1a1.5 1.5 0 0 1-1.5 1.5h-1a1.5 1.5 0 0 1-1.5-1.5v-1zm1.5-.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1zM6 4.5A1.5 1.5 0 0 1 7.5 3h1A1.5 1.5 0 0 1 10 4.5v1A1.5 1.5 0 0 1 8.5 7h-1A1.5 1.5 0 0 1 6 5.5v-1zM7.5 4a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1z"></path>
          <path d="M6 4.5H1.866a1 1 0 1 0 0 1h2.668A6.517 6.517 0 0 0 1.814 9H2.5c.123 0 .244.015.358.043a5.517 5.517 0 0 1 3.185-3.185A1.503 1.503 0 0 1 6 5.5v-1zm3.957 1.358A1.5 1.5 0 0 0 10 5.5v-1h4.134a1 1 0 1 1 0 1h-2.668a6.517 6.517 0 0 1 2.72 3.5H13.5c-.123 0-.243.015-.358.043a5.517 5.517 0 0 0-3.185-3.185z"></path>
          <table>
            <tbody>
              <tr>
                <td>
-                 <ul>
-                   <h5 class="fw-bold card-title"></h5>
-                   <?php afficher_date_tournoi(); ?>
-                 </ul>
+               <ul>
+               <?php afficher_date_tournoiUPDATE(); ?>
+               </ul>
                </td>
              </tr>
            </tbody>
@@ -59,35 +58,20 @@
            <tbody>
              <tr>
                <td>
-                 <!--  <ul>
-                   <h5 class="fw-bold card-title"> </h5>
-                 </ul> -->
-               </td>
-               <td>
-               <td>
-                 <ul>
-                   <h5 class="fw-bold card-title"> </h5>
-                 </ul>
-               </td>
-
                <ul>
                  <form action="supprimer_tournoi.php" class="p-3 p-xl-4" method="post">
                    <h3 class="fw-bold text-success mb-2">Annuler tournoi</h3>
-                   <h5 class="fw-bold card-title\">Choisissez la date du tournoi que vous souhaitez annuler ou activer
+                   <h5 class="fw-bold">Choisisir tournoi
                      <select name="ID_Tournoi" id="listeIdTournoi">
-                       <?php selection_tournoi();
-                        if ($submit == "supprimer") {
-                          update_suppresion_logique();
-                        } ?>
+                       <?php selection_tournoi1();
+                        ?>
                      </select>
                    </h5>
                    <br /><br />
                    <button class="btn btn-primary" type="submit" name="submit" value="supprimer">Supprimer</button>
                    <button class="btn btn-primary" type="submit" name="submit" value="modifier">Activer</button>
-                   <button class="btn btn-primary" type="reset" name="reset">Annuler</button>
-                   <a href="afficher_tournois.php">Revenir</a>
+                   <a class="btn btn-primary shadow" role="button" href="afficher_tournois.php">Revenir</a>
                </ul>
-
                </td>
              </tr>
            </tbody>

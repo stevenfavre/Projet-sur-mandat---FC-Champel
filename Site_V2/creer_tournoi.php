@@ -69,6 +69,8 @@
                <br /><br />
                <div><button class="btn btn-primary shadow d-block w-100" type="reset" name="reset">Annuler</button></div>
 
+               <a class="btn btn-primary shadow" role="button" href="afficher_tournois.php">Revenir</a>
+
              </form>
 
 

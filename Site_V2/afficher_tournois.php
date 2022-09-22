@@ -20,8 +20,8 @@ include('./functions/tournoi.php');
 <body style="/*background: url(&quot;design.jpg&quot;);*/background-position: 0 -60px;">
   <?php include_once('default_pages/navbar.php'); ?>
 
-  <section class="py-5"></section>
-  <section>
+  <section class="py-5">
+  
     <div class="container bg-primary-gradient py-5">
       <div class="row">
         <div class="col-md-8 col-xl-6 text-center mx-auto">
@@ -37,11 +37,13 @@ include('./functions/tournoi.php');
           <form action="afficher_tournois.php" class="p-3 p-xl-4" method="post">
             <table>
               <tbody>
-                <?php //afficher_tournois(); 
-                afficher_date_tournoi(); ?>
+                <?php 
+                afficher_date_tournoi(); 
+                ?>
               </tbody>
             </table>
           </form>
+          <a class="btn btn-primary shadow" role="button" href="tournois.php">Revenir</a>
         </div>
         </svg>
       </div>
