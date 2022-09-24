@@ -71,12 +71,15 @@ require_once('./functions/Fonctions_Sofian.php'); //Fait appel à la page où se
 
                     let nomEquipe = parsedData[0]
                     let degreEquipe = parsedData[1]
+                    let nomGroupeEquipe = parsedData[2]
 
-                    var tabEquipe = '<br /><br /><table><tr><td><ul><h5 class="fw-bold card-title">Nom et degré</h5></ul></td><td>'
+                    var tabEquipe = '<br /><br /><table><tr><td><ul><h5 class="fw-bold card-title">Nom degré et groupe</h5></ul></td><td>'
                     tabEquipe += '<tr><td><ul>'
                     tabEquipe += nomEquipe
                     tabEquipe += '<tr><td><ul>'
                     tabEquipe += degreEquipe
+                    tabEquipe += '<tr><td><ul>'
+                    tabEquipe += nomGroupeEquipe
                     tabEquipe += '</ul></td></tr></table>'
                     $('#concat').append(tabEquipe);
 
