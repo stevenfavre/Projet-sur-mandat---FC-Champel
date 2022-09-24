@@ -72,7 +72,7 @@ if (!empty($idEquipe) && !empty($nomEquipe) && !empty($degreEquipe) && ($actifEq
                             <br /><br />
                             <a href="./Formulaire_modification_club.php">Retour à la page de modification d'un club</a>
                             <br /><br />
-                            <a href="./inscription_tournoi.php">Retour à la page d'insciription au tournoi</a>
+                            <a href="./inscription_tournoi.php">Retour à la page d'inscription au tournoi</a>
                     </form>
 
                 </div>

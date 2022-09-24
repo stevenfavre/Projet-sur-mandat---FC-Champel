@@ -51,7 +51,7 @@ if (!empty($nomClubModif)) { //sources : https://www.php.net/manual/en/function.
                         </div>
                         <br /><br />
                         <div>
-                            <a href="./inscription_tournoi.php">Retour à la page d'insciription au tournoi</a>
+                            <a href="./inscription_tournoi.php">Retour à la page d'inscription au tournoi</a>
                         </div>
                     </form>
                 </div>

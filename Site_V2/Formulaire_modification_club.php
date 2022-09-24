@@ -72,7 +72,7 @@ if (!empty($nomClubModif) && !empty($nomClub) && ($actifClub) != null) { //sourc
                             <br /><br />
                             <a href="./Formulaire_modification_equipe.php">Modifier une équipe du club</a>
                             <br /><br />
-                            <a href="./inscription_tournoi.php">Retour à la page d'insciription au tournoi</a>
+                            <a href="./inscription_tournoi.php">Retour à la page d'inscription au tournoi</a>
                         </div>
                     </form>
                 </div>

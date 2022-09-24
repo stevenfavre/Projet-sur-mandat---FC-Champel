@@ -52,7 +52,7 @@ if (!empty($Nom_Equipe) && !empty($Degres_Equipe)) {
                             <br /><br />
                             <a href="./affichage_equipe_bdd.php">Afficher les équipes de notre base de données</a>
                             <br /><br />
-                            <a href="./inscription_tournoi.php">Retour à la page d'insciription au tournoi</a>
+                            <a href="./inscription_tournoi.php">Retour à la page d'inscription au tournoi</a>
                         </form>
                     </div>
                 </div>
