@@ -218,34 +218,6 @@ function selectionner_demandes_noms_equipes_inscrites($IDEquipe = 0)
     return null;
 }
 
-
-//fonction permettant de sélectionner les noms des équipes ayant fait une demande d'inscription qui a été validé pour le tournoi choisi, sous forme de liste déroulante 
-/* function selectionner_noms_equipes_inscrites_with_id($IDEquipe = null, $id_tournoi)
-{
-
-    $bdd = connectDB();
-
-    $bdd->query("SET NAMES 'utf8'");
-
-    $sql = "SELECT * FROM Inscription_Tournoi AS i JOIN Equipe AS e ON e.ID_Equipe = i.FK_ID_Equipe WHERE FK_ID_Tournoi = " . $id_tournoi . " AND Statut_Inscription_Tournoi = 'Validé' ";
-    $req = $bdd->prepare($sql);
-
-    $req->execute();
-    $reponse2 = $req->fetchAll();
-
-    /* echo "<select name=EQUIPE>"; */
-//foreach ($reponse2 as $data) {
-//if ($IDEquipe != $data['FK_ID_Equipe']) {
-//echo "<option value=" . $data['FK_ID_Equipe'] . ">" . $data['Nom_Equipe'] . "</option>";
-//} else {
-//echo "<option value=" . $data['FK_ID_Equipe'] . " selected>" . $data['Nom_Equipe'] . "</option>";
-//}
-/* echo $data['Nom_Equipe']; */
-// }
-/* echo '</select>'; */
-//return null; */
-//}
-
 //fonction permettant de sélectionner les noms des équipes ayant fait une demande d'inscription pour un tournoi qui n'a pas été encore validé, sous forme de liste déroulante 
 function selectionner_noms_equipes_pas_inscrites_with_id($id_tournoi, $id_equipe = 0)
 {
@@ -479,43 +451,67 @@ function afficher_date_tournoi()
 {
 
     echo "<h3 class=\"fw-bold text-success mb-2\">Tous les tournois</h3>";
+    echo "<tr><td><ul> <a href=\"creer_tournoi.php\"class=\"fa-solid fa-plus\"</a>
+    <a href=\"modifier_tournoi.php\"class=\"far fa-edit btn-light m-2\"</a>
+    <a href=\"supprimer_tournoi.php\"class=\"fa-solid fa-trash\"</a></ul></td></tr>";
+   
+
     echo "<tr><td><ul><h5 class=\"fw-bold text-success mb-2\">Date début</h5></ul></td>
     <td><ul><h5 class=\"fw-bold text-success mb-2\">Date fin</h5></ul></td>
     <td><ul><h5 class=\"fw-bold text-success mb-2\">Salle</h5></ul></td>
-    <td><ul><a href=\"creer_tournoi.php\"class=\"fa-solid fa-plus\"</a></ul></td>
-    <td><ul><a href=\"modifier_tournoi.php\"class=\"far fa-edit btn-light m-2\"</a></ul></td>
-    <td><ul><a href=\"supprimer_tournoi.php\"class=\"fa-solid fa-trash\"</a></ul></td></tr>";
+    <td><ul><h5 class=\"fw-bold text-success mb-2\">Statut</h5></ul></td></tr>";
+
+
+
+
     foreach (afficher_Tournoi() as $tournoi) {
         if ($tournoi['Actif_Tournoi'] == 0)
-            echo "<tr><td><ul><strike><h5 class=\"fw-bold\" id=\"h5Texte\">" . date("d.m.Y", strtotime($tournoi['Date_Debut_Tournoi'])) . "</h5></a></strike></ul></td>  
-            <td><ul><strike><h5 class=\"fw-bold\" id=\"h5Texte\">" . date("d.m.Y", strtotime($tournoi['Date_Fin_Tournoi'])) . "</h5></a></strike></ul></td>
-            <td><ul><strike><h5 class=\"fw-bold\" id=\"h5Texte\">" . $tournoi['Nom_Salle'] . "</h5></a></strike></ul></td></tr>";
+            echo "<tr><td><ul><strike><h5 class=\"fw-bold\" id=\"h5Texte\">". "Tournoi du " . date("d.m.Y", strtotime($tournoi['Date_Debut_Tournoi'])) . "</h5></a></strike></ul></td>  
+            <td><ul><strike><h5 class=\"fw-bold\" id=\"h5Texte\">"  . date("d.m.Y", strtotime($tournoi['Date_Fin_Tournoi'])) . "</h5></a></strike></ul></td>
+            <td><ul><strike><h5 class=\"fw-bold\" id=\"h5Texte\">" . $tournoi['Nom_Salle'] .  "</h5></a></strike></ul></td>
+            <td><ul><h5 class=\"fw-bold\" id=\"h5Texte\">" . "Tournoi annulé" .  "</h5></a></ul></td></tr>";
 
         else
-            echo "<tr><td><ul>" . date("d.m.Y", strtotime($tournoi['Date_Debut_Tournoi'])) . "</ul></td>
-    <td><ul>" . date("d.m.Y", strtotime($tournoi['Date_Fin_Tournoi'])) .  "</ul></td>
-    <td><ul>" . $tournoi['Nom_Salle'] . "</ul></td><tr>";
+            echo "<td><ul><h5 class=\"fw-bold\" id=\"h5Texte\">" ."Tournoi du ". date("d.m.Y", strtotime($tournoi['Date_Debut_Tournoi'])) . "</h5></ul></td>
+    <td><ul><h5 class=\"fw-bold\" id=\"h5Texte\">" . date("d.m.Y", strtotime($tournoi['Date_Fin_Tournoi'])) .  "</h5></ul></td>
+    <td><ul><h5 class=\"fw-bold\" id=\"h5Texte\">" . $tournoi['Nom_Salle'] . "</h5></ul></td></tr>";
     }
+   
+    
+    
 }
+
 
 function afficher_date_tournoiUPDATE()
 {
 
-    echo "<tr><td><ul><h3 class=\"fw-bold text-success\">Tous les tournois</h3></ul></td></tr>";
+    echo "<tr><td><ul><h3 class=\"fw-bold text-success mb-2\">Tous les tournois</h3></ul></td></tr>";
 
-    echo "<tr><td><ul><h5 class=\"fw-bold text-success mb-2\">Date début</h5></ul>
+   
+
+    echo "<tr><td><ul><h5 class=\"fw-bold text-success mb-2\">Date début</h5></ul></td>
     <td><ul><h5 class=\"fw-bold text-success mb-2\">Date fin</h5></ul></td>
-    <td><ul><h5 class=\"fw-bold text-success mb-2\">Salle</h5></ul></td></tr>";
+    <td><ul><h5 class=\"fw-bold text-success mb-2\">Salle</h5></ul></td>
+    <td><ul><h5 class=\"fw-bold text-success mb-2\">Statut</h5></ul></td></tr>";
+
+
+
+
     foreach (afficher_Tournoi() as $tournoi) {
         if ($tournoi['Actif_Tournoi'] == 0)
-            echo "<tr><td><ul><strike><h5 class=\"fw-bold\" id=\"h5Texte\">" . "Tournoi du " . date("d.m.Y", strtotime($tournoi['Date_Debut_Tournoi'])) . "</h5></a></strike></ul></td>  
-            <td><ul><strike><h5 class=\"fw-bold\" id=\"h5Texte\">" . date("d.m.Y", strtotime($tournoi['Date_Fin_Tournoi'])) . "</h5></a></strike></ul></td>
-            <td><ul><strike><h5 class=\"fw-bold\" id=\"h5Texte\">" . $tournoi['Nom_Salle'] . "</h5></a></strike></ul></td><tr>";
+            echo "<tr><td><ul><strike><h5 class=\"fw-bold\" id=\"h5Texte\">". "Tournoi du " . date("d.m.Y", strtotime($tournoi['Date_Debut_Tournoi'])) . "</h5></a></strike></ul></td>  
+            <td><ul><strike><h5 class=\"fw-bold\" id=\"h5Texte\">"  . date("d.m.Y", strtotime($tournoi['Date_Fin_Tournoi'])) . "</h5></a></strike></ul></td>
+            <td><ul><strike><h5 class=\"fw-bold\" id=\"h5Texte\">" . $tournoi['Nom_Salle'] .  "</h5></a></strike></ul></td>
+            <td><ul><h5 class=\"fw-bold\" id=\"h5Texte\">" . "Tournoi annulé" .  "</h5></a></ul></td></tr>";
+
         else
-            echo "<td><ul>" . "Tournoi du " . date("d.m.Y", strtotime($tournoi['Date_Debut_Tournoi'])) . "</ul></td>
-            <td><ul>" . date("d.m.Y", strtotime($tournoi['Date_Fin_Tournoi'])) .  "</ul></td>
-            <td><ul>" . $tournoi['Nom_Salle'] . "</ul></td></tr>";
+            echo "<td><ul><h5 class=\"fw-bold\" id=\"h5Texte\">" ."Tournoi du ". date("d.m.Y", strtotime($tournoi['Date_Debut_Tournoi'])) . "</h5></ul></td>
+    <td><ul><h5 class=\"fw-bold\" id=\"h5Texte\">" . date("d.m.Y", strtotime($tournoi['Date_Fin_Tournoi'])) .  "</h5></ul></td>
+    <td><ul><h5 class=\"fw-bold\" id=\"h5Texte\">" . $tournoi['Nom_Salle'] . "</h5></ul></td></tr>";
     }
+   
+    
+    
 }
 
 //fonction permettant d'afficher les  équipes ayant fait une demande d'inscription qui n'a pas été validé pour un tournoi ainsi que les informations du tournoi
@@ -627,15 +623,27 @@ function afficher_toutes_demandes_inscrites()
 //fonction permetant de modifier le statut de l'inscription le faire passer de en attente à validé
 function update_statut_equipes_tournoiTst($id_inscription)
 {
-        $bdd = connectDB();
-        $sql = 'UPDATE inscription_tournoi SET Statut_Inscription_Tournoi = :test WHERE ID_Inscription_Tournoi = :idTournoi';
-        $request = $bdd->prepare($sql);
-        $request->execute([
+    $bdd = connectDB();
+    $sql = 'UPDATE inscription_tournoi SET Statut_Inscription_Tournoi = :test WHERE ID_Inscription_Tournoi = :idTournoi';
+    $request = $bdd->prepare($sql);
+    $request->execute(
+        [
             'idTournoi' => $id_inscription,
             'test' => 'Validé'
         ]
-        );
+    );
+}
 
+function update_statut_inscriptions($id_inscription)
+{
+    try {
+        $bdd = connectDB();
+        $sql = "UPDATE `Inscription_Tournoi` SET `Statut_Inscription_Tournoi`  = 'Validé' WHERE ID_Inscription_Tournoi = " . $id_inscription . ";";
+        $request = $bdd->prepare($sql);
+        $request->execute();
+    } catch (\Throwable $e) {
+        debug($e->getMessage());
+    }
 }
 
 
@@ -644,7 +652,19 @@ function update_statut_equipes($id_inscription)
 {
     try {
         $bdd = connectDB();
-        $sql = "UPDATE `Inscription_Tournoi` SET `Statut_Inscription_Tournoi`  = 'en attente' WHERE ID_Inscription_Tournoi = " . $id_inscription . ";";
+        $sql = "UPDATE `Inscription_Tournoi` SET `Statut_Inscription_Tournoi`  = 'En attente' WHERE ID_Inscription_Tournoi = " . $id_inscription . ";";
+        $request = $bdd->prepare($sql);
+        $request->execute();
+    } catch (\Throwable $e) {
+        debug($e->getMessage());
+    }
+}
+
+function update_statut_equipes_en_attente($id_inscription)
+{
+    try {
+        $bdd = connectDB();
+        $sql = "UPDATE `Inscription_Tournoi` SET `Statut_Inscription_Tournoi`  = 'En attente'WHERE ID_Inscription_Tournoi = " . $id_inscription . ";";
         $request = $bdd->prepare($sql);
         $request->execute();
     } catch (\Throwable $e) {
@@ -728,18 +748,18 @@ function delete_tournoi($idTournoi)
 //fonction permetant de d'inscrire une équipe déjà existante au tournoi
 function inscription_equipe_tournoi($ID_Tournoi, $equipe)
 {
-    
-    try {
-    $bdd = connectDB();
-    
-    $sql = ("INSERT INTO Inscription_Tournoi (`ID_Inscription_Tournoi`, `Date_Inscription_Tournoi`, `Statut_Inscription_Tournoi`, `FK_ID_Tournoi`, `FK_ID_Equipe`) VALUES (NULL, '" . date('y-m-d') . "', 'En attente', '" . $ID_Tournoi . "', '" . $equipe . "')");
 
-    $request = $bdd->prepare($sql);
-    $request->execute();
-    echo "<p class=\"fw-bold text-success mb-2\">L'insertion a été correctement réalisée ! </p>";
-} catch (\Throwable $e) {
-    debug($e->getMessage());
-}
+    try {
+        $bdd = connectDB();
+
+        $sql = ("INSERT INTO Inscription_Tournoi (`ID_Inscription_Tournoi`, `Date_Inscription_Tournoi`, `Statut_Inscription_Tournoi`, `FK_ID_Tournoi`, `FK_ID_Equipe`) VALUES (NULL, '" . date('y-m-d') . "', 'En attente', '" . $ID_Tournoi . "', '" . $equipe . "')");
+
+        $request = $bdd->prepare($sql);
+        $request->execute();
+        echo "<p class=\"fw-bold text-success mb-2\">L'insertion a été correctement réalisée ! </p>";
+    } catch (\Throwable $e) {
+        debug($e->getMessage());
+    }
 }
 function insertMatch($date_match, $heure_debut, $heure_fin, $duree_match, $type_match, $fk_id_local, $fk_id_visiteur, $fk_id_tournoi, $fk_id_terrain, $fk_id_groupe = 1)
 {
@@ -811,30 +831,49 @@ function selectionner_inscriptions()
 
 function afficher_toutes_inscriptions()
 {
+?>
+    <p style="padding-right: 80%;"></p>
+    <a href="inscription_tournoi.php"class="fa-solid fa-plus">Nouvelle inscription tournoi</a>
+</br></br>
+
+    <?php
+    echo "<tr><td><ul><h5 class=\"fw-bold text-success mb-2\">Tournoi</h5></ul></td>
+    <td><ul><h5 class=\"fw-bold text-success mb-2\">Equipe</h5></ul></td>
+    <td><ul><h5 class=\"fw-bold text-success mb-2\">Groupe</h5></ul></td>
+    <td><ul><h5 class=\"fw-bold text-success mb-2\">Statut</h5></ul></td>
+    <td><ul><h5 class=\"fw-bold text-success mb-2\">Opérations</h5></ul></td></tr>";
     
+
     foreach (selectionner_inscriptions() as $inscription) {
-        echo "<div class=\"col mb-4\">
-          <div><a href=\"afficher_demandes.php?id_inscription_tournoi=" . $inscription['ID_Inscription_Tournoi'] . "\">
-              <h4 class=\"fw-bold\">Date inscription " . date("d.m.Y", strtotime($inscription['Date_Inscription_Tournoi'])) . "</h4>
-              <p class=\"text-muted\">Date du tournoi " . contientTournoiInscrit($inscription['FK_ID_Tournoi']) . ".</p>
-            </div>
-          </div>
-        </div>";
+        echo "<div><a href=\"afficher_demandes.php?id_inscription_tournoi=" . $inscription['ID_Inscription_Tournoi'] . "\">";
+    
+        if ($inscription['Statut_Inscription_Tournoi'] != "Validé")
+
+        echo "<tr><td><ul><strike><h5 class=\"fw-bold\">" . contientTournoiInscrit($inscription['FK_ID_Tournoi']) . "</h5></ul></strike></td>
+        <td><ul><strike><h5 class=\"fw-bold\">" .  contientEquipeInscriteSANSID($inscription['FK_ID_Equipe']) . "</h5></ul></strike></td> 
+        <td><ul><strike><h5 class=\"fw-bold\">" .  contientGroupeInscrit($inscription['FK_ID_Equipe']) . "</h5></ul></strike></td>
+        <td><ul><strike><h5 class=\"fw-bold\">  " .  $inscription['Statut_Inscription_Tournoi'] . "</h5></ul></strike></td>
+        <td><ul><button type=\"\" class=\"btn btn-primary btn-sm\" name=\"submit\" style=\"padding: 0px 12px !important;\" value=\"" . $inscription['ID_Inscription_Tournoi'] . "-modifier\">Valider</button></ul></td></tr>"; 
+        
+        else
+
+        echo "<tr><td><ul><h5 class=\"fw-bold\">" . contientTournoiInscrit($inscription['FK_ID_Tournoi']) . "</h5></ul></td>
+             <td><ul><h5 class=\"fw-bold\">" .  contientEquipeInscriteSANSID($inscription['FK_ID_Equipe']) . "</h5></ul></td> 
+             <td><ul><h5 class=\"fw-bold\">" .  contientGroupeInscrit($inscription['FK_ID_Equipe']) . "</h5></ul></td>
+            <td><ul><h5 class=\"fw-bold\">  " .  $inscription['Statut_Inscription_Tournoi'] . "</h5></ul></td>
+            <td><ul><button type=\"submit\" class=\"btn btn-primary btn-sm\" name=\"submit\" style=\"padding: 0px 12px !important;\" value=\"" . $inscription['ID_Inscription_Tournoi'] . "-annuler\">Annuler</button></td></tr>";
+       
+        echo"</div>";
     }
 }
-
-
-
-
-
 function afficherEquipeInscrites($id_tournoi)
 
-{   
+{
     foreach (selectionner_equipe_tournoi($id_tournoi) as $inscrite) {
         echo "<div class=\"inscription\">";
         echo "<div class=\"row row-cols-1 row-cols-md-2 mx-auto\" style=\"max-width: 95%;\">";
         echo "<div class=\"col text-center d-l-flex order-md-last justify-content-l-center align-items-l-center mb-2\">";
-       
+
         if ($inscrite['Statut_Inscription_Tournoi'] != "Validé")
             echo "<button type=\"\" class=\"btn btn-primary btn-sm\" name=\"submit\" style=\"padding: 0px 12px !important;\" value=\"" . $inscrite['ID_Inscription_Tournoi'] . "-modifier\">Valider</button>";
         else
@@ -857,12 +896,12 @@ function afficherEquipeInscrites($id_tournoi)
 }
 
 function afficherEquipeInscritesSansId()
-{   
+{
     foreach (selectionner_inscriptions() as $inscrite) {
         echo "<div class=\"inscription\">";
         echo "<div class=\"row row-cols-1 row-cols-md-2 mx-auto\" style=\"max-width: 95%;\">";
         echo "<div class=\"col text-center d-l-flex order-md-last justify-content-l-center align-items-l-center mb-2\">";
-       
+
         if ($inscrite['Statut_Inscription_Tournoi'] != "Validé")
             echo "<button type=\"\" class=\"btn btn-primary btn-sm\" name=\"submit\" style=\"padding: 0px 12px !important;\" value=\"" . $inscrite['ID_Inscription_Tournoi'] . "-modifier\">Valider</button>";
         else
@@ -892,6 +931,8 @@ function contientEquipeInscrite($id_inscription)
     }
     return  $nomEquipe;
 }
+
+
 
 function contientGroupeInscrit($id_inscription)
 {
@@ -940,4 +981,13 @@ function selectionnerInscriptionID($IdInscriptionTournois)
     } catch (\Throwable $e) {
         debug($e->getMessage());
     }
+}
+
+function contientEquipeInscriteSANSID($IdInscriptionTournois)
+{
+    $nomEquipe = "Inconnu";
+    foreach (selectionnerInscriptionID($IdInscriptionTournois) as $inscription) {
+        $nomEquipe = $inscription['Nom_Equipe'];
+    }
+    return  $nomEquipe;
 }
