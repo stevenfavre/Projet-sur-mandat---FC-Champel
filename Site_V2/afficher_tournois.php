@@ -44,6 +44,7 @@ include('./functions/tournoi.php');
             </table>
           </form>
           <a class="btn btn-primary shadow" role="button" href="tournois.php">Revenir</a>
+
         </div>
         </svg>
       </div>

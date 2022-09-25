@@ -63,13 +63,26 @@
                             }
                           */
                 }  ?>
+                </br></br>
+<table>
+  <tbody>
+    <td>
+      <ul>
+      <button class="btn btn-primary" type="submit" name="submit" value="ok">Créer</button>
+      </ul>
+    </td>
+    <td>
+      <ul>
+      <a class="btn btn-primary shadow" role="button" href="afficher_tournois.php">Retour</a>
+      </ul>
+    </td>
 
-               <div><button class="btn btn-primary shadow d-block w-100" type="submit" name="submit" value="ok">Créer tournoi</button></div>
+  </tbody>
+</table>
+              
 
-               <br /><br />
-               <div><button class="btn btn-primary shadow d-block w-100" type="reset" name="reset">Annuler</button></div>
-
-               <a class="btn btn-primary shadow" role="button" href="afficher_tournois.php">Revenir</a>
+     
+             
 
              </form>
 
