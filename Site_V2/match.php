@@ -39,7 +39,8 @@ if ($up_down == 'U') { // S'il s'agit d'une augmentation du score
           <p class="fw-bold text-success mb-2">Liste des matchs</p>
           <h3 class="fw-bold">Match du tournoi :&nbsp;</h3>
           <p class="text-muted">&nbsp;<a href="modifier_equipe_tournoi.php?id_tournoi=<?php echo $_SESSION['id_tournoi']; ?>">Equipes inscrites</a></p>
-          <a class="btn btn-primary shadow" role="button" href="creer_match.php?id_tournoi=<?php echo $_SESSION['id_tournoi']; ?>">Créer un match</a>
+          <!-- <a class="btn btn-primary shadow" role="button" href="creer_match.php?id_tournoi=<?php echo $_SESSION['id_tournoi']; ?>">Créer un match</a> -->
+          <a class="btn btn-primary shadow" role="button" href="./functions/algorithme_groupe.php?id_tournoi=<?php echo $_SESSION['id_tournoi']; ?>">Créer les groupes</a>
           <br><br>
           <input type="text" id="recherche" onkeyup="recherche()" placeholder="Recherche..." title="Rechercher un match">
           <?php
