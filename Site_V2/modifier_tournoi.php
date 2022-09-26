@@ -6,15 +6,17 @@
   if (isset($_POST['submit'])) {
     $submit = $_POST['submit'];
   }
+
   if ($submit == "modifier") {
     $IdTournoi = $_POST['ID_Tournoi'];
     $Date_debut = $_POST['Date_Debut_Tournoi'];
     $Date_fin = $_POST['Date_Fin_Tournoi'];
     $Fk_ID_Salle = $_POST['ID_Salle'];
+
+
     update_tournoi($IdTournoi, $Date_debut, $Date_fin, $Fk_ID_Salle);
-    
-    
   }
+
   ?>
  <!DOCTYPE html>
  <html lang="en">
@@ -40,47 +42,59 @@
            <h2 class="fw-bold">Modification d'un tournoi</h2>
          </div>
        </div>
-         <div class="card shadow-sm">
+       <div class="card shadow-sm">
          <path fill-rule="evenodd" d="M0 10.5A1.5 1.5 0 0 1 1.5 9h1A1.5 1.5 0 0 1 4 10.5v1A1.5 1.5 0 0 1 2.5 13h-1A1.5 1.5 0 0 1 0 11.5v-1zm1.5-.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1zm10.5.5A1.5 1.5 0 0 1 13.5 9h1a1.5 1.5 0 0 1 1.5 1.5v1a1.5 1.5 0 0 1-1.5 1.5h-1a1.5 1.5 0 0 1-1.5-1.5v-1zm1.5-.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1zM6 4.5A1.5 1.5 0 0 1 7.5 3h1A1.5 1.5 0 0 1 10 4.5v1A1.5 1.5 0 0 1 8.5 7h-1A1.5 1.5 0 0 1 6 5.5v-1zM7.5 4a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1z"></path>
          <path d="M6 4.5H1.866a1 1 0 1 0 0 1h2.668A6.517 6.517 0 0 0 1.814 9H2.5c.123 0 .244.015.358.043a5.517 5.517 0 0 1 3.185-3.185A1.503 1.503 0 0 1 6 5.5v-1zm3.957 1.358A1.5 1.5 0 0 0 10 5.5v-1h4.134a1 1 0 1 1 0 1h-2.668a6.517 6.517 0 0 1 2.72 3.5H13.5c-.123 0-.243.015-.358.043a5.517 5.517 0 0 0-3.185-3.185z"></path>
 
 
          <table>
-          <tbody>
-                <?php afficher_date_tournoiUPDATE(); ?>
-          </tbody>
-         </table> 
+           <tbody>
+             <?php afficher_date_tournoiUPDATE(); ?>
+           </tbody>
+         </table>
 
          <table>
            <tbody>
              <tr>
                <td>
                  <ul>
-                 </div>
-                 <form action="modifier_tournoi.php" class="p-3 p-xl-4" method="post">
-                   <h3 class="fw-bold text-success mb-2">Modifier tournoi</h3>
-                   <h5 class="fw-bold card-title\">Sélectionnez le tournoi 
-                     <select name="ID_Tournoi" id="listeIdTournoi" onchange="afficheDetails()">
-                       <?php selection_tournoi1(); ?>
-                     </select>
-                   </h5>
-                   <h5 class="fw-bold text-success mb-2">Dates tournoi</h5>
-                   <label for="text">Date de début:<div class="mb-3"><input class="form-control" type="date" name="Date_Debut_Tournoi" placeholder="Date de début" id="dateDebut"></div></label>
-                   <label for="text">Date de fin:<div class="mb-3"><input class="form-control" type="date" name="Date_Fin_Tournoi" placeholder="Date de fin" id="dateFin"></div></label>
-                   <h5 class="fw-bold text-success mb-2">Salle tournoi
-                     <select name="ID_Salle" id="listeIdSalle">
-                       <?php selection_salle_tournoi(); ?>
-                      </select></h5>
-                   </br></br>
-                   <button class="btn btn-primary" type="submit" name="submit" value="modifier">Modifier</button>
-                   <a class="btn btn-primary shadow" role="button" href="afficher_tournois.php">Revenir</a>
-               </ul>
-               </td>
-             </tr>
-           </tbody>
-           </form>
-         </table> 
        </div>
+       <form action="modifier_tournoi.php" class="p-3 p-xl-4" method="post">
+         <h3 class="fw-bold text-success mb-2">Modifier tournoi</h3>
+         <h5 class="fw-bold card-title\">Sélectionnez le tournoi
+           <select name="ID_Tournoi" id="listeIdTournoi" onchange="afficheDetails()">
+             <?php selection_tournoi1(); ?>
+           </select>
+         </h5>
+         <h5 class="fw-bold text-success mb-2">Dates tournoi</h5>
+         <label for="text">Date de début:<div class="mb-3"><input class="form-control" type="date" name="Date_Debut_Tournoi" placeholder="Date de début" id="dateDebut"></div></label>
+         <label for="text">Date de fin:<div class="mb-3"><input class="form-control" type="date" name="Date_Fin_Tournoi" placeholder="Date de fin" id="dateFin"></div></label>
+         <h5 class="fw-bold text-success mb-2">Salle tournoi
+           <select name="ID_Salle" id="listeIdSalle">
+             <?php selection_salle_tournoi(); ?>
+           </select>
+         </h5>
+         <?php
+          if ($submit == "modifier") {
+            $IdTournoi = $_POST['ID_Tournoi'];
+            $Date_debut = $_POST['Date_Debut_Tournoi'];
+            $Date_fin = $_POST['Date_Fin_Tournoi'];
+            $Fk_ID_Salle = $_POST['ID_Salle'];
+            echo "<h5 class=\"fw-bold text-success mb-2\">Modification avec succès !</h5>";
+
+            update_tournoi($IdTournoi, $Date_debut, $Date_fin, $Fk_ID_Salle);
+          }
+          ?>
+         </br></br>
+         <button class="btn btn-primary" type="submit" name="submit" value="modifier">Modifier</button>
+         <a class="btn btn-primary shadow" role="button" href="afficher_tournois.php">Revenir</a>
+         </ul>
+         </td>
+         </tr>
+         </tbody>
+       </form>
+       </table>
+     </div>
      </div>
    </section>
    <?php include_once('default_pages/footer.php'); ?>
