@@ -2,18 +2,20 @@
 include('./functions/dbconnection.php');
 include('./functions/tournoi.php');
 
+if (!empty($_GET['submit'])) {
+  $_SESSION['submit'] = $_GET['submit'];
 
+  $submit = filter_input(INPUT_GET, 'submit');
 
-$submit = filter_input(INPUT_GET, 'submit');
+  $coupure = explode("-", $submit);
+  $id_inscription = $coupure[0];
+  $option = $coupure[1];
 
-$coupure = explode("-",$submit);
-$id_inscription = $coupure[0];
-$option = $coupure[1];
-
-if ($option == 'modifier') {
-  update_statut_inscriptions($id_inscription);
-} elseif ($option == 'annuler') {
-  update_statut_equipes_en_attente($id_inscription);
+  if ($option == 'modifier') {
+    update_statut_inscriptions($id_inscription);
+  } elseif ($option == 'annuler') {
+    update_statut_equipes_en_attente($id_inscription);
+  }
 }
 
 

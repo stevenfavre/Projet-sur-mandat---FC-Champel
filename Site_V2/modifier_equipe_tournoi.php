@@ -2,19 +2,20 @@
 include('./functions/dbconnection.php');
 include('./functions/tournoi.php');
 
-if (!empty($_GET['id_tournoi']))
-  $_SESSION['id_tournoi'] = $_GET['id_tournoi'];
+if (!empty($_GET['submit'])) {
+  $_SESSION['submit'] = $_GET['submit'];
 
-$submit = filter_input(INPUT_GET, 'submit');
+  $submit = filter_input(INPUT_GET, 'submit');
 
-$coupure = explode("-",$submit);
-$id_inscription = $coupure[0];
-$option = $coupure[1];
+  $coupure = explode("-", $submit);
+  $id_inscription = $coupure[0];
+  $option = $coupure[1];
 
-if ($option == 'modifier') {
-  update_statut_equipes_tournoiTst($id_inscription);
-} elseif ($option == 'annuler') {
-  update_statut_equipes($id_inscription);
+  if ($option == 'modifier') {
+    update_statut_equipes_tournoiTst($id_inscription);
+  } elseif ($option == 'annuler') {
+    update_statut_equipes($id_inscription);
+  }
 }
 ?>
 <!DOCTYPE html>
@@ -36,7 +37,7 @@ if ($option == 'modifier') {
       <div class="row mb-4 mb-lg-5">
         <div class="col-md-8 col-xl-6 text-center mx-auto">
           <h1 class="fw-bold text-success mb-2">Equipes inscrites</h1>
-          <h3 class="fw-bold">Tournoi du   <?php selection_tournoi($_SESSION['id_tournoi']); ?> &nbsp;</h3>
+          <h3 class="fw-bold">Tournoi du <?php selection_tournoi($_SESSION['id_tournoi']); ?> &nbsp;</h3>
           </br></br>
           <h5 class="fw-bold text-success mb-2"><a href="inscription_equipe.php?id_tournoi=<?php echo $_SESSION['id_tournoi']; ?>">Inscrire une nouvelle equipe</a></h5>
           <!-- <p class=\"fw-bold text-success mb-2\">L'insertion a été correctement réalisée ! </p> -->
@@ -47,6 +48,7 @@ if ($option == 'modifier') {
         afficherEquipeInscrites($_SESSION['id_tournoi']);
         ?>
       </form>
+      <a class="btn btn-primary shadow" href="tournois.php">Revenir</a>
     </div>
     </div>
     </form>

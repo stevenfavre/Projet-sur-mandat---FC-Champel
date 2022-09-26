@@ -51,7 +51,7 @@
              <tr>
                <td>
                  <ul>
-                   <?php afficher_date_tournoiUPDATE(); ?>
+                   <?php afficher_date_tournoiDELETE(); ?>
                  </ul>
                </td>
              </tr>
