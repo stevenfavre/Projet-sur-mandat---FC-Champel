@@ -7,7 +7,7 @@ $idEquipe = filter_input(INPUT_GET, "nomEquipe", FILTER_UNSAFE_RAW);
 
 $bdd = connectDB();
 $reponseDesEquipe = $bdd->query("SET NAMES 'utf8'");
-$reponseDesEquipe = $bdd->query("SELECT `Nom_Equipe`, `Degres_Equipe`, `Nom_Groupe` FROM `equipe` JOIN `groupe` on FK_ID_Groupe = ID_Groupe WHERE `ID_Equipe` = '$idEquipe'");
+$reponseDesEquipe = $bdd->query("SELECT `Nom_Equipe`, `Degres_Equipe`, `Nom_Groupe` FROM `Equipe` JOIN `Groupe` on FK_ID_Groupe = ID_Groupe WHERE `ID_Equipe` = '$idEquipe'");
 
 echo json_encode($reponseDesEquipe->fetch());
  

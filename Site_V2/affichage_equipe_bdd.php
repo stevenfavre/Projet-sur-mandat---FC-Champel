@@ -90,6 +90,7 @@ require_once('./functions/Fonctions_Sofian.php'); //Fait appel à la page où se
                 }
             })
         }
+        
     </script>
 
 
