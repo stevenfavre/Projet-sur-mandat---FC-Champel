@@ -15,8 +15,10 @@
 
     update_suppresion_logique();
   }
+  if ($submit == "terminer") {
 
-
+    update_terminer_logique();
+  }
   ?>
  <!DOCTYPE html>
  <html lang="en">
@@ -51,7 +53,7 @@
              <tr>
                <td>
                  <ul>
-                   <?php afficher_date_tournoiDELETE(); ?>
+                   <?php afficher_date_tournoi(); ?>
                  </ul>
                </td>
              </tr>
@@ -82,11 +84,17 @@
 
                           update_suppresion_logique();
                         }
+                        if ($submit == "terminer") {
+                          echo "<h5 class=\"fw-bold text-success mb-2\">Action réalisée avec succès !</h5>";
+
+                          update_terminer_logique();
+                        }
                         ?>
                      </h5>
                      <br /><br />
                      <button class="btn btn-primary" type="submit" name="submit" value="supprimer">Supprimer</button>
                      <button class="btn btn-primary" type="submit" name="submit" value="modifier">Activer</button>
+                     <button class="btn btn-primary" type="submit" name="submit" value="terminer">Terminer</button>
                      <a class="btn btn-primary shadow" role="button" href="afficher_tournois.php">Revenir</a>
                  </ul>
                </td>
