@@ -70,9 +70,7 @@ if (!empty($idEquipe) && !empty($nomEquipe) && !empty($degreEquipe) && ($actifEq
                             <br /><br />
                             <div><input class="btn btn-primary shadow d-block w-100" value='Envoyer' type="submit"></div>
                             <br /><br />
-                            <a href="./Formulaire_modification_club.php">Retour à la page de modification d'un club</a>
-                            <br /><br />
-                            <a href="./inscription_tournoi.php">Retour à la page d'inscription au tournoi</a>
+                            <a href="./page_equipes.php">Retour</a>
                     </form>
 
                 </div>

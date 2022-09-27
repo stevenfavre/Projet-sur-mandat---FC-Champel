@@ -39,7 +39,7 @@ require_once('./functions/Fonctions_Sofian.php'); //Fait appel à la page où se
                 </div>
             </div>
             <br /><br />
-            <a href="./inscription_tournoi.php">Retour à la page d'insciription au tournoi</a>
+            <a href="./page_equipes.php">Retour</a>
         </div>
     </section>
     <?php include_once('default_pages/footer.php'); ?>
@@ -90,7 +90,6 @@ require_once('./functions/Fonctions_Sofian.php'); //Fait appel à la page où se
                 }
             })
         }
-        
     </script>
 
 

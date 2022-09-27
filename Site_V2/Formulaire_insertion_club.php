@@ -56,11 +56,7 @@ if (!empty($nomClub) && !empty($rueAdresse) && !empty($localiteAdresse) && !empt
                             <br /><br />
                             <div><input class="btn btn-primary shadow d-block w-100" value='Envoyer' type="submit"></div>
                             <br /><br />
-                            <a href="./Formulaire_insertion_equipe.php">Insérer une équipe du club</a>
-                            <br /><br />
-                            <a href="./affichage_club_actif.php">Afficher les clubs de notre base de données</a>
-                            <br /><br />
-                            <a href="./inscription_tournoi.php">Retour à la page d'inscription au tournoi</a>
+                            <a href="./page_clubs.php">Retour</a>
                         </form>
                     </div>
                 </div>

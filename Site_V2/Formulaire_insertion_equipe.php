@@ -50,9 +50,7 @@ if (!empty($Nom_Equipe) && !empty($Degres_Equipe)) {
                             <div class="mb-3"><input class="form-control" type="text" id="Degres_Equipe" name="Degres_Equipe" placeholder="Degré de l'équipe"></div>
                             <div><input class="btn btn-primary shadow d-block w-100" value='Envoyer' type="submit"></div>
                             <br /><br />
-                            <a href="./affichage_equipe_bdd.php">Afficher les équipes de notre base de données</a>
-                            <br /><br />
-                            <a href="./inscription_tournoi.php">Retour à la page d'inscription au tournoi</a>
+                            <a href="./page_clubs.php">Retour</a>
                         </form>
                     </div>
                 </div>

@@ -12,7 +12,7 @@ if (!empty($nomClubModif)) { //sources : https://www.php.net/manual/en/function.
 
     if (move_uploaded_file($_FILES["Image_Club"]["tmp_name"], $target_file)) //sources : https://www.php.net/manual/en/function.move-uploaded-file.php
         modification_club($nomClubModif, $_FILES["Image_Club"]["name"], $nomClub, $actifClub); //sources : https://www.php.net/manual/en/function.move-uploaded-file.php
-} 
+}
 
 
 ?>
@@ -51,7 +51,8 @@ if (!empty($nomClubModif)) { //sources : https://www.php.net/manual/en/function.
                         </div>
                         <br /><br />
                         <div>
-                            <a href="./inscription_tournoi.php">Retour à la page d'inscription au tournoi</a>
+                            <br /><br />
+                            <a href="./page_clubs.php">Retour</a>
                         </div>
                     </form>
                 </div>

@@ -60,7 +60,7 @@ if (!empty($nomEquipeReactiver)) {
                             </select>
                         </form>
                         <br /><br />
-                        <a href="./inscription_tournoi.php">Retour à la page d'inscription au tournoi</a>
+                        <a href="./page_equipes.php">Retour</a>
                     </div>
                 </div>
                 <div class="col-md-4 col-xl-4 d-flex justify-content-center justify-content-xl-start">
