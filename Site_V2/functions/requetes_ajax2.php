@@ -10,4 +10,3 @@ $reponseDesEquipe = $bdd->query("SET NAMES 'utf8'");
 $reponseDesEquipe = $bdd->query("SELECT `Nom_Equipe`, `Degres_Equipe`, `Nom_Groupe` FROM `Equipe` JOIN `Groupe` on FK_ID_Groupe = ID_Groupe WHERE `ID_Equipe` = '$idEquipe'");
 
 echo json_encode($reponseDesEquipe->fetch());
- 
