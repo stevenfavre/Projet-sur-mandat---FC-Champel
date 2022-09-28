@@ -9,7 +9,8 @@
             <ul class="navbar-nav mx-auto">
                 <li class="nav-item"><a class="nav-link" href="index.php">Accueil</a></li>
                 <li class="nav-item"><a class="nav-link" href="tournois.php">Tournois</a></li>
-                <li class="nav-item"><a class="nav-link" href="inscription_tournoi.php">Equipes</a></li>
+                <li class="nav-item"><a class="nav-link" href="page_clubs.php">Clubs</a></li>
+                <li class="nav-item"><a class="nav-link" href="page_equipes.php">Equipes</a></li>
             </ul>
             <a class="btn btn-primary shadow" role="button" href="login.php" style="margin-right: 0.5%;">Log in</a>
             <a class="btn btn-primary shadow" role="button" href="signup.php">Sign up</a>
