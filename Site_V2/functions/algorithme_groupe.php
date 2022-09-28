@@ -17,10 +17,10 @@ function createGroupe($fk_id_tournoi)
     $_SESSION['Equipes'] = array();
 
     // Groupe stockant les équipes
-    $GroupeUn = array();
-    $GroupeDeux = array();
-    $GroupeTrois = array();
-    $GroupeQuatre = array();
+    $_SESSION['GroupeUn'] = array();
+    $_SESSION['GroupeDeux'] = array();
+    $_SESSION['GroupeTrois'] = array();
+    $_SESSION['GroupeQuatre'] = array();
 
     foreach (getInscriptions($fk_id_tournoi, "Validé") as $equipes) {
         // Récupération des équipes individuellement
@@ -37,25 +37,24 @@ function createGroupe($fk_id_tournoi)
         $division = array_chunk($_SESSION['Equipes'], NB_EQUIPES_IDEAL);
 
         foreach ($division[0] as $equipe) {
-            array_push($GroupeUn, $equipe);
+            array_push($_SESSION['GroupeUn'], $equipe);
             updateGroupe($equipe[0]['ID_Equipe'], 1);
         }
 
         foreach ($division[1] as $equipe) {
-            array_push($GroupeDeux, $equipe);
+            array_push($_SESSION['GroupeDeux'], $equipe);
             updateGroupe($equipe[0]['ID_Equipe'], 2);
         }
 
         foreach ($division[2] as $equipe) {
-            array_push($GroupeTrois, $equipe);
+            array_push($_SESSION['GroupeTrois'], $equipe);
             updateGroupe($equipe[0]['ID_Equipe'], 3);
         }
 
         foreach ($division[3] as $equipe) {
-            array_push($GroupeQuatre, $equipe);
+            array_push($_SESSION['GroupeQuatre'], $equipe);
             updateGroupe($equipe[0]['ID_Equipe'], 4);
         }
-
     }
 }
 
