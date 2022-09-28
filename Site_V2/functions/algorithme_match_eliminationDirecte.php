@@ -1,8 +1,9 @@
 <?php
-require_once('./functions/dbconnection.php'); //Fait appel à la page se trouve la connexion à la BDD.
-require_once('./functions/Fonctions_Sofian.php'); //Fait appel à la page où se trouvent les fonction 
-require_once('./functions/debug.php');
-require_once('./functions/steven_fonctions.php');
+require_once('dbconnection.php'); //Fait appel à la page se trouve la connexion à la BDD.
+require_once('Fonctions_Sofian.php'); //Fait appel à la page où se trouvent les fonction 
+require_once('debug.php');
+require_once('steven_fonctions.php');
+require_once('algorithme_groupe.php');
 
 
 // Définition de la constant concernant le nombre d'équipe idéal au total dans le tournoi
@@ -13,66 +14,21 @@ define("NB_FINALE", 1);
 define("NB_MATCH_3_PLACE", 1);
 define("NB_MATCH_5_8_PLACE", 4);
 
+//Récupértion des groupes depuis l'algorithme
+$_SESSION['GroupeUn'];
+$_SESSION['GroupeDeux'];
+$_SESSION['GroupeTrois'];
+$_SESSION['GroupeQuatre'];
 
-$id_tournoi = $_GET["id_tournoi"];
-createGroupe($id_tournoi);
-
-// Fonction répartissant les équipes dans les différents groupes
-function createGroupe($fk_id_tournoi)
+function createQuartFinale()
 {
-    $redo = false;
-    //$_SESSION['Groupes'] = array();
-    $_SESSION['Equipes'] = array();
-
-    // Groupe stockant les équipes
-    $GroupeUn = array();
-    $GroupeDeux = array();
-    $GroupeTrois = array();
-    $GroupeQuatre = array();
-
-    foreach (getInscriptions($fk_id_tournoi, "Validé") as $equipes) {
-        // Récupération des équipes individuellement
-        $equipe = selectEquipeWithID($equipes['FK_ID_Equipe']);
-        // Stockage des équipes dans une liste de session
-        array_push($_SESSION['Equipes'], $equipe);
-    }
-
-    if (count($_SESSION['Equipes']) >= NB_EQUIPES_IDEAL) {
-
-        shuffle($_SESSION['Equipes']);
-
-        // https://stackoverflow.com/questions/23362451/php-generate-unique-teams-using-number-combination
-        $division = array_chunk($_SESSION['Equipes'], NB_EQUIPES_IDEAL);
-
-        foreach ($division[0] as $equipe) {
-            array_push($GroupeUn, $equipe);
-            updateGroupe($equipe[0]['ID_Equipe'], 1);
-        }
-
-        foreach ($division[1] as $equipe) {
-            array_push($GroupeDeux, $equipe);
-            updateGroupe($equipe[0]['ID_Equipe'], 2);
-        }
-
-        foreach ($division[2] as $equipe) {
-            array_push($GroupeTrois, $equipe);
-            updateGroupe($equipe[0]['ID_Equipe'], 3);
-        }
-
-        foreach ($division[3] as $equipe) {
-            array_push($GroupeQuatre, $equipe);
-            updateGroupe($equipe[0]['ID_Equipe'], 4);
-        }
-
-    }
 }
 
-function createQuartFinale($GroupeUn, $GroupeDeux, $GroupeTrois, $GroupeQuatre){
 
-    echo $GroupeUn[0] . " vs " . $GroupeQuatre[1];
-    echo $GroupeUn[1] . " vs " . $GroupeQuatre[0];
-    echo $GroupeDeux[0] . " vs " . $GroupeTrois[1];
-    echo $GroupeDeux[1] . " vs " . $GroupeTrois[0];
-    
+$bdd = connectDB();
+$bdd->query("SET NAMES 'utf8'");
 
-}
+
+
+$quartFinaleUn = $bdd->query("INSERT INTO `Matchs`(`ID_Match`, `Date_Match`, `Heure_Debut_Match`, `Heure_Fin_Match`, `Duree_Match`, `Type_Match`, `But_Local_Match`, `But_Visiteur_Match`, `FK_ID_Local`, `FK_ID_Visiteur`, `FK_ID_Groupe`, `FK_ID_Tournoi`, `FK_ID_Terrain`, `Actif_Match`) VALUES ('[value-1]','[value-2]','[value-3]','[value-4]','[value-5]','Quart de finale','[value-7]','[value-8]','[value-9]','[value-10]','[value-11]','[value-12]','[value-13]','[value-14]')");
+$quartFinaleUn->setFetchMode(PDO::FETCH_BOTH);
