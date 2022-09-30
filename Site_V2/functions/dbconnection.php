@@ -3,7 +3,7 @@
 
 // Fonction permettant de faire la connection à la base de donnée
 
-function connectDB()
+/*function connectDB()
 
 {
     $dbServer = "hhva.myd.infomaniak.com";
@@ -18,14 +18,14 @@ function connectDB()
         $bdd->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     }
     return $bdd;
-} 
+} */
 
 
 
-/* function connectDB() //fonction qui permet de se connecter à la BDD
+function connectDB() //fonction qui permet de se connecter à la BDD
 {
     $dbServer = "localhost";
-    $dbName = "hhva_t23_7_v1";
+    $dbName = "hhva_t23_7_v2";
     $dbUser = "root";
     $dbPwd = "";
 
@@ -36,4 +36,4 @@ function connectDB()
         $bdd->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     }
     return $bdd;
-} */
+}
