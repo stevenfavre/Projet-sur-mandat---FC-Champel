@@ -28,6 +28,7 @@ require_once './functions/steven_fonctions.php'
 
             <li class="nav-item"><a class="nav-link" href="afficher_tournois.php">Liste tournois</a></li>
             <li class="nav-item"><a class="nav-link" href="afficher_demandes.php">Inscriptions</a></li>
+            <li class="nav-item"><a class="nav-link" href="match.php">Matchs</a></li>
             <li class="nav-item"><a class="nav-link" href="classement_tournoi.php">Classements</a></li>
           </ul>
 

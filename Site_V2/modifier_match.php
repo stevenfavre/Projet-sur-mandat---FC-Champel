@@ -39,7 +39,6 @@ if ($submitPost == 'modifier') {
     // Permet de faire l'insertion d'un match dans la base de données
     updateMatch($_SESSION['match']['ID_Match'], $id_local, $id_visiteur, $time_debut, $time_fin, $minutes, $type, $but_local, $but_visiteur);
     header("Location: match.php?id_tournoi=" . $_SESSION['match']['FK_ID_Tournoi']);
-
 } else if ($submitPost == 'activer') {
     updateActifMatch($_SESSION['match']['ID_Match'], 1);
     refreshSessionMatch();
