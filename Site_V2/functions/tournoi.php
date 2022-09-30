@@ -880,3 +880,17 @@ function contientEquipeInscriteSANSID($IdInscriptionTournois)
     }
     return  $nomEquipe;
 }
+
+function selectionner_inscription($fk_id_tournoi, $statut)
+{
+    try {
+        $db = connectDB();
+        $sql = "SELECT * FROM `Inscription_Tournoi` WHERE `FK_ID_Tournoi` = " . $fk_id_tournoi . " AND Statut_Inscription_Tournoi = '" . $statut . "';";
+        $request = $db->prepare($sql);
+        $request->execute();
+        return $request->fetchAll(PDO::FETCH_ASSOC);
+    } catch (\Throwable $e) {
+        echo "<script>alert(\" Select des inscriptions des équipes du tournoi du id : " . $fk_id_tournoi . " + " . $e->getMessage() . "\");</script>";
+        debug();
+    }
+}
