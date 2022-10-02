@@ -19,6 +19,11 @@ $groupeB = $_SESSION['GroupeDeux'];
 $groupeC = $_SESSION['GroupeTrois'];
 $groupeD = $_SESSION['GroupeQuatre'];
 
+function createMatch9A16ePlace()
+{
+  
+}
+
 function createQuartFinale($groupeA, $groupeB, $groupeC, $groupeD)
 {
   $quartFinaleUn = array(
@@ -83,31 +88,6 @@ function createQuartFinale($groupeA, $groupeB, $groupeC, $groupeD)
     $idEquipe8 = $equipe['ID_Equipe'];
   }
 
-  /*$idGroupeA = 0;
-  foreach ($groupeA as $groupe) {
-    $idGroupeA = $groupe['ID_Equipe'];
-  }
-  $idGroupeB = 0;
-  foreach ($groupeB as $groupe) {
-    $idGroupeB = $groupe['ID_Equipe'];
-  }
-  $idGroupeC = 0;
-  foreach ($groupeC as $groupe) {
-    $idGroupeC = $groupe['ID_Equipe'];
-  }
-  $idGroupeD = 0;
-  foreach ($groupeD as $groupe) {
-    $idGroupeD = $groupe['ID_Equipe'];
-  }*/
-
-  /* print_r($quartFinaleUn);
-  echo "<br /><br />";
-  print_r($quartFinaleDeux);
-  echo "<br /><br />";
-  print_r($quartFinaleTrois);
-  echo "<br /><br />";
-  print_r($quartFinaleQuatre);
-  */
 
   $bdd = connectDB();
 
@@ -127,19 +107,78 @@ function createQuartFinale($groupeA, $groupeB, $groupeC, $groupeD)
   $insertquartQuatre = $bdd->query("INSERT INTO `matchs`(`Date_Match`, `Heure_Debut_Match`, `Heure_Fin_Match`, `Duree_Match`, `Type_Match`, `But_Local_Match`, `But_Visiteur_Match`, `FK_ID_Local`, `FK_ID_Visiteur`, `FK_ID_Groupe`, `FK_ID_Tournoi`, `FK_ID_Terrain`, `Actif_Match`) 
   VALUES ('2022-09-24','10:40:00','10:51:00','11','Quart de finale','0','1','$idEquipe7','$idEquipe8', null,'1','1','1')");
 
-  //print_r($insertquartUn);
-  // echo "<br /><br />";
-  // print_r($insertquartDeux);
-  // echo "<br /><br />";
-  // print_r($insertquartTrois);
-  // echo "<br /><br />";
-  // print_r($insertquartQuatre);
-  // echo "<br /><br />";
-
+  //createMatch5A8ePlace($insertquartUn, $insertquartDeux, $insertquartTrois, $insertquartQuatre);
   createDemiFinale($insertquartUn, $insertquartDeux, $insertquartTrois, $insertquartQuatre);
 }
 
 createQuartFinale($groupeA, $groupeB, $groupeC, $groupeD);
+
+//function createMatch5A8ePlace($insertquartUn, $insertquartDeux, $insertquartTrois, $insertquartQuatre)
+// {
+//   $bdd = connectDB();
+//   $num = 4;
+//   $matchs = $bdd->query("SET NAMES 'utf8'");
+//   $matchs = $bdd->query("SELECT * FROM Matchs order by ID_Match desc limit $num;");
+
+//   $idEquipePerdanteUne = 0;
+//   foreach ($matchs as $valeur) {
+//     if ($valeur['But_Local_Match'] < $valeur['But_Visiteur_Match']) {
+//       $idEquipePerdanteUne = $valeur['FK_ID_Local'];
+//     } elseif ($valeur['But_Local_Match'] > $valeur['But_Visiteur_Match']) {
+//       $idEquipePerdanteUne = $valeur['FK_ID_Visiteur'];
+//     }
+//   }
+//   $num -= 1;
+
+//   $matchs = $bdd->query("SET NAMES 'utf8'");
+//   $matchs = $bdd->query("SELECT * FROM Matchs order by ID_Match desc limit $num;");
+
+//   $idEquipePerdanteDeux = 0;
+//   foreach ($matchs as $valeur) {
+//     if ($valeur['But_Local_Match'] < $valeur['But_Visiteur_Match']) {
+//       $idEquipePerdanteDeux = $valeur['FK_ID_Local'];
+//     } elseif ($valeur['But_Local_Match'] > $valeur['But_Visiteur_Match']) {
+//       $idEquipePerdanteDeux = $valeur['FK_ID_Visiteur'];
+//     }
+//   }
+
+//   $num -= 1;
+
+//   $matchs = $bdd->query("SET NAMES 'utf8'");
+//   $matchs = $bdd->query("SELECT * FROM Matchs order by ID_Match desc limit $num;");
+
+//   $idEquipePerdanteTrois = 0;
+//   foreach ($matchs as $valeur) {
+//     if ($valeur['But_Local_Match'] < $valeur['But_Visiteur_Match']) {
+//       $idEquipePerdanteTrois = $valeur['FK_ID_Local'];
+//     } elseif ($valeur['But_Local_Match'] > $valeur['But_Visiteur_Match']) {
+//       $idEquipePerdanteTrois = $valeur['FK_ID_Visiteur'];
+//     }
+//   }
+
+//   $num -= 1;
+
+//   $matchs = $bdd->query("SET NAMES 'utf8'");
+//   $matchs = $bdd->query("SELECT * FROM Matchs order by ID_Match desc limit $num;");
+
+//   $idEquipePerdanteQuatre = 0;
+//   foreach ($matchs as $valeur) {
+//     if ($valeur['But_Local_Match'] < $valeur['But_Visiteur_Match']) {
+//       $idEquipePerdanteQuatre = $valeur['FK_ID_Local'];
+//     } elseif ($valeur['But_Local_Match'] > $valeur['But_Visiteur_Match']) {
+//       $idEquipePerdanteQuatre = $valeur['FK_ID_Visiteur'];
+//     }
+//   }
+
+//   $insertMatchPerdantUn = $bdd->query("SET NAMES 'utf8'");
+//   $insertMatchPerdantUn = $bdd->query("INSERT INTO `matchs`(`Date_Match`, `Heure_Debut_Match`, `Heure_Fin_Match`, `Duree_Match`, `Type_Match`, `But_Local_Match`, `But_Visiteur_Match`, `FK_ID_Local`, `FK_ID_Visiteur`, `FK_ID_Groupe`, `FK_ID_Tournoi`, `FK_ID_Terrain`, `Actif_Match`) 
+//   VALUES ('2022-09-24','11:20:00','11:31:00','11','1er match entre perdants des quarts','4','2','$idEquipePerdanteUne','$idEquipePerdanteDeux', null,'1','1','1')");
+
+//   $insertMatchPerdantUn = $bdd->query("SET NAMES 'utf8'");
+//   $insertMatchPerdantUn = $bdd->query("INSERT INTO `matchs`(`Date_Match`, `Heure_Debut_Match`, `Heure_Fin_Match`, `Duree_Match`, `Type_Match`, `But_Local_Match`, `But_Visiteur_Match`, `FK_ID_Local`, `FK_ID_Visiteur`, `FK_ID_Groupe`, `FK_ID_Tournoi`, `FK_ID_Terrain`, `Actif_Match`) 
+//   VALUES ('2022-09-24','11:20:00','11:31:00','11','2eme match entre perdants des quarts','4','2','$idEquipePerdanteTrois','$idEquipePerdanteQuatre', null,'1','1','1')");
+
+// }
 
 
 function createDemiFinale($insertquartUn, $insertquartDeux, $insertquartTrois, $insertquartQuatre)
@@ -150,11 +189,11 @@ function createDemiFinale($insertquartUn, $insertquartDeux, $insertquartTrois, $
   $matchs = $bdd->query("SELECT * FROM Matchs order by ID_Match desc limit $num;");
 
   $idEquipeGagnanteUne = 0;
-  foreach ($matchs as $match) {
-    if ($match['But_Local_Match'] > $match['But_Visiteur_Match']) {
-      $idEquipeGagnanteUne = $match['FK_ID_Local'];
-    } elseif ($match['But_Local_Match'] < $match['But_Visiteur_Match']) {
-      $idEquipeGagnanteUne = $match['FK_ID_Visiteur'];
+  foreach ($matchs as $valeur) {
+    if ($valeur['But_Local_Match'] > $valeur['But_Visiteur_Match']) {
+      $idEquipeGagnanteUne = $valeur['FK_ID_Local'];
+    } elseif ($valeur['But_Local_Match'] < $valeur['But_Visiteur_Match']) {
+      $idEquipeGagnanteUne = $valeur['FK_ID_Visiteur'];
     }
   }
   $num -= 1;
@@ -163,55 +202,130 @@ function createDemiFinale($insertquartUn, $insertquartDeux, $insertquartTrois, $
   $matchs = $bdd->query("SELECT * FROM Matchs order by ID_Match desc limit $num;");
 
   $idEquipeGagnanteDeux = 0;
-  foreach ($matchs as $match) {
-    if ($match['But_Local_Match'] > $match['But_Visiteur_Match']) {
-      $idEquipeGagnanteDeux = $match['FK_ID_Local'];
-    } elseif ($match['But_Local_Match'] > $match['But_Visiteur_Match']) {
-      $idEquipeGagnanteDeux = $match['FK_ID_Visiteur'];
+  foreach ($matchs as $valeur) {
+    if ($valeur['But_Local_Match'] > $valeur['But_Visiteur_Match']) {
+      $idEquipeGagnanteDeux = $valeur['FK_ID_Local'];
+    } elseif ($valeur['But_Local_Match'] < $valeur['But_Visiteur_Match']) {
+      $idEquipeGagnanteDeux = $valeur['FK_ID_Visiteur'];
     }
   }
 
-  echo $idEquipeGagnanteUne;
-  echo "<br /><br />";
-  echo $idEquipeGagnanteDeux;
+  $num -= 1;
+
+  $matchs = $bdd->query("SET NAMES 'utf8'");
+  $matchs = $bdd->query("SELECT * FROM Matchs order by ID_Match desc limit $num;");
+
+  $idEquipeGagnanteTrois = 0;
+  foreach ($matchs as $valeur) {
+    if ($valeur['But_Local_Match'] > $valeur['But_Visiteur_Match']) {
+      $idEquipeGagnanteTrois = $valeur['FK_ID_Local'];
+    } elseif ($valeur['But_Local_Match'] < $valeur['But_Visiteur_Match']) {
+      $idEquipeGagnanteTrois = $valeur['FK_ID_Visiteur'];
+    }
+  }
+
+  $num -= 1;
+
+  $matchs = $bdd->query("SET NAMES 'utf8'");
+  $matchs = $bdd->query("SELECT * FROM Matchs order by ID_Match desc limit $num;");
+
+  $idEquipeGagnanteQuatre = 0;
+  foreach ($matchs as $valeur) {
+    if ($valeur['But_Local_Match'] > $valeur['But_Visiteur_Match']) {
+      $idEquipeGagnanteQuatre = $valeur['FK_ID_Local'];
+    } elseif ($valeur['But_Local_Match'] < $valeur['But_Visiteur_Match']) {
+      $idEquipeGagnanteQuatre = $valeur['FK_ID_Visiteur'];
+    }
+  }
+
 
   $insertDemiUne = $bdd->query("SET NAMES 'utf8'");
   $insertDemiUne = $bdd->query("INSERT INTO `matchs`(`Date_Match`, `Heure_Debut_Match`, `Heure_Fin_Match`, `Duree_Match`, `Type_Match`, `But_Local_Match`, `But_Visiteur_Match`, `FK_ID_Local`, `FK_ID_Visiteur`, `FK_ID_Groupe`, `FK_ID_Tournoi`, `FK_ID_Terrain`, `Actif_Match`) 
-  VALUES ('2022-09-24','11:00:00','11:11:00','11','Demi finale','2','1','$idEquipeGagnanteUne','$idEquipeGagnanteDeux', '1','1','1','1')");
-
-  /*$idEquipeGagnanteTrois = 0;
-  foreach ($insertquartTrois as $match) {
-    if ($match['But_Local_Match'] > $match[`But_Visiteur_Match`]) {
-      $idEquipeGagnanteTrois = $match['FK_ID_Local'];
-    } elseif ('But_Local_Match' < `But_Visiteur_Match`) {
-      $idEquipeGagnanteTrois = $match[`FK_ID_Visiteur`];
-    }
-  }
-
-  $idEquipeGagnanteQuatre = 0;
-  foreach ($insertquartQuatre as $match) {
-    if ($match['But_Local_Match'] > $match[`But_Visiteur_Match`]) {
-      $idEquipeGagnanteQuatre = $match['FK_ID_Local'];
-    } elseif ($match['But_Local_Match'] < $match[`But_Visiteur_Match`]) {
-      $idEquipeGagnanteQuatre = $match[`FK_ID_Visiteur`];
-    }
-  }
+  VALUES ('2022-09-24','11:00:00','11:11:00','11','Demi finale','2','1','$idEquipeGagnanteUne','$idEquipeGagnanteDeux', null,'1','1','1')");
 
   $insertDemiDeux = $bdd->query("SET NAMES 'utf8'");
   $insertDemiDeux = $bdd->query("INSERT INTO `matchs`(`Date_Match`, `Heure_Debut_Match`, `Heure_Fin_Match`, `Duree_Match`, `Type_Match`, `But_Local_Match`, `But_Visiteur_Match`, `FK_ID_Local`, `FK_ID_Visiteur`, `FK_ID_Groupe`, `FK_ID_Tournoi`, `FK_ID_Terrain`, `Actif_Match`) 
-  VALUES ('2022-09-24','11:00:00','11:11:00','11','Demi finale','4','2','$idEquipeGagnanteTrois','$idEquipeGagnanteQuatre', null,'1','1','1')");*/
+  VALUES ('2022-09-24','11:20:00','11:31:00','11','Demi finale','4','2','$idEquipeGagnanteTrois','$idEquipeGagnanteQuatre', null,'1','1','1')");
+
+  
+  createMatch3eEt4ePlace($insertDemiUne, $insertDemiDeux);
+  createFinale($insertDemiUne, $insertDemiDeux);
+  
+  
 }
 
-
-
-function createFinale()
+function createMatch3eEt4ePlace($insertDemiUne, $insertDemiDeux)
 {
+  $bdd = connectDB();
+  $num = 2;
+  $matchs = $bdd->query("SET NAMES 'utf8'");
+  $matchs = $bdd->query("SELECT * FROM Matchs order by ID_Match desc limit $num;");
+
+  $idEquipePerdanteDemiUne = 0;
+  foreach ($matchs as $valeur) {
+    if ($valeur['But_Local_Match'] < $valeur['But_Visiteur_Match']) {
+      $idEquipePerdanteDemiUne = $valeur['FK_ID_Local'];
+    } elseif ($valeur['But_Local_Match'] > $valeur['But_Visiteur_Match']) {
+      $idEquipePerdanteDemiUne = $valeur['FK_ID_Visiteur'];
+    }
+  }
+  $num -= 1;
+
+  $matchs = $bdd->query("SET NAMES 'utf8'");
+  $matchs = $bdd->query("SELECT * FROM Matchs order by ID_Match desc limit $num;");
+
+  $idEquipePerdanteDemiDeux = 0;
+  foreach ($matchs as $valeur) {
+    if ($valeur['But_Local_Match'] < $valeur['But_Visiteur_Match']) {
+      $idEquipePerdanteDemiDeux = $valeur['FK_ID_Local'];
+    } elseif ($valeur['But_Local_Match'] > $valeur['But_Visiteur_Match']) {
+      $idEquipePerdanteDemiDeux = $valeur['FK_ID_Visiteur'];
+    }
+  }
+
+  $insertPetiteFinale = $bdd->query("SET NAMES 'utf8'");
+  $insertPetiteFinale = $bdd->query("INSERT INTO `matchs`(`Date_Match`, `Heure_Debut_Match`, `Heure_Fin_Match`, `Duree_Match`, `Type_Match`, `But_Local_Match`, `But_Visiteur_Match`, `FK_ID_Local`, `FK_ID_Visiteur`, `FK_ID_Groupe`, `FK_ID_Tournoi`, `FK_ID_Terrain`, `Actif_Match`) 
+  VALUES ('2022-09-24','16:00:00','16:21:00','11','Match pour la 3ème place','4','2','$idEquipePerdanteDemiUne','$idEquipePerdanteDemiDeux', null,'1','1','1')");
 }
 
-function createMatch5A8ePlace()
+
+function createFinale($insertDemiUne, $insertDemiDeux)
 {
+  $bdd = connectDB();
+  $num = 3;
+  $matchs = $bdd->query("SET NAMES 'utf8'");
+  $matchs = $bdd->query("SELECT * FROM Matchs order by ID_Match desc limit $num;");
+
+  $idEquipeGagnanteDemiUne = 0;
+  foreach ($matchs as $valeur) {
+    if ($valeur['But_Local_Match'] > $valeur['But_Visiteur_Match']) {
+      $idEquipeGagnanteDemiUne = $valeur['FK_ID_Local'];
+    } elseif ($valeur['But_Local_Match'] < $valeur['But_Visiteur_Match']) {
+      $idEquipeGagnanteDemiUne = $valeur['FK_ID_Visiteur'];
+    }
+  }
+  $num -= 1;
+
+  $matchs = $bdd->query("SET NAMES 'utf8'");
+  $matchs = $bdd->query("SELECT * FROM Matchs order by ID_Match desc limit $num;");
+
+  $idEquipeGagnanteDemiDeux = 0;
+  foreach ($matchs as $valeur) {
+    if ($valeur['But_Local_Match'] > $valeur['But_Visiteur_Match']) {
+      $idEquipeGagnanteDemiDeux = $valeur['FK_ID_Local'];
+    } elseif ($valeur['But_Local_Match'] < $valeur['But_Visiteur_Match']) {
+      $idEquipeGagnanteDemiDeux = $valeur['FK_ID_Visiteur'];
+    }
+  }
+
+  $insertFinale = $bdd->query("SET NAMES 'utf8'");
+  $insertFinale = $bdd->query("INSERT INTO `matchs`(`Date_Match`, `Heure_Debut_Match`, `Heure_Fin_Match`, `Duree_Match`, `Type_Match`, `But_Local_Match`, `But_Visiteur_Match`, `FK_ID_Local`, `FK_ID_Visiteur`, `FK_ID_Groupe`, `FK_ID_Tournoi`, `FK_ID_Terrain`, `Actif_Match`) 
+  VALUES ('2022-09-24','16:00:00','16:21:00','11','Finale','4','2','$idEquipeGagnanteDemiUne','$idEquipeGagnanteDemiDeux', null,'1','1','1')");
+
 }
 
-function createMatch9A16ePlce()
-{
-}
+
+
+
+
+

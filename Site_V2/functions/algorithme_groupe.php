@@ -3,6 +3,8 @@ require_once "steven_fonctions.php";
 require_once "dbconnection.php";
 require_once "debug.php";
 
+session_start();
+
 // Définition de la constant concernant le nombre d'équipe idéal dans un groupe
 define("NB_EQUIPES_IDEAL", 4);
 define("NB_GROUPE_PARFAIT", 4);
@@ -17,10 +19,10 @@ function createGroupe($fk_id_tournoi)
     $_SESSION['Equipes'] = array();
 
     // Groupe stockant les équipes
-    $GroupeUn = array();
-    $GroupeDeux = array();
-    $GroupeTrois = array();
-    $GroupeQuatre = array();
+    $_SESSION['GroupeUn'] = array();
+    $_SESSION['GroupeDeux'] = array();
+    $_SESSION['GroupeTrois'] = array();
+    $_SESSION['GroupeQuatre'] = array();
 
     foreach (getInscriptions($fk_id_tournoi, "Validé") as $equipes) {
         // Récupération des équipes individuellement
@@ -37,22 +39,22 @@ function createGroupe($fk_id_tournoi)
         $division = array_chunk($_SESSION['Equipes'], NB_EQUIPES_IDEAL);
 
         foreach ($division[0] as $equipe) {
-            array_push($GroupeUn, $equipe);
+            array_push($_SESSION['GroupeUn'], $equipe);
             updateGroupe($equipe[0]['ID_Equipe'], 1);
         }
 
         foreach ($division[1] as $equipe) {
-            array_push($GroupeDeux, $equipe);
+            array_push($_SESSION['GroupeDeux'], $equipe);
             updateGroupe($equipe[0]['ID_Equipe'], 2);
         }
 
         foreach ($division[2] as $equipe) {
-            array_push($GroupeTrois, $equipe);
+            array_push($_SESSION['GroupeTrois'], $equipe);
             updateGroupe($equipe[0]['ID_Equipe'], 3);
         }
 
         foreach ($division[3] as $equipe) {
-            array_push($GroupeQuatre, $equipe);
+            array_push($_SESSION['GroupeQuatre'], $equipe);
             updateGroupe($equipe[0]['ID_Equipe'], 4);
         }
     }
@@ -86,3 +88,11 @@ function updateGroupe($id_equipe, $id_groupe)
         debug();
     }
 }
+?>
+<!DOCTYPE html>
+<html lang="en">
+
+<section class="py-5">
+<a class="btn btn-primary shadow" role="button" href="algorithme_match_eliminationDirecte.php">Créer Phase à élimination directe</a>
+
+</html>
