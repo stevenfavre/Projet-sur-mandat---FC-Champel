@@ -14,7 +14,8 @@ createGroupe($id_tournoi);
 // Fonction répartissant les équipes dans les différents groupes
 function createGroupe($fk_id_tournoi)
 {
-    $redo = false;
+    try {
+        $redo = false;
     //$_SESSION['Groupes'] = array();
     $_SESSION['Equipes'] = array();
 
@@ -57,7 +58,13 @@ function createGroupe($fk_id_tournoi)
             array_push($_SESSION['GroupeQuatre'], $equipe);
             updateGroupe($equipe[0]['ID_Equipe'], 4);
         }
+
+        header('Location: ../parametre_tournoi.php?id_tournoi='.$fk_id_tournoi);
     }
+    } catch (\Throwable $th) {
+        //throw $th;
+    }
+    
 }
 
 // Fonction qui permet de récupérer les équipes dans un tournoi en fonction du statut recherché
@@ -89,10 +96,3 @@ function updateGroupe($id_equipe, $id_groupe)
     }
 }
 ?>
-<!DOCTYPE html>
-<html lang="en">
-
-<section class="py-5">
-<a class="btn btn-primary shadow" role="button" href="algorithme_match_eliminationDirecte.php">Créer Phase à élimination directe</a>
-
-</html>

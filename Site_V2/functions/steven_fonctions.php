@@ -2,6 +2,8 @@
 require_once "dbconnection.php";
 require_once "debug.php";
 
+session_start();
+
 // Fonction permettant d'afficher le code html correspondant au différent matchs
 function afficherMatch($tournoi)
 {
@@ -37,9 +39,9 @@ function afficherMatch($tournoi)
 
         // Si le match est actif, laisser le lien 
         if ($t['Actif_Match'] == 1)
-            echo "<h5 class=\"fw-bold\" id=\"h5Texte\">" . returnNameEquipe($t['FK_ID_Local']) . " / " . returnNameEquipe($t['FK_ID_Visiteur']) . "</h5></a>";
+            echo "<h5 class=\"fw-bold\" id=\"h5Texte\">" . returnNameEquipe($t['FK_ID_Local']) . " / " . returnNameEquipe($t['FK_ID_Visiteur']) . " - " . $t['Type_Match'] . "</h5></a>";
         else
-            echo "<strike><h5 class=\"fw-bold\" id=\"h5Texte\">" . returnNameEquipe($t['FK_ID_Local']) . " / " . returnNameEquipe($t['FK_ID_Visiteur']) . "</h5></a></strike>";
+            echo "<strike><h5 class=\"fw-bold\" id=\"h5Texte\">" . returnNameEquipe($t['FK_ID_Local']) . " / " . returnNameEquipe($t['FK_ID_Visiteur']) . " - " . $t['Type_Match'] . "</h5></a></strike>";
 
         echo "<p class=\"text-muted mb-4\">Date : " . date("d.m.Y", strtotime($t['Date_Match'])) . " / Terrain : " . $t['FK_ID_Terrain'] . "&nbsp;<br>
             Heure : " . $t['Heure_Debut_Match'] . "&nbsp;-> " . $t['Heure_Fin_Match'] . "&nbsp;<br></p>";
@@ -363,3 +365,55 @@ function updateActifMatch($id_match, $actif_inactif)
         debug($e->getMessage());
     }
 }
+
+function afficherTableauGroupe($id_tournoi)
+{
+    try {
+        $db = connectDB();
+        $sql = "SELECT * FROM Groupe ORDER BY Nom_Groupe";
+        $request = $db->prepare($sql);
+        $request->execute();
+        $reponse = $request->fetchAll();
+    } catch (\Throwable $e) {
+        debug($e->getMessage());
+    }
+
+    echo '<thead><tr><td><b>' . $reponse[0]['Nom_Groupe'] . '</b></td><td><b>' . $reponse[1]['Nom_Groupe'] . '</b></td><td><b>' . $reponse[2]['Nom_Groupe'] . '</b></td><td><b>' . $reponse[3]['Nom_Groupe'] . '</b></tr></theade>';
+
+    echo '<tbody><tr><td>' . $_SESSION['GroupeUn'][0][0]['Nom_Equipe'] . '</td><td>' . $_SESSION['GroupeDeux'][0][0]['Nom_Equipe'] . '</td><td>' .
+        $_SESSION['GroupeTrois'][0][0]['Nom_Equipe'] . '</td><td>' . $_SESSION['GroupeQuatre'][0][0]['Nom_Equipe'] . '</td></tr>';
+
+    echo '<tr><td>' . $_SESSION['GroupeUn'][1][0]['Nom_Equipe'] . '</td><td>' . $_SESSION['GroupeDeux'][1][0]['Nom_Equipe'] . '</td><td>' .
+        $_SESSION['GroupeTrois'][1][0]['Nom_Equipe'] . '</td><td>' . $_SESSION['GroupeQuatre'][1][0]['Nom_Equipe'] . '</td></tr>';
+
+    echo '<tr><td>' . $_SESSION['GroupeUn'][2][0]['Nom_Equipe'] . '</td><td>' . $_SESSION['GroupeDeux'][2][0]['Nom_Equipe'] . '</td><td>' .
+        $_SESSION['GroupeTrois'][2][0]['Nom_Equipe'] . '</td><td>' . $_SESSION['GroupeQuatre'][2][0]['Nom_Equipe'] . '</td></tr>';
+
+    echo '<tr><td>' . $_SESSION['GroupeUn'][3][0]['Nom_Equipe'] . '</td><td>' . $_SESSION['GroupeDeux'][3][0]['Nom_Equipe'] . '</td><td>' .
+        $_SESSION['GroupeTrois'][3][0]['Nom_Equipe'] . '</td><td>' . $_SESSION['GroupeQuatre'][3][0]['Nom_Equipe'] . '</td></tr></tbody>';
+}
+
+function selectMatchPoul($id_tournoi){
+    try {
+        $db = connectDB();
+        $sql = "SELECT * FROM `Matchs` WHERE `FK_ID_Tournoi` = " . $id_tournoi . " AND `Type_Match` = 'Poul';";
+        $request = $db->prepare($sql);
+        $request->execute();
+        return $request->fetchAll(PDO::FETCH_ASSOC);
+    } catch (\Throwable $e) {
+        debug($e->getMessage());
+    }
+}
+
+function selectMatchQuartFinale($id_tournoi){
+    try {
+        $db = connectDB();
+        $sql = "SELECT * FROM `Matchs` WHERE `FK_ID_Tournoi` = " . $id_tournoi . " AND `Type_Match` = 'Quart de finale';";
+        $request = $db->prepare($sql);
+        $request->execute();
+        return $request->fetchAll(PDO::FETCH_ASSOC);
+    } catch (\Throwable $e) {
+        debug($e->getMessage());
+    }
+}
+

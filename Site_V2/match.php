@@ -1,5 +1,6 @@
 <?php
-session_start(['cookie_lifetime' => 3600,]);
+
+session_start();
 require_once "functions/steven_fonctions.php";
 
 if (!empty($_GET['id_tournoi']))
@@ -7,17 +8,21 @@ if (!empty($_GET['id_tournoi']))
 
 $submit = filter_input(INPUT_GET, 'submit');
 
-$arr = explode("-", $submit, 3);
-$id_match = $arr[0];
-$up_down = $arr[1];
-$local_visiteur = $arr[2];
+if (!empty($submit)) {
 
-if ($up_down == 'U') { // S'il s'agit d'une augmentation du score
-  updateUpScore($id_match, $local_visiteur);
-} elseif ($up_down == 'D') { // S'il s'agit d'une réduction du score
-  updateDownScore($id_match, $local_visiteur);
+  $arr = explode("-", $submit, 3);
+  $id_match = $arr[0];
+  $up_down = $arr[1];
+  $local_visiteur = $arr[2];
+
+  if ($up_down == 'U') // S'il s'agit d'une augmentation du score
+    updateUpScore($id_match, $local_visiteur);
+  elseif ($up_down == 'D') // S'il s'agit d'une réduction du score
+    updateDownScore($id_match, $local_visiteur);
 }
+
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -37,11 +42,17 @@ if ($up_down == 'U') { // S'il s'agit d'une augmentation du score
       <div class="row mb-4 mb-lg-5">
         <div class="col-md-8 col-xl-6 text-center mx-auto">
           <p class="fw-bold text-success mb-2">Liste des matchs</p>
-          <h3 class="fw-bold">Match du tournoi :&nbsp;</h3>
+          <h3 class="fw-bold">Match du tournoi : <?= date("d.m.Y", strtotime(getDateTournoi($_SESSION['id_tournoi']))) ?>&nbsp;</h3>
           <p class="text-muted">&nbsp;<a href="modifier_equipe_tournoi.php?id_tournoi=<?php echo $_SESSION['id_tournoi']; ?>">Equipes inscrites</a></p>
           <!-- <a class="btn btn-primary shadow" role="button" href="creer_match.php?id_tournoi=<?php echo $_SESSION['id_tournoi']; ?>">Créer un match</a> -->
-          <a class="btn btn-primary shadow" role="button" href="./functions/algorithme_groupe.php?id_tournoi=<?php echo $_SESSION['id_tournoi']; ?>">Créer les groupes</a>
           <a class="btn btn-primary shadow" role="button" href="classement_groupes.php?id_tournoi=<?php echo $_SESSION['id_tournoi']; ?>">Classement des groupes</a>
+          <?php
+          if (empty(selectMatchPoul($_SESSION['id_tournoi']))) {
+            echo '<a class="btn btn-primary shadow" role="button" href="./functions/algorithme_groupe.php?id_tournoi=' . $_SESSION['id_tournoi'] . '">Générer le tournoi</a>';
+          } else if (empty(selectMatchQuartFinale($_SESSION['id_tournoi']))) {
+            echo '<a class="btn btn-primary shadow" role="button" href="./functions/algorithme_match_eliminationDirect.php' . $_SESSION['id_tournoi'] . '">Générer les quarts de finale</a>';
+          }
+          ?>
           <br><br>
           <input type="text" id="recherche" onkeyup="recherche()" placeholder="Recherche..." title="Rechercher un match">
           <?php
