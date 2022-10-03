@@ -251,7 +251,7 @@ function selectionnerMatchsGroupe1($id_groupe)
 {
     try {
         $db = connectDB();
-        $sql = "SELECT ID_Match FROM  matchs WHERE FK_ID_Groupe = $id_groupe";
+        $sql = "SELECT ID_Match FROM  Matchs WHERE FK_ID_Groupe = $id_groupe";
         $request = $db->prepare($sql);
         $request->execute();
         return $request->rowCount(PDO::FETCH_ASSOC);
@@ -345,7 +345,7 @@ function selectionnerMatchsQuarts($id_groupe)
 {
     try {
         $db = connectDB();
-        $sql = "SELECT * FROM `matchs` WHERE Type_Match = 'Quart de finale ' ORDER BY ID_Match ASC";
+        $sql = "SELECT * FROM `Matchs` WHERE Type_Match = 'Quart de finale ' ORDER BY ID_Match ASC";
         $request = $db->prepare($sql);
         $request->execute();
         return $request->fetchAll(PDO::FETCH_ASSOC);
@@ -358,7 +358,7 @@ function selectionnerGroupeTournoi($tournoi)
 {
     try {
         $db = connectDB();
-        $sql = "SELECT * FROM `Match` WHERE `FK_ID_Tournoi` = " . $tournoi . ";";
+        $sql = "SELECT * FROM `Matchs` WHERE `FK_ID_Tournoi` = " . $tournoi . ";";
         $request = $db->prepare($sql);
         $request->execute();
         return $request->fetchAll(PDO::FETCH_ASSOC);
@@ -411,19 +411,5 @@ function selectionneEquipe($id_equipe)
         return $request->fetchAll(PDO::FETCH_ASSOC);
     } catch (\Throwable $e) {
         debug($e->getMessage());
-    }
-}
-// Fonction qui permet de récupérer les équipes dans un tournoi en fonction du statut recherché
-function getInscriptions($fk_id_tournoi, $statut)
-{
-    try {
-        $db = connectDB();
-        $sql = "SELECT * FROM `Inscription_Tournoi` WHERE `FK_ID_Tournoi` = " . $fk_id_tournoi . " AND Statut_Inscription_Tournoi = '" . $statut . "';";
-        $request = $db->prepare($sql);
-        $request->execute();
-        return $request->fetchAll(PDO::FETCH_ASSOC);
-    } catch (\Throwable $e) {
-        echo "<script>alert(\" Select des inscriptions des équipes du tournoi du id : " . $fk_id_tournoi . " + " . $e->getMessage() . "\");</script>";
-        debug();
     }
 }
