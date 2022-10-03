@@ -11,7 +11,7 @@ if (isset($_POST['submit'])) {
 if (!empty($_GET['submit'])) {
   $_SESSION['submit'] = $_GET['submit'];
   $submit = filter_input(INPUT_GET, 'submit');
-}
+
 
 $coupure = explode("-", $submit);
 $id_equipe = $coupure[0];
@@ -26,6 +26,7 @@ if ($option == 'modifierL') {
   calculerPointsVisiteur($id_equipe);
 } elseif ($option == 'modifierA') {
   calculerPointsNull($id_equipe, $id_groupe2);
+}
 }
 
 
@@ -53,7 +54,7 @@ if ($option == 'modifierL') {
       <div class="row">
         <div class="col-md-8 col-xl-6 text-center mx-auto">
           <p class="fw-bold text-success mb-2">Classements</p>
-          <h2 class="fw-bold">Classement du groupe </h2>
+          <h2 class="fw-bold">Détails classement groupe </h2>
         </div>
       </div>
       <div class="card shadow-sm">
@@ -69,15 +70,25 @@ if ($option == 'modifierL') {
                 } else {
                   affichageResulatsEquipes($_GET['id_groupe']);
                 }
+                ?>
+              </tbody>
+            </table>
+              </br></br>
+            <?php
+                if (empty($_GET['id_groupe'])) { ?>
+                   <a class="btn btn-primary shadow" role="button" href="test1.php?id_groupe=<?php echo $id_groupe1 ?>">Réinitialisation points</a>
+                   <a class="btn btn-primary shadow" role="button" href="classement_tournoi1.php?id_groupe=<?php echo $id_groupe1 ?>">Calculer tous les points</a>
+            <?php    } else { ?>
+              <a class="btn btn-primary shadow" role="button" href="test1.php?id_groupe=<?php echo $_GET['id_groupe'] ?>">Réinitialisation points</a>
+              <a class="btn btn-primary shadow" role="button"  href="classement_tournoi1.php?id_groupe=<?php echo $_GET['id_groupe'] ?>">Calculer tous les points</a>
+               <?php }
 
 
 
                 ?>
-              </tbody>
-            </table>
-
-            <a href="test1.php?id_groupe=<?php echo $_GET['id_groupe'] ?>">Réinitialisation points</a>
+           
           </form>
+            </br>
           <a class="btn btn-primary shadow" href="classement_groupes.php">Revenir</a>
 
           <?php

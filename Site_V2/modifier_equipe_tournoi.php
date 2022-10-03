@@ -10,7 +10,6 @@ if (!empty($_GET['submit'])) {
   $coupure = explode("-", $submit);
   $id_inscription = $coupure[0];
   $option = $coupure[1];
-
   if ($option == 'modifier') {
     update_statut_equipes_tournoiTst($id_inscription);
   } elseif ($option == 'annuler') {
@@ -20,7 +19,6 @@ if (!empty($_GET['submit'])) {
 ?>
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
@@ -48,7 +46,7 @@ if (!empty($_GET['submit'])) {
         afficherEquipeInscrites($_SESSION['id_tournoi']);
         ?>
       </form>
-      <a class="btn btn-primary shadow" href="tournois.php">Revenir</a>
+      <a class="btn btn-primary shadow" href="operation_tournoi.php">Revenir</a>
     </div>
     </div>
     </form>
@@ -58,56 +56,7 @@ if (!empty($_GET['submit'])) {
   <script src="assets/bootstrap/js/bootstrap.min.js"></script>
   <script src="assets/js/script.min.js"></script>
   <script>
-    $('select').on('change', function() {
-
-
-    });
-
-    affichageSelect()
-
-    function affichageSelect() {
-      $('#concat').empty();
-      let EquipeSelect = $("#EquipeIdTournoi").val()
-
-      $.ajax({
-        url: 'functions/ajax.php?FK_ID_Equipe=' + EquipeSelect,
-        type: "GET",
-        success: function(data) {
-
-          let parsedData = JSON.parse(data)
-          console.log(parsedData)
-
-          let nomEquipe = parsedData[6]
-          let degreEquipe = parsedData[7]
-          let clubEquipe = parsedData[14]
-          let groupeEquipe = parsedData[12]
-          let StatutEquipe = parsedData[2]
-
-          var tabEquipe = '<br /><br /><table><tr><td><ul><h5 class="fw-bold card-title">Nom equipe</h5></ul></td><td><ul><h5 class="fw-bold card-title">Degré</h5></ul></td><td><ul><h5 class="fw-bold card-title">Club</h5></ul></td><td><ul><h5 class="fw-bold card-title">Groupe</h5></ul></td><td><ul><h5 class="fw-bold card-title">Statut</h5></ul></td></tr>'
-          tabEquipe += '<tr><td><ul>'
-          tabEquipe += nomEquipe
-          tabEquipe += '</ul></td>'
-          tabEquipe += '<td><ul>'
-          tabEquipe += degreEquipe
-          tabEquipe += '</ul></td>'
-          tabEquipe += '<td><ul>'
-          tabEquipe += clubEquipe
-          tabEquipe += '</ul></td>'
-          tabEquipe += '<td><ul>'
-          tabEquipe += groupeEquipe
-          tabEquipe += '</ul></td>'
-          tabEquipe += '<td><ul>'
-          tabEquipe += StatutEquipe
-          tabEquipe += '</ul></td></tr></table>'
-          $('#concat').append(tabEquipe);
-
-        },
-        error: function() {
-          alert("Une erreur est surevenue lors de la requete Ajax")
-        }
-      })
-    }
-  </script> <!-- script sofian  -->
+  </script>
 </body>
 
 </html>
