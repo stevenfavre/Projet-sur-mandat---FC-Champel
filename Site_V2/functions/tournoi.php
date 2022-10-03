@@ -284,7 +284,6 @@ function afficherDateTournoi()
 
 function afficher_date_tournoi()
 {
-
     echo "<h3 class=\"fw-bold text-success mb-2\">Tous les tournois</h3></br>";
     echo "<tr><td><ul><h5 class=\"fw-bold text-success mb-2\">Opérations</h5>
    <a href=\"creer_tournoi.php\"class=\"fa-solid fa-plus\"</a>
@@ -301,21 +300,21 @@ function afficher_date_tournoi()
         if ($tournoi['Actif_Tournoi'] == 0)
             echo "<tr><td><ul><strike><h5 class=\"fw-bold\" id=\"h5Texte\">" . "Tournoi du " . date("d.m.Y", strtotime($tournoi['Date_Debut_Tournoi'])) . "</h5></a></strike></ul></td>  
             <td><ul><strike><h5 class=\"fw-bold\" id=\"h5Texte\">"  . date("d.m.Y", strtotime($tournoi['Date_Fin_Tournoi'])) . "</h5></a></strike></ul></td>
-            <td><ul><strike><h5 class=\"fw-bold\" id=\"h5Texte\">" . $tournoi['Nom_Salle'] .  "</h5></a></strike></ul></td>
-            <td><ul><strike><h5 class=\"fw-bold\" id=\"h5Texte\">" . "Annulé" .  "</h5></a></strike></ul></td></tr>";
+            <td><ul><strike><h5 class=\"fw-bold\" id=\"h5Texte\">" . $tournoi['Nom_Salle'] .  "</h5></strike></ul></td>
+            <td><ul><strike><h5 class=\"fw-bold\" id=\"h5Texte\">" . "Annulé" .  "</h5></strike></ul></td></tr>";
 
         elseif ($tournoi['Actif_Tournoi'] == 2)
-            echo "<td><ul><h5 class=\"fw-bold\" id=\"h5Texte\">" . "Tournoi du " . date("d.m.Y", strtotime($tournoi['Date_Debut_Tournoi'])) . "</h5></ul></td>
+            echo "<tr><td><ul><a href=\"match.php?id_tournoi= " . $tournoi['ID_Tournoi'] . "\">" . "<h5 class=\"fw-bold\" id=\"h5Texte\">" . "Tournoi du " . date("d.m.Y", strtotime($tournoi['Date_Debut_Tournoi'])) . "</h5></ul></td>
     <td><ul><h5 class=\"fw-bold\" id=\"h5Texte\">" . date("d.m.Y", strtotime($tournoi['Date_Fin_Tournoi'])) .  "</h5></ul></td>
     <td><ul><h5 class=\"fw-bold\" id=\"h5Texte\">" . $tournoi['Nom_Salle'] . "</h5></ul></td>
     <td><ul><h5 class=\"fw-bold\" id=\"h5Texte\">" . "Terminé <i class=\"fa-solid fa-check\"\></i></h5></a></ul></td></tr>";
 
         else {
-
-            echo "<td><ul><h5 class=\"fw-bold\" id=\"h5Texte\">" . "Tournoi du " . date("d.m.Y", strtotime($tournoi['Date_Debut_Tournoi'])) . "</h5></ul></td>
+            echo "<tr><td><ul><a href=\"match.php?id_tournoi= " . $tournoi['ID_Tournoi'] . "\">" . "<h5 class=\"fw-bold\" id=\"h5Texte\">" . "Tournoi du " . date("d.m.Y", strtotime($tournoi['Date_Debut_Tournoi'])) . "</h5></ul></td>
     <td><ul><h5 class=\"fw-bold\" id=\"h5Texte\">" . date("d.m.Y", strtotime($tournoi['Date_Fin_Tournoi'])) .  "</h5></ul></td>
     <td><ul><h5 class=\"fw-bold\" id=\"h5Texte\">" . $tournoi['Nom_Salle'] . "</h5></ul></td>
-    <td><ul><h5 class=\"fw-bold text-success mb-2\" id=\"h5Texte\">" . "Actif" .  "</h5></a></ul></td></tr>";
+    <td><ul><h5 class=\"fw-bold text-success mb-2\" id=\"h5Texte\">" . "Actif" .  "</h5></a></ul></td>
+    <td><ul><a class=\"btn btn-primary shadow\" role=\"button\" href=\"operation_tournoi.php?id_tournoi= " . $tournoi['ID_Tournoi'] . "\">" . "Lancer tournoi" . "</a></ul></td></tr>";
         }
     }
 }
@@ -323,19 +322,11 @@ function afficher_date_tournoi()
 
 function afficher_date_tournoiUPDATE()
 {
-
     echo "<tr><td><ul><h3 class=\"fw-bold text-success mb-2\">Tous les tournois</h3></ul></td></tr>";
-
-
-
     echo "<tr><td><ul><h5 class=\"fw-bold text-success mb-2\">Date début " . "<i class=\"fa-regular fa-calendar-days\"></i></h5></ul></td>
     <td><ul><h5 class=\"fw-bold text-success mb-2\">Date fin</h5></ul></td>
     <td><ul><h5 class=\"fw-bold text-success mb-2\">Salle " . "<i class=\"fa-solid fa-location-dot\"></h5></ul></td>
     <td><ul><h5 class=\"fw-bold text-success mb-2\">Statut</h5></ul></td></tr>";
-
-
-
-
     foreach (afficher_Tournoi() as $tournoi) {
         if ($tournoi['Actif_Tournoi'] == 1)
             echo "<tr><td><ul><h5 class=\"fw-bold\" id=\"h5Texte\">" . "Tournoi du " . date("d.m.Y", strtotime($tournoi['Date_Debut_Tournoi'])) . "</h5></ul></td>
