@@ -96,3 +96,10 @@ function updateGroupe($id_equipe, $id_groupe)
     }
 }
 ?>
+<!DOCTYPE html>
+<html lang="en">
+
+<section class="py-5">
+<a class="btn btn-primary shadow" role="button" href="algorithme_match_eliminationDirecte.php">Créer Phase à élimination directe</a>
+
+</html>
