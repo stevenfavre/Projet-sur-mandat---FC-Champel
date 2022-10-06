@@ -19,8 +19,10 @@ if (!empty($_GET['submit'])) {
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="utf-8">
+  <script src="https://kit.fontawesome.com/5a023d1c0f.js" crossorigin="anonymous"></script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
   <title>Liste des équipes participant au tournoi</title>
   <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
@@ -35,10 +37,9 @@ if (!empty($_GET['submit'])) {
       <div class="row mb-4 mb-lg-5">
         <div class="col-md-8 col-xl-6 text-center mx-auto">
           <h1 class="fw-bold text-success mb-2">Equipes inscrites</h1>
-          <h3 class="fw-bold">Tournoi du <?php selection_tournoi($_SESSION['id_tournoi']); ?> &nbsp;</h3>
+          <h3 class="fw-bold">Tournoi du <?php afficherDateTournoi($_SESSION['id_tournoi']); ?> &nbsp;</h3>
           </br></br>
-          <h5 class="fw-bold text-success mb-2"><a href="inscription_equipe.php?id_tournoi=<?php echo $_SESSION['id_tournoi']; ?>">Inscrire une nouvelle equipe</a></h5>
-          <!-- <p class=\"fw-bold text-success mb-2\">L'insertion a été correctement réalisée ! </p> -->
+          <h5 class="fw-bold text-success mb-2"><a href="inscription_equipe.php?id_tournoi=<?php echo $_SESSION['id_tournoi']; ?>">Inscrire une nouvelle equipe <i class="fa-solid fa-user-plus"></i></a></h5>
         </div>
       </div>
       <form action="#" method="get">
@@ -46,7 +47,7 @@ if (!empty($_GET['submit'])) {
         afficherEquipeInscrites($_SESSION['id_tournoi']);
         ?>
       </form>
-      <a class="btn btn-primary shadow" href="operation_tournoi.php">Revenir</a>
+      <a class="btn btn-primary shadow" href="match.php">Revenir</a>
     </div>
     </div>
     </form>

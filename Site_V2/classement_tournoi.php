@@ -13,20 +13,20 @@ if (!empty($_GET['submit'])) {
   $submit = filter_input(INPUT_GET, 'submit');
 
 
-$coupure = explode("-", $submit);
-$id_equipe = $coupure[0];
-$option = $coupure[1];
-$id_groupe1 = $coupure[2];
-$id_groupe2 = $coupure[3];
+  $coupure = explode("-", $submit);
+  $id_equipe = $coupure[0];
+  $option = $coupure[1];
+  $id_groupe1 = $coupure[2];
+  $id_groupe2 = $coupure[3];
 
 
-if ($option == 'modifierL') {
-  calculerPointsLocal($id_equipe);
-} elseif ($option == 'modifierV') {
-  calculerPointsVisiteur($id_equipe);
-} elseif ($option == 'modifierA') {
-  calculerPointsNull($id_equipe, $id_groupe2);
-}
+  if ($option == 'modifierL') {
+    calculerPointsLocal($id_equipe);
+  } elseif ($option == 'modifierV') {
+    calculerPointsVisiteur($id_equipe);
+  } elseif ($option == 'modifierA') {
+    calculerPointsNull($id_equipe, $id_groupe2);
+  }
 }
 
 
@@ -73,26 +73,26 @@ if ($option == 'modifierL') {
                 ?>
               </tbody>
             </table>
-              </br></br>
+            </br></br>
             <?php
-                if (empty($_GET['id_groupe'])) { ?>
-                   <a class="btn btn-primary shadow" role="button" href="test1.php?id_groupe=<?php echo $id_groupe1 ?>">Réinitialisation points</a>
-                   <a class="btn btn-primary shadow" role="button" href="classement_tournoi1.php?id_groupe=<?php echo $id_groupe1 ?>">Calculer tous les points</a>
+            if (empty($_GET['id_groupe'])) { ?>
+              <a class="btn btn-primary shadow" role="button" href="test1.php?id_groupe=<?php echo $id_groupe1 ?>">Réinitialisation points</a>
+              <a class="btn btn-primary shadow" role="button" href="classement_tournoi1.php?id_groupe=<?php echo $id_groupe1 ?>">Calculer tous les points</a>
             <?php    } else { ?>
               <a class="btn btn-primary shadow" role="button" href="test1.php?id_groupe=<?php echo $_GET['id_groupe'] ?>">Réinitialisation points</a>
-              <a class="btn btn-primary shadow" role="button"  href="classement_tournoi1.php?id_groupe=<?php echo $_GET['id_groupe'] ?>">Calculer tous les points</a>
-               <?php }
+              <a class="btn btn-primary shadow" role="button" href="classement_tournoi1.php?id_groupe=<?php echo $_GET['id_groupe'] ?>">Calculer tous les points</a>
+            <?php }
 
 
 
-                ?>
-           
+            ?>
+
           </form>
-            </br>
-          <a class="btn btn-primary shadow" href="classement_groupes.php">Revenir</a>
+          </br>
+          <a class="btn btn-primary shadow" href="javascript:history.go(-1)">Revenir</a>
 
           <?php
- /*          if ($submit == "reset") {
+          /*          if ($submit == "reset") {
             remttreZero();
           } */
 

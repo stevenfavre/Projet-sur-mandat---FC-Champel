@@ -2,12 +2,30 @@
 include('./functions/dbconnection.php');
 include('./functions/tournoi.php');
 
+if (!empty($_GET['submit'])) {
+  $_SESSION['submit'] = $_GET['submit'];
+  $submit = filter_input(INPUT_GET, 'submit');
+  $coupure = explode("-", $submit);
+  $id_tournoi = $coupure[0];
+  $option = $coupure[1];
+  $Salle = $coupure[2];
+  $DateDebut = $coupure[3];
+  $Datefin = $coupure[4];
+  if ($option == 'activer') {
+    update_activer_logique($id_tournoi);
+  } elseif ($option == 'terminer') {
+    update_terminer_logique($id_tournoi);
+  } elseif ($option == 'annuler') {
+    update_suppresion_logique($id_tournoi);
+  } elseif ($option == "modifier") {
+    update_tournoi($id_tournoi, $DateDebut, $Datefin, $Salle);
+  }
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-
   <meta charset="utf-8">
   <script src="https://kit.fontawesome.com/5a023d1c0f.js" crossorigin="anonymous"></script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
@@ -19,30 +37,30 @@ include('./functions/tournoi.php');
 
 <body style="/*background: url(&quot;design.jpg&quot;);*/background-position: 0 -60px;">
   <?php include_once('default_pages/navbar.php'); ?>
-
   <section class="py-5">
-
-    <div class="container bg-primary-gradient py-5">
+    <div class="container bg-success">
       <div class="row">
         <div class="col-md-8 col-xl-6 text-center mx-auto">
-          <h2 class="fw-bold">Tournois</h2>
+          <h2 class="fw-bold"></h2>
         </div>
       </div>
       <div class="card shadow-sm">
         <div class="card-body px-4 py-5 px-md-5">
           <path fill-rule="evenodd" d="M0 10.5A1.5 1.5 0 0 1 1.5 9h1A1.5 1.5 0 0 1 4 10.5v1A1.5 1.5 0 0 1 2.5 13h-1A1.5 1.5 0 0 1 0 11.5v-1zm1.5-.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1zm10.5.5A1.5 1.5 0 0 1 13.5 9h1a1.5 1.5 0 0 1 1.5 1.5v1a1.5 1.5 0 0 1-1.5 1.5h-1a1.5 1.5 0 0 1-1.5-1.5v-1zm1.5-.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1zM6 4.5A1.5 1.5 0 0 1 7.5 3h1A1.5 1.5 0 0 1 10 4.5v1A1.5 1.5 0 0 1 8.5 7h-1A1.5 1.5 0 0 1 6 5.5v-1zM7.5 4a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1z"></path>
-
           <path d="M6 4.5H1.866a1 1 0 1 0 0 1h2.668A6.517 6.517 0 0 0 1.814 9H2.5c.123 0 .244.015.358.043a5.517 5.517 0 0 1 3.185-3.185A1.503 1.503 0 0 1 6 5.5v-1zm3.957 1.358A1.5 1.5 0 0 0 10 5.5v-1h4.134a1 1 0 1 1 0 1h-2.668a6.517 6.517 0 0 1 2.72 3.5H13.5c-.123 0-.243.015-.358.043a5.517 5.517 0 0 0-3.185-3.185z"></path>
-
-          <form action="afficher_tournois.php" class="p-3 p-xl-4" method="post">
+          <form action="afficher_tournois.php" method="get">
             <table>
               <tbody>
                 <?php
                 afficher_date_tournoi();
                 ?>
+                 
               </tbody>
             </table>
           </form>
+          <p style="padding-right: 80%;"></p>
+    <a href="creer_tournoi.php" class="fa-solid fa-plus">CREER UN TOURNOI</a>
+    </br></br>
           <a class="btn btn-primary shadow" role="button" href="tournois.php">Revenir</a>
         </div>
         </svg>

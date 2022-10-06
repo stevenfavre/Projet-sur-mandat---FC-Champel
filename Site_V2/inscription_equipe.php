@@ -40,41 +40,23 @@ $submitPost = filter_input(INPUT_POST, 'submit');
           <div class="row d-flex justify-content-center">
             <div class="col-md-6 col-xl-4">
               <div>
-
-                <form action="inscription_equipe.php" class="p-3 p-xl-4" method="post">
-                  <table>
-                    <tbody>
-                      <?php if ($submitPost == "ok") {
-
-                        $equipe = filter_input(INPUT_POST, 'FK_ID_Equipe');
-                        inscription_equipe_tournoi($_SESSION['id_tournoi'], $equipe);
-                        /*if (verificationDonneesTournois($FK_ID_Tournoi, $FK_ID_Equipe)) {
-inscription_equipe_tournoi($FK_ID_Tournoi, $FK_ID_Equipe);
-} else {
-?><script type="text/javascript">
-alert("Veuillez vérifier les informations");
-</script> <?php
-}
-*/
-                      } ?>
-
-                    </tbody>
-                  </table>
-
-                  <select name="FK_ID_Equipe" id="listeIdTournoi">
-                    <?php selection_equipe_incription($IdEquipe) ?>
-                  </select>
-
-
-                  <br /><br />
-
-                  <div><button class="btn btn-primary" type="submit" name="submit" value="ok">Inscrire</button></div>
-                  <br /><br />
-
-
-
-
-                  <a class="btn btn-primary shadow" href="modifier_equipe_tournoi.php">Revenir</a>
+                <form action="#" method="POST">
+                  <div class="mb-3 w-50 mx-auto">
+                    <label for="FK_ID_Equipe">Choisir une équipe :</label>
+                    </br>
+                    <select class="form-control" name="FK_ID_Equipe" required>
+                      <?php selection_equipe_incription($_SESSION['id_tournoi']); ?>
+                    </select>
+                    </br></br>
+                    <div><button class="btn btn-primary" type="submit" name="submit" value="ok">Inscrire</button>
+                      </br></br>
+                      <a class="btn btn-primary shadow" href="modifier_equipe_tournoi.php">Revenir</a>
+                    </div>
+                  </div>
+                  <?php if ($submitPost == "ok") {
+                    $equipe = filter_input(INPUT_POST, 'FK_ID_Equipe');
+                    inscription_equipe_tournoi($_SESSION['id_tournoi'], $equipe);
+                  } ?>
                 </form>
               </div>
               </svg>

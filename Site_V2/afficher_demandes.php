@@ -1,12 +1,9 @@
 <?php
 include('./functions/dbconnection.php');
 include('./functions/tournoi.php');
-
 if (!empty($_GET['submit'])) {
   $_SESSION['submit'] = $_GET['submit'];
-
   $submit = filter_input(INPUT_GET, 'submit');
-
   $coupure = explode("-", $submit);
   $id_inscription = $coupure[0];
   $option = $coupure[1];
@@ -17,10 +14,7 @@ if (!empty($_GET['submit'])) {
     update_statut_equipes_en_attente($id_inscription);
   }
 }
-
-
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -60,7 +54,6 @@ if (!empty($_GET['submit'])) {
         </div>
       </div>
   </section>
-
   <?php include_once('default_pages/footer.php'); ?>
   <script src="assets/js/jquery.min.js"></script>
   <script src="assets/bootstrap/js/bootstrap.min.js"></script>

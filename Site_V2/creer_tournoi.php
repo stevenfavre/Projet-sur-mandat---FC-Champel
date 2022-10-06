@@ -6,10 +6,6 @@
   if (isset($_POST['submit'])) {
     $submit = $_POST['submit'];
   }
-
-
-
-
   ?>
 
  <!DOCTYPE html>
@@ -39,30 +35,24 @@
          <div class="col-md-6 col-xl-4">
            <div>
              <form action="creer_tournoi.php" class="p-3 p-xl-4" method="post">
-               <h6 class="fw-bold mb-0">Date de début</h6>
-               <div class="mb-3"><input class="form-control" type="date" id="date-1" name="Date_Debut_Tournoi" placeholder="Date de début"></div>
-               <h6 class="fw-bold mb-0">Date de fin</h6>
-               <div class="mb-3"><input class="form-control" type="date" id="date-2" name="Date_Fin_Tournoi" placeholder="Date de fin"></div>
-               <h6 class="fw-bold mb-0">Salle tournoi</h6>
+               <h5 class="fw-bold mb-0">Date de début</h5>
+               <div class="mb-3"><input class="form-control" type="date" id="date-1" name="Date_Debut_Tournoi" placeholder="Date de début" required> </div>
 
-               <select name="ID_Salle" id="listeIdTournoi">
-                 <?php selection_salle_tournoi($ID_Salle); ?>
-               </select>
+               <h5 class="fw-bold mb-0">Date de fin</h5>
+               <div class="mb-3"><input class="form-control" type="date" id="date-2" name="Date_Fin_Tournoi" placeholder="Date de fin" required></div>
+               <h5 class="fw-bold mb-0">Salle tournoi
+                 <select name="ID_Salle" id="listeIdTournoi">
+                   <?php selection_salle(); ?>
+                 </select>
+               </h5>
                <?php if ($submit == "ok") {
-
                   $Date_debut = $_POST['Date_Debut_Tournoi'];
                   $Date_fin = $_POST['Date_Fin_Tournoi'];
                   $Fk_ID_Salle = $_POST['ID_Salle'];
-                  insertion_tournoi($Date_debut, $Date_fin, $Fk_ID_Salle);
-                  /* if (verificationDonneesTournois($Date_debut, $Date_fin)) {
-                    insertion_tournoi($Date_debut, $Date_fin, $Fk_ID_Salle);
-                  } else {
-                ?><script type="text/javascript">
-                     alert("Veuillez vérifier les informations");
-                   </script> <?php
-                            }
-                          */
-                }  ?>
+                  verificationDonneesTournois($Date_debut, $Date_fin, $Fk_ID_Salle);
+                }
+                ?>
+
                </br></br>
                <table>
                  <tbody>
@@ -79,14 +69,7 @@
 
                  </tbody>
                </table>
-
-
-
-
-
              </form>
-
-
            </div>
          </div>
          <div class="col-md-4 col-xl-4 d-flex justify-content-center justify-content-xl-start">

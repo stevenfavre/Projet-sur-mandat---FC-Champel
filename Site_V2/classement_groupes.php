@@ -10,7 +10,6 @@ if (!empty($_GET['submit'])) {
 ?>
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
@@ -19,7 +18,6 @@ if (!empty($_GET['submit'])) {
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800&amp;display=swap">
   <link rel="stylesheet" href="assets/fonts/ionicons.min.css">
 </head>
-
 <body style="/*background: url(&quot;design.jpg&quot;);*/background-position: 0 -60px;">
   <?php include_once('default_pages/navbar.php'); ?>
   <section class="py-5">
@@ -46,7 +44,7 @@ if (!empty($_GET['submit'])) {
             </table>
           </form>
           </br></br>
-          <a class="btn btn-primary shadow" href="operation_tournoi.php">Revenir</a>
+          <a class="btn btn-primary shadow" href="javascript:history.go(-1)">Revenir</a>
         </div>
       </div>
   </section>
