@@ -24,12 +24,12 @@ $groupeD = $_SESSION['GroupeQuatre'];
 
 
 
-
 $dateTournoi = getDateTournoi($id_tournoi);
 
 
 function createQuartFinale($id_tournoi, $groupeA, $groupeB, $groupeC, $groupeD, $dateTournoi)
 {
+
   $quartFinaleUn = array(
     ($groupeA[0]),
     ($groupeD[1]),
@@ -91,6 +91,11 @@ function createQuartFinale($id_tournoi, $groupeA, $groupeB, $groupeC, $groupeD, 
   foreach ($groupeA[1] as $equipe) {
     $idEquipe8 = $equipe['ID_Equipe'];
   }
+
+  // $timeDebut = '10:30:00';
+  // $timePauseEntreMatch = 900;
+  // $timeFin = strtotime($timeDebut) + 720;
+
 
 
   $bdd = connectDB();
