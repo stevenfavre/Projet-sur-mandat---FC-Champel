@@ -2,15 +2,14 @@
 include('./functions/dbconnection.php');
 include('./functions/tournoi.php');
 
-
-
-//echo $_POST['submit'];
-
+$submit = null;
 if (isset($_POST['submit'])) {
-  $FK_ID_Tournoi = $_POST['FK_ID_Tournoi'];
-  $FK_ID_Equipe = $_POST['FK_ID_Equipe'];
-  inscription_equipe_tournoi($FK_ID_Tournoi, $FK_ID_Equipe);
+  $submit = $_POST['submit'];
 }
+
+
+
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -29,38 +28,45 @@ if (isset($_POST['submit'])) {
 <body style="/*background: url(&quot;design.jpg&quot;);*/background-position: 0 -60px;">
   <?php include_once('default_pages/navbar.php'); ?>
   <section class="py-5">
-    <div class="container bg-light">
+    <div class="container" style="width: 1000px;margin: auto;border: 5px solid #FF0000;">
       <div class="row -5">
         <div class="col-md-8 col-xl-6 text-center mx-auto">
-          <h2 class="fw-bold">Inscrivez-vous au prochain tournoi</h2>
+          </br>
+          <h3 class="fw-bold">Inscription tournoi</h3>
           <div class="card shadow-sm">
-            <center>
-              <form action="inscription_tournoi.php" class="p-3 p-xl-4" method="post">
+            <form action="inscription_tournoi_equipe.php" class="p-3 p-xl-4" method="post">
 
-                <h5 class="fw-bold text-success mb-2">Choisissez la date du tournoi auquel vous voulez participer <i class="fa-regular fa-calendar"></i> </h5>
-                <select name="FK_ID_Tournoi" id="listeIdTournoi">
-                  <?php selection_tournoi_incription($ID_Tournoi) ?>
-                </select>
-                <br /><br />
-                <h5 class="fw-bold text-success mb-2">Choisissez votre équipe <i class="fa-solid fa-users"></i></h5>
-                <select name="FK_ID_Equipe" id="listeIdTournoi">
-                  <?php selection_equipe_incription($IdEquipe) ?>
-                </select>
-                <br /><br />
-                <div><button class="btn btn-primary" type="submit" name="submit">S'inscrire</button>
-                  <a class="btn btn-primary shadow" role="button" href="afficher_demandes.php">Revenir</a>
-                </div>
-              </form>
-            </center>
+              <h5 class="fw-bold ">Date tournoi <i class="fa-regular fa-calendar"></i> </h5>
+              <select name="FK_ID_Tournoi" id="listeIdTournoi">
+                <?php selection_tournoi_incription() ?>
+              </select>
+
+              <br /><br />
+              <h5 class="fw-bold">Equipes <i class="fa-solid fa-users"></i></h5>
+              <select name="FK_ID_Equipe" id="listeIdTournoi">
+                <?php selection_equipe_incription() ?>
+              </select>
+
+
+              <br /><br />
+              <div><button class="btn btn-primary" type="submit" name="submit" value="ok">S'inscrire</button>
+
+                <a class="btn btn-primary shadow" role="button" href="afficher_demandes.php">Revenir</a>
+              </div>
+              <?php if ($submit == "ok") {
+                $FK_ID_Tournoi = $_POST['FK_ID_Tournoi'];
+                $FK_ID_Equipe = $_POST['FK_ID_Equipe'];
+                inscription_equipe_tournoi($FK_ID_Tournoi, $FK_ID_Equipe);
+                echo "</br></br>";
+                echo "<h5 class=\"fw-bold text-success mb-2\">Vous avez une nouvelle inscription ! </h5>";
+              } ?>
+            </form>
           </div>
         </div>
       </div>
-      <p class="text-muted card-text mb-4">&nbsp;</p>
     </div>
-  </section>
-  </div>
-  </div>
 
+  </section>
   <?php include_once('default_pages/footer.php'); ?>
   <script src="assets/js/jquery.min.js"></script>
   <script src="assets/bootstrap/js/bootstrap.min.js"></script>

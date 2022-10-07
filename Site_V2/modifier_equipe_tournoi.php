@@ -37,7 +37,7 @@ if (!empty($_GET['submit'])) {
       <div class="row mb-4 mb-lg-5">
         <div class="col-md-8 col-xl-6 text-center mx-auto">
           <h1 class="fw-bold text-success mb-2">Equipes inscrites</h1>
-          <h3 class="fw-bold">Tournoi du <?php afficherDateTournoi($_SESSION['id_tournoi']); ?> &nbsp;</h3>
+          <h3 class="fw-bold">Tournoi du <?php echo afficherDateTournoi($_SESSION['id_tournoi']); ?> &nbsp;</h3>
           </br></br>
           <h5 class="fw-bold text-success mb-2"><a href="inscription_equipe.php?id_tournoi=<?php echo $_SESSION['id_tournoi']; ?>">Inscrire une nouvelle equipe <i class="fa-solid fa-user-plus"></i></a></h5>
         </div>

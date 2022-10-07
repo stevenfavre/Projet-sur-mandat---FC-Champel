@@ -37,7 +37,7 @@ if (!empty($_GET['submit'])) {
     <div class="container bg-primary-gradient py-5">
       <div class="row">
         <div class="col-md-8 col-xl-6 text-center mx-auto">
-          <h3 class="fw-bold text-success mb-2">Toutes les inscriptions</h3>
+          <h3 class="fw-bold text-success mb-2">Historique inscriptions supprimées</h3>
         </div>
       </div>
       <div class="card shadow-sm">
@@ -47,17 +47,11 @@ if (!empty($_GET['submit'])) {
           <form action="#" method="get">
             <table>
               <tbody>
-                <?php afficher_toutes_inscriptions(); ?>
+                <?php afficher_toutes_inscriptions_supprimees(); ?>
               </tbody>
             </table>
           </form>
           <a class="btn btn-primary shadow" role="button" href="tournois.php">Revenir</a>
-          <h6 style="padding-left: 80%;">
-            <a href="inscription_tournoi_equipe.php" class="fw-bold"><i class="fa-solid fa-plus"></i> Ajouter inscription </a>
-          </h6>
-          <h6 style="padding-left: 80%;">
-            <a href="afficher_demandes_supprimer.php" class="fw-bold"><i class="fa-regular fa-trash-can"></i> Historique inscriptions </a>
-          </h6>
         </div>
       </div>
   </section>
