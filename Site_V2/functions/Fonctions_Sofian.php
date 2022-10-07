@@ -101,6 +101,25 @@ function affichage_equipe()
     }
 }
 
+function afficherNomEquipe()
+{
+
+    $bdd = connectDB();
+    $bdd->query("SET NAMES 'utf8'");
+
+    $reponseDesEquipes = $bdd->query("SELECT * FROM `Equipe` WHERE `Actif_Equipe` = 1");
+    $reponseDesEquipes->setFetchMode(PDO::FETCH_BOTH);
+
+    while ($donneesDesEquipes = $reponseDesEquipes->fetch()) {
+        echo "<br />";
+        echo  "<form action='./modifier_equipe_tournoi.php?Nom_Equipe ' method='POST'>" .  $donneesDesEquipes['Nom_Equipe'] . "       <input type='submit' class='btn btn-primary shadow' value='sélectionner'></form>";
+        echo "<br />";
+    }
+
+    $bdd = null;
+}
+
+
 
 // Il s'agit d'un fonction qui va permettre d'insérer la rue, la localité et le NPA de l'adresse que j'appel dans le formulaire d'insertion des clubs afin d'insérer les adresses des clubs également. 
 function insertion_adresse_club($rueAdresse, $localiteAdresse, $npaAdresse)
