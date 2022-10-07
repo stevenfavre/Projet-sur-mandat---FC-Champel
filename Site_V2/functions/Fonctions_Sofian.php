@@ -107,12 +107,12 @@ function afficherNomEquipe()
     $bdd = connectDB();
     $bdd->query("SET NAMES 'utf8'");
 
-    $reponseDesEquipes = $bdd->query("SELECT * FROM `Equipe` WHERE `Actif_Equipe` = 1");
+    $reponseDesEquipes = $bdd->query("SELECT `Nom_Equipe` FROM `Equipe` WHERE `Actif_Equipe` = 1");
     $reponseDesEquipes->setFetchMode(PDO::FETCH_BOTH);
 
     while ($donneesDesEquipes = $reponseDesEquipes->fetch()) {
         echo "<br />";
-        echo  "<form action='./modifier_equipe_tournoi.php?Nom_Equipe ' method='POST'>" .  $donneesDesEquipes['Nom_Equipe'] . "       <input type='submit' class='btn btn-primary shadow' value='sélectionner'></form>";
+        echo  "<form action='./inscription_equipe.php?Nom_Equipe ' method='POST'>" .  $donneesDesEquipes['Nom_Equipe'] . "       <input type='submit' class='btn btn-primary shadow' value='sélectionner'></form>";
         echo "<br />";
     }
 
