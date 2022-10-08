@@ -11,8 +11,7 @@ if (isset($_POST['submit'])) {
 if (!empty($_GET['submit'])) {
   $_SESSION['submit'] = $_GET['submit'];
   $submit = filter_input(INPUT_GET, 'submit');
-
-
+  
 $coupure = explode("-", $submit);
 $id_equipe = $coupure[0];
 $option = $coupure[1];

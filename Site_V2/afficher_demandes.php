@@ -31,19 +31,18 @@ if (!empty($_GET['submit'])) {
 </head>
 
 <body style="/*background: url(&quot;design.jpg&quot;);*/background-position: 0 -60px;">
-  <?php include_once('default_pages/navbar.php'); ?>
-
-  <section class="py-5">
-    <div class="container bg-primary-gradient py-5">
-      <div class="row">
-        <div class="col-md-8 col-xl-6 text-center mx-auto">
-          <h3 class="fw-bold text-success mb-2">Toutes les inscriptions</h3>
-        </div>
-      </div>
-      <div class="card shadow-sm">
-        <div class="card-body px-4 py-5 px-md-5">
-          <path fill-rule="evenodd" d="M0 10.5A1.5 1.5 0 0 1 1.5 9h1A1.5 1.5 0 0 1 4 10.5v1A1.5 1.5 0 0 1 2.5 13h-1A1.5 1.5 0 0 1 0 11.5v-1zm1.5-.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1zm10.5.5A1.5 1.5 0 0 1 13.5 9h1a1.5 1.5 0 0 1 1.5 1.5v1a1.5 1.5 0 0 1-1.5 1.5h-1a1.5 1.5 0 0 1-1.5-1.5v-1zm1.5-.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1zM6 4.5A1.5 1.5 0 0 1 7.5 3h1A1.5 1.5 0 0 1 10 4.5v1A1.5 1.5 0 0 1 8.5 7h-1A1.5 1.5 0 0 1 6 5.5v-1zM7.5 4a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1z"></path>
-          <path d="M6 4.5H1.866a1 1 0 1 0 0 1h2.668A6.517 6.517 0 0 0 1.814 9H2.5c.123 0 .244.015.358.043a5.517 5.517 0 0 1 3.185-3.185A1.503 1.503 0 0 1 6 5.5v-1zm3.957 1.358A1.5 1.5 0 0 0 10 5.5v-1h4.134a1 1 0 1 1 0 1h-2.668a6.517 6.517 0 0 1 2.72 3.5H13.5c-.123 0-.243.015-.358.043a5.517 5.517 0 0 0-3.185-3.185z"></path>
+   <?php include_once('default_pages/navbar.php'); ?>
+   <section class="py-5">
+     <div class="container" style="width: 5000px;margin: auto;border: 5px solid #FF0000;">
+       <div class="container py-5">
+         <div class="row mb-5">
+           <div class="col-md-8 col-xl-6 text-center mx-auto">
+             <p class="fw-bold text-success mb-2">Liste inscriptions</p>
+             <h1>Inscriptions equipe</h1>
+           </div>
+         </div>
+         <div class="row d-flex justify-content-center">
+           <div class="col-md-8 col-xl-10">
           <form action="#" method="get">
             <table>
               <tbody>
@@ -51,6 +50,8 @@ if (!empty($_GET['submit'])) {
               </tbody>
             </table>
           </form>
+
+
           <a class="btn btn-primary shadow" role="button" href="tournois.php">Revenir</a>
           <h6 style="padding-left: 80%;">
             <a href="inscription_tournoi_equipe.php" class="fw-bold"><i class="fa-solid fa-plus"></i> Ajouter inscription </a>
@@ -59,8 +60,14 @@ if (!empty($_GET['submit'])) {
             <a href="afficher_demandes_supprimer.php" class="fw-bold"><i class="fa-regular fa-trash-can"></i> Historique inscriptions </a>
           </h6>
         </div>
-      </div>
-  </section>
+
+
+               </div>
+             </div>
+           </div>
+         </div>
+       </div>
+   </section>
   <?php include_once('default_pages/footer.php'); ?>
   <script src="assets/js/jquery.min.js"></script>
   <script src="assets/bootstrap/js/bootstrap.min.js"></script>

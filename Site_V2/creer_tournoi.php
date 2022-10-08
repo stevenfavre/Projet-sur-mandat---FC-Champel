@@ -7,7 +7,6 @@
     $submit = $_POST['submit'];
   }
   ?>
-
  <!DOCTYPE html>
  <html lang="en">
 
@@ -20,7 +19,6 @@
    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800&amp;display=swap">
    <link rel="stylesheet" href="assets/fonts/ionicons.min.css">
  </head>
-
  <body style="/*background: url(&quot;design.jpg&quot;);*/background-position: 0 -60px;">
    <?php include_once('default_pages/navbar.php'); ?>
    <section class="py-5">
@@ -29,26 +27,24 @@
          <div class="row mb-5">
            <div class="col-md-8 col-xl-6 text-center mx-auto">
              <p class="fw-bold text-success mb-2">Créer un tournoi</p>
-             <h2 class="fw-bold">Prochain tournoi</h2>
+             <h1>Prochain tournoi</h1>
            </div>
          </div>
          <div class="row d-flex justify-content-center">
            <div class="col-md-6 col-xl-4">
              <div>
+
                <form action="creer_tournoi.php" class="p-3 p-xl-4" method="post">
                  <h5 class="fw-bold mb-0">Date de début
-                   <div class="mb-3"><input class="form-control" type="date" id="date-1" name="Date_Debut_Tournoi" placeholder="Date de début" required>
+                   <div class="mb-3"><input class="form-control" type="date" id="date-1" name="Date_Debut_Tournoi" placeholder="Date de début" required></div></h5>
 
-                   </div>
-                 </h5>
+                 <h5 class="fw-bold mb-0">Date de fin
+                 <div class="mb-3"><input class="form-control" type="date" id="date-2" name="Date_Fin_Tournoi" placeholder="Date de fin" required></div></h5>
 
-                 <h5 class="fw-bold mb-0">Date de fin</h5>
-                 <div class="mb-3"><input class="form-control" type="date" id="date-2" name="Date_Fin_Tournoi" placeholder="Date de fin" required></div>
-                 <h5 class="fw-bold mb-0">Salle tournoi </h5>
-                 </br>
-                 <select name="ID_Salle" id="listeIdTournoi">
+                 <h5 class="fw-bold mb-0">Salle tournoi
+            <select name="ID_Salle" id="listeIdTournoi">
                    <?php selection_salle(); ?>
-                 </select>
+                 </select></h5>
 
                  <?php if ($submit == "ok") {
                     $Date_debut = $_POST['Date_Debut_Tournoi'];
@@ -57,7 +53,6 @@
                     verificationDonneesTournois($Date_debut, $Date_fin, $Fk_ID_Salle);
                   }
                   ?>
-
                  </br></br>
                  <table>
                    <tbody>
@@ -71,7 +66,6 @@
                          <a class="btn btn-primary shadow" role="button" href="afficher_tournois.php">Retour</a>
                        </ul>
                      </td>
-
                    </tbody>
                  </table>
                </form>

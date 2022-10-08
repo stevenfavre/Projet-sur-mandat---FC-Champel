@@ -1,5 +1,5 @@
 <?php
-
+error_reporting(E_ERROR | E_PARSE);
 session_start();
 require_once "functions/steven_fonctions.php";
 
@@ -21,8 +21,6 @@ if (!empty($submit)) {
     updateDownScore($id_match, $local_visiteur);
 }
 
-
-
 ?>
 
 <!DOCTYPE html>
@@ -36,29 +34,41 @@ if (!empty($submit)) {
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800&amp;display=swap">
   <link rel="stylesheet" href="assets/fonts/ionicons.min.css">
 </head>
-
-<?php
-if ($_GET['error'] == 1) {
-  echo "<script type=\"text/javascript\">alert(\"Le nombre d'équipe inscrites ne correspond pas au exigence requis pour lancer un tournoi.\n Nombre d'inscription actuelle : " . $_GET['nb_inscrit'] . " | Nombre requis : 16\");</script>";
-}
-?>
-
 <body style="/*background: url(&quot;design.jpg&quot;);*/background-position: 0 -60px;">
   <?php include_once('default_pages/navbar.php'); ?>
   <section class="py-5">
+  <div class="container">
+</br>
+      <h2>Options - tournoi</h2>
+
+      <nav>
+        <ul class="nav">
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Tous les classements</a>
+            <div class="dropdown-menu">
+              <a class="dropdown-item" href="classement_groupes.php?id_tournoi=<?php echo $_SESSION['id_tournoi']; ?>">Classement groupes</a>
+              <a class="dropdown-item" href="classement_quartsFinales.php?id_tournoi=<?php echo $_SESSION['id_tournoi']; ?>">Classement quart de finale</a>
+              <a class="dropdown-item" href="#">Classement demi finale</a>
+              <a class="dropdown-item" href="#">Classement finale</a>
+              <a class="dropdown-item" href="#">Classement petite finale</a>
+            </div>
+          </li>
+          <li class="nav-item"><a class="nav-link " href="modifier_equipe_tournoi.php?id_tournoi=<?php echo $_SESSION['id_tournoi']; ?>">Inscriptions equipes</a></li>
+          <li class="nav-item"><a class="nav-link " href="modifier_tournoi.php?id_tournoi=<?php echo $_SESSION['id_tournoi']; ?>">Informations tournoi</a></li>
+        </ul>
+      </nav>
+    </div>
     <div class="container py-5">
-      <div class="row mb-4 mb-lg-5">
-        <div class="col-md-8 col-xl-6 text-center mx-auto">
-          <p class="fw-bold text-success mb-2">Liste des matchs</p>
+      <div class="row">
+        <div class="col-md-8 col-xl-6 text-center mx-auto">          
+          <h2 class="text-success mb-2">Liste des matchs</h2>
           <h3 class="fw-bold">Match du tournoi : <?= date("d.m.Y", strtotime(getDateTournoi($_SESSION['id_tournoi']))) ?>&nbsp;</h3>
-          <p class="text-muted">&nbsp;<a href="modifier_equipe_tournoi.php?id_tournoi=<?php echo $_SESSION['id_tournoi']; ?>">Equipes inscrites</a></p>
-          <!-- <a class="btn btn-primary shadow" role="button" href="creer_match.php?id_tournoi=<?php echo $_SESSION['id_tournoi']; ?>">Créer un match</a> -->
-          <a class="btn btn-primary shadow" role="button" href="classement_groupes.php?id_tournoi=<?php echo $_SESSION['id_tournoi']; ?>">Classement des groupes</a>
+           <a class="btn btn-primary shadow" role="button" href="creer_match.php?id_tournoi=<?php echo $_SESSION['id_tournoi']; ?>">Créer un match</a> 
           <?php
           if (empty(selectMatchPoul($_SESSION['id_tournoi']))) {
             echo '<a class="btn btn-primary shadow" role="button" href="./functions/algorithme_groupe.php?id_tournoi=' . $_SESSION['id_tournoi'] . '">Générer le tournoi</a>';
           } else if (empty(selectMatchQuartFinale($_SESSION['id_tournoi']))) {
-            echo '<a class="btn btn-primary shadow" role="button" href="./functions/algorithme_match_eliminationDirecte.php?id_tournoi=' . $_SESSION['id_tournoi'] . '">Générer les quarts de finale</a>';
+            echo '<a class="btn btn-primary shadow" role="button" href="./functions/algorithme_match_eliminationDirect.php' . $_SESSION['id_tournoi'] . '">Générer les quarts de finale</a>';
           }
           ?>
           <br><br>

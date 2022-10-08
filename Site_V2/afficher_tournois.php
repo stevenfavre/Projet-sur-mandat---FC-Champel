@@ -1,4 +1,6 @@
 <?php
+error_reporting(E_ERROR | E_PARSE);
+
 include('./functions/dbconnection.php');
 include('./functions/tournoi.php');
 
@@ -36,35 +38,52 @@ if (!empty($_GET['submit'])) {
 </head>
 
 <body style="/*background: url(&quot;design.jpg&quot;);*/background-position: 0 -60px;">
-  <?php include_once('default_pages/navbar.php'); ?>
-  <section class="py-5">
-    <div class="container" style="width: 3000px;margin: auto;border: 5px solid #3CB371;">
-      <div class="row 5">
-        <div class="card shadow-sm">
-          <div class="card-body px-5 py-5 px-md-5">
-
+   <?php include_once('default_pages/navbar.php'); ?>
+   <section class="py-5">
+     <div class="container" style="width: 5000px;margin: auto;border: 5px solid #FF0000;">
+       <div class="container py-5">
+         <div class="row mb-5">
+           <div class="col-md-8 col-xl-6 text-center mx-auto">
+             <p class="fw-bold text-success mb-2">Tous les tournois</p>
+             <h1>Liste tournois</h1>
+           </div>
+         </div>
+         <div class="row d-flex justify-content-center">
+           <div class="col-md-8 col-xl-8">
             <form action="afficher_tournois.php" method="get">
               <table>
                 <tbody>
+                
                   <?php
                   afficher_date_tournoi();
                   ?>
 
                 </tbody>
               </table>
+              <table>
+                   <tbody>
+                     <td>
+                       
+                       <a class="btn btn-primary shadow" role="button" href="creer_tournoi.php">Ajouter</a></p>                    
+                   
+                       <a class="btn btn-primary shadow" role="button" href="tournois.php">Retour</a></p>
+                      
+                     </td>
+                   </tbody>
+                 </table>
             </form>
-            <p style="padding-right: 80%;">
-              <a href="creer_tournoi.php" class="text-success">CREER UN TOURNOI</a>
-              </br></br>
-              <a class="btn btn-primary shadow" role="button" href="tournois.php">Revenir</a>
-            </p>
-          </div>
+            
+        
         </div>
-      </div>
-    </div>
-  </section>
 
-  <?php //include_once('default_pages/footer.php'); 
+
+               </div>
+             </div>
+           </div>
+         </div>
+       </div>
+   </section>
+  <?php include_once('default_pages/footer.php'); 
   ?>
   <script src="assets/js/jquery.min.js"></script>
   <script src="assets/bootstrap/js/bootstrap.min.js"></script>
