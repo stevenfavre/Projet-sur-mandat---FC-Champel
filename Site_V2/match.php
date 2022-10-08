@@ -21,6 +21,8 @@ if (!empty($submit)) {
     updateDownScore($id_match, $local_visiteur);
 }
 
+
+
 ?>
 
 <!DOCTYPE html>
@@ -34,6 +36,12 @@ if (!empty($submit)) {
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800&amp;display=swap">
   <link rel="stylesheet" href="assets/fonts/ionicons.min.css">
 </head>
+
+<?php
+if ($_GET['error'] == 1) {
+  echo "<script type=\"text/javascript\">alert(\"Le nombre d'équipe inscrites ne correspond pas au exigence requis pour lancer un tournoi.\n Nombre d'inscription actuelle : " . $_GET['nb_inscrit'] . " | Nombre requis : 16\");</script>";
+}
+?>
 
 <body style="/*background: url(&quot;design.jpg&quot;);*/background-position: 0 -60px;">
   <?php include_once('default_pages/navbar.php'); ?>
@@ -50,7 +58,7 @@ if (!empty($submit)) {
           if (empty(selectMatchPoul($_SESSION['id_tournoi']))) {
             echo '<a class="btn btn-primary shadow" role="button" href="./functions/algorithme_groupe.php?id_tournoi=' . $_SESSION['id_tournoi'] . '">Générer le tournoi</a>';
           } else if (empty(selectMatchQuartFinale($_SESSION['id_tournoi']))) {
-            echo '<a class="btn btn-primary shadow" role="button" href="./functions/algorithme_match_eliminationDirect.php' . $_SESSION['id_tournoi'] . '">Générer les quarts de finale</a>';
+            echo '<a class="btn btn-primary shadow" role="button" href="./functions/algorithme_match_eliminationDirecte.php?id_tournoi=' . $_SESSION['id_tournoi'] . '">Générer les quarts de finale</a>';
           }
           ?>
           <br><br>

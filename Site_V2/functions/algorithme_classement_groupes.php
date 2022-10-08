@@ -345,7 +345,7 @@ function selectionnerMatchsQuarts($id_groupe)
 {
     try {
         $db = connectDB();
-        $sql = "SELECT * FROM `Matchs` WHERE Type_Match = 'Quart de finale ' ORDER BY ID_Match ASC";
+        $sql = "SELECT * FROM `Matchs` WHERE Type_Match = 'Quart de finale' ORDER BY ID_Match ASC";
         $request = $db->prepare($sql);
         $request->execute();
         return $request->fetchAll(PDO::FETCH_ASSOC);

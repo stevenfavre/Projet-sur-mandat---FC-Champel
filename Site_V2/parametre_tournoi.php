@@ -35,20 +35,16 @@ if ($_GET['id_tournoi'] != null) {
             </div>
             <form action="./functions/algorithme_match_poul.php" method="post">
                 <div class="mb-3">
-                    <label>Date du tournoi</label>
-                    <input class="form-control mx-sm-3" style="max-width: 30%;" type="date" name="date" value="<?= $tournoi['date_debut_tournoi'] ?>" required readonly>
-                </div>
-                <div class="mb-3">
                     <label>Heure du premier match</label>
                     <input class="form-control mx-sm-3" style="max-width: 30%;" type="time" name="time-debut" min="08:00:00" value="08:00:00" step="1" required>
                 </div>
                 <div class="mb-3">
                     <label>Temps de match</label>
-                    <input class="form-control mx-sm-3" style="max-width: 30%;" type="time" name="time-match" max="00:15:00" value="00:10:00" step="1" required>
+                    <input class="form-control mx-sm-3" style="max-width: 30%;" type="number" name="time-match" max="15" value="10" step="1" required>
                 </div>
                 <div class="mb-3">
                     <label>Temps de pause entre chaque match</label>
-                    <input class="form-control mx-sm-3" style="max-width: 30%;" type="time" name="time-pause" max="00:10:00" value="00:02:00" step="1" required>
+                    <input class="form-control mx-sm-3" style="max-width: 30%;" type="number" name="time-pause" max="10" value="2" step="1" required>
                 </div>
                 <br><br>
                 <div class="mb-3">

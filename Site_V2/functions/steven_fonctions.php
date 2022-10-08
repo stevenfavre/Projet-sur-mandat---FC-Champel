@@ -396,7 +396,7 @@ function afficherTableauGroupe($id_tournoi)
 function selectMatchPoul($id_tournoi){
     try {
         $db = connectDB();
-        $sql = "SELECT * FROM `Matchs` WHERE `FK_ID_Tournoi` = " . $id_tournoi . " AND `Type_Match` = 'Poul';";
+        $sql = "SELECT * FROM `Matchs` WHERE `FK_ID_Tournoi` = " . $id_tournoi . " AND `Type_Match` = 'Poule';";
         $request = $db->prepare($sql);
         $request->execute();
         return $request->fetchAll(PDO::FETCH_ASSOC);
@@ -416,4 +416,5 @@ function selectMatchQuartFinale($id_tournoi){
         debug($e->getMessage());
     }
 }
+
 
