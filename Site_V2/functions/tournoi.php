@@ -163,44 +163,45 @@ function afficherDateFinTournoi($id_tournoi)
 //OK
 function afficher_date_tournoi()
 {
-    echo "<Div Align=Center> <h2 class=\"fw-bold text-success\">"  . " Tous les tournois " . "</h2> </Div></br>";
 
     echo  "<table class=\"table table-bordered\">
-    <thead class=\"thead-dark\">
-    <tr>
-            <th scope=\"col\"><CENTER><h5 class=\"fw-bold text-success mb-2\"> Date tournoi " . "  " . "<i class=\"fa-regular fa-calendar\"></i></h5></CENTER></th>
-            <th scope=\"col\"><CENTER><h5 class=\"fw-bold text-success mb-2\"> Date fin " . "  " .  "</h5></CENTER></th>
-            <th scope=\"col\"><CENTER><h5 class=\"fw-bold text-success mb-2\"> Salle" . "  " .  "<i class=\"fa-sharp fa-solid fa-location-dot\"></i></h5></CENTER></th>
-            <th scope=\"col\"><CENTER><h5 class=\"fw-bold text-success mb-2\"> Statut " . "  " .  "<i class=\"fa-regular fa-pen-to-square\"></i></h5></CENTER></th>
-            <th scope=\"col\"><CENTER><h5 class=\"fw-bold text-success mb-2\"> Opérations " . "  " .  "<i class=\"fa-solid fa-gears\"></i></h5></CENTER></th>
-         </tr> </thead>";
+    <thead class=\"thead\">
+    <tr class=\"bg-white\">
+            <th scope=\"col\"><CENTER><h4 class=\"text-success\">Date tournoi"  . "</h4></CENTER></th>
+            <th scope=\"col\"><CENTER><h4 class=\"text-success\"> Date fin" . "  " .  "</h4></CENTER></th>
+            <th scope=\"col\"><CENTER><h4 class=\"text-success\"> Salle" . "  " .  "</h4></CENTER></th>
+            <th scope=\"col\"><CENTER><h4 class=\"text-success\"> Statut" . "</h4></CENTER></th>
+            <th scope=\"col\"><CENTER><h4 class=\"text-success\">"."<i class=\"fa-solid fa-gears\"></i></h2></CENTER></th></tr> </thead>";
 
     foreach (afficher_Tournoi() as $tournoi) {
-        echo "<div><a href=\"../afficher_tournois.php?id_tournoi=" . $tournoi['ID_Tournoi'] . "\">";
+        echo "<a href=\"../afficher_tournois.php?id_tournoi=" . $tournoi['ID_Tournoi'] . "\">";
         if ($tournoi['Actif_Tournoi'] == 1)
-            echo "<tr><td><CENTER><p class=\"font-weight-normal\">" . " Tournoi du " . date("d.m.Y", strtotime($tournoi['Date_Debut_Tournoi'])) . "</p></div></td>
+            echo "<tr><td><CENTER><p class=\"font-weight-normal\">" . "Tournoi du " . date("d.m.Y", strtotime($tournoi['Date_Debut_Tournoi'])) . "</a></p></td>
         <td><CENTER><p class=\"font-weight-normal\">" . date("d.m.Y", strtotime($tournoi['Date_Fin_Tournoi'])) .  "</h5></td>
         <td><CENTER><p class=\"font-weight-normal\">" . $tournoi['Nom_Salle'] . "</h5></td>
-        <td><CENTER><p class=\"text-success mb-2\">" . "Actif" .  "</h5></a></td>
-        <td><CENTER><button type=\"submit\" class=\"btn btn-primary btn-sm\" name=\"submit\" style=\"padding: 0px 12px !important;\" value=\"" . $tournoi['ID_Tournoi'] . "-terminer\"><i class=\"fa-solid fa-power-off\"></i></button>
-       <button type=\"submit\" class=\"btn btn-primary btn-sm\" name=\"submit\" style=\"padding: 0px 12px !important;\" value=\"" . $tournoi['ID_Tournoi'] . "-annuler\"><i class=\"fa-regular fa-trash-can\"></i></button>
-       <a class=\"btn btn-primary btn-sm\" style=\"padding: 0px 12px !important;\" role=\"button\" href=\"modifier_tournoi.php?id_tournoi=" .  $tournoi['ID_Tournoi'] . "\"><i class=\"fa-solid fa-pen\"</a></i></a></CENTER>";
+        <td><CENTER><p class=\"text-success mb-2\">" . "Actif" .  "</h5></td>
+        <td><CENTER><button type=\"submit\" class=\"btn btn-outline-dark\" name=\"submit\" style=\"padding: 0px 12px !important;\" value=\"" . $tournoi['ID_Tournoi'] . "-terminer\"><i class=\"fa-solid fa-power-off\"></i></button>
+       <button type=\"submit\" class=\"btn btn-outline-danger\" name=\"submit\" style=\"padding: 0px 12px !important;\" value=\"" . $tournoi['ID_Tournoi'] . "-annuler\"><i class=\"fa-regular fa-trash-can\"></i></button>
+       <a class=\"btn btn-outline-dark\" style=\"padding: 0px 12px !important;\" role=\"button\" href=\"match.php?id_tournoi=" .  $tournoi['ID_Tournoi'] . "\"><i class=\"fa-solid fa-magnifying-glass\"></i></a>
+       <a class=\"btn btn-outline-warning\" style=\"padding: 0px 12px !important;\" role=\"button\" href=\"modifier_tournoi.php?id_tournoi=" .  $tournoi['ID_Tournoi'] . "\"><i class=\"fa-solid fa-pen\"</a></i></a></CENTER>";
 
 
         elseif ($tournoi['Actif_Tournoi'] == 2)
-            echo "<tr><td><CENTER><h6 class=\"fw-bold\">" . "Tournoi du " . date("d.m.Y", strtotime($tournoi['Date_Debut_Tournoi'])) . "</h6></td>
-        <td><CENTER><h6 class=\"fw-bold\" id=\"h5Texte\">" . date("d.m.Y", strtotime($tournoi['Date_Fin_Tournoi'])) .  "</h6></td>
-        <td><CENTER><h6 class=\"fw-bold\" id=\"h5Texte\">" . $tournoi['Nom_Salle'] . "</h6></td>
-        <td><CENTER><h6 class=\"fw-bold \" id=\"h5Texte\">" . "Terminé " .  "<i class=\"fa-solid fa-exclamation\"></i></h6></a></td>
-        <td><CENTER><button type=\"submit\" class=\"btn btn-primary btn-sm\" name=\"submit\" style=\"padding: 0px 12px !important;\" value=\"" . $tournoi['ID_Tournoi'] . "-annuler\"><i class=\"fa-regular fa-trash-can\"></i></button>
-        <a class=\"btn btn-primary btn-sm\" style=\"padding: 0px 12px !important;\" role=\"button\" href=\"modifier_tournoi.php?id_tournoi=" .  $tournoi['ID_Tournoi'] . "\"><i class=\"fa-solid fa-pen\"</a></i></a></CENTER>";
+            echo "<tr><td><CENTER><p class=\"fw-bold\">" . "Tournoi du " . date("d.m.Y", strtotime($tournoi['Date_Debut_Tournoi'])) . "</p></td>
+        <td><CENTER><p class=\"fw-bold\" id=\"h5Texte\">" . date("d.m.Y", strtotime($tournoi['Date_Fin_Tournoi'])) .  "</p></td>
+        <td><CENTER><p class=\"fw-bold\" id=\"h5Texte\">" . $tournoi['Nom_Salle'] . "</p></td>
+        <td><CENTER><p class=\"fw-bold \" id=\"h5Texte\">" . "Terminé " .  "<i class=\"fa-solid fa-exclamation\"></i></p></a></td>
+        <td><CENTER><button type=\"submit\" class=\"btn btn-outline-danger\" name=\"submit\" style=\"padding: 0px 12px !important;\" value=\"" . $tournoi['ID_Tournoi'] . "-annuler\"><i class=\"fa-regular fa-trash-can\"></i></button>
+        <a class=\"btn btn-outline-warning\" style=\"padding: 0px 12px !important;\" role=\"button\" href=\"modifier_tournoi.php?id_tournoi=" .  $tournoi['ID_Tournoi'] . "\"><i class=\"fa-solid fa-pen\"</a></i></a></CENTER>";
 
         elseif ($tournoi['Actif_Tournoi'] == 0)
-            echo "<tr><td><CENTER><strike><h6 class=\"fw-bold\">" . "Tournoi du " . date("d.m.Y", strtotime($tournoi['Date_Debut_Tournoi'])) . "</h6></strike></td>
-        <td><CENTER><strike><h6 class=\"fw-bold\" id=\"h5Texte\">" . date("d.m.Y", strtotime($tournoi['Date_Fin_Tournoi'])) .  "</h6></strike></td>
-        <td><CENTER><strike><h6 class=\"fw-bold\" id=\"h5Texte\">" . $tournoi['Nom_Salle'] . "</h6></strike></td>
-        <td><CENTER><h6 class=\"text-danger\" id=\"h5Texte\">" . "Supprimé" .  "</h6></a></td>
-        <td><CENTER><button type=\"submit\" class=\"btn btn-primary btn-sm\" name=\"submit\" style=\"padding: 0px 12px !important;\" value=\"" . $tournoi['ID_Tournoi'] . "-activer\"><i class=\"fa-solid fa-check\"></i></button></CENTER></td></tr>";
+            echo "<tr><td><CENTER>
+            <p class=\"fw-bold\ id=\"h5Texte\">" . "Tournoi du " . date("d.m.Y", strtotime($tournoi['Date_Debut_Tournoi'])) . "</p></td>
+        <td><CENTER>
+        <p class=\"fw-bold\ id=\"h5Texte\">" . date("d.m.Y", strtotime($tournoi['Date_Fin_Tournoi'])) .  "</p></td>
+        <td><CENTER><p class=\"fw-bold\ id=\"h5Texte\">" . $tournoi['Nom_Salle'] . "</p></td>
+        <td><CENTER><p class=\"text-danger\" id=\"h5Texte\">" . "Supprimé" .  "</p></a></td>
+        <td><CENTER><button type=\"submit\" class=\"btn btn-outline-success\" name=\"submit\" style=\"padding: 0px 12px !important;\" value=\"" . $tournoi['ID_Tournoi'] . "-activer\"><i class=\"fa-solid fa-check\"></i></button></CENTER></td></tr>";
         echo "</div>";
     }
 }
@@ -496,7 +497,7 @@ function afficher_toutes_inscriptions()
         <th scope=\"col\"><CENTER><h5 class=\"fw-bold text-success mb-2\">Equipe " . "<i class=\"fa-solid fa-people-group\"></i></h5></CENTER></th>
         <th scope=\"col\"><CENTER><h5 class=\"fw-bold text-success mb-2\"> Groupe " . "<i class=\"fa-solid fa-users-viewfinder\"></i></h5></CENTER></th>
         <th scope=\"col\"><CENTER><h5 class=\"fw-bold text-success mb-2\"> Statut " . "  " .  "<i class=\"fa-regular fa-pen-to-square\"></i></h5></CENTER></th>
-        <th scope=\"col\"><CENTER><h5 class=\"fw-bold text-success mb-2\"> Options " . "  " .  "<i class=\"fa-solid fa-gears\"></i></h5></CENTER></th>
+        <th scope=\"col\"><CENTER><h5 class=\"fw-bold text-success mb-2\"> " . "  " .  "<i class=\"fa-solid fa-gears\"></i></h5></CENTER></th>
      </tr></thead>";
 
     foreach (selectionnerInscription_all() as $inscription) {
@@ -506,7 +507,7 @@ function afficher_toutes_inscriptions()
         <td><ul><h5 class=\"fw-bold\">" .  $inscription['Nom_Equipe'] . "</h5></ul></td> 
         <td><ul><h5 class=\"fw-bold\">" .  $inscription['Nom_Groupe'] . "</h5></ul></td>
         <td><ul><h5 class=\"fw-bold\">  " .  $inscription['Statut_Inscription_Tournoi'] . "<i class=\"fa-solid fa-hourglass\"></i></h5></ul></td>
-        <td><ul><CENTER><button type=\"\" class=\"btn btn-primary bg-success\" name=\"submit\" style=\"padding: 0px 12px !important;\" value=\"" . $inscription['ID_Inscription_Tournoi'] . "-modifier\">Valider</button>
+        <td><ul><CENTER><button type=\"\" class=\"btn btn- bg-success\" name=\"submit\" style=\"padding: 0px 12px !important;\" value=\"" . $inscription['ID_Inscription_Tournoi'] . "-modifier\">Valider</button>
         <button type=\"\" class=\"btn btn-primary btn-sm\" name=\"submit\" style=\"padding: 0px 12px !important;\" value=\"" . $inscription['ID_Inscription_Tournoi'] . "-supprimer\">Refuser</button>
       </ul></td></tr>";
         if ($inscription['Statut_Inscription_Tournoi'] == "validé")
@@ -514,7 +515,7 @@ function afficher_toutes_inscriptions()
              <td><ul><h5 class=\"fw-bold\">" .  $inscription['Nom_Equipe'] . "</h5></ul></td> 
              <td><ul><h5 class=\"fw-bold\">" .  $inscription['Nom_Groupe'] . "</h5></ul></td>
             <td><ul><h5 class=\"fw-bold text-success mb-2\">  " .  $inscription['Statut_Inscription_Tournoi'] . "</h5></ul></td>
-            <td><ul><CENTER><button type=\"submit\" class=\"btn btn-primary btn-sm\" name=\"submit\" style=\"padding: 0px 12px !important;\" value=\"" . $inscription['ID_Inscription_Tournoi'] . "-annuler\">Annuler</button></td></tr>";
+            <td><ul><CENTER><button type=\"submit\" class=\"btn btn-warning \" name=\"submit\" style=\"padding: 0px 12px !important;\" value=\"" . $inscription['ID_Inscription_Tournoi'] . "-annuler\">Annuler</button></td></tr>";
         echo "</div>";
     }
 }
@@ -560,7 +561,7 @@ function afficherEquipeInscrites($id_tournoi)
         echo "</div>";
         echo "<div class=\"col d-md-flex align-items-md-end align-items-lg-center mb-2\">";
         echo "<div id=\"container\">";
-        echo "<a href=\"modifier_equipe_tournoi.php?id_inscription_tournoi=" . $inscrite['ID_Inscription_Tournoi'] . "\">";
+        echo "<a href=\"affichage_equipe_bdd.php?id_inscription_tournoi=" . $inscrite['ID_Inscription_Tournoi'] . "\">";
 
         if ($inscrite['Statut_Inscription_Tournoi'] != "validé")
             echo "<h5 class=\"fw-bold\" id=\"h5Texte\">" . contientEquipeInscrite($inscrite['FK_ID_Equipe']) . " | " . contientGroupeInscrit($inscrite['FK_ID_Equipe'])  . " | "
