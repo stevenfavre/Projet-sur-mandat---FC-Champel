@@ -13,13 +13,17 @@ $errorMessage = "Veuillez remplir tous les champs pour effectuer une modificatio
 
 //Cette partie vérifie si les champs à modifier ne sont pas vide, si les champs ne sont pas vide la fonction de modification s'applique.
 
-if (!empty($idEquipe) && !empty($nomEquipe) && !empty($degreEquipe) && ($actifEquipe) != null) {
-    modification_equipes($idEquipe, $nomEquipe, $degreEquipe, $actifEquipe);
-} else {
-    echo $errorMessage;
-}
-
-
+if (isset($idEquipe) && isset($nomEquipe) && isset($degreEquipe) && isset($actifEquipe)) {
+    if(!empty($idEquipe) && !empty($nomEquipe) && !empty($degreEquipe) && !empty($actifEquipe)){
+        modification_equipes($idEquipe, $nomEquipe, $degreEquipe, $actifEquipe);
+    }
+    elseif(empty($idEquipe) or empty($nomEquipe) or empty($degreEquipe) or empty($actifEquipe)){
+        echo "<font color='#FF0000'>";  //sources : http://www.info-3000.com/phpmysql/validation/index.php
+        echo $errorMessage;
+        echo "</font>";
+        echo "<BR>";
+    }
+}  
 
 
 ?>

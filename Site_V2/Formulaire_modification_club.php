@@ -11,15 +11,19 @@ $target_dir = "assets/img/team/"; //sources : https://www.php.net/manual/en/func
 $errorMessage = "Veuillez remplir tous les champs pour effectuer une modification !";
 
 
-
-if (!empty($nomClubModif) && !empty($nomClub) && ($actifClub) != null) { //sources : https://www.php.net/manual/en/function.move-uploaded-file.php
-    $target_file = $target_dir . basename($_FILES["Image_Club"]["name"]); //sources : https://www.php.net/manual/en/function.move-uploaded-file.php
-
-    if (move_uploaded_file($_FILES["Image_Club"]["tmp_name"], $target_file)) //sources : https://www.php.net/manual/en/function.move-uploaded-file.php
-        modification_club($nomClubModif, $_FILES["Image_Club"]["name"], $nomClub, $actifClub); //sources : https://www.php.net/manual/en/function.move-uploaded-file.php
-} else {
-    echo $errorMessage;
+if (isset($nomClubModif) && isset($nomClub) && isset($actifClub)){
+    if (!empty($nomClubModif) && !empty($nomClub) && ($actifClub) != null) { //sources : https://www.php.net/manual/en/function.move-uploaded-file.php
+        $target_file = $target_dir . basename($_FILES["Image_Club"]["name"]); //sources : https://www.php.net/manual/en/function.move-uploaded-file.php
+        if (move_uploaded_file($_FILES["Image_Club"]["tmp_name"], $target_file)) //sources : https://www.php.net/manual/en/function.move-uploaded-file.php
+            modification_club($nomClubModif, $_FILES["Image_Club"]["name"], $nomClub, $actifClub); //sources : https://www.php.net/manual/en/function.move-uploaded-file.php
+    } else {
+        echo "<font color='#FF0000'>";  //sources : http://www.info-3000.com/phpmysql/validation/index.php
+        echo $errorMessage;
+        echo "</font>";
+        echo "<BR>";
+    }
 }
+
 
 
 ?>
