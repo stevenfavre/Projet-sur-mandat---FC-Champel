@@ -67,7 +67,6 @@ if (!empty($_GET['submit'])) {
                 ?> -->
           </form>
           <a class="btn btn-primary shadow" href="classement_groupes.php">Revenir</a>
-          <a class="btn btn-primary shadow" role="button" href="./functions/algorithme_match_eliminationDirect.php'<?php $_SESSION['id_tournoi'] ?>'">Générer matchs demie finale</a>
 
 
         </div>
