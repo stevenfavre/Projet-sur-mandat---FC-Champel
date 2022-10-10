@@ -124,8 +124,10 @@ function refreshSessionMatch()
             if ($_SESSION['match']['Actif_Match'] == 1) {
                 echo "<button class=\"btn btn-primary\" type=\"submit\" name=\"submit\" value=\"annuler\">Annuler le match</button>";
             } else {
-                echo "<button class=\"btn btn-primary\" type=\"submit\" name=\"submit\" value=\"activer\">Reprogrammer le match</button>";
+                echo "<button class=\"btn btn-primary\" type=\"submit\" name=\"submit\" value=\"activer\">Reprogrammer le match</button><br><br>";
             }
+
+            echo '<a href="./match.php">Retour</a>';
             ?>
         </div>
         </form>

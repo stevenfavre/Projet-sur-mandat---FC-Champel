@@ -68,7 +68,7 @@ if (!empty($_GET['submit'])) {
                 ?> -->
           </form>
           <a class="btn btn-primary shadow" href="match.php">Revenir</a>
-          <a class="btn btn-primary shadow" role="button" href="./functions/algorithme_match_eliminationDirect.php'<?php $_SESSION['id_tournoi'] ?>'">Générer matchs demie finale</a>
+          <a class="btn btn-primary shadow" role="button" href="./functions/algorithme_demi_finale.php?id_tournoi=<?php echo $_SESSION['id_tournoi'] ?>">Générer matchs demie finale</a>
 
 
         </div>

@@ -60,7 +60,7 @@ if (!empty($_GET['submit'])) {
             <!--     <a class="btn btn-primary shadow" href="javascript:history.go(-1)">Revenir</a> -->
             <a class="btn btn-primary shadow" href="match.php">Revenir</a>
 
-            <a class="btn btn-primary shadow" role="button" href="./functions/algorithme_match_eliminationDirect.php'<?php $_SESSION['id_tournoi'] ?>'">Générer les quarts de finale</a>
+            <a class="btn btn-primary shadow" role="button" href="./functions/algorithme_match_eliminationDirect.php?id_tournoi=<?php $_SESSION['id_tournoi'] ?>">Générer les quarts de finale</a>
           </div>
         </div>
       </div>

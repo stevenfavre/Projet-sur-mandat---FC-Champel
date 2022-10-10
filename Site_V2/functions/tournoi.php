@@ -148,7 +148,7 @@ function afficherDateTournoi($id_tournoi)
 {
     $date = "Non existante";
     foreach (selection_tournoi($id_tournoi) as $tournoi) {
-        $date = date("d-m-Y", strtotime($tournoi['Date_Debut_Tournoi']));
+        $date = date("d.m.Y", strtotime($tournoi['Date_Debut_Tournoi']));
     }
     return $date;
 }
@@ -156,7 +156,7 @@ function afficherDateFinTournoi($id_tournoi)
 {
     $date = "Non existante";
     foreach (selection_tournoi($id_tournoi) as $tournoi) {
-        $date = date("Y-m-d", strtotime($tournoi['Date_Fin_Tournoi']));
+        $date = date("d.m.Y", strtotime($tournoi['Date_Fin_Tournoi']));
     }
     return $date;
 }
@@ -171,7 +171,7 @@ function afficher_date_tournoi()
             <th scope=\"col\"><CENTER><h4 class=\"text-success\"> Date fin" . "  " .  "</h4></CENTER></th>
             <th scope=\"col\"><CENTER><h4 class=\"text-success\"> Salle" . "  " .  "</h4></CENTER></th>
             <th scope=\"col\"><CENTER><h4 class=\"text-success\"> Statut" . "</h4></CENTER></th>
-            <th scope=\"col\"><CENTER><h4 class=\"text-success\">"."<i class=\"fa-solid fa-gears\"></i></h2></CENTER></th></tr> </thead>";
+            <th scope=\"col\"><CENTER><h4 class=\"text-success\">" . "<i class=\"fa-solid fa-gears\"></i></h2></CENTER></th></tr> </thead>";
 
     foreach (afficher_Tournoi() as $tournoi) {
         echo "<a href=\"../afficher_tournois.php?id_tournoi=" . $tournoi['ID_Tournoi'] . "\">";
@@ -440,7 +440,7 @@ function selection_tournoi_incription()
 function selection_equipe_incription()
 {
     $bdd = connectDB();
-    $sql = "SELECT * FROM `Equipe` WHERE ID_Equipe not in (SELECT FK_ID_Equipe FROM Inscription_Tournoi);";
+    $sql = "SELECT * FROM `Equipe` WHERE ID_Equipe not in (SELECT FK_ID_Equipe FROM Inscription_Tournoi WHERE FK_ID_Tournoi = 2);";
     $request = $bdd->prepare($sql);
     $request->execute();
     $reponse = $request->fetchAll();

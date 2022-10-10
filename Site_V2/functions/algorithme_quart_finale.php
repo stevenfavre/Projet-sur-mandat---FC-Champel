@@ -14,7 +14,7 @@ $groupeD = $_SESSION['GroupeQuatre'];
 
 $dateTournoi = getDateTournoi($id_tournoi);
 
-$heureDebut1 = calculDebut('10:30:00', 0, 11, 0);
+$heureDebut1 = calculDebut('13:00:00', 0, 11, 0);
 $heureFin1 = calculDebut($heureDebut1, 0, 11, 0);
 $heureDebut2 = calculDebut($heureFin1, 0, 11, 0);
 $heureFin2 = calculDebut($heureDebut2, 0, 11, 0);
@@ -93,7 +93,7 @@ function calculDebut($temps, $hours, $minutes, $seconds)  // sources : https://f
 
 function createQuartFinale($id_tournoi, $groupeA, $groupeB, $groupeC, $groupeD, $dateTournoi, $heureDebut1, $heureFin1, $heureDebut2, $heureFin2, $heureDebut3, $heureFin3, $heureDebut4, $heureFin4)
 {
-    $heureDebut1 = calculDebut('10:30:00', 0, 11, 0);
+    $heureDebut1 = calculDebut('13:00:00', 0, 11, 0);
     $heureFin1 = calculDebut($heureDebut1, 0, 11, 0);
     $heureDebut2 = calculDebut($heureFin1, 0, 11, 0);
     $heureFin2 = calculDebut($heureDebut2, 0, 11, 0);
@@ -226,7 +226,7 @@ function insertQuart($date, $heurDebut, $heureFin, $scoreLoc, $scoreVisit, $idEq
     $bdd = connectDB();
 
     $quart = $bdd->prepare("INSERT INTO `Matchs`(`Date_Match`, `Heure_Debut_Match`, `Heure_Fin_Match`, `Duree_Match`, `Type_Match`, `But_Local_Match`, `But_Visiteur_Match`, `FK_ID_Local`, `FK_ID_Visiteur`, `FK_ID_Groupe`, `FK_ID_Tournoi`, `FK_ID_Terrain`, `Actif_Match`) 
-    VALUES ('$date','$heurDebut','$heureFin','11','Quart de finale','$scoreLoc','$scoreVisit','$idEquipeLoc','$idEquipeVisit', null,'$id_tournoi','1','1')");
+    VALUES ('$date','$heurDebut','$heureFin','11','Quart de finale','$scoreLoc','$scoreVisit','$idEquipeLoc','$idEquipeVisit', null,'" . $id_tournoi . "','1','1')");
 
     $bdd->beginTransaction();
     $quart->execute();
@@ -244,3 +244,4 @@ function getTournois($id)
 }
 
 $allTournois = createQuartFinale($id_tournoi, $groupeA, $groupeB, $groupeC, $groupeD, $dateTournoi, $heureDebut1, $heureFin1, $heureDebut2, $heureFin2, $heureDebut3, $heureFin3, $heureDebut4, $heureFin4);
+

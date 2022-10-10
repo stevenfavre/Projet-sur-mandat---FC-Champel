@@ -110,3 +110,5 @@ function getDemi($id)
 }
 
 $allDemi = createDemiFinale($id_tournoi, $quartUn, $quartDeux, $quartTrois, $quartQuatre, $dateTournoi, $heureDebut21, $heureFin21, $heureDebut22, $heureFin22);
+
+

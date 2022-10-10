@@ -37,14 +37,14 @@ function afficherMatch($tournoi)
         echo "<div id=\"container\">";
         echo "<a href=\"modifier_match.php?id_match=" . $t['ID_Match'] . "\">";
 
-        // Si le match est actif, laisser le lien 
+        // Si le match est actif, afficher le match normalement, sinon l'affiche avec une barre 
         if ($t['Actif_Match'] == 1)
-            echo "<h5 class=\"fw-bold\" id=\"h5Texte\">" . returnNameEquipe($t['FK_ID_Local']) . " / " . returnNameEquipe($t['FK_ID_Visiteur']) . " - " . $t['Type_Match'] . "</h5></a>";
+            echo "<h5 class=\"fw-bold\" id=\"h5Texte\">" . returnNameEquipe($t['FK_ID_Local']) . " / " . returnNameEquipe($t['FK_ID_Visiteur']) .  "</h5></a>";
         else
-            echo "<strike><h5 class=\"fw-bold\" id=\"h5Texte\">" . returnNameEquipe($t['FK_ID_Local']) . " / " . returnNameEquipe($t['FK_ID_Visiteur']) . " - " . $t['Type_Match'] . "</h5></a></strike>";
+            echo "<strike><h6 class=\"fw-bold\" id=\"h5Texte\">" . returnNameEquipe($t['FK_ID_Local']) . " / " . returnNameEquipe($t['FK_ID_Visiteur']) . " - " . $t['Type_Match'] . "</h6></a></strike>";
 
-        echo "<p class=\"text-muted mb-4\">Date : " . date("d.m.Y", strtotime($t['Date_Match'])) . " / Terrain : " . $t['FK_ID_Terrain'] . "&nbsp;<br>
-            Heure : " . $t['Heure_Debut_Match'] . "&nbsp;-> " . $t['Heure_Fin_Match'] . "&nbsp;<br></p>";
+        echo "<p class=\"text-muted mb-4\">Date : " . date("d.m.Y", strtotime($t['Date_Match'])) . " / Terrain : " . $t['FK_ID_Terrain'] . "&nbsp;<br>";
+        echo "Type de match : " . $t['Type_Match'] . " / Heure : " . $t['Heure_Debut_Match'] . "&nbsp;-> " . $t['Heure_Fin_Match'] . "&nbsp;<br></p>";
         echo "</div></div></div></div>";
     }
 }
@@ -393,7 +393,8 @@ function afficherTableauGroupe($id_tournoi)
         $_SESSION['GroupeTrois'][3][0]['Nom_Equipe'] . '</td><td>' . $_SESSION['GroupeQuatre'][3][0]['Nom_Equipe'] . '</td></tr></tbody>';
 }
 
-function selectMatchPoul($id_tournoi){
+function selectMatchPoul($id_tournoi)
+{
     try {
         $db = connectDB();
         $sql = "SELECT * FROM `Matchs` WHERE `FK_ID_Tournoi` = " . $id_tournoi . " AND `Type_Match` = 'Poule';";
@@ -405,7 +406,8 @@ function selectMatchPoul($id_tournoi){
     }
 }
 
-function selectMatchQuartFinale($id_tournoi){
+function selectMatchQuartFinale($id_tournoi)
+{
     try {
         $db = connectDB();
         $sql = "SELECT * FROM `Matchs` WHERE `FK_ID_Tournoi` = " . $id_tournoi . " AND `Type_Match` = 'Quart de finale';";
@@ -416,5 +418,3 @@ function selectMatchQuartFinale($id_tournoi){
         debug($e->getMessage());
     }
 }
-
-
