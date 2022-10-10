@@ -245,3 +245,4 @@ function getTournois($id)
 
 $allTournois = createQuartFinale($id_tournoi, $groupeA, $groupeB, $groupeC, $groupeD, $dateTournoi, $heureDebut1, $heureFin1, $heureDebut2, $heureFin2, $heureDebut3, $heureFin3, $heureDebut4, $heureFin4);
 
+header("Location:../match.php?id_tournoi=$id_tournoi");

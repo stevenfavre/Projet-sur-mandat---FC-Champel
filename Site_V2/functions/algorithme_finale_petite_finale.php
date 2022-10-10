@@ -43,7 +43,7 @@ function createfinaleEtPetitefinale($id_tournoi, $demiUn, $demiDeux, $dateTourno
 
     $insertPetiteFinale = $bdd->query("SET NAMES 'utf8'");
     $insertPetiteFinale = $bdd->query("INSERT INTO `Matchs`(`Date_Match`, `Heure_Debut_Match`, `Heure_Fin_Match`, `Duree_Match`, `Type_Match`, `But_Local_Match`, `But_Visiteur_Match`, `FK_ID_Local`, `FK_ID_Visiteur`, `FK_ID_Groupe`, `FK_ID_Tournoi`, `FK_ID_Terrain`, `Actif_Match`) 
-  VALUES ('$dateTournoi','$heureDebut23','$heureFin23','11','Petite finale','4','2','$idEquipePerdanteDemiUne','$idEquipePerdanteDemiDeux', null,'$id_tournoi','1','1')");
+  VALUES ('$dateTournoi','$heureDebut23','$heureFin23','10','Petite finale','4','2','$idEquipePerdanteDemiUne','$idEquipePerdanteDemiDeux', null,'$id_tournoi','1','1')");
 
     $bdd = connectDB();
     $num = 3;
@@ -74,7 +74,9 @@ function createfinaleEtPetitefinale($id_tournoi, $demiUn, $demiDeux, $dateTourno
 
     $insertFinale = $bdd->query("SET NAMES 'utf8'");
     $insertFinale = $bdd->query("INSERT INTO `Matchs`(`Date_Match`, `Heure_Debut_Match`, `Heure_Fin_Match`, `Duree_Match`, `Type_Match`, `But_Local_Match`, `But_Visiteur_Match`, `FK_ID_Local`, `FK_ID_Visiteur`, `FK_ID_Groupe`, `FK_ID_Tournoi`, `FK_ID_Terrain`, `Actif_Match`) 
-VALUES ('$dateTournoi','$heureDebut24','$heureFin24','11','Finale','4','2','$idEquipeGagnanteDemiUne','$idEquipeGagnanteDemiDeux', null,'$id_tournoi','1','1')");
+VALUES ('$dateTournoi','$heureDebut24','$heureFin24','10','Finale','4','2','$idEquipeGagnanteDemiUne','$idEquipeGagnanteDemiDeux', null,'$id_tournoi','1','1')");
 }
 
 createfinaleEtPetitefinale($id_tournoi, $demiUn, $demiDeux, $dateTournoi, $heureDebut23, $heureFin23, $heureDebut24, $heureFin24);
+
+header("Location:../match.php?id_tournoi=$id_tournoi");
