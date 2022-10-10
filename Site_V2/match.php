@@ -34,11 +34,12 @@ if (!empty($submit)) {
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800&amp;display=swap">
   <link rel="stylesheet" href="assets/fonts/ionicons.min.css">
 </head>
+
 <body style="/*background: url(&quot;design.jpg&quot;);*/background-position: 0 -60px;">
   <?php include_once('default_pages/navbar.php'); ?>
   <section class="py-5">
-  <div class="container">
-</br>
+    <div class="container">
+      </br>
       <h2>Options - tournoi</h2>
 
       <nav>
@@ -48,9 +49,9 @@ if (!empty($submit)) {
             <div class="dropdown-menu">
               <a class="dropdown-item" href="classement_groupes.php?id_tournoi=<?php echo $_SESSION['id_tournoi']; ?>">Classement groupes</a>
               <a class="dropdown-item" href="classement_quartsFinales.php?id_tournoi=<?php echo $_SESSION['id_tournoi']; ?>">Classement quart de finale</a>
-              <a class="dropdown-item" href="#">Classement demi finale</a>
-              <a class="dropdown-item" href="#">Classement finale</a>
-              <a class="dropdown-item" href="#">Classement petite finale</a>
+              <a class="dropdown-item" href="classement_demi_finale.php?id_tournoi=<?php echo $_SESSION['id_tournoi']; ?>">Classement demi final</a>
+              <a class="dropdown-item" href="classement_finale.php?id_tournoi=<?php echo $_SESSION['id_tournoi']; ?>">Classement finale</a>
+              <a class="dropdown-item" href="classement_petite_finale.php?id_tournoi=<?php echo $_SESSION['id_tournoi']; ?>">Classement petite finale</a>
             </div>
           </li>
           <li class="nav-item"><a class="nav-link " href="modifier_equipe_tournoi.php?id_tournoi=<?php echo $_SESSION['id_tournoi']; ?>">Inscriptions equipes</a></li>
@@ -60,10 +61,10 @@ if (!empty($submit)) {
     </div>
     <div class="container py-5">
       <div class="row">
-        <div class="col-md-8 col-xl-6 text-center mx-auto">          
+        <div class="col-md-8 col-xl-6 text-center mx-auto">
           <h2 class="text-success mb-2">Liste des matchs</h2>
           <h3 class="fw-bold">Match du tournoi : <?= date("d.m.Y", strtotime(getDateTournoi($_SESSION['id_tournoi']))) ?>&nbsp;</h3>
-           <a class="btn btn-primary shadow" role="button" href="creer_match.php?id_tournoi=<?php echo $_SESSION['id_tournoi']; ?>">Créer un match</a> 
+          <a class="btn btn-primary shadow" role="button" href="creer_match.php?id_tournoi=<?php echo $_SESSION['id_tournoi']; ?>">Créer un match</a>
           <?php
           if (empty(selectMatchPoul($_SESSION['id_tournoi']))) {
             echo '<a class="btn btn-primary shadow" role="button" href="./functions/algorithme_groupe.php?id_tournoi=' . $_SESSION['id_tournoi'] . '">Générer le tournoi</a>';

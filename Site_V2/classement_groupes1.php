@@ -39,6 +39,7 @@ if (!empty($_GET['submit'])) {
                 <tbody>
 
                   <?php
+                  affichageResulatsToutesEquipes($_SESSION['id_tournoi']);
                   affichageGroupes($_SESSION['id_tournoi']);
                   //affichageResultatGroupes($_SESSION['id_tournoi']); SELECT MAX
                   ?>
@@ -46,12 +47,11 @@ if (!empty($_GET['submit'])) {
               </table>
               <?php
               if (empty($_GET['id_tournoi'])) { ?>
-                <!-- <a class="btn btn-primary shadow" role="button" href="test2.php?id_tournoi=<?php echo $id_groupe1 ?>">Réinitialisation points</a> -->
-                <!--  <a class="btn btn-primary shadow" role="button" href="classement_groupes1.php?id_tournoi=<?php $_GET['id_tournoi'] ?>">Calculer tous les points</a> -->
-              <?php    } else { ?>
-                <!--  <a class="btn btn-primary shadow" role="button" href="test2.php?id_tournoi=<?php echo $_GET['id_tournoi'] ?>">Réinitialisation points</a> -->
-                <!-- <a class="btn btn-primary shadow" role="button" href="classement_groupes1.php?id_tournoi=<?php echo $_GET['id_tournoi'] ?>">Calculer tous les points</a> -->
 
+                <a class="btn btn-primary shadow" role="button" href="test2.php?id_tournoi=<?php echo $_GET['id_tournoi'] ?>">Réinitialisation points</a>
+
+              <?php    } else { ?>
+                <a class="btn btn-primary shadow" role="button" href="test2.php?id_tournoi=<?php echo $_GET['id_tournoi'] ?>">Réinitialisation points</a>
               <?php }
 
               ?>

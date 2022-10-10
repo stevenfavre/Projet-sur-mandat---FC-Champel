@@ -42,16 +42,17 @@ if (!empty($_GET['submit'])) {
           <form action="#" method="get">
             <table>
               <tbody>
-              <div class="col-md-6 col-xl-4">
-        <div>
+                <div class="col-md-6 col-xl-4">
+                  <div>
 
-          <div class="container">
-            <h1>Quarts de finale</h1>
+                    <div class="container">
+                      <h1>Quarts de finale</h1>
 
-                <?php
-                //affichageClassements($_SESSION['id_tournoi']);
-                affichageResulatsQuartsFinal($_SESSION['id_tournoi']);
-                ?>
+                      <?php
+                      //affichageClassements($_SESSION['id_tournoi']);
+                      affichageResulatsQuartsFinal($_SESSION['id_tournoi']);
+                      //affichageResulatsQuartsFinal1($_SESSION['id_tournoi']);
+                      ?>
               </tbody>
             </table>
             <?php
@@ -66,10 +67,10 @@ if (!empty($_GET['submit'])) {
                //}
                 ?> -->
           </form>
-          <a class="btn btn-primary shadow" href="classement_groupes.php">Revenir</a>
+          <a class="btn btn-primary shadow" href="match.php">Revenir</a>
           <a class="btn btn-primary shadow" role="button" href="./functions/algorithme_match_eliminationDirect.php'<?php $_SESSION['id_tournoi'] ?>'">Générer matchs demie finale</a>
 
-          
+
         </div>
       </div>
   </section>
