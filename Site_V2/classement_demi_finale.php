@@ -46,7 +46,7 @@ if (!empty($_GET['submit'])) {
                   <div>
 
                     <div class="container">
-                      <h1>Demi final</h1>
+                      <h1>Demi finale</h1>
 
                       <?php
                       //affichageClassements($_SESSION['id_tournoi']);
