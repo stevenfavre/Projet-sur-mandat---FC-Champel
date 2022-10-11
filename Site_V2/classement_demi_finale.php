@@ -46,7 +46,7 @@ if (!empty($_GET['submit'])) {
                   <div>
 
                     <div class="container">
-                      <h1>Demi final</h1>
+                      <h1>Demi finale</h1>
 
                       <?php
                       //affichageClassements($_SESSION['id_tournoi']);
@@ -67,7 +67,7 @@ if (!empty($_GET['submit'])) {
                 ?> -->
           </form>
           <a class="btn btn-primary shadow" href="match.php">Revenir</a>
-          <a class="btn btn-primary shadow" role="button" href="./functions/algorithme_finale_petite_finale.php?id_tournoi=<?php echo $_SESSION['id_tournoi'] ?>">Générer matchs finale</a>
+          <a class="btn btn-primary shadow" role="button" href="./functions/algorithme_finale_petite_finale.php?id_tournoi=<?php echo $_SESSION['id_tournoi'] ?>">Générer finale et petite finale</a>
 
 
         </div>

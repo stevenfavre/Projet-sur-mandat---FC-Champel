@@ -77,11 +77,11 @@ function createMatch5A8ePlace($id_tournoi, $quartUn, $quartDeux, $quartTrois, $q
 
     $insertMatchPerdantUn = $bdd->query("SET NAMES 'utf8'");
     $insertMatchPerdantUn = $bdd->query("INSERT INTO `Matchs`(`Date_Match`, `Heure_Debut_Match`, `Heure_Fin_Match`, `Duree_Match`, `Type_Match`, `But_Local_Match`, `But_Visiteur_Match`, `FK_ID_Local`, `FK_ID_Visiteur`, `FK_ID_Groupe`, `FK_ID_Tournoi`, `FK_ID_Terrain`, `Actif_Match`) 
-  VALUES ('$dateTournoi','$heureDebut17','$heureFin17','11','PerdantsQuartUn','4','2','$idEquipePerdanteUne','$idEquipePerdanteDeux', null,'$id_tournoi','1','1')");
+  VALUES ('$dateTournoi','$heureDebut17','$heureFin17','10','PerdantsQuartUn','4','2','$idEquipePerdanteUne','$idEquipePerdanteDeux', null,'$id_tournoi','1','1')");
 
     $insertMatchPerdantDeux = $bdd->query("SET NAMES 'utf8'");
     $insertMatchPerdantDeux = $bdd->query("INSERT INTO `Matchs`(`Date_Match`, `Heure_Debut_Match`, `Heure_Fin_Match`, `Duree_Match`, `Type_Match`, `But_Local_Match`, `But_Visiteur_Match`, `FK_ID_Local`, `FK_ID_Visiteur`, `FK_ID_Groupe`, `FK_ID_Tournoi`, `FK_ID_Terrain`, `Actif_Match`) 
-  VALUES ('$dateTournoi', '$heureDebut18', '$heureFin18','11','PerdantsQuartDeux','4','2','$idEquipePerdanteTrois','$idEquipePerdanteQuatre', null,'$id_tournoi','1','1')");
+  VALUES ('$dateTournoi', '$heureDebut18', '$heureFin18','10','PerdantsQuartDeux','4','2','$idEquipePerdanteTrois','$idEquipePerdanteQuatre', null,'$id_tournoi','1','1')");
 
 
     $num = 2;
@@ -121,12 +121,15 @@ function createMatch5A8ePlace($id_tournoi, $quartUn, $quartDeux, $quartTrois, $q
 
     $insertMatch5e6ePlace = $bdd->query("SET NAMES 'utf8'");
     $insertMatch5e6ePlace = $bdd->query("INSERT INTO `Matchs`(`Date_Match`, `Heure_Debut_Match`, `Heure_Fin_Match`, `Duree_Match`, `Type_Match`, `But_Local_Match`, `But_Visiteur_Match`, `FK_ID_Local`, `FK_ID_Visiteur`, `FK_ID_Groupe`, `FK_ID_Tournoi`, `FK_ID_Terrain`, `Actif_Match`) 
-   VALUES ('$dateTournoi', '$heureDebut19', '$heureFin19','11','Match_5Et6_place','4','2','$idEquipeGagneUne','$idEquipeGagneDeux', null,'$id_tournoi','1','1')");
+   VALUES ('$dateTournoi', '$heureDebut19', '$heureFin19','10','Match_5Et6_place','4','2','$idEquipeGagneUne','$idEquipeGagneDeux', null,'$id_tournoi','1','1')");
 
     $insertMatch7e8ePlace = $bdd->query("SET NAMES 'utf8'");
     $insertMatch7e8ePlace = $bdd->query("INSERT INTO `Matchs`(`Date_Match`, `Heure_Debut_Match`, `Heure_Fin_Match`, `Duree_Match`, `Type_Match`, `But_Local_Match`, `But_Visiteur_Match`, `FK_ID_Local`, `FK_ID_Visiteur`, `FK_ID_Groupe`, `FK_ID_Tournoi`, `FK_ID_Terrain`, `Actif_Match`) 
-  VALUES ('$dateTournoi', '$heureDebut20', '$heureFin20','11','Match_7Et8_place','4','2','$idEquipePerduUne','$idEquipePerduDeux', null,'$id_tournoi','1','1')");
+  VALUES ('$dateTournoi', '$heureDebut20', '$heureFin20','10','Match_7Et8_place','4','2','$idEquipePerduUne','$idEquipePerduDeux', null,'$id_tournoi','1','1')");
 }
 
 
 createMatch5A8ePlace($id_tournoi, $quartUn, $quartDeux, $quartTrois, $quartQuatre, $dateTournoi, $heureDebut17, $heureFin17, $heureDebut18, $heureFin18, $heureDebut19, $heureFin19, $heureDebut20, $heureFin20);
+echo createMatch5A8ePlace($id_tournoi, $quartUn, $quartDeux, $quartTrois, $quartQuatre, $dateTournoi, $heureDebut17, $heureFin17, $heureDebut18, $heureFin18, $heureDebut19, $heureFin19, $heureDebut20, $heureFin20);
+
+// header("Location:../match.php?id_tournoi=$id_tournoi");

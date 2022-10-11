@@ -92,7 +92,7 @@ function insertDemi($date, $heurDebut, $heureFin, $scoreLoc, $scoreVisit, $idEqu
     $bdd = connectDB();
 
     $quart = $bdd->prepare("INSERT INTO `Matchs`(`Date_Match`, `Heure_Debut_Match`, `Heure_Fin_Match`, `Duree_Match`, `Type_Match`, `But_Local_Match`, `But_Visiteur_Match`, `FK_ID_Local`, `FK_ID_Visiteur`, `FK_ID_Groupe`, `FK_ID_Tournoi`, `FK_ID_Terrain`, `Actif_Match`) 
-    VALUES ('$date','$heurDebut','$heureFin','11','Demi finale','$scoreLoc','$scoreVisit','$idEquipeLoc','$idEquipeVisit', null,'$id_tournoi','1','1')");
+    VALUES ('$date','$heurDebut','$heureFin','10','Demi finale','$scoreLoc','$scoreVisit','$idEquipeLoc','$idEquipeVisit', null,'$id_tournoi','1','1')");
 
     $bdd->beginTransaction();
     $quart->execute();
@@ -112,3 +112,4 @@ function getDemi($id)
 $allDemi = createDemiFinale($id_tournoi, $quartUn, $quartDeux, $quartTrois, $quartQuatre, $dateTournoi, $heureDebut21, $heureFin21, $heureDebut22, $heureFin22);
 
 
+header("Location:../match.php?id_tournoi=$id_tournoi");
