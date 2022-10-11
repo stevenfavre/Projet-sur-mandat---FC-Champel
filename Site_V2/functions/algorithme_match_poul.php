@@ -67,7 +67,7 @@ function sqlMatchPoul($tournoi, $equipe1, $equipe2, $heure_debut, $heure_fin, $g
     try {
         $db = connectDB();
         $sql = "INSERT INTO `Matchs` (`ID_Match`, `Date_Match`, `Heure_Debut_Match`, `Heure_Fin_Match`, `Duree_Match`, `Type_Match`, `But_Local_Match`, `But_Visiteur_Match`, `FK_ID_Local`, `FK_ID_Visiteur`, `FK_ID_Groupe`, `FK_ID_Tournoi`, `FK_ID_Terrain`, `Actif_Match`)
-        VALUES (NULL,  '" . $tournoi[0]['Date_Debut_Tournoi'] . "', '$heure_debut', '$heure_fin', '$minutes', 'Poule', '0', '0' , '" . $equipe1['ID_Equipe'] . "', '" . $equipe2['ID_Equipe'] . "', '$groupe', '" . $tournoi[0]['ID_Tournoi'] . "',  '$terrain', 1);";
+        VALUES (NULL,  '" . $tournoi[0]['Date_Debut_Tournoi'] . "', '$heure_debut', '$heure_fin', '$minutes', 'Poule', '" . rand(0,10) . "', '" . rand(0,10) . "' , '" . $equipe1['ID_Equipe'] . "', '" . $equipe2['ID_Equipe'] . "', '$groupe', '" . $tournoi[0]['ID_Tournoi'] . "',  '$terrain', 1);";
         $request = $db->prepare($sql);
         $request->execute();
     } catch (\Throwable $e) {

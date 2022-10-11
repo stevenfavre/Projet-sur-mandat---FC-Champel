@@ -66,7 +66,6 @@ if (!empty($submit)) {
         <div class="col-md-8 col-xl-6 text-center mx-auto">
           <h2 class="text-success mb-2">Liste des matchs</h2>
           <h3 class="fw-bold">Match du tournoi : <?= date("d.m.Y", strtotime(getDateTournoi($_SESSION['id_tournoi']))) ?>&nbsp;</h3>
-          <a class="btn btn-primary shadow" role="button" href="creer_match.php?id_tournoi=<?php echo $_SESSION['id_tournoi']; ?>">Créer un match</a>
           <?php
           if (empty(selectMatchPoul($_SESSION['id_tournoi']))) {
             echo '<a class="btn btn-primary shadow" role="button" href="./functions/algorithme_groupe.php?id_tournoi=' . $_SESSION['id_tournoi'] . '">Générer le tournoi</a>';
