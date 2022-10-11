@@ -211,14 +211,11 @@ function createQuartFinale($id_tournoi, $groupeA, $groupeB, $groupeC, $groupeD, 
     $insertquartTrois = insertQuart($dateTournoi, $heureDebut3, $heureFin3, "3", "0", $idEquipe5, $idEquipe6, $id_tournoi);
     $insertquartQuatre = insertQuart($dateTournoi, $heureDebut4, $heureFin4, "5", "2", $idEquipe7, $idEquipe8, $id_tournoi);
 
-    $tournoiPrem = getTournois($insertquartUn);
-    $tournoiDeux = getTournois($insertquartDeux);
-    $tournoiTrois = getTournois($insertquartTrois);
-    $tournoiQuatre = getTournois($insertquartQuatre);
+    $quart1 = getTournois($insertquartUn);
+    $quart2 = getTournois($insertquartDeux);
+    $quart3 = getTournois($insertquartTrois);
+    $quart4 = getTournois($insertquartQuatre);
 
-    $allTournois =  [$tournoiPrem, $tournoiDeux, $tournoiTrois, $tournoiQuatre];
-
-    return $allTournois;
 }
 
 function insertQuart($date, $heurDebut, $heureFin, $scoreLoc, $scoreVisit, $idEquipeLoc, $idEquipeVisit, $id_tournoi)
@@ -243,6 +240,6 @@ function getTournois($id)
     return $quart;
 }
 
-$allTournois = createQuartFinale($id_tournoi, $groupeA, $groupeB, $groupeC, $groupeD, $dateTournoi, $heureDebut1, $heureFin1, $heureDebut2, $heureFin2, $heureDebut3, $heureFin3, $heureDebut4, $heureFin4);
+createQuartFinale($id_tournoi, $groupeA, $groupeB, $groupeC, $groupeD, $dateTournoi, $heureDebut1, $heureFin1, $heureDebut2, $heureFin2, $heureDebut3, $heureFin3, $heureDebut4, $heureFin4);
 
 header("Location:../match.php?id_tournoi=$id_tournoi");
