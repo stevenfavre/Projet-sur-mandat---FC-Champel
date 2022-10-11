@@ -52,8 +52,8 @@ if (!empty($submit)) {
               <a class="dropdown-item" href="classement_demi_finale.php?id_tournoi=<?php echo $_SESSION['id_tournoi']; ?>">Classement demi final</a>
               <a class="dropdown-item" href="classement_finale.php?id_tournoi=<?php echo $_SESSION['id_tournoi']; ?>">Classement finale</a>
               <a class="dropdown-item" href="classement_petite_finale.php?id_tournoi=<?php echo $_SESSION['id_tournoi']; ?>">Classement petite finale</a>
-              <a class="dropdown-item" href="classement_algorithme_match_5e_8e_place.php?id_tournoi=<?php echo $_SESSION['id_tournoi']; ?>">Classement matchs pour la 5ème à 8ème place</a>
-              <a class="dropdown-item" href="classement_algorithme_match_9e_16e_place.php?id_tournoi=<?php echo $_SESSION['id_tournoi']; ?>">Classement matchs pour la 9ème à 16ème place</a>
+              <a class="dropdown-item" href="classement__5e_8e_place.php?id_tournoi=<?php echo $_SESSION['id_tournoi']; ?>">Classement matchs pour la 5ème à 8ème place</a>
+              <a class="dropdown-item" href="classement_9e_16e_place.php?id_tournoi=<?php echo $_SESSION['id_tournoi']; ?>">Classement matchs pour la 9ème à 16ème place</a>
 
             </div>
           </li>

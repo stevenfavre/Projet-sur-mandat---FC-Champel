@@ -67,7 +67,7 @@ if (!empty($_GET['submit'])) {
                 ?> -->
           </form>
           <a class="btn btn-primary shadow" href="match.php">Revenir</a>
-          <a class="btn btn-primary shadow" role="button" href="./functions/algorithme_finale_petite_finale.php?id_tournoi=<?php echo $_SESSION['id_tournoi'] ?>">Générer finale et petite finale</a>
+          <a class="btn btn-primary shadow" role="button" href="./functions/algorithme_finale_petite_finale.php?id_tournoi=<?php echo $_SESSION['id_tournoi'] ?>">Générer la Finale et la petite finale</a>
 
 
         </div>
