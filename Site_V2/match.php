@@ -52,9 +52,8 @@ if (!empty($submit)) {
               <a class="dropdown-item" href="classement_demi_finale.php?id_tournoi=<?php echo $_SESSION['id_tournoi']; ?>">Classement demi final</a>
               <a class="dropdown-item" href="classement_finale.php?id_tournoi=<?php echo $_SESSION['id_tournoi']; ?>">Classement finale</a>
               <a class="dropdown-item" href="classement_petite_finale.php?id_tournoi=<?php echo $_SESSION['id_tournoi']; ?>">Classement petite finale</a>
-              <a class="dropdown-item" href="classement__5e_8e_place.php?id_tournoi=<?php echo $_SESSION['id_tournoi']; ?>">Classement matchs pour la 5ème à 8ème place</a>
-              <a class="dropdown-item" href="classement_9e_16e_place.php?id_tournoi=<?php echo $_SESSION['id_tournoi']; ?>">Classement matchs pour la 9ème à 16ème place</a>
-
+              <a class="dropdown-item" href="classement_last_equipes.php?id_tournoi=<?php echo $_SESSION['id_tournoi']; ?>">Classement 5ème à 8ème place</a>
+              <a class="dropdown-item" href="classement_last_places.php?id_tournoi=<?php echo $_SESSION['id_tournoi']; ?>">Classement 9ème à 16ème place</a>
             </div>
           </li>
           <li class="nav-item"><a class="nav-link " href="modifier_equipe_tournoi.php?id_tournoi=<?php echo $_SESSION['id_tournoi']; ?>">Inscriptions equipes</a></li>
@@ -67,16 +66,16 @@ if (!empty($submit)) {
         <div class="col-md-8 col-xl-6 text-center mx-auto">
           <h2 class="text-success mb-2">Liste des matchs</h2>
           <h3 class="fw-bold">Match du tournoi : <?= date("d.m.Y", strtotime(getDateTournoi($_SESSION['id_tournoi']))) ?>&nbsp;</h3>
+          <a class="btn btn-primary shadow" role="button" href="creer_match.php?id_tournoi=<?php echo $_SESSION['id_tournoi']; ?>">Créer un match</a>
           <?php
           if (empty(selectMatchPoul($_SESSION['id_tournoi']))) {
             echo '<a class="btn btn-primary shadow" role="button" href="./functions/algorithme_groupe.php?id_tournoi=' . $_SESSION['id_tournoi'] . '">Générer le tournoi</a>';
           } else if (empty(selectMatchQuartFinale($_SESSION['id_tournoi']))) {
-            echo '<a class="btn btn-primary shadow" role="button" href="./functions/algorithme_quart_finale.php?id_tournoi=' . $_SESSION['id_tournoi'] . '">Générer les quarts de finale</a>';
+            echo '<a class="btn btn-primary shadow" role="button" href="./functions/algorithme_match_eliminationDirect.php' . $_SESSION['id_tournoi'] . '">Générer les quarts de finale</a>';
           }
           ?>
           <br><br>
           <input type="text" id="recherche" onkeyup="recherche()" placeholder="Recherche..." title="Rechercher un match">
-          <br><br>
           <?php
           // afficherSalleEtDate($_GET['id_tournoi']);
           ?>
@@ -101,13 +100,11 @@ if (!empty($submit)) {
       filter = input.value.toUpperCase();
       div = document.getElementById("divContenu");
       div2 = div.getElementsByClassName("equipe");
+      console.log(div2);
       for (i = 0; i < div2.length; i++) {
         a = div2[i].getElementsByTagName("h5")[0];
         txtValue = a.textContent || a.innerText;
-        console.log(a);
-        console.log(div2[i]);
-        console.log(txtValue.toUpperCase().indexOf(filter));
-        if (txtValue.toUpperCase().indexOf(filter) != -1) {
+        if (txtValue.toUpperCase().indexOf(filter) > -1) {
           div2[i].style.display = "";
         } else {
           div2[i].style.display = "none";

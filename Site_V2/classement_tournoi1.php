@@ -60,13 +60,13 @@ if (!empty($_GET['submit'])) {
               <tbody>
                 <?php
                 if (empty($_GET['id_groupe'])) {
-                  affichageResulatsEquipes1($id_groupe1);
-                  affichageResulatsEquipes2($id_groupe1);
-                  affichageResulatsEquipes($id_groupe1);
+                  affichageResulatsEquipes1($id_groupe1, $_GET['id_tournoi']);
+                  affichageResulatsEquipes2($id_groupe1, $_GET['id_tournoi']);
+                  affichageResulatsEquipes($id_groupe1, $_GET['id_tournoi']);
                 } else {
-                  affichageResulatsEquipes1($_GET['id_groupe']);
-                  affichageResulatsEquipes2($_GET['id_groupe']);
-                  affichageResulatsEquipes($_GET['id_groupe']);
+                  affichageResulatsEquipes1($_GET['id_groupe'], $_GET['id_tournoi']);
+                  affichageResulatsEquipes2($_GET['id_groupe'], $_GET['id_tournoi']);
+                  affichageResulatsEquipes($_GET['id_groupe'], $_GET['id_tournoi']);
                 }
                 ?>
               </tbody>
@@ -74,9 +74,9 @@ if (!empty($_GET['submit'])) {
             </br></br>
             <?php
             if (empty($_GET['id_groupe'])) { ?>
-              <a class="btn btn-primary shadow" role="button" href="test1.php?id_groupe=<?php echo $id_groupe1 ?>">Réinitialisation points</a>
+              <a class="btn btn-primary shadow" role="button" href="test1.php?id_groupe=<?php echo $id_groupe1 ?>&id_tournoi=<?php echo $_GET['id_tournoi']?>">Réinitialisation points</a>
             <?php    } else { ?>
-              <a class="btn btn-primary shadow" role="button" href="test1.php?id_groupe=<?php echo $_GET['id_groupe'] ?>">Réinitialisation points</a>
+              <a class="btn btn-primary shadow" role="button" href="test1.php?id_groupe=<?php echo $_GET['id_groupe'] ?>&id_tournoi=<?php echo $_GET['id_tournoi']?>">Réinitialisation points</a>
             <?php }
             ?>
           </form>
