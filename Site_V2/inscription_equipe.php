@@ -2,17 +2,29 @@
 include('./functions/dbconnection.php');
 include('./functions/tournoi.php');
 
-$submitPost = filter_input(INPUT_POST, 'submit');
+$submitPost = filter_input(INPUT_GET, 'submit');
 
   if ($_GET['id_tournoi'] != null) {
     refreshSessionTournoi();
   }
 
-  if ($submitPost == "ok") {
-    $equipe = filter_input(INPUT_POST, 'FK_ID_Equipe');
+  if (!empty($_GET['submit'])) {
+
+    header("Location: inscription_equipe.php?id_tournoi=" . $_SESSION['tournoi']['ID_Tournoi']);
+
+
+
+  }elseif(empty($_GET['submit'])){
+    $equipe = filter_input(INPUT_GET, 'FK_ID_Equipe');
     inscription_equipe_tournoi($_SESSION['id_tournoi'], $equipe);
     header("Location: modifier_equipe_tournoi.php?id_tournoi=" . $_SESSION['tournoi']['ID_Tournoi']);
+    
+    
+
+
   }
+
+ 
 
   function refreshSessionTournoi()
   {
@@ -43,14 +55,13 @@ $submitPost = filter_input(INPUT_POST, 'submit');
           <h3 class="fw-bold">Inscrivez une équipe</h3>
           <div class="card shadow-sm">
             <center>
-              <form action="#" method="POST">
+              <form action="inscription_equipe.php" method="GET">
                 <div class="mb-3 w-50 mx-auto">
                   </br>
                   <h5 class="fw-bold text-success mb-2">Choisissez votre équipe <i class="fa-solid fa-users"></i></h5>
 
-                  <select class="form-control" name="FK_ID_Equipe" required>
                     <?php selection_equipe_incription1($_SESSION['id_tournoi']); ?>
-                  </select>
+               
                   </br></br>
                   <div><button class="btn btn-primary" type="submit" name="submit" value="ok">Inscrire</button>
                     </br></br>

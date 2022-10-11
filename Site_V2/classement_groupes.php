@@ -59,9 +59,7 @@ if (!empty($_GET['submit'])) {
             </br></br>
             <!--     <a class="btn btn-primary shadow" href="javascript:history.go(-1)">Revenir</a> -->
             <a class="btn btn-primary shadow" href="match.php">Revenir</a>
-
-            <a class="btn btn-primary shadow" role="button" href="./functions/algorithme_quart_finale.php?id_tournoi=<?php echo $_SESSION['id_tournoi'] ?>">Générer les quarts de finale</a>
-            <a class="btn btn-primary shadow" role="button" href="./functions/algorithme_match_9e_16e_place.php?id_tournoi=<?php echo $_SESSION['id_tournoi'] ?>">Générer les matchs de 9e à 16e</a>
+            <a class="btn btn-primary shadow" role="button" href="./functions/algorithme_match_eliminationDirect.php'<?php $_SESSION['id_tournoi'] ?>'">Générer les quarts de finale</a>
           </div>
         </div>
       </div>

@@ -2,6 +2,7 @@
 error_reporting(E_ERROR | E_PARSE);
 session_start();
 require_once "functions/steven_fonctions.php";
+require_once "functions/tournoi.php";
 
 if (!empty($_GET['id_tournoi']))
   $_SESSION['id_tournoi'] = $_GET['id_tournoi'];
@@ -54,6 +55,8 @@ if (!empty($submit)) {
               <a class="dropdown-item" href="classement_petite_finale.php?id_tournoi=<?php echo $_SESSION['id_tournoi']; ?>">Classement petite finale</a>
               <a class="dropdown-item" href="classement_last_equipes.php?id_tournoi=<?php echo $_SESSION['id_tournoi']; ?>">Classement 5ème à 8ème place</a>
               <a class="dropdown-item" href="classement_last_places.php?id_tournoi=<?php echo $_SESSION['id_tournoi']; ?>">Classement 9ème à 16ème place</a>
+              <a class="dropdown-item" href="tous_les_classement_ID.php?id_tournoi=<?php echo $_SESSION['id_tournoi']; ?>">Tout le classement</a>
+
             </div>
           </li>
           <li class="nav-item"><a class="nav-link " href="modifier_equipe_tournoi.php?id_tournoi=<?php echo $_SESSION['id_tournoi']; ?>">Inscriptions equipes</a></li>
@@ -67,7 +70,9 @@ if (!empty($submit)) {
           <h2 class="text-success mb-2">Liste des matchs</h2>
           <h3 class="fw-bold">Match du tournoi : <?= date("d.m.Y", strtotime(getDateTournoi($_SESSION['id_tournoi']))) ?>&nbsp;</h3>
           <?php
-          if (empty(selectMatchPoul($_SESSION['id_tournoi']))) {
+            if (empty(selectionner_equipe_tournoi($_SESSION['id_tournoi']))) {
+              echo '<a class="btn btn-primary shadow" role="button" href="inscription_equipe.php?id_tournoi=' . $_SESSION['id_tournoi'] . '">Inscrire des equipes</a>';
+            }else if (empty(selectMatchPoul($_SESSION['id_tournoi']))) {
             echo '<a class="btn btn-primary shadow" role="button" href="./functions/algorithme_groupe.php?id_tournoi=' . $_SESSION['id_tournoi'] . '">Générer le tournoi</a>';
           } else if (empty(selectMatchQuartFinale($_SESSION['id_tournoi']))) {
             echo '<a class="btn btn-primary shadow" role="button" href="./functions/algorithme_match_eliminationDirect.php' . $_SESSION['id_tournoi'] . '">Générer les quarts de finale</a>';

@@ -68,14 +68,14 @@ if (!empty($_GET['submit'])) {
 
 
 
-            <a class="btn btn-primary shadow" role="button" href="tournois.php">Retour</a></p>
+            <a class="btn btn-primary shadow" role="button" href="tournois.php"><i class="fa-solid fa-arrow-left"></i></a></p>
 
 
             <h6 style="padding-left: 75%;">
-              <a href="creer_tournoi.php" class="fw-bold"><i class="fa-solid fa-plus"></i> Ajouter inscription </a>
+              <a href="creer_tournoi.php" class="fw-bold"><i class="fa-solid fa-plus"></i> Creer tournoi</a>
 
               </br></br>
-              <a href="afficher_tournois_supprimer.php" class="fw-bold"><i class="fa-regular fa-trash-can"></i> Historique inscriptions </a>
+              <a href="afficher_tournois_supprimer.php" class="fw-bold"><i class="fa-regular fa-trash-can"></i> Tournois supprimés</a>
             </h6>
 
 

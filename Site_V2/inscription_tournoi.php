@@ -55,13 +55,7 @@ if (isset($_POST['submit'])) {
               <br /><br />
               <div><button class="btn btn-primary shadow d-block w-100" type="reset" name="reset">Annuler</button></div>
             </form>
-            <br /><br />
-            <div><a href="Formulaire_insertion_club.php">Insertion des clubs</a></div>
-            <br /><br />
-            <div><a href="Formulaire_modification_club.php">Modification des clubs</a></div>
-            <br /><br />
-            <div><a href="Formulaire_suppression_club.php">Suppression des clubs</a></div>
-            <br /><br />
+           
           </div>
         </div>
       </div>

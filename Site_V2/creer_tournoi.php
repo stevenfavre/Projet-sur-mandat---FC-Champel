@@ -51,6 +51,9 @@
                     $Date_fin = $_POST['Date_Fin_Tournoi'];
                     $Fk_ID_Salle = $_POST['ID_Salle'];
                     verificationDonneesTournois($Date_debut, $Date_fin, $Fk_ID_Salle);
+                    //header("Location: afficher_tournois.php");
+                    //die();
+                   
                   }
                   ?>
                  </br></br>
@@ -63,7 +66,7 @@
                      </td>
                      <td>
                        <ul>
-                         <a class="btn btn-primary shadow" role="button" href="afficher_tournois.php">Retour</a>
+                         <a class="btn btn-primary shadow" role="button" href="afficher_tournois.php"><i class="fa-solid fa-arrow-left"></i></a>
                        </ul>
                      </td>
                    </tbody>

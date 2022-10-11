@@ -15,13 +15,7 @@ if (!empty($_GET['submit'])) {
   $Datefin = $coupure[4];
   if ($option == 'activer') {
     update_activer_logique($id_tournoi);
-  } elseif ($option == 'terminer') {
-    update_terminer_logique($id_tournoi);
-  } elseif ($option == 'annuler') {
-    update_suppresion_logique($id_tournoi);
-  } elseif ($option == "modifier") {
-    update_tournoi($id_tournoi, $DateDebut, $Datefin, $Salle);
-  }
+  } 
 }
 ?>
 <!DOCTYPE html>
@@ -44,18 +38,18 @@ if (!empty($_GET['submit'])) {
       <div class="container py-5">
         <div class="row mb-5">
           <div class="col-md-8 col-xl-6 text-center mx-auto">
-            <p class="fw-bold text-success mb-2">Tous les tournois</p>
-            <h1>Liste tournois</h1>
+            <p class="fw-bold text-success mb-2">Tous les tournois supprimés</p>
+            <h1>Historique tournois supprimés</h1>
           </div>
         </div>
         <div class="row d-flex justify-content-center">
           <div class="col-md-8 col-xl-8">
-            <form action="afficher_tournois.php" method="get">
+            <form action="afficher_tournois_supprimer.php" method="get">
               <table>
                 <tbody>
 
                   <?php
-                  afficher_date_tournoi();
+                   afficher_date_tournoi_supprime();
                   ?>
 
                 </tbody>
@@ -68,20 +62,12 @@ if (!empty($_GET['submit'])) {
 
 
 
-            <a class="btn btn-primary shadow" role="button" href="tournois.php">Retour</a></p>
+            <a class="btn btn-primary shadow" role="button" href="afficher_tournois.php"><i class="fa-solid fa-arrow-left"></i></a></p>
 
 
-            <h6 style="padding-left: 75%;">
-              <a href="creer_tournoi.php" class="fw-bold"><i class="fa-solid fa-plus"></i> Ajouter inscription </a>
-
-              </br></br>
-              <a href="afficher_tournois_supprimer.php" class="fw-bold"><i class="fa-regular fa-trash-can"></i> Historique inscriptions </a>
-            </h6>
 
 
           </div>
-
-
         </div>
       </div>
     </div>
