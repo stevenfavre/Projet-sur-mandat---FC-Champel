@@ -14,45 +14,45 @@ function creerMatchPoul()
 
     $time_debut = $_POST['time-debut'];
 
-    $futur_debut = forMatchPoul($_SESSION['GroupeUn'], $tournoi, $time_debut);
-    $futur_debut = forMatchPoul($_SESSION['GroupeDeux'], $tournoi, $futur_debut);
-    $futur_debut = forMatchPoul($_SESSION['GroupeTrois'], $tournoi, $futur_debut);
-    $futur_debut = forMatchPoul($_SESSION['GroupeQuatre'], $tournoi, $futur_debut);
+    $futur_debut = forMatchPoul($_SESSION['GroupeUn'], $tournoi, $time_debut, 1);
+    $futur_debut = forMatchPoul($_SESSION['GroupeDeux'], $tournoi, $futur_debut, 2);
+    $futur_debut = forMatchPoul($_SESSION['GroupeTrois'], $tournoi, $futur_debut, 3);
+    $futur_debut = forMatchPoul($_SESSION['GroupeQuatre'], $tournoi, $futur_debut, 4);
 }
 
-function forMatchPoul($groupe, $tournoi, $time_debut = "08:00:00")
+function forMatchPoul($groupe, $tournoi, $time_debut = "08:00:00", $nbGroupe)
 {
     $time_match = $_POST['time-match'];
     $time_pause = $_POST['time-pause'];
     $time_calcul = $time_debut;
 
     $time_fin = calculerIntervalTemps($time_debut, 0, $time_match);
-    sqlMatchPoul($tournoi, $groupe[0][0], $groupe[1][0], $time_debut, $time_fin, $groupe[0][0]['FK_ID_Groupe'], 1);
+    sqlMatchPoul($tournoi, $groupe[0][0], $groupe[1][0], $time_debut, $time_fin, $nbGroupe, 1);
 
     $time_debut = calculerIntervalTemps($time_fin, 0, $time_match * 3 + $time_pause * 3);
     $time_fin = calculerIntervalTemps($time_fin, 0, $time_match * 4 + $time_pause * 3);
-    sqlMatchPoul($tournoi, $groupe[2][0], $groupe[3][0], $time_debut, $time_fin, $groupe[0][0]['FK_ID_Groupe'], 1);
+    sqlMatchPoul($tournoi, $groupe[2][0], $groupe[3][0], $time_debut, $time_fin, $nbGroupe, 1);
     //echo "<p>" . date('H:i:s', $time_debut) . "</p>";
 
     $time_debut = calculerIntervalTemps($time_fin, 0, $time_match * 3 + $time_pause * 3);
     $time_fin = calculerIntervalTemps($time_fin, 0, $time_match * 4 + $time_pause * 3);
-    sqlMatchPoul($tournoi, $groupe[0][0], $groupe[2][0], $time_debut, $time_fin, $groupe[0][0]['FK_ID_Groupe'], 1);
+    sqlMatchPoul($tournoi, $groupe[0][0], $groupe[2][0], $time_debut, $time_fin, $nbGroupe, 1);
     //echo "<p>" . date('H:i:s', $time_debut) . "</p>";
 
 
     $time_debut = calculerIntervalTemps($time_fin, 0, $time_match * 3 + $time_pause * 3);
     $time_fin = calculerIntervalTemps($time_fin, 0, $time_match * 4 + $time_pause * 3);
-    sqlMatchPoul($tournoi, $groupe[1][0], $groupe[3][0], $time_debut, $time_fin, $groupe[0][0]['FK_ID_Groupe'], 1);
+    sqlMatchPoul($tournoi, $groupe[1][0], $groupe[3][0], $time_debut, $time_fin, $nbGroupe, 1);
     //echo "<p>" . date('H:i:s', $time_debut) . "</p>";
 
     $time_debut = calculerIntervalTemps($time_fin, 0, $time_match * 3 + $time_pause * 3);
     $time_fin = calculerIntervalTemps($time_fin, 0, $time_match * 4 + $time_pause * 3);
-    sqlMatchPoul($tournoi, $groupe[0][0], $groupe[3][0], $time_debut, $time_fin, $groupe[0][0]['FK_ID_Groupe'], 1);
+    sqlMatchPoul($tournoi, $groupe[0][0], $groupe[3][0], $time_debut, $time_fin, $nbGroupe, 1);
     //echo "<p>" . date('H:i:s', $time_debut) . "</p>";
 
     $time_debut = calculerIntervalTemps($time_fin, 0, $time_match * 3 + $time_pause * 3);
     $time_fin = calculerIntervalTemps($time_fin, 0, $time_match * 4 + $time_pause * 3);
-    sqlMatchPoul($tournoi, $groupe[1][0], $groupe[2][0], $time_debut, $time_fin, $groupe[0][0]['FK_ID_Groupe'], 1);
+    sqlMatchPoul($tournoi, $groupe[1][0], $groupe[2][0], $time_debut, $time_fin, $nbGroupe, 1);
 
     return calculerIntervalTemps($time_calcul, 0, $time_match + $time_pause);
 }
