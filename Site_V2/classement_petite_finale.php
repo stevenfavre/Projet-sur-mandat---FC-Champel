@@ -66,7 +66,7 @@ if (!empty($_GET['submit'])) {
                //}
                 ?> -->
           </form>
-          <a class="btn btn-primary shadow" href="classement_groupes.php">Revenir</a>
+          <a class="btn btn-primary shadow" href="match.php">Revenir</a>
 
 
         </div>
