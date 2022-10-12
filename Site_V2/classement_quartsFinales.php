@@ -68,8 +68,10 @@ if (!empty($_GET['submit'])) {
                 ?> -->
           </form>
           <a class="btn btn-primary shadow" href="match.php">Revenir</a>
-          <a class="btn btn-primary shadow" role="button" href="./functions/algorithme_match_eliminationDirect.php'<?php $_SESSION['id_tournoi'] ?>'">Générer matchs demie finale</a>
-
+          <br /><br />
+          <a class="btn btn-primary shadow" role="button" href="./functions/algorithme_demi_finale.php?id_tournoi=<?php echo $_SESSION['id_tournoi'] ?>">Générer matchs demie finale</a>
+          <br /><br />
+          <a class="btn btn-primary shadow" role="button" href="./functions/algorithme_match_5e_8e_place.php?id_tournoi=<?php echo $_SESSION['id_tournoi'] ?>">Générer matchs 5ème à 8ème place</a>
 
         </div>
       </div>
