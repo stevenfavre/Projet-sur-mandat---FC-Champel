@@ -185,6 +185,162 @@ function affichagePetiteFinal($id_match)
     }
 }
 
+function affichagePerdantQuartFinal1($id_match)
+{
+    $hola = 1;
+
+
+    echo "<tr><td><ul><h5 class=\"fw-bold text-success mb-2\">Match " . "<i class=\"fa-solid fa-people-group\"></i></h5></ul></td>
+    <td><ul><h5 class=\"fw-bold text-success mb-2\">Equipes " .  "<i class=\"fa-solid fa-users-viewfinder\"></i></h5></ul></td>
+    <td><ul><h5 class=\"fw-bold text-success mb-2\">Buts " .  "<i class=\"fa-solid fa-users-viewfinder\"></i></h5></ul></td>
+    <td><ul><h5 class=\"fw-bold text-success mb-2\">Victoires " .  "<i class=\"fa-solid fa-users-viewfinder\"></i></h5></ul></td></tr>";
+    foreach (selectionnerEquipesPerdantesQuartFinal($id_match) as $matchs) {
+        if ($matchs['But_Local_Match'] < $matchs['But_Visiteur_Match']) {
+
+            echo "<tr><td><ul><h5 class=\"fw-bold\">" . $hola++  . " match petite finale " . "</h5></ul></td>
+        <td><ul><h5 class=\"fw-bold\">"  .  contientNomEquipe($matchs['FK_ID_Local']) . " VS " .  contientNomEquipe($matchs['FK_ID_Visiteur']) . "</h5></ul></td>
+        <td><ul><h5 class=\"fw-bold\">"  . $matchs['But_Local_Match'] . " vs " .  $matchs['But_Visiteur_Match'] . "</h5></ul></td>
+        <td><ul><h5 class=\"fw-bold\">"  . "<i class=\"fa-solid fa-trophy\"></i>" . " " .  contientNomEquipe($matchs['FK_ID_Visiteur']) . "</h5></ul></td></tr>";
+        } else
+            echo "<tr><td><ul><h5 class=\"fw-bold\">" . $hola++  . " match petite finale " . "</h5></ul></td>
+        <td><ul><h5 class=\"fw-bold\">"  .  contientNomEquipe($matchs['FK_ID_Local']) . " VS " .  contientNomEquipe($matchs['FK_ID_Visiteur']) . "</h5></ul></td>
+        <td><ul><h5 class=\"fw-bold\">"  . $matchs['But_Local_Match'] . " vs " .  $matchs['But_Visiteur_Match'] . "</h5></ul></td>
+        <td><ul><h5 class=\"fw-bold\">"  . "<i class=\"fa-solid fa-trophy\"></i>" . " " . contientNomEquipe($matchs['FK_ID_Local']) . "</h5></ul></td></tr>";
+    }
+}
+
+function affichagePerdantDernierePlace($id_match)
+{
+    $hola = 1;
+
+
+    echo "<tr><td><ul><h5 class=\"fw-bold text-success mb-2\">Match " . "<i class=\"fa-solid fa-people-group\"></i></h5></ul></td>
+    <td><ul><h5 class=\"fw-bold text-success mb-2\">Equipes " .  "<i class=\"fa-solid fa-users-viewfinder\"></i></h5></ul></td>
+    <td><ul><h5 class=\"fw-bold text-success mb-2\">Buts " .  "<i class=\"fa-solid fa-users-viewfinder\"></i></h5></ul></td>
+    <td><ul><h5 class=\"fw-bold text-success mb-2\">Victoires " .  "<i class=\"fa-solid fa-users-viewfinder\"></i></h5></ul></td></tr>";
+    foreach (selectionnerEquipesPerdantesDernierePlace1($id_match) as $matchs) {
+        if ($matchs['But_Local_Match'] < $matchs['But_Visiteur_Match']) {
+
+            echo "<tr><td><ul><h5 class=\"fw-bold\">" . $hola++  . " match petite finale " . "</h5></ul></td>
+        <td><ul><h5 class=\"fw-bold\">"  .  contientNomEquipe($matchs['FK_ID_Local']) . " VS " .  contientNomEquipe($matchs['FK_ID_Visiteur']) . "</h5></ul></td>
+        <td><ul><h5 class=\"fw-bold\">"  . $matchs['But_Local_Match'] . " vs " .  $matchs['But_Visiteur_Match'] . "</h5></ul></td>
+        <td><ul><h5 class=\"fw-bold\">"  . "<i class=\"fa-solid fa-trophy\"></i>" . " " .  contientNomEquipe($matchs['FK_ID_Visiteur']) . "</h5></ul></td></tr>";
+        } else
+            echo "<tr><td><ul><h5 class=\"fw-bold\">" . $hola++  . " match petite finale " . "</h5></ul></td>
+        <td><ul><h5 class=\"fw-bold\">"  .  contientNomEquipe($matchs['FK_ID_Local']) . " VS " .  contientNomEquipe($matchs['FK_ID_Visiteur']) . "</h5></ul></td>
+        <td><ul><h5 class=\"fw-bold\">"  . $matchs['But_Local_Match'] . " vs " .  $matchs['But_Visiteur_Match'] . "</h5></ul></td>
+        <td><ul><h5 class=\"fw-bold\">"  . "<i class=\"fa-solid fa-trophy\"></i>" . " " . contientNomEquipe($matchs['FK_ID_Local']) . "</h5></ul></td></tr>";
+    }
+}
+
+function affichagePerdantDernierePlace1($id_match)
+{
+    $hola = 1;
+    foreach (selectionnerEquipesPerdantesDernierePlace($id_match) as $matchs) {
+        if ($matchs['But_Local_Match'] < $matchs['But_Visiteur_Match']) {
+
+            echo "<tr><td><ul><h5 class=\"fw-bold\">" . $hola++  . " match petite finale " . "</h5></ul></td>
+        <td><ul><h5 class=\"fw-bold\">"  .  contientNomEquipe($matchs['FK_ID_Local']) . " VS " .  contientNomEquipe($matchs['FK_ID_Visiteur']) . "</h5></ul></td>
+        <td><ul><h5 class=\"fw-bold\">"  . $matchs['But_Local_Match'] . " vs " .  $matchs['But_Visiteur_Match'] . "</h5></ul></td>
+        <td><ul><h5 class=\"fw-bold\">"  . "<i class=\"fa-solid fa-trophy\"></i>" . " " .  contientNomEquipe($matchs['FK_ID_Visiteur']) . "</h5></ul></td></tr>";
+        } else
+            echo "<tr><td><ul><h5 class=\"fw-bold\">" . $hola++  . " match petite finale " . "</h5></ul></td>
+        <td><ul><h5 class=\"fw-bold\">"  .  contientNomEquipe($matchs['FK_ID_Local']) . " VS " .  contientNomEquipe($matchs['FK_ID_Visiteur']) . "</h5></ul></td>
+        <td><ul><h5 class=\"fw-bold\">"  . $matchs['But_Local_Match'] . " vs " .  $matchs['But_Visiteur_Match'] . "</h5></ul></td>
+        <td><ul><h5 class=\"fw-bold\">"  . "<i class=\"fa-solid fa-trophy\"></i>" . " " . contientNomEquipe($matchs['FK_ID_Local']) . "</h5></ul></td></tr>";
+    }
+}
+function affichagePerdantDernierePlace2($id_match)
+{
+    $hola = 1;
+    foreach (selectionnerEquipesPerdantesDernierePlace2($id_match) as $matchs) {
+        if ($matchs['But_Local_Match'] < $matchs['But_Visiteur_Match']) {
+
+            echo "<tr><td><ul><h5 class=\"fw-bold\">" . $hola++  . " match petite finale " . "</h5></ul></td>
+        <td><ul><h5 class=\"fw-bold\">"  .  contientNomEquipe($matchs['FK_ID_Local']) . " VS " .  contientNomEquipe($matchs['FK_ID_Visiteur']) . "</h5></ul></td>
+        <td><ul><h5 class=\"fw-bold\">"  . $matchs['But_Local_Match'] . " vs " .  $matchs['But_Visiteur_Match'] . "</h5></ul></td>
+        <td><ul><h5 class=\"fw-bold\">"  . "<i class=\"fa-solid fa-trophy\"></i>" . " " .  contientNomEquipe($matchs['FK_ID_Visiteur']) . "</h5></ul></td></tr>";
+        } else
+            echo "<tr><td><ul><h5 class=\"fw-bold\">" . $hola++  . " match petite finale " . "</h5></ul></td>
+        <td><ul><h5 class=\"fw-bold\">"  .  contientNomEquipe($matchs['FK_ID_Local']) . " VS " .  contientNomEquipe($matchs['FK_ID_Visiteur']) . "</h5></ul></td>
+        <td><ul><h5 class=\"fw-bold\">"  . $matchs['But_Local_Match'] . " vs " .  $matchs['But_Visiteur_Match'] . "</h5></ul></td>
+        <td><ul><h5 class=\"fw-bold\">"  . "<i class=\"fa-solid fa-trophy\"></i>" . " " . contientNomEquipe($matchs['FK_ID_Local']) . "</h5></ul></td></tr>";
+    }
+}
+function affichagePerdantDernierePlace3($id_match)
+{
+    $hola = 1;
+    foreach (selectionnerEquipesPerdantesDernierePlace3($id_match) as $matchs) {
+        if ($matchs['But_Local_Match'] < $matchs['But_Visiteur_Match']) {
+
+            echo "<tr><td><ul><h5 class=\"fw-bold\">" . $hola++  . " match petite finale " . "</h5></ul></td>
+        <td><ul><h5 class=\"fw-bold\">"  .  contientNomEquipe($matchs['FK_ID_Local']) . " VS " .  contientNomEquipe($matchs['FK_ID_Visiteur']) . "</h5></ul></td>
+        <td><ul><h5 class=\"fw-bold\">"  . $matchs['But_Local_Match'] . " vs " .  $matchs['But_Visiteur_Match'] . "</h5></ul></td>
+        <td><ul><h5 class=\"fw-bold\">"  . "<i class=\"fa-solid fa-trophy\"></i>" . " " .  contientNomEquipe($matchs['FK_ID_Visiteur']) . "</h5></ul></td></tr>";
+        } else
+            echo "<tr><td><ul><h5 class=\"fw-bold\">" . $hola++  . " match petite finale " . "</h5></ul></td>
+        <td><ul><h5 class=\"fw-bold\">"  .  contientNomEquipe($matchs['FK_ID_Local']) . " VS " .  contientNomEquipe($matchs['FK_ID_Visiteur']) . "</h5></ul></td>
+        <td><ul><h5 class=\"fw-bold\">"  . $matchs['But_Local_Match'] . " vs " .  $matchs['But_Visiteur_Match'] . "</h5></ul></td>
+        <td><ul><h5 class=\"fw-bold\">"  . "<i class=\"fa-solid fa-trophy\"></i>" . " " . contientNomEquipe($matchs['FK_ID_Local']) . "</h5></ul></td></tr>";
+    }
+}
+function affichagePerdantDernierePlace4($id_match)
+{
+    $hola = 1;
+    foreach (selectionnerEquipesPerdantesDernierePlace4($id_match) as $matchs) {
+        if ($matchs['But_Local_Match'] < $matchs['But_Visiteur_Match']) {
+
+            echo "<tr><td><ul><h5 class=\"fw-bold\">" . $hola++  . " match petite finale " . "</h5></ul></td>
+        <td><ul><h5 class=\"fw-bold\">"  .  contientNomEquipe($matchs['FK_ID_Local']) . " VS " .  contientNomEquipe($matchs['FK_ID_Visiteur']) . "</h5></ul></td>
+        <td><ul><h5 class=\"fw-bold\">"  . $matchs['But_Local_Match'] . " vs " .  $matchs['But_Visiteur_Match'] . "</h5></ul></td>
+        <td><ul><h5 class=\"fw-bold\">"  . "<i class=\"fa-solid fa-trophy\"></i>" . " " .  contientNomEquipe($matchs['FK_ID_Visiteur']) . "</h5></ul></td></tr>";
+        } else
+            echo "<tr><td><ul><h5 class=\"fw-bold\">" . $hola++  . " match petite finale " . "</h5></ul></td>
+        <td><ul><h5 class=\"fw-bold\">"  .  contientNomEquipe($matchs['FK_ID_Local']) . " VS " .  contientNomEquipe($matchs['FK_ID_Visiteur']) . "</h5></ul></td>
+        <td><ul><h5 class=\"fw-bold\">"  . $matchs['But_Local_Match'] . " vs " .  $matchs['But_Visiteur_Match'] . "</h5></ul></td>
+        <td><ul><h5 class=\"fw-bold\">"  . "<i class=\"fa-solid fa-trophy\"></i>" . " " . contientNomEquipe($matchs['FK_ID_Local']) . "</h5></ul></td></tr>";
+    }
+}
+function affichagePerdantDernierePlace5($id_match)
+{
+    $hola = 1;
+    foreach (selectionnerEquipesPerdantesDernierePlace5($id_match) as $matchs) {
+        if ($matchs['But_Local_Match'] < $matchs['But_Visiteur_Match']) {
+
+            echo "<tr><td><ul><h5 class=\"fw-bold\">" . $hola++  . " match petite finale " . "</h5></ul></td>
+        <td><ul><h5 class=\"fw-bold\">"  .  contientNomEquipe($matchs['FK_ID_Local']) . " VS " .  contientNomEquipe($matchs['FK_ID_Visiteur']) . "</h5></ul></td>
+        <td><ul><h5 class=\"fw-bold\">"  . $matchs['But_Local_Match'] . " vs " .  $matchs['But_Visiteur_Match'] . "</h5></ul></td>
+        <td><ul><h5 class=\"fw-bold\">"  . "<i class=\"fa-solid fa-trophy\"></i>" . " " .  contientNomEquipe($matchs['FK_ID_Visiteur']) . "</h5></ul></td></tr>";
+        } else
+            echo "<tr><td><ul><h5 class=\"fw-bold\">" . $hola++  . " match petite finale " . "</h5></ul></td>
+        <td><ul><h5 class=\"fw-bold\">"  .  contientNomEquipe($matchs['FK_ID_Local']) . " VS " .  contientNomEquipe($matchs['FK_ID_Visiteur']) . "</h5></ul></td>
+        <td><ul><h5 class=\"fw-bold\">"  . $matchs['But_Local_Match'] . " vs " .  $matchs['But_Visiteur_Match'] . "</h5></ul></td>
+        <td><ul><h5 class=\"fw-bold\">"  . "<i class=\"fa-solid fa-trophy\"></i>" . " " . contientNomEquipe($matchs['FK_ID_Local']) . "</h5></ul></td></tr>";
+    }
+}
+
+
+function affichagePerdantQuartFinal2($id_match)
+{
+    $hola = 1;
+
+
+  
+    foreach (selectionnerEquipesPerdantesQuartFinal2($id_match) as $matchs) {
+        if ($matchs['But_Local_Match'] < $matchs['But_Visiteur_Match']) {
+
+            echo "<tr><td><ul><h5 class=\"fw-bold\">" . $hola++  . " match petite finale " . "</h5></ul></td>
+        <td><ul><h5 class=\"fw-bold\">"  .  contientNomEquipe($matchs['FK_ID_Local']) . " VS " .  contientNomEquipe($matchs['FK_ID_Visiteur']) . "</h5></ul></td>
+        <td><ul><h5 class=\"fw-bold\">"  . $matchs['But_Local_Match'] . " vs " .  $matchs['But_Visiteur_Match'] . "</h5></ul></td>
+        <td><ul><h5 class=\"fw-bold\">"  . "<i class=\"fa-solid fa-trophy\"></i>" . " " .  contientNomEquipe($matchs['FK_ID_Visiteur']) . "</h5></ul></td></tr>";
+        } else
+            echo "<tr><td><ul><h5 class=\"fw-bold\">" . $hola++  . " match petite finale " . "</h5></ul></td>
+        <td><ul><h5 class=\"fw-bold\">"  .  contientNomEquipe($matchs['FK_ID_Local']) . " VS " .  contientNomEquipe($matchs['FK_ID_Visiteur']) . "</h5></ul></td>
+        <td><ul><h5 class=\"fw-bold\">"  . $matchs['But_Local_Match'] . " vs " .  $matchs['But_Visiteur_Match'] . "</h5></ul></td>
+        <td><ul><h5 class=\"fw-bold\">"  . "<i class=\"fa-solid fa-trophy\"></i>" . " " . contientNomEquipe($matchs['FK_ID_Local']) . "</h5></ul></td></tr>";
+    }
+}
+
 
 function affichageVictoiresQuartsFinal($id_match)
 {
@@ -595,6 +751,106 @@ function selectionnerPetiteFinal($id_tournoi)
     try {
         $db = connectDB();
         $sql = "SELECT * FROM `Matchs` WHERE Type_Match = 'Petite finale' AND FK_ID_Tournoi = $id_tournoi ";
+        $request = $db->prepare($sql);
+        $request->execute();
+        return $request->fetchAll(PDO::FETCH_ASSOC);
+    } catch (\Throwable $e) {
+        debug($e->getMessage());
+    }
+}
+
+function selectionnerEquipesPerdantesQuartFinal($id_tournoi)
+{
+    try {
+        $db = connectDB();
+        $sql = "SELECT * FROM `Matchs` WHERE Type_Match = 'PerdantsQuartUn' AND FK_ID_Tournoi = $id_tournoi ";
+        $request = $db->prepare($sql);
+        $request->execute();
+        return $request->fetchAll(PDO::FETCH_ASSOC);
+    } catch (\Throwable $e) {
+        debug($e->getMessage());
+    }
+}
+function selectionnerEquipesPerdantesDernierePlace1($id_tournoi)
+{
+    try {
+        $db = connectDB();
+        $sql = "SELECT * FROM `Matchs` WHERE Type_Match = 'Match_5Et6_place' AND FK_ID_Tournoi = $id_tournoi ";
+        $request = $db->prepare($sql);
+        $request->execute();
+        return $request->fetchAll(PDO::FETCH_ASSOC);
+    } catch (\Throwable $e) {
+        debug($e->getMessage());
+    }
+}
+
+function selectionnerEquipesPerdantesDernierePlace($id_tournoi)
+{
+    try {
+        $db = connectDB();
+        $sql = "SELECT * FROM `Matchs` WHERE Type_Match = 'Match_7Et8_place' AND FK_ID_Tournoi = $id_tournoi ";
+        $request = $db->prepare($sql);
+        $request->execute();
+        return $request->fetchAll(PDO::FETCH_ASSOC);
+    } catch (\Throwable $e) {
+        debug($e->getMessage());
+    }
+}
+
+function selectionnerEquipesPerdantesDernierePlace2($id_tournoi)
+{
+    try {
+        $db = connectDB();
+        $sql = "SELECT * FROM `Matchs` WHERE Type_Match = 'Match_9Et10_place' AND FK_ID_Tournoi = $id_tournoi ";
+        $request = $db->prepare($sql);
+        $request->execute();
+        return $request->fetchAll(PDO::FETCH_ASSOC);
+    } catch (\Throwable $e) {
+        debug($e->getMessage());
+    }
+}
+function selectionnerEquipesPerdantesDernierePlace3($id_tournoi)
+{
+    try {
+        $db = connectDB();
+        $sql = "SELECT * FROM `Matchs` WHERE Type_Match = 'Match_11Et12_place' AND FK_ID_Tournoi = $id_tournoi ";
+        $request = $db->prepare($sql);
+        $request->execute();
+        return $request->fetchAll(PDO::FETCH_ASSOC);
+    } catch (\Throwable $e) {
+        debug($e->getMessage());
+    }
+}
+function selectionnerEquipesPerdantesDernierePlace4($id_tournoi)
+{
+    try {
+        $db = connectDB();
+        $sql = "SELECT * FROM `Matchs` WHERE Type_Match = 'Match_13Et14_place' AND FK_ID_Tournoi = $id_tournoi ";
+        $request = $db->prepare($sql);
+        $request->execute();
+        return $request->fetchAll(PDO::FETCH_ASSOC);
+    } catch (\Throwable $e) {
+        debug($e->getMessage());
+    }
+}
+function selectionnerEquipesPerdantesDernierePlace5($id_tournoi)
+{
+    try {
+        $db = connectDB();
+        $sql = "SELECT * FROM `Matchs` WHERE Type_Match = 'Match_15Et16_place' AND FK_ID_Tournoi = $id_tournoi ";
+        $request = $db->prepare($sql);
+        $request->execute();
+        return $request->fetchAll(PDO::FETCH_ASSOC);
+    } catch (\Throwable $e) {
+        debug($e->getMessage());
+    }
+}
+
+function selectionnerEquipesPerdantesQuartFinal2($id_tournoi)
+{
+    try {
+        $db = connectDB();
+        $sql = "SELECT * FROM `Matchs` WHERE Type_Match = 'PerdantsQuartDeux' AND FK_ID_Tournoi = $id_tournoi ";
         $request = $db->prepare($sql);
         $request->execute();
         return $request->fetchAll(PDO::FETCH_ASSOC);
