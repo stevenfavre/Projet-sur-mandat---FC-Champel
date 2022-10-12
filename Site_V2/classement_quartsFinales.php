@@ -74,6 +74,7 @@ if (!empty($_GET['submit'])) {
           <a class="btn btn-primary shadow" role="button" href="./functions/algorithme_match_5e_8e_place.php?id_tournoi=<?php echo $_SESSION['id_tournoi'] ?>">Générer matchs 5ème à 8ème place</a>
         </div>
       </div>
+      
   </section>
 
   <?php include_once('default_pages/footer.php'); ?>
