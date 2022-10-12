@@ -70,12 +70,12 @@ if (!empty($submit)) {
           <h2 class="text-success mb-2">Liste des matchs</h2>
           <h3 class="fw-bold">Match du tournoi : <?= date("d.m.Y", strtotime(getDateTournoi($_SESSION['id_tournoi']))) ?>&nbsp;</h3>
           <?php
-            if (empty(selectionner_equipe_tournoi($_SESSION['id_tournoi']))) {
-              echo '<a class="btn btn-primary shadow" role="button" href="inscription_equipe.php?id_tournoi=' . $_SESSION['id_tournoi'] . '">Inscrire des equipes</a>';
-            }else if (empty(selectMatchPoul($_SESSION['id_tournoi']))) {
+          if (empty(selectionner_equipe_tournoi($_SESSION['id_tournoi']))) {
+            echo '<a class="btn btn-primary shadow" role="button" href="inscription_equipe.php?id_tournoi=' . $_SESSION['id_tournoi'] . '">Inscrire des equipes</a>';
+          } else if (empty(selectMatchPoul($_SESSION['id_tournoi']))) {
             echo '<a class="btn btn-primary shadow" role="button" href="./functions/algorithme_groupe.php?id_tournoi=' . $_SESSION['id_tournoi'] . '">Générer le tournoi</a>';
           } else if (empty(selectMatchQuartFinale($_SESSION['id_tournoi']))) {
-            echo '<a class="btn btn-primary shadow" role="button" href="./functions/algorithme_match_eliminationDirect.php' . $_SESSION['id_tournoi'] . '">Générer les quarts de finale</a>';
+            echo '<a class="btn btn-primary shadow" role="button" href="./functions/algorithme_quart_finale.php?id_tournoi=' . $_SESSION['id_tournoi'] . '">Générer les quarts de finale</a>';
           }
           ?>
           <br><br>
