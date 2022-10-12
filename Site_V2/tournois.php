@@ -22,13 +22,6 @@ require_once './functions/steven_fonctions.php'
     <div class="row mb-5">
       <div class="col-md-8 col-xl-6 text-center mx-auto">
         <h3 class="fw-bold text-success mb-2">Tous les tournois</h3>
-        <nav class="navbar navbar-light navbar-expand-md sticky-top navbar-shrink py-3" id="mainNav">
-          <ul class="navbar-nav mx-auto">
-            <li class="nav-item"><a class="nav-link" href="afficher_tournois.php">Liste tournois</a></li>
-            <li class="nav-item"><a class="nav-link" href="afficher_demandes.php">Inscriptions</a></li>
-            <li class="nav-item"><a class="nav-link" href="classement_tournoi.php">Classements</a></li>
-          </ul>
-        </nav>
         <br /><br />
         <p class="text-muted w-lg-50">Différents tournois géré grâce à notre système.&nbsp;</p>
       </div>

@@ -4,7 +4,7 @@ include('./functions/tournoi.php');
 include('./functions/algorithme_classement_groupes.php');
 $id_tournoi = $_GET['id_tournoi'];
 $db = connectDB();
-$sql = "UPDATE matchs
+$sql = "UPDATE Matchs
 JOIN Equipe ON ID_Equipe = FK_ID_Local OR ID_Equipe =  FK_ID_Visiteur 
 JOIN Tournoi ON ID_Tournoi = FK_ID_Tournoi
 
