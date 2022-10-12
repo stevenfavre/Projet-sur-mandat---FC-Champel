@@ -46,11 +46,11 @@ if (!empty($_GET['submit'])) {
               </table>
               <?php
               if (empty($_GET['id_tournoi'])) { ?>
-                <!-- <a class="btn btn-primary shadow" role="button" href="test2.php?id_tournoi=<?php echo $id_groupe1 ?>">Réinitialisation points</a> -->
-                <!--  <a class="btn btn-primary shadow" role="button" href="classement_groupes1.php?id_tournoi=<?php $_GET['id_tournoi'] ?>">Calculer tous les points</a> -->
+                <a class="btn btn-primary shadow" role="button" href="test2.php?id_tournoi=<?php echo $id_groupe1 ?>">Réinitialisation points</a>
+                <a class="btn btn-primary shadow" role="button" href="classement_groupes1.php?id_tournoi=<?php $_GET['id_tournoi'] ?>">Calculer tous les points</a>
               <?php    } else { ?>
-                <!--  <a class="btn btn-primary shadow" role="button" href="test2.php?id_tournoi=<?php echo $_GET['id_tournoi'] ?>">Réinitialisation points</a> -->
-                <!-- <a class="btn btn-primary shadow" role="button" href="classement_groupes1.php?id_tournoi=<?php echo $_GET['id_tournoi'] ?>">Calculer tous les points</a> -->
+                <a class="btn btn-primary shadow" role="button" href="test2.php?id_tournoi=<?php echo $_GET['id_tournoi'] ?>">Réinitialisation points</a>
+                <a class="btn btn-primary shadow" role="button" href="classement_groupes1.php?id_tournoi=<?php echo $_GET['id_tournoi'] ?>">Calculer tous les points</a>
 
               <?php }
 
@@ -63,7 +63,6 @@ if (!empty($_GET['submit'])) {
             <a class="btn btn-primary shadow" role="button" href="./functions/algorithme_quart_finale.php?id_tournoi=<?php echo $_SESSION['id_tournoi'] ?>">Générer quarts de finale</a>
             <br /><br />
             <a class="btn btn-primary shadow" role="button" href="./functions/algorithme_match_9e_16e_place.php?id_tournoi=<?php echo $_SESSION['id_tournoi'] ?>">Générer matchs 9ème à 16ème place</a>
-
           </div>
         </div>
       </div>
