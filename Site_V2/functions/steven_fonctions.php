@@ -162,7 +162,7 @@ function selectAllTournoi()
 {
     try {
         $db = connectDB();
-        $sql = "SELECT * FROM `Tournoi` WHERE `Actif_Tournoi` != 0 ORDER BY `Date_Debut_Tournoi` ASC";
+        $sql = "SELECT * FROM `Tournoi` WHERE Actif_Tournoi = 1 OR Actif_Tournoi = 2 ORDER BY `Date_Debut_Tournoi` ASC";
         $request = $db->prepare($sql);
         $request->execute();
         return $request->fetchAll(PDO::FETCH_ASSOC);
