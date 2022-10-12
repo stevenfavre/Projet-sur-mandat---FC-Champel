@@ -92,6 +92,56 @@ function calculDebut($temps, $hours, $minutes, $seconds)  // sources : https://f
 }
 function createMatch9A16ePlace($id_tournoi, $groupeA, $groupeB, $groupeC, $groupeD, $dateTournoi, $heureDebut5, $heureFin5, $heureDebut6, $heureFin6, $heureDebut7, $heureFin7, $heureDebut8, $heureFin8, $heureDebut9, $heureFin9, $heureDebut10, $heureFin10, $heureDebut11, $heureFin11, $heureDebut12, $heureFin12, $heureDebut13, $heureFin13, $heureDebut14, $heureFin14, $heureDebut15, $heureFin15, $heureDebut16, $heureFin16)
 {
+
+    $heureDebut1 = calculDebut('13:00:00', 0, 11, 0);
+    $heureFin1 = calculDebut($heureDebut1, 0, 11, 0);
+    $heureDebut2 = calculDebut($heureFin1, 0, 11, 0);
+    $heureFin2 = calculDebut($heureDebut2, 0, 11, 0);
+    $heureDebut3 = calculDebut($heureFin2, 0, 11, 0);
+    $heureFin3 = calculDebut($heureDebut3, 0, 11, 0);
+    $heureDebut4 = calculDebut($heureFin3, 0, 11, 0);
+    $heureFin4 = calculDebut($heureDebut4, 0, 11, 0);
+    $heureDebut5 = calculDebut($heureDebut1, 0, 11, 0);
+    $heureFin5 = calculDebut($heureDebut5, 0, 11, 0);
+    $heureDebut6 = calculDebut($heureFin5, 0, 11, 0);
+    $heureFin6 = calculDebut($heureDebut6, 0, 11, 0);
+    $heureDebut7 = calculDebut($heureFin6, 0, 11, 0);
+    $heureFin7 = calculDebut($heureDebut7, 0, 11, 0);
+    $heureDebut8 = calculDebut($heureFin7, 0, 11, 0);
+    $heureFin8 = calculDebut($heureDebut8, 0, 11, 0);
+    $heureDebut9 = calculDebut($heureFin8, 0, 11, 0);
+    $heureFin9 = calculDebut($heureDebut9, 0, 11, 0);
+    $heureDebut10 = calculDebut($heureFin9, 0, 11, 0);
+    $heureFin10 = calculDebut($heureDebut10, 0, 11, 0);
+    $heureDebut11 = calculDebut($heureFin10, 0, 11, 0);
+    $heureFin11 = calculDebut($heureDebut11, 0, 11, 0);
+    $heureDebut12 = calculDebut($heureFin11, 0, 11, 0);
+    $heureFin12 = calculDebut($heureDebut12, 0, 11, 0);
+    $heureDebut13 = calculDebut($heureFin12, 0, 11, 0);
+    $heureFin13 = calculDebut($heureDebut13, 0, 11, 0);
+    $heureDebut14 = calculDebut($heureFin13, 0, 11, 0);
+    $heureFin14 = calculDebut($heureDebut14, 0, 11, 0);
+    $heureDebut15 = calculDebut($heureFin14, 0, 11, 0);
+    $heureFin15 = calculDebut($heureDebut15, 0, 11, 0);
+    $heureDebut16 = calculDebut($heureFin15, 0, 11, 0);
+    $heureFin16 = calculDebut($heureDebut16, 0, 11, 0);
+    $heureDebut17 = calculDebut($heureFin4, 0, 60, 0);
+    $heureFin17 = calculDebut($heureDebut17, 0, 11, 0);
+    $heureDebut18 = calculDebut($heureFin17, 0, 11, 0);
+    $heureFin18 = calculDebut($heureDebut18, 0, 11, 0);
+    $heureDebut19 = calculDebut($heureFin18, 0, 11, 0);
+    $heureFin19 = calculDebut($heureDebut19, 0, 11, 0);
+    $heureDebut20 = calculDebut($heureFin19, 0, 11, 0);
+    $heureFin20 = calculDebut($heureDebut20, 0, 11, 0);
+    $heureDebut21 = calculDebut($heureFin20, 0, 11, 0);
+    $heureFin21 = calculDebut($heureDebut21, 0, 11, 0);
+    $heureDebut22 = calculDebut($heureFin21, 0, 11, 0);
+    $heureFin22 = calculDebut($heureDebut22, 0, 11, 0);
+    $heureDebut23 = calculDebut($heureFin22, 0, 11, 0);
+    $heureFin23 = calculDebut($heureDebut23, 0, 11, 0);
+    $heureDebut24 = calculDebut($heureFin23, 0, 11, 0);
+    $heureFin24 = calculDebut($heureDebut24, 0, 11, 0);
+
     $matchUn = array(
         ($groupeA[2]),
         ($groupeD[3]),
