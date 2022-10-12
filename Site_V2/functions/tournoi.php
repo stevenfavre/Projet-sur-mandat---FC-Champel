@@ -13,16 +13,16 @@ function verificationDonneesTournois($Date_debut, $Date_fin, $Fk_ID_Salle)
     $count = $req->rowCount();
     if ($count > 0) { ?>
         <script type="text/javascript">
-            alert("Dates indisponibles ! ");
+            alert("Veuillez vérifier les dates ! ");
+        </script>
+    <?php
+    } else {
+        insertion_tournoi($Date_debut, $Date_fin, $Fk_ID_Salle); ?>
+        <script type="text/javascript">
+            alert("Le tournoi a été crée !");
         </script>
 <?php
-    } else {
-        insertion_tournoi($Date_debut, $Date_fin, $Fk_ID_Salle);
-        echo "</br></br>";
-        echo "<h3 class=text-success>Votre tournoi a été crée ! </h3>";
     }
-   
-   
 }
 //ok
 function selection_salle()
@@ -64,21 +64,13 @@ function afficher_option_salle($id_salle)
 //OK
 function insertion_tournoi($Date_debut, $Date_fin, $Fk_ID_Salle)
 {
-
-    try {
-        $bdd = connectDB();
-        $sql = "INSERT INTO Tournoi (`ID_Tournoi`, `Date_Debut_Tournoi`, `Date_Fin_Tournoi`, `FK_ID_Salle`, `Actif_Tournoi`) 
+    $bdd = connectDB();
+    $sql = "INSERT INTO Tournoi (`ID_Tournoi`, `Date_Debut_Tournoi`, `Date_Fin_Tournoi`, `FK_ID_Salle`, `Actif_Tournoi`) 
         VALUES (NULL,  '$Date_debut', '$Date_fin', '$Fk_ID_Salle', 1);";
 
-        $req = $bdd->prepare($sql);
-        $req->execute();
-        $reponse = $req->fetchAll();
-    } catch (\Throwable $th) {
-        //throw $th;
-        echo "<script> alert(\"Insertion raté ! \");</script>";
-    }
-
-    return null;
+    $req = $bdd->prepare($sql);
+    $req->execute();
+    $req->fetchAll();
 }
 
 ///OK
@@ -194,7 +186,7 @@ function afficher_date_tournoi()
             <th scope=\"col\"><CENTER><h4 class=\"text-success\"> Date fin" . "  " .  "</h4></CENTER></th>
             <th scope=\"col\"><CENTER><h4 class=\"text-success\"> Salle" . "  " .  "</h4></CENTER></th>
             <th scope=\"col\"><CENTER><h4 class=\"text-success\"> Statut" . "</h4></CENTER></th>
-            <th scope=\"col\"><CENTER><h4 class=\"text-success\">"."<i class=\"fa-solid fa-gears\"></i></h2></CENTER></th></tr> </thead>";
+            <th scope=\"col\"><CENTER><h4 class=\"text-success\">" . "<i class=\"fa-solid fa-gears\"></i></h2></CENTER></th></tr> </thead>";
 
     foreach (afficher_Tournoi() as $tournoi) {
         echo "<a href=\"../afficher_tournois.php?id_tournoi=" . $tournoi['ID_Tournoi'] . "\">";
@@ -230,7 +222,7 @@ function afficher_date_tournoi_supprime()
             <th scope=\"col\"><CENTER><h4 class=\"text-success\"> Date fin" . "  " .  "</h4></CENTER></th>
             <th scope=\"col\"><CENTER><h4 class=\"text-success\"> Salle" . "  " .  "</h4></CENTER></th>
             <th scope=\"col\"><CENTER><h4 class=\"text-success\"> Statut" . "</h4></CENTER></th>
-            <th scope=\"col\"><CENTER><h4 class=\"text-success\">"."<i class=\"fa-solid fa-gears\"></i></h2></CENTER></th></tr> </thead>";
+            <th scope=\"col\"><CENTER><h4 class=\"text-success\">" . "<i class=\"fa-solid fa-gears\"></i></h2></CENTER></th></tr> </thead>";
 
     foreach (afficher_TournoiDelete() as $tournoi) {
         echo "<a href=\"../afficher_tournois.php?id_tournoi=" . $tournoi['ID_Tournoi'] . "\">";
@@ -453,7 +445,7 @@ function inscription_equipe_tournoi($ID_Tournoi, $equipe)
 
         $bdd = connectDB();
         $sql = ("INSERT INTO Inscription_Tournoi (`ID_Inscription_Tournoi`, `Date_Inscription_Tournoi`, `Statut_Inscription_Tournoi`, `FK_ID_Tournoi`, `FK_ID_Equipe`) 
-            VALUES (NULL, '" . date('y-m-d') . "', 'en attente', '" . $ID_Tournoi . "', '" . $equipe . "')");
+            VALUES (NULL, '" . date('y-m-d') . "', 'validé', '" . $ID_Tournoi . "', '" . $equipe . "')");
         $request = $bdd->prepare($sql);
         $request->execute();
     } catch (\Throwable $e) {
@@ -496,15 +488,12 @@ function selection_equipe_incription()
 function selection_equipe_incription1($id_tournoi)
 {
     $bdd = connectDB();
-    $sql = "SELECT * FROM `Equipe` WHERE ID_Equipe not in (SELECT FK_ID_Equipe FROM Inscription_Tournoi WHERE FK_ID_Tournoi = $id_tournoi AND Statut_Inscription_Tournoi = 'en attente');";
+    $sql = "SELECT * FROM `Equipe` WHERE ID_Equipe not in (SELECT FK_ID_Equipe FROM Inscription_Tournoi WHERE FK_ID_Tournoi = $id_tournoi AND Statut_Inscription_Tournoi = 'validé');";
     $request = $bdd->prepare($sql);
     $request->execute();
     $reponse = $request->fetchAll();
     foreach ($reponse as $data) {
         echo "<td><CENTER><h5 class=\"bold\"><a href=\"inscription_equipe.php?id_tournoi=" . $id_tournoi . "&FK_ID_Equipe=" . $data['ID_Equipe'] . "\">" . $data['Nom_Equipe'] . "</a></CENTER></h5></td>";
-
-
-   
     }
 }
 function selectionner_equipe_tournoi($id_tournoi)

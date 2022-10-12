@@ -52,7 +52,6 @@ function affichageResulatsToutesEquipes($id_tournoi)
         elseif ($matchs['But_Local_Match'] == $matchs['But_Visiteur_Match'])
             echo  "<h5 class=\"fw-bold\">" . CalculerPointsNull($matchs['FK_ID_Local'], $matchs['FK_ID_Visiteur']) .  "</h5>";
     }
-    header('Location:./classement_groupes.php?id_tournoi=' . $id_tournoi);
 }
 function affichageResultatGroupes($tournoi)
 {
@@ -325,7 +324,7 @@ function affichagePerdantQuartFinal2($id_match)
     $hola = 1;
 
 
-  
+
     foreach (selectionnerEquipesPerdantesQuartFinal2($id_match) as $matchs) {
         if ($matchs['But_Local_Match'] < $matchs['But_Visiteur_Match']) {
 
@@ -358,7 +357,7 @@ function affichageResulatsEquipes($id_groupe, $id_tournoi)
 {
     $hola = 1;
 
-    echo  "</br><tr><table class=\"table\"><thead class=\"thead-dark\">
+    echo  "<tr><table class=\"table\"><thead class=\"thead-dark\">
             <th scope=\"col\"><h5 class=\"fw-bold text-success mb-2\">Match "  .  "<i class=\"fa-regular fa-futbol\"></i></h5></th>
             <th scope=\"col\"><h5 class=\"fw-bold text-success mb-2\">Equipes " .  "<i class=\"fa-solid fa-people-group\"></i>" . " vs " .
         "<i class=\"fa-solid fa-people-group\"></i></h5></th>
@@ -385,7 +384,8 @@ function affichageResulatsEquipes2($id_groupe, $id_tournoi)
     echo "<tr><CENTER><h2 class=\"fw-bold text-success mb-2\">Classement du "  . contientNomGroupe($id_groupe) . "</h2></tr></br>";
     foreach (selectionnerMatchsGroupe3($id_groupe, $id_tournoi) as $matchs) {
         echo  "<td><CENTER><h5 class=\"fw-bold\">" . $hola++ .
-            "  " . "<i class=\"fa-solid fa-trophy\"></i></h5>" . " <h5>" .  $matchs['Nom_Equipe'] . " | Points " . $matchs['Points_Equipe']    .  "</h5></td>";
+            "  " . "<i class=\"fa-solid fa-trophy\"></i>
+            </h5>" . " <h5 style='margin-left:70px;'>" .  $matchs['Nom_Equipe'] . " | Points " . $matchs['Points_Equipe'] . " </h5></td>";
     }
 }
 
