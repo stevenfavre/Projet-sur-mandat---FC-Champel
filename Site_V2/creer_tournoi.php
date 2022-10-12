@@ -1,10 +1,18 @@
- <?php
+<?php
   include('./functions/dbconnection.php');
   include('./functions/tournoi.php');
 
   $submit = null;
   if (isset($_POST['submit'])) {
     $submit = $_POST['submit'];
+  }
+  $submit = filter_input(INPUT_POST, 'submit');
+  if ($submit == "ok") {
+    $Date_debut = $_POST['Date_Debut_Tournoi'];
+    $Date_fin = $_POST['Date_Fin_Tournoi'];
+    $Fk_ID_Salle = $_POST['ID_Salle'];
+    verificationDonneesTournois($Date_debut, $Date_fin, $Fk_ID_Salle);
+    header("Location: afficher_tournois.php");
   }
   ?>
  <!DOCTYPE html>
@@ -16,7 +24,7 @@
    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
    <title>Création - Tournoi</title>
    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
-   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800&amp;display=swap">
+   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800&display=swap">
    <link rel="stylesheet" href="assets/fonts/ionicons.min.css">
  </head>
 
@@ -35,7 +43,7 @@
            <div class="col-md-6 col-xl-4">
              <div>
 
-               <form action="creer_tournoi.php" class="p-3 p-xl-4" method="post">
+               <form action="creer_tournoi.php"  method="post">
                  <h5 class="fw-bold mb-0">Date de début
                    <div class="mb-3"><input class="form-control" type="date" id="date-1" name="Date_Debut_Tournoi" placeholder="Date de début" required></div>
                  </h5>
@@ -51,28 +59,14 @@
                  </h5>
 
                  <?php
-                  if ($submit == "ok") {
-                    $Date_debut = $_POST['Date_Debut_Tournoi'];
-                    $Date_fin = $_POST['Date_Fin_Tournoi'];
-                    $Fk_ID_Salle = $_POST['ID_Salle'];
-                    verificationDonneesTournois($Date_debut, $Date_fin, $Fk_ID_Salle);
-                  }
+
                   ?>
                  </br></br>
-                 <table>
-                   <tbody>
-                     <td>
-                       <ul>
+                
                          <button class="btn btn-primary" type="submit" name="submit" value="ok">Créer</button>
-                       </ul>
-                     </td>
-                     <td>
-                       <ul>
+                     
                          <a class="btn btn-primary shadow" role="button" href="afficher_tournois.php"><i class="fa-solid fa-arrow-left"></i></a>
-                       </ul>
-                     </td>
-                   </tbody>
-                 </table>
+                       
                </form>
              </div>
            </div>
