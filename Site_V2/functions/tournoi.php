@@ -18,9 +18,6 @@ function verificationDonneesTournois($Date_debut, $Date_fin, $Fk_ID_Salle)
     <?php
     } else {
         insertion_tournoi($Date_debut, $Date_fin, $Fk_ID_Salle); ?>
-        <script type="text/javascript">
-            alert("Le tournoi a été crée !");
-        </script>
 <?php
     }
 }
@@ -70,9 +67,26 @@ function insertion_tournoi($Date_debut, $Date_fin, $Fk_ID_Salle)
 
     $req = $bdd->prepare($sql);
     $req->execute();
-    $req->fetchAll();
+ 
 }
 
+function insertMatch($date_match, $heure_debut, $heure_fin, $duree_match, $type_match, $fk_id_local, $fk_id_visiteur, $fk_id_tournoi, $fk_id_terrain, $fk_id_groupe = 1)
+{
+    // Code permettant de récupérer les minutes du temps
+    $to_time = strtotime($heure_fin);
+    $from_time = strtotime($heure_debut);
+    $minutes = round(abs($to_time - $from_time) / 60, 2);
+
+    try {
+        $db = connectDB();
+        $sql = "INSERT INTO `Matchs` (`ID_Match`, `Date_Match`, `Heure_Debut_Match`, `Heure_Fin_Match`, `Duree_Match`, `Type_Match`, `But_Local_Match`, `But_Visiteur_Match`, `FK_ID_Local`, `FK_ID_Visiteur`, `FK_ID_Groupe`, `FK_ID_Tournoi`, `FK_ID_Terrain`, `Actif_Match`)
+        VALUES (NULL,  '$date_match', '$heure_debut', '$heure_fin', '$minutes', '$type_match', '0', '0' , '$fk_id_local', '$fk_id_visiteur', '$fk_id_groupe', '$fk_id_tournoi',  '$fk_id_terrain', 1);";
+        $request = $db->prepare($sql);
+        $request->execute();
+    } catch (\Throwable $e) {
+        debug($e->getMessage());
+    }
+}
 ///OK
 function selection_tournoi($id_tournoi)
 {
