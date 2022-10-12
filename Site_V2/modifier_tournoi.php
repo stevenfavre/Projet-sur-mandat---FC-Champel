@@ -14,7 +14,7 @@
     $Date_fin = filter_input(INPUT_POST, 'Date_Fin_Tournoi');
     $Fk_ID_Salle = filter_input(INPUT_POST, 'ID_Salle');
     update_tournoi($_SESSION['tournoi']['ID_Tournoi'], $Date_debut, $Date_fin, $Fk_ID_Salle);
-    header("Location: afficher_tournois.php?id_tournoi=" . $_SESSION['tournoi']['ID_Tournoi']);
+    header("Location: afficher_tournois.php");
   }
 
   function refreshSessionTournoi()

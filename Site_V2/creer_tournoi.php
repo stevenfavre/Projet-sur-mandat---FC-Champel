@@ -19,6 +19,7 @@
    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800&amp;display=swap">
    <link rel="stylesheet" href="assets/fonts/ionicons.min.css">
  </head>
+
  <body style="/*background: url(&quot;design.jpg&quot;);*/background-position: 0 -60px;">
    <?php include_once('default_pages/navbar.php'); ?>
    <section class="py-5">
@@ -36,24 +37,25 @@
 
                <form action="creer_tournoi.php" class="p-3 p-xl-4" method="post">
                  <h5 class="fw-bold mb-0">Date de début
-                   <div class="mb-3"><input class="form-control" type="date" id="date-1" name="Date_Debut_Tournoi" placeholder="Date de début" required></div></h5>
+                   <div class="mb-3"><input class="form-control" type="date" id="date-1" name="Date_Debut_Tournoi" placeholder="Date de début" required></div>
+                 </h5>
 
                  <h5 class="fw-bold mb-0">Date de fin
-                 <div class="mb-3"><input class="form-control" type="date" id="date-2" name="Date_Fin_Tournoi" placeholder="Date de fin" required></div></h5>
+                   <div class="mb-3"><input class="form-control" type="date" id="date-2" name="Date_Fin_Tournoi" placeholder="Date de fin" required></div>
+                 </h5>
 
                  <h5 class="fw-bold mb-0">Salle tournoi
-            <select name="ID_Salle" id="listeIdTournoi">
-                   <?php selection_salle(); ?>
-                 </select></h5>
+                   <select name="ID_Salle" id="listeIdTournoi">
+                     <?php selection_salle(); ?>
+                   </select>
+                 </h5>
 
-                 <?php if ($submit == "ok") {
+                 <?php
+                  if ($submit == "ok") {
                     $Date_debut = $_POST['Date_Debut_Tournoi'];
                     $Date_fin = $_POST['Date_Fin_Tournoi'];
                     $Fk_ID_Salle = $_POST['ID_Salle'];
                     verificationDonneesTournois($Date_debut, $Date_fin, $Fk_ID_Salle);
-                    //header("Location: afficher_tournois.php");
-                    //die();
-                   
                   }
                   ?>
                  </br></br>

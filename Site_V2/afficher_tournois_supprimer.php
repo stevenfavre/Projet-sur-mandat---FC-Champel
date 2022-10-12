@@ -15,7 +15,8 @@ if (!empty($_GET['submit'])) {
   $Datefin = $coupure[4];
   if ($option == 'activer') {
     update_activer_logique($id_tournoi);
-  } 
+    header("Location: afficher_tournois.php");
+  }
 }
 ?>
 <!DOCTYPE html>
@@ -49,7 +50,7 @@ if (!empty($_GET['submit'])) {
                 <tbody>
 
                   <?php
-                   afficher_date_tournoi_supprime();
+                  afficher_date_tournoi_supprime();
                   ?>
 
                 </tbody>
