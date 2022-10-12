@@ -6,13 +6,14 @@ require_once('steven_fonctions.php');
 //require_once('algorithme_groupe.php');
 
 $id_tournoi = $_GET["id_tournoi"];
+$dateTournoi = getDateTournoi($id_tournoi);
+
 
 $groupeA = $_SESSION['GroupeUn'];
 $groupeB = $_SESSION['GroupeDeux'];
 $groupeC = $_SESSION['GroupeTrois'];
 $groupeD = $_SESSION['GroupeQuatre'];
 
-$dateTournoi = getDateTournoi($id_tournoi);
 
 $heureDebut1 = calculDebut('13:00:00', 0, 11, 0);
 $heureFin1 = calculDebut($heureDebut1, 0, 11, 0);
@@ -215,7 +216,6 @@ function createQuartFinale($id_tournoi, $groupeA, $groupeB, $groupeC, $groupeD, 
     $quart2 = getTournois($insertquartDeux);
     $quart3 = getTournois($insertquartTrois);
     $quart4 = getTournois($insertquartQuatre);
-
 }
 
 function insertQuart($date, $heurDebut, $heureFin, $scoreLoc, $scoreVisit, $idEquipeLoc, $idEquipeVisit, $id_tournoi)
