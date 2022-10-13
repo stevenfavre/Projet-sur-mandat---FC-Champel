@@ -6,9 +6,15 @@ $Nom_Equipe = filter_input(INPUT_POST,  'Nom_Equipe');
 $Degres_Equipe = filter_input(INPUT_POST,  'Degres_Equipe');
 $idClub = filter_input(INPUT_POST,  'Nom_club');
 
-
-if (!empty($Nom_Equipe) && !empty($Degres_Equipe)) {
-    insertion_equipes($Nom_Equipe, $Degres_Equipe, $idClub);
+if (isset($Nom_Equipe) && isset($Degres_Equipe)) {
+    if (!empty($Nom_Equipe) && !empty($Degres_Equipe)) {
+        insertion_equipes($Nom_Equipe, $Degres_Equipe, $idClub);
+    } else {
+        echo "<font color='#FF0000'>";  //sources : http://www.info-3000.com/phpmysql/validation/index.php
+        echo "Veuillez indiquer toutes les informations de l'équipe pour l'insérer !";
+        echo "</font>";
+        echo "<BR>";
+    }
 }
 
 ?>

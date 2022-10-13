@@ -10,15 +10,21 @@ $npaAdresse = filter_input(INPUT_POST,  'NPA_Adresse');
 $target_dir = "assets/img/team/"; //sources : https://www.php.net/manual/en/function.move-uploaded-file.php
 
 
-
-if (!empty($nomClub) && !empty($rueAdresse) && !empty($localiteAdresse) && !empty($npaAdresse)) { //sources : https://www.php.net/manual/en/function.move-uploaded-file.php
-    $target_file = $target_dir . basename($_FILES["Image_Club"]["name"]); //sources : https://www.php.net/manual/en/function.move-uploaded-file.php
-
-    if (move_uploaded_file($_FILES["Image_Club"]["tmp_name"], $target_file)) { //sources : https://www.php.net/manual/en/function.move-uploaded-file.php
-        $idAdresse = insertion_adresse_club($rueAdresse, $localiteAdresse, $npaAdresse);
+if (isset($nomClub) && isset($rueAdresse) && isset($localiteAdresse) && isset($npaAdresse)) {
+    if (!empty($nomClub) && !empty($rueAdresse) && !empty($localiteAdresse) && !empty($npaAdresse)) { //sources : https://www.php.net/manual/en/function.move-uploaded-file.php
+        $target_file = $target_dir . basename($_FILES["Image_Club"]["name"]); //sources : https://www.php.net/manual/en/function.move-uploaded-file.php  
+        if (move_uploaded_file($_FILES["Image_Club"]["tmp_name"], $target_file))  //sources : https://www.php.net/manual/en/function.move-uploaded-file.php
+            $idAdresse = insertion_adresse_club($rueAdresse, $localiteAdresse, $npaAdresse);
         insertion_club($nomClub, $_FILES["Image_Club"]["name"], $idAdresse);
+    } else {
+        echo "<font color='#FF0000'>";  //sources : http://www.info-3000.com/phpmysql/validation/index.php
+        echo "Veuillez indiquer toutes les informations du club pour l'insérer !";
+        echo "</font>";
+        echo "<BR>";
     }
 }
+
+
 ?>
 
 <!DOCTYPE html>
