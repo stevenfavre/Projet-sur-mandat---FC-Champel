@@ -38,7 +38,6 @@ require_once('./functions/Fonctions_Sofian.php'); //Fait appel à la page où se
                     <div id="concat"></div>
                 </div>
             </div>
-            <a href="./afficher_nom_equipes.php">Liste de toutes les équipes</a>
             <br /><br />
             <a href="./page_equipes.php">Retour</a>
         </div>
