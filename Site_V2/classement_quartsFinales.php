@@ -18,7 +18,7 @@ if (!empty($_GET['submit'])) {
   <meta charset="utf-8">
   <script src="https://kit.fontawesome.com/5a023d1c0f.js" crossorigin="anonymous"></script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-  <title>Classement - Tournois</title>
+  <title>Quart de finale - Tournois</title>
   <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800&amp;display=swap">
   <link rel="stylesheet" href="assets/fonts/ionicons.min.css">
@@ -47,36 +47,29 @@ if (!empty($_GET['submit'])) {
 
                     <div class="container">
                       <h1>Quarts de finale</h1>
+</br>
 
                       <?php
-                      //affichageClassements($_SESSION['id_tournoi']);
                       affichageResulatsQuartsFinal($_SESSION['id_tournoi']);
-                      //affichageResulatsQuartsFinal1($_SESSION['id_tournoi']);
                       ?>
               </tbody>
             </table>
-            <?php
-            // if (empty($_GET['id_match'])) { 
-            ?>
-
-            <!--                    <a class="btn btn-primary shadow" role="button" href="test1.php?id_match=<?php echo $id_match1 ?>">Réinitialisation points</a>
-                   <a class="btn btn-primary shadow" role="button" href="classement_tournoi1.php?id_match=<?php echo $id_match1 ?>">Calculer tous les points</a>
-            //   //} else { ?>
-              <a class="btn btn-primary shadow" role="button" href="test1.php?id_groupe=<?php echo $_GET['id_match'] ?>">Réinitialisation points</a>
-              <a class="btn btn-primary shadow" role="button"  href="classement_tournoi1.php?id_match=<?php echo $_GET['id_match'] ?>">Calculer tous les points</a>
-               //}
-                ?> -->
           </form>
-          <a class="btn btn-primary shadow" href="match.php">Revenir</a>
-          <br /><br />
-          <a class="btn btn-primary shadow" role="button" href="./functions/algorithme_demi_finale.php?id_tournoi=<?php echo $_SESSION['id_tournoi'] ?>">Générer matchs demie finale</a>
-          <br /><br />
-          <a class="btn btn-primary shadow" role="button" href="./functions/algorithme_match_5e_8e_place.php?id_tournoi=<?php echo $_SESSION['id_tournoi'] ?>">Générer matchs 5ème à 8ème place</a>
+</br></br>
+          <table>
+            <tbody>
+              <td>          <a class="btn btn-primary shadow" role="button" href="./functions/algorithme_demi_finale.php?id_tournoi=<?php echo $_SESSION['id_tournoi'] ?>">Générer matchs demi finale</a>&nbsp
+</td> <td>          <a class="btn btn-primary shadow" role="button" href="./functions/algorithme_match_5e_8e_place.php?id_tournoi=<?php echo $_SESSION['id_tournoi'] ?>">Générer matchs 5ème - 8ème place</a>
+</td>
+            </tbody>
+          </table>
+</br>
+          <a class="btn btn-primary shadow" role="button" href="match.php"><i class="fa-solid fa-arrow-left"></i></a>
 
+          
         </div>
       </div>
   </section>
-
   <?php include_once('default_pages/footer.php'); ?>
   <script src="assets/js/jquery.min.js"></script>
   <script src="assets/bootstrap/js/bootstrap.min.js"></script>

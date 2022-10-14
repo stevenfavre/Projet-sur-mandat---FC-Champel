@@ -33,24 +33,40 @@ if (!empty($_GET['submit'])) {
 <body style="/*background: url(&quot;design.jpg&quot;);*/background-position: 0 -60px;">
   <?php include_once('default_pages/navbar.php'); ?>
   <section class="py-5">
-    <div class="container py-5">
-      <div class="row mb-4 mb-lg-5">
-        <div class="col-md-8 col-xl-6 text-center mx-auto">
-          <h1 class="fw-bold text-success mb-2">Equipes inscrites</h1>
-          <h3 class="fw-bold">Tournoi du <?php echo afficherDateTournoi($_SESSION['id_tournoi']); ?> &nbsp;</h3>
-          </br></br>
-          <h5 class="fw-bold text-success mb-2"><a href="inscription_equipe.php?id_tournoi=<?php echo $_SESSION['id_tournoi']; ?>">Inscrire une nouvelle equipe <i class="fa-solid fa-user-plus"></i></a></h5>
+    <div class="container" style="width: 9000px;margin: auto;border: 5px solid #FF0000;">
+      <div class="container py-5">
+        <div class="row mb-5">
+          <div class="col-md-8 col-xl-6 text-center mx-auto">
+            <p class="fw-bold text-success mb-2">Toutes les equipes participantes</p>
+            <h1>Equipes inscrites au tournoi</h1>
+          </div>
+        </div>
+        <div class="row d-flex justify-content-center">
+          <div class="col-md-15 col-xl-15">
+            <h5 class="fw-bold text-success mb-2"><a href="inscription_equipe.php?id_tournoi=<?php echo $_SESSION['id_tournoi']; ?>">Inscrire une nouvelle equipe <i class="fa-solid fa-user-plus"></i></a></h5>
+
+            <form action="#" method="get">
+              <table>
+                <tbody>
+                  <?php
+                  afficherEquipeInscrites($_SESSION['id_tournoi']);
+                  ?>
+                </tbody>
+              </table>
+            </form>
+            <a class="btn btn-primary shadow" role="button" href="match.php"><i class="fa-solid fa-arrow-left"></i></a>
+
+
+
+
+          </div>
+
+
         </div>
       </div>
-      <form action="#" method="get">
-        <?php
-        afficherEquipeInscrites($_SESSION['id_tournoi']);
-        ?>
-      </form>
-      <a class="btn btn-primary shadow" href="match.php">Revenir</a>
     </div>
     </div>
-    </form>
+    </div>
   </section>
   <?php include_once('default_pages/footer.php'); ?>
   <script src="assets/js/jquery.min.js"></script>

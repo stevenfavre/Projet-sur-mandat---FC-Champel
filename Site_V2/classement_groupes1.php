@@ -41,26 +41,26 @@ if (!empty($_GET['submit'])) {
                   <?php
                   affichageResulatsToutesEquipes($_SESSION['id_tournoi']);
                   affichageGroupes($_SESSION['id_tournoi']);
-                  //affichageResultatGroupes($_SESSION['id_tournoi']); SELECT MAX
                   ?>
                 </tbody>
               </table>
               <?php
               if (empty($_GET['id_tournoi'])) { ?>
-
-                <a class="btn btn-primary shadow" role="button" href="test2.php?id_tournoi=<?php echo $_GET['id_tournoi'] ?>">Réinitialisation points</a>
-
+                <table><tbody><td>  <a class="btn btn-primary shadow" role="button" href="test2.php?id_tournoi=<?php echo $_GET['id_tournoi'] ?>"><i class="fa-solid fa-arrows-rotate"></i></a>
               <?php    } else { ?>
-                <a class="btn btn-primary shadow" role="button" href="test2.php?id_tournoi=<?php echo $_GET['id_tournoi'] ?>">Réinitialisation points</a>
+                <td> &nbsp<a class="btn btn-primary shadow" role="button" href="test2.php?id_tournoi=<?php echo $_GET['id_tournoi'] ?>"><i class="fa-solid fa-arrows-rotate"></i></a>
               <?php }
-
               ?>
             </form>
             </br></br>
-            <!--     <a class="btn btn-primary shadow" href="javascript:history.go(-1)">Revenir</a> -->
-            <a class="btn btn-primary shadow" href="match.php">Revenir</a>
-
+            <table><tbody>
+              
+              <td>
             <a class="btn btn-primary shadow" role="button" href="./functions/algorithme_quart_finale.php?id_tournoi=<?php echo $_SESSION['id_tournoi'] ?>">Générer quarts de finale</a>
+            
+            <td> &nbsp<a class="btn btn-primary shadow" role="button" href="./functions/algorithme_match_9e_16e_place.php?id_tournoi=<?php echo $_SESSION['id_tournoi'] ?>">Générer matchs 9ème-16ème place</a>
+            </td>  </tbody></table>
+         
           </div>
         </div>
       </div>

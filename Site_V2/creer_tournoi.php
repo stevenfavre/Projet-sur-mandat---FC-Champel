@@ -40,33 +40,24 @@
            </div>
          </div>
          <div class="row d-flex justify-content-center">
-           <div class="col-md-6 col-xl-4">
+           <div class="col-md-15 col-xl-7">
              <div>
-
                <form action="creer_tournoi.php"  method="post">
-                 <h5 class="fw-bold mb-0">Date de début
+                 <h5 class="fw-bold mb-0">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspDate de début </h5>
                    <div class="mb-3"><input class="form-control" type="date" id="date-1" name="Date_Debut_Tournoi" placeholder="Date de début" required></div>
-                 </h5>
+                
 
-                 <h5 class="fw-bold mb-0">Date de fin
+                 <h5 class="fw-bold mb-0">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspDate de fin </h5>
                    <div class="mb-3"><input class="form-control" type="date" id="date-2" name="Date_Fin_Tournoi" placeholder="Date de fin" required></div>
-                 </h5>
+                
 
-                 <h5 class="fw-bold mb-0">Salle tournoi
+                 <h5 class="fw-bold mb-0">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspSalle tournoi&nbsp 
                    <select name="ID_Salle" id="listeIdTournoi">
                      <?php selection_salle(); ?>
-                   </select>
-                 </h5>
-
-                 <?php
-
-                  ?>
-                 </br></br>
-                
-                         <button class="btn btn-primary" type="submit" name="submit" value="ok">Créer</button>
-                     
-                         <a class="btn btn-primary shadow" role="button" href="afficher_tournois.php"><i class="fa-solid fa-arrow-left"></i></a>
-                       
+                   </select></h5>
+</br></br>
+                <table><tbody<td><ul> <button class="btn btn-primary" type="submit" name="submit" value="ok">Créer</button>&nbsp&nbsp                        <a class="btn btn-primary shadow" role="button" href="afficher_tournois.php"><i class="fa-solid fa-arrow-left"></i></a>
+</ul></td></table>     
                </form>
              </div>
            </div>

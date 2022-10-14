@@ -42,7 +42,7 @@
      <div class="container bg-primary-gradient py-5">
        <div class="row mb-5">
          <div class="col-md-8 col-xl-6 text-center mx-auto">
-           <h2 class="fw-bold">Modification tournoi du <?php echo date("d.m.Y", strtotime($_SESSION['tournoi']['Date_Debut_Tournoi'])); ?> </h2>
+           <h2 class="fw-bold">Informations tournoi du <?php echo date("d.m.Y", strtotime($_SESSION['tournoi']['Date_Debut_Tournoi'])); ?> </h2>
          </div>
        </div>
        <div class="card shadow-sm">
@@ -76,7 +76,7 @@
          <button class="btn btn-primary" type="submit" name="submit" value="modifier">Modifier</button>
          <?php
           ?>
-         <a class="btn btn-primary shadow" role="button" href="afficher_tournois.php"><i class="fa-solid fa-arrow-left"></i></a>
+         <a class="btn btn-primary shadow" role="button" href="match.php"><i class="fa-solid fa-arrow-left"></i></a>
          </table>
        </div>
        </tbody>

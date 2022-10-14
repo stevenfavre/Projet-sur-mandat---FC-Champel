@@ -49,27 +49,17 @@ if (!empty($_GET['submit'])) {
                       <h1>Classement equipes 9ème - 16ème place </h1>
 
                       <?php
-                      
                       affichagePerdantDernierePlace2($_SESSION['id_tournoi']);
                       affichagePerdantDernierePlace3($_SESSION['id_tournoi']);
                       affichagePerdantDernierePlace4($_SESSION['id_tournoi']);
                       affichagePerdantDernierePlace5($_SESSION['id_tournoi']);
-                      
-
-
                       ?>
               </tbody>
             </table>
             <?php
-        
             ?>
-
-    
           </form>
-          <a class="btn btn-primary shadow" href="classement_groupes.php">Revenir</a>
-          <a class="btn btn-primary shadow" role="button" href="./functions/algorithme_match_eliminationDirect.php'<?php $_SESSION['id_tournoi'] ?>'">Générer matchs demie finale</a>
-
-
+          <a class="btn btn-primary shadow" href="match.php">Revenir</a>
         </div>
       </div>
   </section>

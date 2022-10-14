@@ -58,10 +58,8 @@ if (!empty($_GET['submit'])) {
           <path d="M6 4.5H1.866a1 1 0 1 0 0 1h2.668A6.517 6.517 0 0 0 1.814 9H2.5c.123 0 .244.015.358.043a5.517 5.517 0 0 1 3.185-3.185A1.503 1.503 0 0 1 6 5.5v-1zm3.957 1.358A1.5 1.5 0 0 0 10 5.5v-1h4.134a1 1 0 1 1 0 1h-2.668a6.517 6.517 0 0 1 2.72 3.5H13.5c-.123 0-.243.015-.358.043a5.517 5.517 0 0 0-3.185-3.185z"></path>
           <form action="classement_tournoi.php" method="get">
             <table>
-
               <?php
               if (empty($_GET['id_groupe'])) {
-
                 affichageResulatsEquipes2($id_groupe1, $_GET['id_tournoi']);
                 affichageResulatsEquipes($id_groupe1, $_GET['id_tournoi']);
               } else {
@@ -72,7 +70,7 @@ if (!empty($_GET['submit'])) {
             </table>
             </br></br>
             <?php
-            if (empty($_GET['id_groupe'])) { ?>
+            /*             if (empty($_GET['id_groupe'])) { ?>
               <a class="btn btn-primary shadow" role="button" href="test1.php?id_groupe=<?php echo $id_groupe1 ?>&id_tournoi=<?php echo $_GET['id_tournoi'] ?>">Réinitialisation points</a>
               <a class="btn btn-primary shadow" role="button" href="classement_tournoi1.php?id_groupe=<?php echo $id_groupe1 ?>&id_tournoi=<?php echo $_GET['id_tournoi'] ?>">Calculer tous les points</a>
 
@@ -80,116 +78,16 @@ if (!empty($_GET['submit'])) {
               <a class="btn btn-primary shadow" role="button" href="test1.php?id_groupe=<?php echo $_GET['id_groupe'] ?>&id_tournoi=<?php echo $_GET['id_tournoi'] ?>">Réinitialisation points</a>
               <a class="btn btn-primary shadow" role="button" href="classement_tournoi1.php?id_groupe=<?php echo $_GET['id_groupe'] ?>&id_tournoi=<?php echo $_GET['id_tournoi'] ?>">Calculer tous les points</a>
 
-            <?php }
+            <?php } ?> */
             ?>
+            <a class="btn btn-primary shadow" href="classement_groupes.php?id_tournoi=<?php echo $_GET['id_tournoi'] ?>"><i class="fa-solid fa-arrow-left"></i></a>
+
           </form>
           </br>
-          <a class="btn btn-primary shadow" href="classement_groupes.php">Revenir</a>
+
           <?php
           ?>
 
-          <!--         </div>
-      </div>
-      <div class="col-md-6 col-xl-4">
-        <div>
-
-          <div class="container">
-            <h1>Quarts de finale</h1>
-            <table class="table">
-              <thead>
-                <tr>
-                  <th>QUART 1</th>
-                  <th>Equipe</th>
-                  <th>Score</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>QUART 2</td>
-                  <td>Equipe</td>
-                  <td>Score</td>
-                </tr>
-                <tr class="table-active">
-                  <td>Active</td>
-                  <td>Une cellule</td>
-                  <td>Une cellule</td>
-                </tr>
-                <tr class="table-primary">
-                  <td>Primary</td>
-                  <td>Une cellule</td>
-                  <td>Une cellule</td>
-                </tr>
-                <tr class="table-secondary">
-                  <td>Secondary</td>
-                  <td>Une cellule</td>
-                  <td>Une cellule</td>
-                </tr>
-                <tr class="table-success">
-                  <td>Success</td>
-                  <td>Une cellule</td>
-                  <td>Une cellule</td>
-                </tr>
-                <tr class="table-danger">
-                  <td>Danger</td>
-                  <td>Une cellule</td>
-                  <td>Une cellule</td>
-                </tr>
-                <tr class="table-warning">
-                  <td>Warning</td>
-                  <td>Une cellule</td>
-                  <td>Une cellule</td>
-                </tr>
-                <tr class="table-info">
-                  <td>Info</td>
-                  <td>Une cellule</td>
-                  <td>Une cellule</td>
-                </tr>
-                <tr class="table-light">
-                  <td>Light</td>
-                  <td>Une cellule</td>
-                  <td>Une cellule</td>
-                </tr>
-                <tr class="table-dark">
-                  <td>Dark</td>
-                  <td>Une cellule</td>
-                  <td>Une cellule</td>
-                </tr>
-                <tr>
-                  <td class="table-primary">Primary</td>
-                  <td class="table-success">Success</td>
-                  <td class="table-warning">Warning</td>
-                </tr>
-              </tbody>
-            </table>
-
-            <table class="table table-dark">
-              <thead>
-                <tr>
-                  <th>Classe</th>
-                  <th>Couleur</th>
-                  <th>Couleur</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>Default</td>
-                  <td>Une cellule</td>
-                  <td>Une cellule</td>
-                </tr>
-                <tr class="bg-info">
-                  <td>Active</td>
-                  <td>Une cellule</td>
-                  <td>Une cellule</td>
-                </tr>
-                <tr class="bg-warning">
-                  <td>Primary</td>
-                  <td>Une cellule</td>
-                  <td>Une cellule</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-</body>-->
         </div>
       </div>
   </section>

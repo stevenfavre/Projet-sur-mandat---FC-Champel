@@ -46,7 +46,7 @@ if (!empty($_GET['submit'])) {
                   <div>
 
                     <div class="container">
-                      <h1>Classement equipes perdantes quart de final</h1>
+                      <h2>Classement equipes perdantes - quart de final</h2>
 
                       <?php
                       //affichageClassements($_SESSION['id_tournoi']);
@@ -59,21 +59,11 @@ if (!empty($_GET['submit'])) {
               </tbody>
             </table>
             <?php
-            // if (empty($_GET['id_match'])) { 
-            ?>
+            ?> <a class="btn btn-primary shadow" role="button" href="./functions/algorithme_match_9e_16e_place.php?id_tournoi=<?php echo $_SESSION['id_tournoi'] ?>">Générer matchs 9ème-16ème place</a>
 
-            <!--                    <a class="btn btn-primary shadow" role="button" href="test1.php?id_match=<?php echo $id_match1 ?>">Réinitialisation points</a>
-                   <a class="btn btn-primary shadow" role="button" href="classement_tournoi1.php?id_match=<?php echo $id_match1 ?>">Calculer tous les points</a>
-            //   //} else { ?>
-              <a class="btn btn-primary shadow" role="button" href="test1.php?id_groupe=<?php echo $_GET['id_match'] ?>">Réinitialisation points</a>
-              <a class="btn btn-primary shadow" role="button"  href="classement_tournoi1.php?id_match=<?php echo $_GET['id_match'] ?>">Calculer tous les points</a>
-               //}
-                ?> -->
           </form>
-          <a class="btn btn-primary shadow" href="classement_groupes.php">Revenir</a>
-          <a class="btn btn-primary shadow" role="button" href="./functions/algorithme_match_eliminationDirect.php'<?php $_SESSION['id_tournoi'] ?>'">Générer matchs demie finale</a>
-
-
+          </br></br>
+          <a class="btn btn-primary shadow" role="button" href="match.php"><i class="fa-solid fa-arrow-left"></i></a>
         </div>
       </div>
   </section>

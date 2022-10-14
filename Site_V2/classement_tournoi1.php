@@ -74,9 +74,9 @@ if (!empty($_GET['submit'])) {
             </br></br>
             <?php
             if (empty($_GET['id_groupe'])) { ?>
-              <a class="btn btn-primary shadow" role="button" href="test1.php?id_groupe=<?php echo $id_groupe1 ?>&id_tournoi=<?php echo $_GET['id_tournoi']?>">Réinitialisation points</a>
+              <a class="btn btn-primary shadow" role="button" href="test1.php?id_groupe=<?php echo $id_groupe1 ?>&id_tournoi=<?php echo $_GET['id_tournoi'] ?>">Réinitialisation points</a>
             <?php    } else { ?>
-              <a class="btn btn-primary shadow" role="button" href="test1.php?id_groupe=<?php echo $_GET['id_groupe'] ?>&id_tournoi=<?php echo $_GET['id_tournoi']?>">Réinitialisation points</a>
+              <a class="btn btn-primary shadow" role="button" href="test1.php?id_groupe=<?php echo $_GET['id_groupe'] ?>&id_tournoi=<?php echo $_GET['id_tournoi'] ?>">Réinitialisation points</a>
             <?php }
             ?>
           </form>

@@ -50,7 +50,7 @@ if (!empty($_GET['submit'])) {
                 </tbody>
               </table>
             </form>
-            <a class="btn btn-primary shadow" role="button" href="tournois.php">Revenir</a>
+            <a class="btn btn-primary shadow" role="button" href="tournois.php"><i class="fa-solid fa-arrow-left"></i></a>
             <h6 style="padding-left: 80%;">
               <a href="inscription_tournoi_equipe.php" class="fw-bold"><i class="fa-solid fa-plus"></i> Ajouter inscription </a>
             </h6>

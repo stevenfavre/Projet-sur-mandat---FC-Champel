@@ -40,7 +40,7 @@ if (!empty($_GET['submit'])) {
 <body style="/*background: url(&quot;design.jpg&quot;);*/background-position: 0 -60px;">
   <?php include_once('default_pages/navbar.php'); ?>
   <section class="py-5">
-    <div class="container" style="width: 5000px;margin: auto;border: 5px solid #FF0000;">
+    <div class="container" style="width: 9000px;margin: auto;border: 5px solid #FF0000;">
       <div class="container py-5">
         <div class="row mb-5">
           <div class="col-md-8 col-xl-6 text-center mx-auto">
@@ -49,33 +49,22 @@ if (!empty($_GET['submit'])) {
           </div>
         </div>
         <div class="row d-flex justify-content-center">
-          <div class="col-md-8 col-xl-8">
+          <div class="col-md-15 col-xl-15">
             <form action="afficher_tournois.php" method="get">
               <table>
                 <tbody>
-
                   <?php
                   afficher_date_tournoi();
                   ?>
-
                 </tbody>
               </table>
-
-
-
-
             </form>
+            <a class="btn btn-primary shadow" role="button" href="tournois.php"><i class="fa-solid fa-arrow-left"></i></a>
 
-
-
-            <a class="btn btn-primary shadow" role="button" href="tournois.php"><i class="fa-solid fa-arrow-left"></i></a></p>
-
-
-            <h6 style="padding-left: 75%;">
-              <a href="creer_tournoi.php" class="fw-bold"><i class="fa-solid fa-plus"></i> Creer tournoi</a>
-
+            <h6 style="padding-left: 83%;">
+              <a href="creer_tournoi.php" class="fw-bold"><i class="fa-solid fa-plus"></i>&nbsp&nbspCréer tournoi</a>
               </br></br>
-              <a href="afficher_tournois_supprimer.php" class="fw-bold"><i class="fa-regular fa-trash-can"></i> Tournois supprimés</a>
+              <a href="afficher_tournois_supprimer.php" class="fw-bold"><i class="fa-regular fa-trash-can"></i>&nbsp&nbspHistorique</a>
             </h6>
 
 

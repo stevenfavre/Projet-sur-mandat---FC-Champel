@@ -15,7 +15,7 @@ if (!empty($_GET['submit'])) {
   <meta charset="utf-8">
   <script src="https://kit.fontawesome.com/5a023d1c0f.js" crossorigin="anonymous"></script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-  <title>Classement - Tournois</title>
+  <title>Classement - Groupes</title>
   <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800&amp;display=swap">
   <link rel="stylesheet" href="assets/fonts/ionicons.min.css">
@@ -26,43 +26,41 @@ if (!empty($_GET['submit'])) {
   <section class="py-5">
     <div class="container" style="width: 5000px;margin: auto;border: 5px solid #FF0000;">
       <div class="container py-5">
-        <div class="row mb-5">
           <div class="col-md-8 col-xl-6 text-center mx-auto">
             <p class="fw-bold text-success mb-2">Tous les groupes</p>
             <h1>Classement groupes</h1>
           </div>
-        </div>
         <div class="row d-flex justify-content-center">
-          <div class="col-md-8 col-xl-6">
+       
+          <div class="col-md-10 col-xl-7">
+        
+
             <form action="classement_groupes.php" method="get">
-              <table>
-                <tbody>
+          
 
                   <?php
                   affichageGroupes($_SESSION['id_tournoi']);
-                  //affichageResultatGroupes($_SESSION['id_tournoi']); SELECT MAX
                   ?>
-                </tbody>
-              </table>
+         
               <?php
               if (empty($_GET['id_tournoi'])) { ?>
-                <a class="btn btn-primary shadow" role="button" href="test2.php?id_tournoi=<?php echo $id_groupe1 ?>">Réinitialisation points</a>
-                <a class="btn btn-primary shadow" role="button" href="classement_groupes1.php?id_tournoi=<?php $_GET['id_tournoi'] ?>">Calculer tous les points</a>
+              <table><tbody><td> <a class="btn btn-primary shadow" role="button" href="test2.php?id_tournoi=<?php echo $id_groupe1 ?>"><i class="fa-solid fa-arrows-rotate"></i></a>
+                <a class="btn btn-primary shadow" role="button" href="classement_groupes1.php?id_tournoi=<?php $_GET['id_tournoi'] ?>">Calculer points</a></td></tbody></table>
+                
               <?php    } else { ?>
-                <a class="btn btn-primary shadow" role="button" href="test2.php?id_tournoi=<?php echo $_GET['id_tournoi'] ?>">Réinitialisation points</a>
-                <a class="btn btn-primary shadow" role="button" href="classement_groupes1.php?id_tournoi=<?php echo $_GET['id_tournoi'] ?>">Calculer tous les points</a>
-
+                <a class="btn btn-primary shadow" role="button" href="test2.php?id_tournoi=<?php echo $_GET['id_tournoi'] ?>"><i class="fa-solid fa-arrows-rotate"></i></a>
+                <a class="btn btn-primary shadow" role="button" href="classement_groupes1.php?id_tournoi=<?php echo $_GET['id_tournoi'] ?>">Calculer points</a>
               <?php }
-
               ?>
             </form>
-            </br></br>
-            <!--     <a class="btn btn-primary shadow" href="javascript:history.go(-1)">Revenir</a> -->
-            <a class="btn btn-primary shadow" href="match.php">Revenir</a>
-            <br /><br />
-            <a class="btn btn-primary shadow" role="button" href="./functions/algorithme_quart_finale.php?id_tournoi=<?php echo $_SESSION['id_tournoi'] ?>">Générer quarts de finale</a>
-            <br /><br />
-            <a class="btn btn-primary shadow" role="button" href="./functions/algorithme_match_9e_16e_place.php?id_tournoi=<?php echo $_SESSION['id_tournoi'] ?>">Générer matchs 9ème à 16ème place</a>
+              </br></br>
+            <table><tbody>
+              
+              <td>
+              <a class="btn btn-primary" role="button" href="./functions/algorithme_quart_finale.php?id_tournoi=<?php echo $_SESSION['id_tournoi'] ?>">Générer quarts de finale</a>&nbsp</td>
+           <td> &nbsp<a class="btn btn-primary" role="button" href="./functions/algorithme_match_9e_16e_place.php?id_tournoi=<?php echo $_SESSION['id_tournoi'] ?>">Générer matchs 9ème-16ème place</a>
+            </td>  </tbody></table>
+         
           </div>
         </div>
       </div>

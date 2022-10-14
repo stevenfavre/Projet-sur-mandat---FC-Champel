@@ -60,7 +60,7 @@ if (!empty($submit)) {
             </div>
           </li>
           <li class="nav-item"><a class="nav-link " href="modifier_equipe_tournoi.php?id_tournoi=<?php echo $_SESSION['id_tournoi']; ?>">Inscriptions equipes</a></li>
-          <li class="nav-item"><a class="nav-link " href="modifier_tournoi.php?id_tournoi=<?php echo $_SESSION['id_tournoi']; ?>">Informations tournoi</a></li>
+          <li class="nav-item"><a class="nav-link " href="info_tournoi.php?id_tournoi=<?php echo $_SESSION['id_tournoi']; ?>">Informations tournoi</a></li>
         </ul>
       </nav>
     </div>
@@ -75,8 +75,23 @@ if (!empty($submit)) {
           } else if (empty(selectMatchPoul($_SESSION['id_tournoi']))) {
             echo '<a class="btn btn-primary shadow" role="button" href="./functions/algorithme_groupe.php?id_tournoi=' . $_SESSION['id_tournoi'] . '">Générer le tournoi</a>';
           } else if (empty(selectMatchQuartFinale($_SESSION['id_tournoi']))) {
+            echo '<a class="btn btn-primary shadow" role="button" href="classement_groupes.php?id_tournoi=' . $_SESSION['id_tournoi'] . '">Classement des groupes</a>';
+          } else if (empty(selectMatchQuartFinale($_SESSION['id_tournoi']))) {
             echo '<a class="btn btn-primary shadow" role="button" href="./functions/algorithme_quart_finale.php?id_tournoi=' . $_SESSION['id_tournoi'] . '">Générer les quarts de finale</a>';
+          } else if (empty(selectMatchDemiFinale($_SESSION['id_tournoi']))) {
+            echo '<a class="btn btn-primary shadow" role="button" href="classement_quartsFinales.php?id_tournoi=' . $_SESSION['id_tournoi'] . '">Classement quarts de finale</a>';
+          } else if (empty(selectMatchFinale($_SESSION['id_tournoi']))) {
+            echo '<a class="btn btn-primary shadow" role="button" href="classement_demi_finale.php?id_tournoi=' . $_SESSION['id_tournoi'] . '">Classement demi finale</a>';
+          } else if (empty(selectMatchPlaces($_SESSION['id_tournoi']))) {
+            echo '<a class="btn btn-primary shadow" role="button" href="classement_finale.php?id_tournoi=' . $_SESSION['id_tournoi'] . '">Classement finale</a>';
+          } else if (empty(selectMatchPlaces1($_SESSION['id_tournoi']))) {
+            echo '<a class="btn btn-primary shadow" role="button" href="classement_last_equipes.php?id_tournoi=' . $_SESSION['id_tournoi'] . '">Classement 5ème-8ème place</a>';
+          } else if (empty(selectMatchPlaces2($_SESSION['id_tournoi']))) {
+            echo '<a class="btn btn-primary shadow" role="button" href="classement_last_places.php?id_tournoi=' . $_SESSION['id_tournoi'] . '">Classement 9ème-16ème place</a>';
+          } else if (empty(selectMatchPlaces3($_SESSION['id_tournoi']))) {
+            echo '<a class="btn btn-primary shadow" role="button" href="tous_les_classement_ID.php?id_tournoi=' . $_SESSION['id_tournoi'] . '">Générer classement final du tournoi</a>';
           }
+
           ?>
           <br><br>
           <input type="text" id="recherche" onkeyup="recherche()" placeholder="Recherche..." title="Rechercher un match">
