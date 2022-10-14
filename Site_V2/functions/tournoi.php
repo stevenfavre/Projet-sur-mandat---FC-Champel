@@ -67,26 +67,8 @@ function insertion_tournoi($Date_debut, $Date_fin, $Fk_ID_Salle)
 
     $req = $bdd->prepare($sql);
     $req->execute();
- 
 }
 
-function insertMatch($date_match, $heure_debut, $heure_fin, $duree_match, $type_match, $fk_id_local, $fk_id_visiteur, $fk_id_tournoi, $fk_id_terrain, $fk_id_groupe = 1)
-{
-    // Code permettant de récupérer les minutes du temps
-    $to_time = strtotime($heure_fin);
-    $from_time = strtotime($heure_debut);
-    $minutes = round(abs($to_time - $from_time) / 60, 2);
-
-    try {
-        $db = connectDB();
-        $sql = "INSERT INTO `Matchs` (`ID_Match`, `Date_Match`, `Heure_Debut_Match`, `Heure_Fin_Match`, `Duree_Match`, `Type_Match`, `But_Local_Match`, `But_Visiteur_Match`, `FK_ID_Local`, `FK_ID_Visiteur`, `FK_ID_Groupe`, `FK_ID_Tournoi`, `FK_ID_Terrain`, `Actif_Match`)
-        VALUES (NULL,  '$date_match', '$heure_debut', '$heure_fin', '$minutes', '$type_match', '0', '0' , '$fk_id_local', '$fk_id_visiteur', '$fk_id_groupe', '$fk_id_tournoi',  '$fk_id_terrain', 1);";
-        $request = $db->prepare($sql);
-        $request->execute();
-    } catch (\Throwable $e) {
-        debug($e->getMessage());
-    }
-}
 ///OK
 function selection_tournoi($id_tournoi)
 {
@@ -192,29 +174,28 @@ function afficherDateFinTournoi($id_tournoi)
 
 function afficher_date_tournoi()
 {
-
     echo  "<table class=\"table table-bordered\">
-    <thead class=\"thead\">
+  
     <tr class=\"bg-white\">
             <th scope=\"col\"><CENTER><h4 class=\"text-success\">Date tournoi"  . "</h4></CENTER></th>
             <th scope=\"col\"><CENTER><h4 class=\"text-success\"> Date fin" . "  " .  "</h4></CENTER></th>
             <th scope=\"col\"><CENTER><h4 class=\"text-success\"> Salle" . "  " .  "</h4></CENTER></th>
             <th scope=\"col\"><CENTER><h4 class=\"text-success\"> Statut" . "</h4></CENTER></th>
-            <th scope=\"col\"><CENTER><h4 class=\"text-success\">" . "<i class=\"fa-solid fa-gears\"></i></h2></CENTER></th></tr> </thead>";
+            <th scope=\"col\"><CENTER><h4 class=\"text-success\">" . "<i class=\"fa-solid fa-gears\"></i></h2></CENTER></th></tr> ";
 
     foreach (afficher_Tournoi() as $tournoi) {
         echo "<a href=\"../afficher_tournois.php?id_tournoi=" . $tournoi['ID_Tournoi'] . "\">";
         if ($tournoi['Actif_Tournoi'] == 1)
-            echo "<tr><td><CENTER><p class=\"font-weight-normal\">" . "Tournoi du " . date("d.m.Y", strtotime($tournoi['Date_Debut_Tournoi'])) . "</a></p></td>
-        <td><CENTER><p class=\"font-weight-normal\">" . date("d.m.Y", strtotime($tournoi['Date_Fin_Tournoi'])) .  "</h5></td>
-        <td><CENTER><p class=\"font-weight-normal\">" . $tournoi['Nom_Salle'] . "</h5></td>
-        <td><CENTER><p class=\"font-weight-normal\">" . "Actif" .  "</h5></td>
+            echo "<tr><td><CENTER>
+        <p class=\"fw-bold\ id=\"h5Texte\">" . "Tournoi du " . date("d.m.Y", strtotime($tournoi['Date_Debut_Tournoi'])) . "</p></td>
+    <td><CENTER>
+    <p class=\"fw-bold\ id=\"h5Texte\">" . date("d.m.Y", strtotime($tournoi['Date_Fin_Tournoi'])) .  "</p></td>
+    <td><CENTER><p class=\"fw-bold\ id=\"h5Texte\">" . $tournoi['Nom_Salle'] . "</p></td>
+    <td><CENTER><p class=\"text-dark\" id=\"h5Texte\">" . " actif " .  "</p></a></td>
         <td><CENTER><button type=\"submit\" class=\"btn btn-outline-success\" name=\"submit\" style=\"padding: 0px 12px !important;\" value=\"" . $tournoi['ID_Tournoi'] . "-terminer\"><i class=\"fa-solid fa-power-off\"></i></button>
        <button type=\"submit\" class=\"btn btn-outline-danger\" name=\"submit\" style=\"padding: 0px 12px !important;\" value=\"" . $tournoi['ID_Tournoi'] . "-annuler\"><i class=\"fa-regular fa-trash-can\"></i></button>
        <a class=\"btn btn-outline-dark\" style=\"padding: 0px 12px !important;\" role=\"button\" href=\"match.php?id_tournoi=" .  $tournoi['ID_Tournoi'] . "\"><i class=\"fa-solid fa-magnifying-glass\"></i></a>
-       <a class=\"btn btn-outline-warning\" style=\"padding: 0px 12px !important;\" role=\"button\" href=\"modifier_tournoi.php?id_tournoi=" .  $tournoi['ID_Tournoi'] . "\"><i class=\"fa-solid fa-pen\"</a></i></a></CENTER>";
-
-
+       <a class=\"btn btn-outline-warning\" style=\"padding: 0px 12px !important;\" role=\"button\" href=\"modifier_tournoi.php?id_tournoi=" .  $tournoi['ID_Tournoi'] . "\"><i class=\"fa-solid fa-pen\"</i></a></td></CENTER>";
         elseif ($tournoi['Actif_Tournoi'] == 2)
             echo "<tr><td><CENTER><p class=\"fw-bold\">" . "Tournoi du " . date("d.m.Y", strtotime($tournoi['Date_Debut_Tournoi'])) . "</p></td>
         <td><CENTER><p class=\"fw-bold\" id=\"h5Texte\">" . date("d.m.Y", strtotime($tournoi['Date_Fin_Tournoi'])) .  "</p></td>
@@ -466,6 +447,8 @@ function inscription_equipe_tournoi($ID_Tournoi, $equipe)
         debug($e->getMessage());
     }
 }
+//ok
+
 
 //OK
 function selection_tournoi_incription()
@@ -498,7 +481,7 @@ function selection_equipe_incription()
         }
     }
 }
-
+//ok
 function selection_equipe_incription1($id_tournoi)
 {
     $bdd = connectDB();
@@ -506,10 +489,20 @@ function selection_equipe_incription1($id_tournoi)
     $request = $bdd->prepare($sql);
     $request->execute();
     $reponse = $request->fetchAll();
+
     foreach ($reponse as $data) {
-        echo "<td><CENTER><h5 class=\"bold\"><a href=\"inscription_equipe.php?id_tournoi=" . $id_tournoi . "&FK_ID_Equipe=" . $data['ID_Equipe'] . "\">" . $data['Nom_Equipe'] . "</a></CENTER></h5></td>";
+        echo "<center><a href=\"inscription_equipe.php?id_tournoi=" . $id_tournoi . "&FK_ID_Equipe=" . $data['ID_Equipe'] . "\">"   . $data['Nom_Equipe'] . "</a></br>";
     }
 }
+
+function inscription_toutes_equipes_tournoi($id_tournoi)
+{
+    $bdd = connectDB();
+    $sql = "INSERT INTO Inscription_Tournoi FROM `Equipe` WHERE ID_Equipe not in (SELECT FK_ID_Equipe FROM Inscription_Tournoi WHERE FK_ID_Tournoi = $id_tournoi AND Statut_Inscription_Tournoi = 'validé');";
+    $request = $bdd->prepare($sql);
+    $request->execute();
+}
+
 function selectionner_equipe_tournoi($id_tournoi)
 {
 
@@ -587,37 +580,30 @@ function afficher_toutes_inscriptions_supprimees()
 //OK
 function afficherEquipeInscrites($id_tournoi)
 {
+    echo  "<table class=\"table table-bordered\"><thead class=\"thead-dark\"><tr>
+        <th scope=\"col\"><CENTER><h5 class=\"fw-bold text-success mb-2\">Equipe  " . "<i class=\"fa-regular fa-calendar-days\"></i></h5></CENTER></th>
+        <th scope=\"col\"><CENTER><h5 class=\"fw-bold text-success mb-2\">Groupe " . "<i class=\"fa-solid fa-people-group\"></i></h5></CENTER></th>
+        <th scope=\"col\"><CENTER><h5 class=\"fw-bold text-success mb-2\">Catégorie " . "<i class=\"fa-solid fa-people-group\"></i></h5></CENTER></th>
+        <th scope=\"col\"><CENTER><h5 class=\"fw-bold text-success mb-2\">Club " . "<i class=\"fa-solid fa-users-viewfinder\"></i></h5></CENTER></th>
+        <th scope=\"col\"><CENTER><h5 class=\"fw-bold text-success mb-2\">Options" . "  " .  "<i class=\"fa-regular fa-pen-to-square\"></i></h5></CENTER></th>
+     </tr></thead>";
     foreach (selectionner_equipe_tournoi($id_tournoi) as $inscrite) {
-        echo "<div class=\"inscription\">";
-
-        echo "<div class=\"row row-cols-1 row-cols-md-2 mx-auto\" style=\"max-width: 95%;\">";
-        echo "<div class=\"col text-center d-l-flex order-md-last justify-content-l-center align-items-l-center mb-2\">";
-
-
+        echo "<div><a href=\"affichage_equipe_bdd.php?id_inscription_tournoi=" . $inscrite['ID_Inscription_Tournoi'] . "\">";
         if ($inscrite['Statut_Inscription_Tournoi'] != "validé")
-            echo "<button type=\"\" class=\"btn btn-primary bg-success\" name=\"submit\" style=\"padding: 0px 12px !important;\" value=\"" . $inscrite['ID_Inscription_Tournoi'] . "-modifier\">Valider</button>";
+            echo "<tr><td><ul><h5 class=\"fw-\">" . contientEquipeInscrite($inscrite['FK_ID_Equipe']) . "</h5></ul></td>
+        <td><ul><h5 class=\"fw-\">"  . contientGroupeInscrit($inscrite['FK_ID_Equipe'])  . "</h5></ul></td>
+        <td><ul><h5 class=\"fw-\">" . contientCatégorieInscrit($inscrite['FK_ID_Equipe'])  . "</h5></ul></td>
+        <td><ul><h5 class=\"fw-\">" . contientClubInscrit($inscrite['FK_ID_Equipe']) . "</h5></ul></td>
+        <td><ul><button type=\"\" class=\"btn btn-primary bg-success\" name=\"submit\" style=\"padding: 0px 12px !important;\" value=\"" . $inscrite['ID_Inscription_Tournoi'] . "-modifier\">Valider</button>";
 
         else
-            echo "<button type=\"submit\" class=\"btn btn-primary btn-sm\" name=\"submit\" style=\"padding: 0px 12px !important;\" value=\"" . $inscrite['ID_Inscription_Tournoi'] . "-annuler\">Annuler</button>";
-
-
-        echo "</div>";
-        echo "<div class=\"col d-md-flex align-items-md-end align-items-lg-center mb-2\">";
-        echo "<div id=\"container\">";
-        echo "<a href=\"affichage_equipe_bdd.php?id_inscription_tournoi=" . $inscrite['ID_Inscription_Tournoi'] . "\">";
-
-        if ($inscrite['Statut_Inscription_Tournoi'] != "validé")
-            echo "<h5 class=\"fw-bold\" id=\"h5Texte\">" . contientEquipeInscrite($inscrite['FK_ID_Equipe']) . " | " . contientGroupeInscrit($inscrite['FK_ID_Equipe'])  . " | "
-                . "  Catégorie  " . contientCatégorieInscrit($inscrite['FK_ID_Equipe'])  . "<br>" . "  Club " . contientClubInscrit($inscrite['FK_ID_Equipe']) . "</h5></a>";
-
-
-        else
-            echo "<h5 class=\"fw-bold\" id=\"h5Texte\">" . contientEquipeInscrite($inscrite['FK_ID_Equipe']) . " / " . contientGroupeInscrit($inscrite['FK_ID_Equipe'])  . " /  Catégorie  " . contientCatégorieInscrit($inscrite['FK_ID_Equipe']) . "</br>" . "Club " . contientClubInscrit($inscrite['FK_ID_Equipe']) . "</h5></a>";
-
-        echo "<p class=\"text-muted mb-4\">Date d'inscription : " . date("d.m.Y", strtotime($inscrite['Date_Inscription_Tournoi'])) . "&nbsp;
-        Statut inscription --->" . $inscrite['Statut_Inscription_Tournoi'] .   " &nbsp;</p>";
-        echo "</div></div></div></div>";
+            echo "<tr><td><ul><h5 class=\"fw-\">" . contientEquipeInscrite($inscrite['FK_ID_Equipe']) . "</h5></ul></td>
+        <td><ul><h5 class=\"fw-\">" .  contientGroupeInscrit($inscrite['FK_ID_Equipe'])  . "</h5></ul></td>
+        <td><ul><h5 class=\"fw-\">" . contientCatégorieInscrit($inscrite['FK_ID_Equipe'])  . "</h5></ul></td>
+        <td><ul><h5 class=\"fw-\">" . contientClubInscrit($inscrite['FK_ID_Equipe']) . "</h5></ul></td>
+        <td><ul><button type=\"submit\" class=\"btn btn-primary btn-sm\" name=\"submit\" style=\"padding: 0px 12px !important;\" value=\"" . $inscrite['ID_Inscription_Tournoi'] . "-annuler\">Annuler</button>";
     }
+    echo "</div>";
 }
 
 function afficherEquipeInscritesSansId()
@@ -738,4 +724,78 @@ function contientEquipeInscriteSANSID($IdInscriptionTournois)
         $nomEquipe = $inscription['Nom_Equipe'];
     }
     return  $nomEquipe;
+}
+
+function selectMatchDemiFinale($id_tournoi)
+{
+    try {
+        $db = connectDB();
+        $sql = "SELECT * FROM `Matchs` WHERE `FK_ID_Tournoi` = " . $id_tournoi . " AND `Type_Match` = 'Demi finale';";
+        $request = $db->prepare($sql);
+        $request->execute();
+        return $request->fetchAll(PDO::FETCH_ASSOC);
+    } catch (\Throwable $e) {
+        debug($e->getMessage());
+    }
+}
+
+function selectMatchFinale($id_tournoi)
+{
+    try {
+        $db = connectDB();
+        $sql = "SELECT * FROM `Matchs` WHERE `FK_ID_Tournoi` = " . $id_tournoi . " AND `Type_Match` = 'Finale' OR 'Petite Finale';";
+        $request = $db->prepare($sql);
+        $request->execute();
+        return $request->fetchAll(PDO::FETCH_ASSOC);
+    } catch (\Throwable $e) {
+        debug($e->getMessage());
+    }
+}
+function selectMatchPlaces($id_tournoi)
+{
+    try {
+        $db = connectDB();
+        $sql = "SELECT * FROM `Matchs` WHERE `FK_ID_Tournoi` = " . $id_tournoi . " AND `Type_Match` = 'PerdantsQuartUn ' OR 'PerdantsQuartDeux' ;";
+        $request = $db->prepare($sql);
+        $request->execute();
+        return $request->fetchAll(PDO::FETCH_ASSOC);
+    } catch (\Throwable $e) {
+        debug($e->getMessage());
+    }
+}
+function selectMatchPlaces1($id_tournoi)
+{
+    try {
+        $db = connectDB();
+        $sql = "SELECT * FROM `Matchs` WHERE `FK_ID_Tournoi` = " . $id_tournoi . " AND `Type_Match` = 'Match_9Et10_place';";
+        $request = $db->prepare($sql);
+        $request->execute();
+        return $request->fetchAll(PDO::FETCH_ASSOC);
+    } catch (\Throwable $e) {
+        debug($e->getMessage());
+    }
+}
+function selectMatchPlaces2($id_tournoi)
+{
+    try {
+        $db = connectDB();
+        $sql = "SELECT * FROM `Matchs` WHERE `FK_ID_Tournoi` = " . $id_tournoi . " AND `Type_Match` = 'Match_11Et12_place';";
+        $request = $db->prepare($sql);
+        $request->execute();
+        return $request->fetchAll(PDO::FETCH_ASSOC);
+    } catch (\Throwable $e) {
+        debug($e->getMessage());
+    }
+}
+function selectMatchPlaces3($id_tournoi)
+{
+    try {
+        $db = connectDB();
+        $sql = "SELECT * FROM `Matchs` WHERE `FK_ID_Tournoi` = " . $id_tournoi . " AND `Type_Match` = 'Match_17Et18_place';";
+        $request = $db->prepare($sql);
+        $request->execute();
+        return $request->fetchAll(PDO::FETCH_ASSOC);
+    } catch (\Throwable $e) {
+        debug($e->getMessage());
+    }
 }
