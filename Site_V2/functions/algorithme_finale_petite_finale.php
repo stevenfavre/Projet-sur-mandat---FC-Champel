@@ -143,7 +143,7 @@ function createfinaleEtPetitefinale($id_tournoi, $dateTournoi, $heureDebut23, $h
     $bdd = connectDB();
     $num = 2;
     $matchs = $bdd->query("SET NAMES 'utf8'");
-    $matchs = $bdd->query("SELECT * FROM Matchs where FK_ID_Tournoi = $id_tournoi order by ID_Match desc limit $num;");
+    $matchs = $bdd->query("SELECT * FROM Matchs where Type_Match = 'Demi finale' AND FK_ID_Tournoi = $id_tournoi order by ID_Match desc limit $num;");
 
     $idEquipeGagnanteDemiUne = 0;
     $idEquipePerdanteDemiUne = 0;
@@ -160,7 +160,7 @@ function createfinaleEtPetitefinale($id_tournoi, $dateTournoi, $heureDebut23, $h
     $num -= 1;
 
     $matchs = $bdd->query("SET NAMES 'utf8'");
-    $matchs = $bdd->query("SELECT * FROM Matchs where FK_ID_Tournoi = $id_tournoi order by ID_Match desc limit $num;");
+    $matchs = $bdd->query("SELECT * FROM Matchs where Type_Match = 'Demi finale' AND FK_ID_Tournoi = $id_tournoi order by ID_Match desc limit $num;");
 
     $idEquipeGagnanteDemiDeux = 0;
     $idEquipePerdanteDemiDeux = 0;

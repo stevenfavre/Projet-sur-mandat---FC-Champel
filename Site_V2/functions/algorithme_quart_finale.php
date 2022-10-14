@@ -220,8 +220,9 @@ function createQuartFinale($id_tournoi, $groupeA, $groupeB, $groupeC, $groupeD, 
 
 function insertQuart($date, $heurDebut, $heureFin, $scoreLoc, $scoreVisit, $idEquipeLoc, $idEquipeVisit, $id_tournoi)
 {
-    $bdd = connectDB();
 
+
+    $bdd = connectDB();
     $quart = $bdd->prepare("INSERT INTO `Matchs`(`Date_Match`, `Heure_Debut_Match`, `Heure_Fin_Match`, `Duree_Match`, `Type_Match`, `But_Local_Match`, `But_Visiteur_Match`, `FK_ID_Local`, `FK_ID_Visiteur`, `FK_ID_Groupe`, `FK_ID_Tournoi`, `FK_ID_Terrain`, `Actif_Match`) 
     VALUES ('$date','$heurDebut','$heureFin','11','Quart de finale','$scoreLoc','$scoreVisit','$idEquipeLoc','$idEquipeVisit', null,'" . $id_tournoi . "','1','1')");
 
@@ -231,6 +232,8 @@ function insertQuart($date, $heurDebut, $heureFin, $scoreLoc, $scoreVisit, $idEq
     $bdd->commit();
     return $insertId;
 }
+
+
 
 function getTournois($id)
 {

@@ -93,7 +93,7 @@ function createMatch5A8ePlace($id_tournoi, $dateTournoi, $heureDebut17, $heureFi
     $bdd = connectDB();
     $num = 4;
     $matchs = $bdd->query("SET NAMES 'utf8'");
-    $matchs = $bdd->query("SELECT * FROM Matchs where FK_ID_Tournoi = $id_tournoi order by ID_Match desc limit $num;");
+    $matchs = $bdd->query("SELECT * FROM Matchs where Type_Match = 'Quart de finale' AND FK_ID_Tournoi = $id_tournoi order by ID_Match desc limit $num;");
 
     $idEquipePerdanteUne = 0;
     foreach ($matchs as $valeur) {
@@ -107,7 +107,7 @@ function createMatch5A8ePlace($id_tournoi, $dateTournoi, $heureDebut17, $heureFi
     $num -= 1;
 
     $matchs = $bdd->query("SET NAMES 'utf8'");
-    $matchs = $bdd->query("SELECT * FROM Matchs where FK_ID_Tournoi = $id_tournoi order by ID_Match desc limit $num;");
+    $matchs = $bdd->query("SELECT * FROM Matchs where Type_Match = 'Quart de finale' AND FK_ID_Tournoi = $id_tournoi order by ID_Match desc limit $num;");
 
     $idEquipePerdanteDeux = 0;
     foreach ($matchs as $valeur) {
@@ -121,7 +121,7 @@ function createMatch5A8ePlace($id_tournoi, $dateTournoi, $heureDebut17, $heureFi
     $num -= 1;
 
     $matchs = $bdd->query("SET NAMES 'utf8'");
-    $matchs = $bdd->query("SELECT * FROM Matchs where FK_ID_Tournoi = $id_tournoi order by ID_Match desc limit $num;");
+    $matchs = $bdd->query("SELECT * FROM Matchs where Type_Match = 'Quart de finale' AND FK_ID_Tournoi = $id_tournoi order by ID_Match desc limit $num;");
 
     $idEquipePerdanteTrois = 0;
     foreach ($matchs as $valeur) {
@@ -135,7 +135,7 @@ function createMatch5A8ePlace($id_tournoi, $dateTournoi, $heureDebut17, $heureFi
     $num -= 1;
 
     $matchs = $bdd->query("SET NAMES 'utf8'");
-    $matchs = $bdd->query("SELECT * FROM Matchs where FK_ID_Tournoi = $id_tournoi order by ID_Match desc limit $num;");
+    $matchs = $bdd->query("SELECT * FROM Matchs where Type_Match = 'Quart de finale' AND FK_ID_Tournoi = $id_tournoi order by ID_Match desc limit $num;");
 
     $idEquipePerdanteQuatre = 0;
     foreach ($matchs as $valeur) {
@@ -155,9 +155,9 @@ function createMatch5A8ePlace($id_tournoi, $dateTournoi, $heureDebut17, $heureFi
   VALUES ('$dateTournoi', '$heureDebut18', '$heureFin18','10','PerdantsQuartDeux','4','2','$idEquipePerdanteTrois','$idEquipePerdanteQuatre', null,'$id_tournoi','1','1')");
 
 
-    $num = 2;
+    //$num = 2;
     $matchs = $bdd->query("SET NAMES 'utf8'");
-    $matchs = $bdd->query("SELECT * FROM Matchs WHERE FK_ID_Tournoi = $id_tournoi order by ID_Match desc limit $num;");
+    $matchs = $bdd->query("SELECT * FROM Matchs WHERE Type_Match = 'PerdantsQuartUn' AND FK_ID_Tournoi = $id_tournoi");
 
     $idEquipeGagneUne = 0;
     $idEquipePerduUne = 0;
@@ -172,10 +172,10 @@ function createMatch5A8ePlace($id_tournoi, $dateTournoi, $heureDebut17, $heureFi
     }
 
 
-    $num -= 1;
+    //$num -= 1;
 
     $matchs = $bdd->query("SET NAMES 'utf8'");
-    $matchs = $bdd->query("SELECT * FROM Matchs where FK_ID_Tournoi = $id_tournoi order by ID_Match desc limit $num;");
+    $matchs = $bdd->query("SELECT * FROM Matchs where Type_Match = 'PerdantsQuartUn' AND FK_ID_Tournoi = $id_tournoi");
 
     $idEquipeGagneDeux = 0;
     $idEquipePerduDeux = 0;

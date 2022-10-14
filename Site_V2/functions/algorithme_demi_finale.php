@@ -93,7 +93,7 @@ function createDemiFinale($id_tournoi, $dateTournoi, $heureDebut21, $heureFin21,
     $bdd = connectDB();
     $num = 4;
     $matchs = $bdd->query("SET NAMES 'utf8'");
-    $matchs = $bdd->query("SELECT * FROM Matchs where FK_ID_Tournoi = $id_tournoi order by ID_Match desc limit $num;");
+    $matchs = $bdd->query("SELECT * FROM Matchs where Type_Match = 'Quart de finale' AND FK_ID_Tournoi = $id_tournoi order by ID_Match desc limit $num;");
 
     $idEquipeGagnanteUne = 0;
     foreach ($matchs as $valeur) {
@@ -106,7 +106,7 @@ function createDemiFinale($id_tournoi, $dateTournoi, $heureDebut21, $heureFin21,
     $num -= 1;
 
     $matchs = $bdd->query("SET NAMES 'utf8'");
-    $matchs = $bdd->query("SELECT * FROM Matchs where FK_ID_Tournoi = $id_tournoi order by ID_Match desc limit $num;");
+    $matchs = $bdd->query("SELECT * FROM Matchs where Type_Match = 'Quart de finale' AND FK_ID_Tournoi = $id_tournoi order by ID_Match desc limit $num;");
 
     $idEquipeGagnanteDeux = 0;
     foreach ($matchs as $valeur) {
@@ -120,7 +120,7 @@ function createDemiFinale($id_tournoi, $dateTournoi, $heureDebut21, $heureFin21,
     $num -= 1;
 
     $matchs = $bdd->query("SET NAMES 'utf8'");
-    $matchs = $bdd->query("SELECT * FROM Matchs where FK_ID_Tournoi = $id_tournoi order by ID_Match desc limit $num;");
+    $matchs = $bdd->query("SELECT * FROM Matchs where Type_Match = 'Quart de finale' AND FK_ID_Tournoi = $id_tournoi order by ID_Match desc limit $num;");
 
     $idEquipeGagnanteTrois = 0;
     foreach ($matchs as $valeur) {
@@ -134,7 +134,7 @@ function createDemiFinale($id_tournoi, $dateTournoi, $heureDebut21, $heureFin21,
     $num -= 1;
 
     $matchs = $bdd->query("SET NAMES 'utf8'");
-    $matchs = $bdd->query("SELECT * FROM Matchs where FK_ID_Tournoi = $id_tournoi order by ID_Match desc limit $num;");
+    $matchs = $bdd->query("SELECT * FROM Matchs where Type_Match = 'Quart de finale' AND FK_ID_Tournoi = $id_tournoi order by ID_Match desc limit $num;");
 
     $idEquipeGagnanteQuatre = 0;
     foreach ($matchs as $valeur) {
