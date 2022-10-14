@@ -56,7 +56,7 @@ function refreshSessionTournoi()
           <div class="col-md-5 col-xl-6">
             <form action="classement_tournoi.php" method="get">
 
-              <table class="table table-warning">
+              <table class="table ">
                 <thead>
                   <tr>
                     <th>Place</th>
@@ -66,16 +66,16 @@ function refreshSessionTournoi()
                 <tbody>
                   <tr>
                     <td>1 place</td>
-                    <td><?php gagnant1($_GET['id_tournoi']); ?></td>
+                    <td><?php gagnant4($_GET['id_tournoi']); ?></td>
                   </tr>
-                  <tr class="warning">
+                  <tr class="">
                     <td>2 place</td>
-                    <td><?php gagnant2($_GET['id_tournoi']); ?></td>
+                    <td><?php gagnant3($_GET['id_tournoi']); ?></td>
 
                   </tr>
-                  <tr class="text-warning">
+                  <tr class="text">
                     <td>3 place</td>
-                    <td><?php gagnant3($_GET['id_tournoi']); ?></td>
+                    <td><?php gagnant5($_GET['id_tournoi']); ?></td>
 
 
                   </tr>
@@ -83,12 +83,12 @@ function refreshSessionTournoi()
                     <td>4 place</td>
                     <td><?php gagnant6($_GET['id_tournoi']); ?></td>
                   </tr>
-                  <tr class="warning">
+                  <tr class="">
                     <td>5 place</td>
                     <td><?php gagnant8($_GET['id_tournoi']); ?></td>
 
                   </tr>
-                  <tr class="text-warning">
+                  <tr class="text">
                     <td>6 place</td>
                     <td><?php gagnant7($_GET['id_tournoi']); ?></td>
 
@@ -98,12 +98,12 @@ function refreshSessionTournoi()
                     <td>7 place</td>
                     <td><?php gagnant10($_GET['id_tournoi']); ?></td>
                   </tr>
-                  <tr class="warning">
+                  <tr class="">
                     <td>8 place</td>
                     <td><?php gagnant9($_GET['id_tournoi']); ?></td>
 
                   </tr>
-                  <tr class="text-warning">
+                  <tr class="text">
                     <td>9 place</td>
                     <td><?php gagnant12($_GET['id_tournoi']); ?></td>
 
@@ -113,12 +113,12 @@ function refreshSessionTournoi()
                     <td>10 place</td>
                     <td><?php gagnant11($_GET['id_tournoi']); ?></td>
                   </tr>
-                  <tr class="warning">
+                  <tr class="">
                     <td>11 place</td>
                     <td><?php gagnant14($_GET['id_tournoi']); ?></td>
 
                   </tr>
-                  <tr class="text-warning">
+                  <tr class="text">
                     <td>12 place</td>
                     <td><?php gagnant13($_GET['id_tournoi']); ?></td>
 
@@ -128,12 +128,12 @@ function refreshSessionTournoi()
                     <td>13 place</td>
                     <td><?php gagnant16($_GET['id_tournoi']); ?></td>
                   </tr>
-                  <tr class="warning">
+                  <tr class="">
                     <td>14 place</td>
                     <td><?php gagnant15($_GET['id_tournoi']); ?></td>
 
                   </tr>
-                  <tr class="text-warning">
+                  <tr class="text">
                     <td>15 place</td>
                     <td><?php gagnant17($_GET['id_tournoi']); ?></td>
 
@@ -141,7 +141,7 @@ function refreshSessionTournoi()
                   </tr>
 
 
-                  <tr class="warning">
+                  <tr class="">
                     <td>16 place</td>
                     <td><?php gagnant18($_GET['id_tournoi']); ?></td>
 
