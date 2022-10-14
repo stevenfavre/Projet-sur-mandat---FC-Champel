@@ -1163,54 +1163,68 @@ function selectionneEquipe($id_equipe)
     }
 }
 
-function gagnant1($id_tournoi)
-{
-
-    $db = connectDB();
-    $sql = "SELECT MAX(But_Visiteur_Match), e.Nom_Equipe    FROM Matchs AS m JOIN Equipe AS e ON e.ID_Equipe = m.FK_ID_Local OR e.ID_Equipe =  m.FK_ID_Visiteur 
-        WHERE Type_Match = 'Finale' AND FK_ID_Tournoi = $id_tournoi ";
-    $request = $db->prepare($sql);
-    $request->execute();
-    $reponse = $request->fetchAll();
-
-    foreach ($reponse as $data) {
-        echo $data['Nom_Equipe'];
-    }
-}
-
-
-function gagnant2($id_tournoi)
-{
-
-    $db = connectDB();
-    $sql = "SELECT MIN(But_Visiteur_Match), e.Nom_Equipe    FROM Matchs AS m JOIN Equipe AS e ON e.ID_Equipe = m.FK_ID_Local OR e.ID_Equipe =  m.FK_ID_Visiteur 
-        WHERE Type_Match = 'Finale' AND FK_ID_Tournoi = $id_tournoi ";
-    $request = $db->prepare($sql);
-    $request->execute();
-    $reponse = $request->fetchAll();
-
-    foreach ($reponse as $data) {
-        echo $data['Nom_Equipe'];
-    }
-}
-
-
-
-
-
 function gagnant3($id_tournoi)
 {
 
     $db = connectDB();
-    $sql = "SELECT MAX(But_Visiteur_Match), e.Nom_Equipe    FROM Matchs AS m JOIN Equipe AS e ON e.ID_Equipe = m.FK_ID_Local OR e.ID_Equipe =  m.FK_ID_Visiteur 
+    $sql = "SELECT But_Visiteur_Match, But_Local_Match, FK_ID_Visiteur, FK_ID_Local   FROM Matchs  
+        WHERE Type_Match = 'Finale' AND FK_ID_Tournoi = $id_tournoi ";
+    $request = $db->prepare($sql);
+    $request->execute();
+    $reponse = $request->fetchAll();
+
+    foreach ($reponse as $data) {
+        if ($data['But_Local_Match'] < $data['But_Visiteur_Match']) {
+            $place15 = $data['FK_ID_Local'];
+        } else {
+            $place16 = contientNomEquipe($data['FK_ID_Visiteur']);
+        }
+    }
+    echo $place16;
+}
+
+function gagnant4($id_tournoi)
+{
+
+    $db = connectDB();
+    $sql = "SELECT But_Visiteur_Match, But_Local_Match, FK_ID_Visiteur, FK_ID_Local   FROM Matchs  
+        WHERE Type_Match = 'Finale' AND FK_ID_Tournoi = $id_tournoi ";
+    $request = $db->prepare($sql);
+    $request->execute();
+    $reponse = $request->fetchAll();
+
+    foreach ($reponse as $data) {
+        if ($data['But_Local_Match'] > $data['But_Visiteur_Match']) {
+            $place15 = contientNomEquipe($data['FK_ID_Local']);
+        } else {
+            $place16 = contientNomEquipe($data['FK_ID_Visiteur']);
+        }
+    }
+    echo $place15;
+}
+
+
+
+
+
+function gagnant5($id_tournoi)
+{
+
+    $db = connectDB();
+    $sql = "SELECT But_Visiteur_Match, But_Local_Match, FK_ID_Visiteur, FK_ID_Local   FROM Matchs  
         WHERE Type_Match = 'Petite Finale' AND FK_ID_Tournoi = $id_tournoi ";
     $request = $db->prepare($sql);
     $request->execute();
     $reponse = $request->fetchAll();
 
     foreach ($reponse as $data) {
-        echo $data['Nom_Equipe'];
+        if ($data['But_Local_Match'] > $data['But_Visiteur_Match']) {
+            $place15 = contientNomEquipe($data['FK_ID_Local']);
+        } else {
+            $place16 = contientNomEquipe($data['FK_ID_Visiteur']);
+        }
     }
+    echo $place15;
 }
 
 function gagnant6($id_tournoi)
@@ -1225,12 +1239,12 @@ function gagnant6($id_tournoi)
 
     foreach ($reponse as $data) {
         if ($data['But_Local_Match'] < $data['But_Visiteur_Match']) {
-            $place15 = $data['FK_ID_Local'];
+            $place16 = contientNomEquipe($data['FK_ID_Local']);
         } else {
-            $place16 = contientNomEquipe($data['FK_ID_Visiteur']);
+            $place15 = contientNomEquipe($data['FK_ID_Visiteur']);
         }
     }
-    echo $place16;
+    echo $place15;
 }
 function gagnant7($id_tournoi)
 {
