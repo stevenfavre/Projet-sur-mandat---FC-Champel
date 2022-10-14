@@ -22,23 +22,27 @@ if ($_GET['id_match'] != null) {
 if ($submitPost == 'modifier') {
 
     // Récupération des données permettant la création du produit
-    $id_local = filter_input(INPUT_POST, 'equipe_local');
-    $id_visiteur = filter_input(INPUT_POST, 'equipe_visiteur');
+    $id_local = filter_input(INPUT_POST, 'equipe_local', FILTER_SANITIZE_NUMBER_INT);
+    $id_visiteur = filter_input(INPUT_POST, 'equipe_visiteur', FILTER_SANITIZE_NUMBER_INT);
     $time_debut = filter_input(INPUT_POST, 'time-debut');
     $time_fin = filter_input(INPUT_POST, 'time-fin');
     $type = filter_input(INPUT_POST, 'type-match');
     $type = str_replace("'", "\'", $type);
-    $but_local = filter_input(INPUT_POST, 'but_local');
-    $but_visiteur = filter_input(INPUT_POST, 'but_visiteur');
+    $but_local = filter_input(INPUT_POST, 'but_local', FILTER_SANITIZE_NUMBER_INT);
+    $but_visiteur = filter_input(INPUT_POST, 'but_visiteur', FILTER_SANITIZE_NUMBER_INT);
 
     // Code permettant de récupérer les minutes du temps
     $to_time = strtotime($time_fin);
     $from_time = strtotime($time_debut);
     $minutes = round(abs($to_time - $from_time) / 60, 2);
 
-    // Permet de faire l'insertion d'un match dans la base de données
-    updateMatch($_SESSION['match']['ID_Match'], $id_local, $id_visiteur, $time_debut, $time_fin, $minutes, $type, $but_local, $but_visiteur);
-    header("Location: match.php?id_tournoi=" . $_SESSION['match']['FK_ID_Tournoi']);
+    if ($but_local < 0 || $but_visiteur < 0)
+        echo '<script type="text/javascript">alert("Le score ne peut pas être négatif !")</script>';
+    else {
+        // Permet de faire l'insertion d'un match dans la base de données
+        updateMatch($_SESSION['match']['ID_Match'], $id_local, $id_visiteur, $time_debut, $time_fin, $minutes, $type, $but_local, $but_visiteur);
+        header("Location: match.php?id_tournoi=" . $_SESSION['match']['FK_ID_Tournoi']);
+    }
 } else if ($submitPost == 'activer') {
     updateActifMatch($_SESSION['match']['ID_Match'], 1);
     refreshSessionMatch();
@@ -91,7 +95,7 @@ function refreshSessionMatch()
                     </select>
                 </div>
                 <div class="mb-3 w-50 mx-auto">
-                    <label for="equipe_visiteur">Equipe local :</label>
+                    <label for="equipe_visiteur">Equipe visiteur :</label>
                     <select class="form-control" name="equipe_visiteur" required>
                         <?php afficher_option_equipes($_SESSION['match']['FK_ID_Tournoi'], $_SESSION['match']['FK_ID_Visiteur']); ?>
                     </select>
@@ -127,7 +131,7 @@ function refreshSessionMatch()
                 echo "<button class=\"btn btn-primary\" type=\"submit\" name=\"submit\" value=\"activer\">Reprogrammer le match</button><br><br>";
             }
 
-            echo '<a href="./match.php">Retour</a>';
+            echo '<br><a href="./match.php">Retour</a>';
             ?>
         </div>
         </form>

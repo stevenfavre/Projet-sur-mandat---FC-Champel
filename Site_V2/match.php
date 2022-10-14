@@ -7,7 +7,7 @@ require_once "functions/tournoi.php";
 if (!empty($_GET['id_tournoi']))
   $_SESSION['id_tournoi'] = $_GET['id_tournoi'];
 
-$submit = filter_input(INPUT_GET, 'submit');
+$submit = filter_input(INPUT_POST, 'submit');
 
 if (!empty($submit)) {
 
@@ -32,16 +32,16 @@ if (!empty($submit)) {
   <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
   <title>Liste des matchs</title>
   <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800&amp;display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800&display=swap">
   <link rel="stylesheet" href="assets/fonts/ionicons.min.css">
 </head>
 
-<body style="/*background: url(&quot;design.jpg&quot;);*/background-position: 0 -60px;">
+<body>
   <?php include_once('default_pages/navbar.php'); ?>
   <section class="py-5">
     <div class="container">
       </br>
-      <h2>Options - tournoi</h2>
+      <h3 class="mb-2">Options</h3>
 
       <nav>
         <ul class="nav">
@@ -70,7 +70,7 @@ if (!empty($submit)) {
           <h2 class="text-success mb-2">Liste des matchs</h2>
           <h3 class="fw-bold">Match du tournoi : <?= date("d.m.Y", strtotime(getDateTournoi($_SESSION['id_tournoi']))) ?>&nbsp;</h3>
           <?php
-          if (empty(selectionner_equipe_tournoi($_SESSION['id_tournoi']))) {
+          if (count(selectionner_equipe_tournoi($_SESSION['id_tournoi'])) < 16) {
             echo '<a class="btn btn-primary shadow" role="button" href="inscription_equipe.php?id_tournoi=' . $_SESSION['id_tournoi'] . '">Inscrire des equipes</a>';
           } else if (empty(selectMatchPoul($_SESSION['id_tournoi']))) {
             echo '<a class="btn btn-primary shadow" role="button" href="./functions/algorithme_groupe.php?id_tournoi=' . $_SESSION['id_tournoi'] . '">Générer le tournoi</a>';
@@ -100,8 +100,9 @@ if (!empty($submit)) {
           ?>
         </div>
       </div>
+      <br>
       <div id="divContenu">
-        <form action="match.php" method="get">
+        <form action="match.php" method="post">
           <?php
           afficherMatch($_SESSION['id_tournoi']);
           ?>

@@ -34,6 +34,7 @@ function createGroupe($fk_id_tournoi)
             array_push($_SESSION['Equipes'], $equipe);
         }
 
+        // Permet de confirmer le nombre d'équipe inscrites
         if (count($_SESSION['Equipes']) >= NB_EQUIPES_IDEAL) {
 
             shuffle($_SESSION['Equipes']);
@@ -97,6 +98,7 @@ function updateGroupe($id_equipe, $id_groupe)
     }
 }
 
+// Permet de réaliser un test sur le nombre d'inscription à un tournoi
 function checkNBInscriptions($nb_inscriptions, $fk_id_tournoi)
 {
     $inscriptions = getInscriptions($fk_id_tournoi, "Validé");

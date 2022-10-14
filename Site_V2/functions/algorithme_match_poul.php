@@ -7,6 +7,7 @@ session_start();
 
 creerMatchPoul();
 
+// Lancement de la création d'un un tournoi
 function creerMatchPoul()
 {
     $id_tournoi = $_POST['id_tournoi'];
@@ -20,6 +21,7 @@ function creerMatchPoul()
     $futur_debut = forMatchPoul($_SESSION['GroupeQuatre'], $tournoi, $futur_debut, 4);
 }
 
+// Algorithme de match de poule
 function forMatchPoul($groupe, $tournoi, $time_debut = "08:00:00", $nbGroupe)
 {
     $time_match = $_POST['time-match'];
@@ -57,6 +59,7 @@ function forMatchPoul($groupe, $tournoi, $time_debut = "08:00:00", $nbGroupe)
     return calculerIntervalTemps($time_calcul, 0, $time_match + $time_pause);
 }
 
+// Fonction d'insertion des matchs dans le tournoi
 function sqlMatchPoul($tournoi, $equipe1, $equipe2, $heure_debut, $heure_fin, $groupe = null, $terrain = 1)
 {
     // Code permettant de récupérer les minutes du temps
@@ -75,6 +78,7 @@ function sqlMatchPoul($tournoi, $equipe1, $equipe2, $heure_debut, $heure_fin, $g
     }
 }
 
+// Permet de calculer les différences de temps
 function calculerIntervalTemps($temps = "08:00:00", $heure = 0, $minutes = 10)
 {
     // Séparation du temps en différentes variables
@@ -99,4 +103,5 @@ function calculerIntervalTemps($temps = "08:00:00", $heure = 0, $minutes = 10)
     return $temps_final;
 }
 
+// A la fin de la génération, redirection vers la page des matchs 
 header("Location:../match.php?id_tournoi=$id_tournoi");

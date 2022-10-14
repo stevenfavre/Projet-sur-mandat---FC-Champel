@@ -26,8 +26,6 @@ function refreshSessionTournoi()
   $_SESSION['tournoi'] = $tournois[0];
 }
 ?>
-
-?>
 <!DOCTYPE html>
 <html lang="en">
 

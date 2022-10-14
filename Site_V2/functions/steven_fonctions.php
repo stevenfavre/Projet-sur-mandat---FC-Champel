@@ -22,14 +22,23 @@ function afficherMatch($tournoi)
             <path fill-rule=\"evenodd\" d=\"M7.776 5.553a.5.5 0 0 1 .448 0l6 3a.5.5 0 1 1-.448.894L8 6.56 2.224 9.447a.5.5 0 1 1-.448-.894l6-3z\"/>
             </svg></button>";
 
-        echo "<h6 class=\"fw-bold text-center\" style=\"margin-bottom: 0.5% !important; margin-top: 1% !important;\">" . $t['But_Local_Match'] . "&nbsp&nbsp &nbsp-&nbsp &nbsp&nbsp" . $t['But_Visiteur_Match'] . "</h6></a>
-            <button type=\"submit\" class=\"btn btn-primary btn-sm\" name=\"submit\" style=\"padding: 0px 12px !important;\" value=\"" . $t['ID_Match'] . "-D-L\">
-            <svg xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\" fill=\"currentColor\" class=\"bi bi-chevron-compact-down\" viewBox=\"0 0 16 16\">
+        echo "<h6 class=\"fw-bold text-center\" style=\"margin-bottom: 0.5% !important; margin-top: 1% !important;\">" . $t['But_Local_Match'] . "&nbsp&nbsp &nbsp-&nbsp &nbsp&nbsp" . $t['But_Visiteur_Match'] . "</h6></a>";
+
+        if ($t['But_Local_Match'] <= 0)
+            echo "<button type=\"button\" class=\"btn btn-primary btn-sm\" name=\"submit\" style=\"padding: 0px 12px !important;\" disabled>";
+        else
+            echo "<button type=\"submit\" class=\"btn btn-primary btn-sm\" name=\"submit\" style=\"padding: 0px 12px !important;\" value=\"" . $t['ID_Match'] . "-D-L\">";
+
+        echo "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\" fill=\"currentColor\" class=\"bi bi-chevron-compact-down\" viewBox=\"0 0 16 16\">
             <path fill-rule=\"evenodd\" d=\"M1.553 6.776a.5.5 0 0 1 .67-.223L8 9.44l5.776-2.888a.5.5 0 1 1 .448.894l-6 3a.5.5 0 0 1-.448 0l-6-3a.5.5 0 0 1-.223-.67z\"/>
             </svg></button>";
 
-        echo "<button type=\"submit\" class=\"btn btn-primary btn-sm\" name=\"submit\" style=\"padding: 0px 12px !important; margin-left: 1% !important;\" value=\"" . $t['ID_Match'] . "-D-V\">
-            <svg xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\" fill=\"currentColor\" class=\"bi bi-chevron-compact-down\" viewBox=\"0 0 16 16\">
+        if ($t['But_Visiteur_Match'] <= 0)
+            echo "<button type=\"button\" class=\"btn btn-primary btn-sm\" name=\"submit\" style=\"padding: 0px 12px !important; margin-left: 1% !important;\" disabled>";
+        else
+            echo "<button type=\"submit\" class=\"btn btn-primary btn-sm\" name=\"submit\" style=\"padding: 0px 12px !important; margin-left: 1% !important;\" value=\"" . $t['ID_Match'] . "-D-V\">";
+
+        echo "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\" fill=\"currentColor\" class=\"bi bi-chevron-compact-down\" viewBox=\"0 0 16 16\">
             <path fill-rule=\"evenodd\" d=\"M1.553 6.776a.5.5 0 0 1 .67-.223L8 9.44l5.776-2.888a.5.5 0 1 1 .448.894l-6 3a.5.5 0 0 1-.448 0l-6-3a.5.5 0 0 1-.223-.67z\"/>
             </svg></button>";
         echo "</div>";
@@ -230,19 +239,21 @@ function updateUpScore($id_match, $localORvisiteur)
 // Permet de réduire le score de l'équipe fournit en paramètres
 function updateDownScore($id_match, $localORvisiteur)
 {
-    try {
-        $db = connectDB();
+    if (checkNegatifScore($id_match, $localORvisiteur)) {
+        try {
+            $db = connectDB();
 
-        if ($localORvisiteur == "L") {
-            $sql = "UPDATE Matchs SET But_Local_Match = But_Local_Match - 1 WHERE ID_Match = " . $id_match . ";";
-        } else {
-            $sql = "UPDATE Matchs SET But_Visiteur_Match = But_Visiteur_Match - 1 WHERE ID_Match = " . $id_match . ";";
+            if ($localORvisiteur == "L") {
+                $sql = "UPDATE Matchs SET But_Local_Match = But_Local_Match - 1 WHERE ID_Match = " . $id_match . ";";
+            } else {
+                $sql = "UPDATE Matchs SET But_Visiteur_Match = But_Visiteur_Match - 1 WHERE ID_Match = " . $id_match . ";";
+            }
+
+            $request = $db->prepare($sql);
+            $request->execute();
+        } catch (\Throwable $e) {
+            debug($e->getMessage());
         }
-
-        $request = $db->prepare($sql);
-        $request->execute();
-    } catch (\Throwable $e) {
-        debug($e->getMessage());
     }
 }
 
@@ -334,6 +345,7 @@ function afficher_option_terrain($id_tournoi)
 
         foreach ($reponse as $data)
             echo "<option value=\"" . $data['ID_Terrain'] . "\">" . $data['Numero_Terrain'] . "</option>";
+            
     } catch (Exception $e) {
         debug($e->getMessage());
     }
@@ -366,6 +378,7 @@ function updateActifMatch($id_match, $actif_inactif)
     }
 }
 
+// Fonction qui permet d'afficher un tableau des groupes 
 function afficherTableauGroupe($id_tournoi)
 {
     try {
@@ -374,25 +387,26 @@ function afficherTableauGroupe($id_tournoi)
         $request = $db->prepare($sql);
         $request->execute();
         $reponse = $request->fetchAll();
+
+        echo '<thead><tr><td><b>' . $reponse[0]['Nom_Groupe'] . '</b></td><td><b>' . $reponse[1]['Nom_Groupe'] . '</b></td><td><b>' . $reponse[2]['Nom_Groupe'] . '</b></td><td><b>' . $reponse[3]['Nom_Groupe'] . '</b></tr></theade>';
+
+        echo '<tbody><tr><td>' . $_SESSION['GroupeUn'][0][0]['Nom_Equipe'] . '</td><td>' . $_SESSION['GroupeDeux'][0][0]['Nom_Equipe'] . '</td><td>' .
+            $_SESSION['GroupeTrois'][0][0]['Nom_Equipe'] . '</td><td>' . $_SESSION['GroupeQuatre'][0][0]['Nom_Equipe'] . '</td></tr>';
+
+        echo '<tr><td>' . $_SESSION['GroupeUn'][1][0]['Nom_Equipe'] . '</td><td>' . $_SESSION['GroupeDeux'][1][0]['Nom_Equipe'] . '</td><td>' .
+            $_SESSION['GroupeTrois'][1][0]['Nom_Equipe'] . '</td><td>' . $_SESSION['GroupeQuatre'][1][0]['Nom_Equipe'] . '</td></tr>';
+
+        echo '<tr><td>' . $_SESSION['GroupeUn'][2][0]['Nom_Equipe'] . '</td><td>' . $_SESSION['GroupeDeux'][2][0]['Nom_Equipe'] . '</td><td>' .
+            $_SESSION['GroupeTrois'][2][0]['Nom_Equipe'] . '</td><td>' . $_SESSION['GroupeQuatre'][2][0]['Nom_Equipe'] . '</td></tr>';
+
+        echo '<tr><td>' . $_SESSION['GroupeUn'][3][0]['Nom_Equipe'] . '</td><td>' . $_SESSION['GroupeDeux'][3][0]['Nom_Equipe'] . '</td><td>' .
+            $_SESSION['GroupeTrois'][3][0]['Nom_Equipe'] . '</td><td>' . $_SESSION['GroupeQuatre'][3][0]['Nom_Equipe'] . '</td></tr></tbody>';
     } catch (\Throwable $e) {
         debug($e->getMessage());
     }
-
-    echo '<thead><tr><td><b>' . $reponse[0]['Nom_Groupe'] . '</b></td><td><b>' . $reponse[1]['Nom_Groupe'] . '</b></td><td><b>' . $reponse[2]['Nom_Groupe'] . '</b></td><td><b>' . $reponse[3]['Nom_Groupe'] . '</b></tr></theade>';
-
-    echo '<tbody><tr><td>' . $_SESSION['GroupeUn'][0][0]['Nom_Equipe'] . '</td><td>' . $_SESSION['GroupeDeux'][0][0]['Nom_Equipe'] . '</td><td>' .
-        $_SESSION['GroupeTrois'][0][0]['Nom_Equipe'] . '</td><td>' . $_SESSION['GroupeQuatre'][0][0]['Nom_Equipe'] . '</td></tr>';
-
-    echo '<tr><td>' . $_SESSION['GroupeUn'][1][0]['Nom_Equipe'] . '</td><td>' . $_SESSION['GroupeDeux'][1][0]['Nom_Equipe'] . '</td><td>' .
-        $_SESSION['GroupeTrois'][1][0]['Nom_Equipe'] . '</td><td>' . $_SESSION['GroupeQuatre'][1][0]['Nom_Equipe'] . '</td></tr>';
-
-    echo '<tr><td>' . $_SESSION['GroupeUn'][2][0]['Nom_Equipe'] . '</td><td>' . $_SESSION['GroupeDeux'][2][0]['Nom_Equipe'] . '</td><td>' .
-        $_SESSION['GroupeTrois'][2][0]['Nom_Equipe'] . '</td><td>' . $_SESSION['GroupeQuatre'][2][0]['Nom_Equipe'] . '</td></tr>';
-
-    echo '<tr><td>' . $_SESSION['GroupeUn'][3][0]['Nom_Equipe'] . '</td><td>' . $_SESSION['GroupeDeux'][3][0]['Nom_Equipe'] . '</td><td>' .
-        $_SESSION['GroupeTrois'][3][0]['Nom_Equipe'] . '</td><td>' . $_SESSION['GroupeQuatre'][3][0]['Nom_Equipe'] . '</td></tr></tbody>';
 }
 
+// Fonction qui permet de sélectionner les matchs de poule
 function selectMatchPoul($id_tournoi)
 {
     try {
@@ -406,6 +420,7 @@ function selectMatchPoul($id_tournoi)
     }
 }
 
+// Fonction qui permet de sélectionner les matchs de quart de finale
 function selectMatchQuartFinale($id_tournoi)
 {
     try {
@@ -414,6 +429,32 @@ function selectMatchQuartFinale($id_tournoi)
         $request = $db->prepare($sql);
         $request->execute();
         return $request->fetchAll(PDO::FETCH_ASSOC);
+    } catch (\Throwable $e) {
+        debug($e->getMessage());
+    }
+}
+
+// Fonction permettant de contrôler si le score du match est égal ou inférieur à 0
+function checkNegatifScore($id_match, $local_visiteur)
+{
+    try {
+        $db = connectDB();
+        $sql = "SELECT * FROM `Matchs` WHERE `ID_Match` = " . $id_match;
+        $request = $db->prepare($sql);
+        $request->execute();
+        $resultat = $request->fetchAll(PDO::FETCH_ASSOC);
+
+        if ($local_visiteur == "L") {
+            if ($resultat[0]['But_Local_Match'] <= 0)
+                return false;
+            else
+                return true;
+        } elseif ($local_visiteur == "V") {
+            if ($resultat[0]['But_Visiteur_Match'] <= 0)
+                return false;
+            else
+                return true;
+        }
     } catch (\Throwable $e) {
         debug($e->getMessage());
     }

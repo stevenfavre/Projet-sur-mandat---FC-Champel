@@ -73,10 +73,8 @@
            </select>
          </div>
          </br></br>
-         <button class="btn btn-primary" type="submit" name="submit" value="modifier">Modifier</button>
-         <?php
-          ?>
          <a class="btn btn-primary shadow" role="button" href="match.php"><i class="fa-solid fa-arrow-left"></i></a>
+         <button class="btn btn-primary" type="submit" name="submit" value="modifier">Modifier</button>
          </table>
        </div>
        </tbody>
