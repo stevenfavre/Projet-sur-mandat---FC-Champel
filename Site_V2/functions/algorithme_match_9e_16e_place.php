@@ -227,7 +227,7 @@ function createMatch9A16ePlace($id_tournoi, $groupeA, $groupeB, $groupeC, $group
     $bdd = connectDB();
     $num = 4;
     $matchs = $bdd->query("SET NAMES 'utf8'");
-    $matchs = $bdd->query("SELECT * FROM Matchs where FK_Id_Tournoi = $id_tournoi order by ID_Match desc limit $num;");
+    $matchs = $bdd->query("SELECT * FROM Matchs where Type_Match = '3eA_VS_4eD' AND FK_Id_Tournoi = $id_tournoi");
 
     $idEquipeGagneUne = 0;
     $idEquipePerduUne = 0;
@@ -244,7 +244,7 @@ function createMatch9A16ePlace($id_tournoi, $groupeA, $groupeB, $groupeC, $group
     $num -= 1;
 
     $matchs = $bdd->query("SET NAMES 'utf8'");
-    $matchs = $bdd->query("SELECT * FROM Matchs where FK_Id_Tournoi = $id_tournoi order by ID_Match desc limit $num;");
+    $matchs = $bdd->query("SELECT * FROM Matchs where Type_Match = '3eB_VS_4eC' AND FK_Id_Tournoi = $id_tournoi");
 
     $idEquipeGagneDeux = 0;
     $idEquipePerduDeux = 0;
@@ -262,7 +262,7 @@ function createMatch9A16ePlace($id_tournoi, $groupeA, $groupeB, $groupeC, $group
     $num -= 1;
 
     $matchs = $bdd->query("SET NAMES 'utf8'");
-    $matchs = $bdd->query("SELECT * FROM Matchs where FK_Id_Tournoi = $id_tournoi order by ID_Match desc limit $num;");
+    $matchs = $bdd->query("SELECT * FROM Matchs where Type_Match = '3eC_VS_4eB' and FK_Id_Tournoi = $id_tournoi");
 
     $idEquipeGagneTrois = 0;
     $idEquipePerduTrois = 0;
@@ -280,7 +280,7 @@ function createMatch9A16ePlace($id_tournoi, $groupeA, $groupeB, $groupeC, $group
     $num -= 1;
 
     $matchs = $bdd->query("SET NAMES 'utf8'");
-    $matchs = $bdd->query("SELECT * FROM Matchs where FK_Id_Tournoi = $id_tournoi order by ID_Match desc limit $num;");
+    $matchs = $bdd->query("SELECT * FROM Matchs where Type_Match = '3eD_VS_4eA' and FK_Id_Tournoi = $id_tournoi");
 
     $idEquipeGagneQuatre = 0;
     $idEquipePerduQuatre = 0;
@@ -314,7 +314,7 @@ function createMatch9A16ePlace($id_tournoi, $groupeA, $groupeB, $groupeC, $group
     $bdd = connectDB();
     $num = 4;
     $matchs = $bdd->query("SET NAMES 'utf8'");
-    $matchs = $bdd->query("SELECT * FROM Matchs where FK_Id_Tournoi = $id_tournoi order by ID_Match desc limit $num;");
+    $matchs = $bdd->query("SELECT * FROM Matchs where Type_Match = 'Match5' and FK_Id_Tournoi = $id_tournoi");
 
     $idEquipeGagneCinq = 0;
     $idEquipePerduCinq = 0;
@@ -331,7 +331,7 @@ function createMatch9A16ePlace($id_tournoi, $groupeA, $groupeB, $groupeC, $group
     $num -= 1;
 
     $matchs = $bdd->query("SET NAMES 'utf8'");
-    $matchs = $bdd->query("SELECT * FROM Matchs where FK_Id_Tournoi = $id_tournoi order by ID_Match desc limit $num;");
+    $matchs = $bdd->query("SELECT * FROM Matchs where Type_Match = 'Match6' and FK_Id_Tournoi = $id_tournoi");
 
     $idEquipeGagneSix = 0;
     $idEquipePerduSix = 0;
@@ -348,7 +348,7 @@ function createMatch9A16ePlace($id_tournoi, $groupeA, $groupeB, $groupeC, $group
     $num -= 1;
 
     $matchs = $bdd->query("SET NAMES 'utf8'");
-    $matchs = $bdd->query("SELECT * FROM Matchs where FK_Id_Tournoi = $id_tournoi order by ID_Match desc limit $num;");
+    $matchs = $bdd->query("SELECT * FROM Matchs where Type_Match = 'Match7' and FK_Id_Tournoi = $id_tournoi");
 
     $idEquipeGagneSept = 0;
     $idEquipePerduSept = 0;
@@ -366,7 +366,7 @@ function createMatch9A16ePlace($id_tournoi, $groupeA, $groupeB, $groupeC, $group
     $num -= 1;
 
     $matchs = $bdd->query("SET NAMES 'utf8'");
-    $matchs = $bdd->query("SELECT * FROM Matchs where FK_Id_Tournoi = $id_tournoi order by ID_Match desc limit $num;");
+    $matchs = $bdd->query("SELECT * FROM Matchs where Type_Match = 'Match8' and FK_Id_Tournoi = $id_tournoi");
 
     $idEquipeGagneHuit = 0;
     $idEquipePerduHuit = 0;

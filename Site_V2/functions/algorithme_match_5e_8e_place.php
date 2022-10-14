@@ -175,7 +175,7 @@ function createMatch5A8ePlace($id_tournoi, $dateTournoi, $heureDebut17, $heureFi
     //$num -= 1;
 
     $matchs = $bdd->query("SET NAMES 'utf8'");
-    $matchs = $bdd->query("SELECT * FROM Matchs where Type_Match = 'PerdantsQuartUn' AND FK_ID_Tournoi = $id_tournoi");
+    $matchs = $bdd->query("SELECT * FROM Matchs where Type_Match = 'PerdantsQuartDeux' AND FK_ID_Tournoi = $id_tournoi");
 
     $idEquipeGagneDeux = 0;
     $idEquipePerduDeux = 0;
