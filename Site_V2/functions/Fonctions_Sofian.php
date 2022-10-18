@@ -9,22 +9,10 @@ function insertion_equipes($nomEquipe, $degreEquipe, $idClub)
 {
 
     $bdd = connectDB();
-    $sqlQuery = 'SELECT Nom_Equipe FROM Equipe WHERE Nom_Equipe like :nom';
-    $req = $bdd->prepare($sqlQuery);
-    $req->execute([
-        'nom' => $nomEquipe
-    ]);
-    $checkequipes = $req->fetch();
 
-    if ($checkequipes <= 0) {
-        $reponseDesEquipes = $bdd->query("SET NAMES 'utf8'");
-        $reponseDesEquipes = $bdd->query("INSERT INTO `Equipe` (`Nom_Equipe`, `Degres_Equipe`, `FK_ID_Club`) VALUES ('$nomEquipe', '$degreEquipe', '$idClub')"); // sources : https://stackoverflow.com/questions/45946593/getting-the-primary-key-id-of-the-last-inserted-row-to-run-multiple-insert-opera
-    } else {
-        echo "<font color='#FF0000'>";  //sources : http://www.info-3000.com/phpmysql/validation/index.php
-        echo "Cette équipe existe déjà !";
-        echo "</font>";
-        echo "<BR>";
-    }
+    $reponseDesEquipes = $bdd->query("SET NAMES 'utf8'");
+    $reponseDesEquipes = $bdd->query("INSERT INTO `Equipe` (`Nom_Equipe`, `Degres_Equipe`, `FK_ID_Club`) VALUES ('$nomEquipe', '$degreEquipe', '$idClub')"); // sources : https://stackoverflow.com/questions/45946593/getting-the-primary-key-id-of-the-last-inserted-row-to-run-multiple-insert-opera
+
 
     $bdd = null;
 }
@@ -153,23 +141,11 @@ function insertion_club($nomClub, $urlImageClub, $idAdresse)   // soucres : http
 {
 
     $bdd = connectDB();
-    $sqlQuery = 'SELECT Nom_Club FROM Club WHERE Nom_Club like :nom';
-    $req = $bdd->prepare($sqlQuery);
-    $req->execute([
-        'nom' => $nomClub
-    ]);
-    $checkclubs = $req->fetchAll();
-    //$checkclubs = $bdd->query("SET NAMES 'utf8'");
-    //$checkclubs = $bdd->query("SELECT COUNT(Nom_Club) FROM Club WHERE 'Nom_Club' like '$nomClub'");
-    if (COUNT($checkclubs) <= 0) {
-        $reponseDesClubs = $bdd->query("SET NAMES 'utf8'");
-        $reponseDesClubs = $bdd->query("INSERT INTO `Club` (`Nom_Club`, `Url_Image_Club`, `FK_ID_Adresse`) VALUES ('$nomClub', '$urlImageClub', '$idAdresse')");
-    } else {
-        echo "<font color='#FF0000'>";  //sources : http://www.info-3000.com/phpmysql/validation/index.php
-        echo "Ce club existe déjà !";
-        echo "</font>";
-        echo "<BR>";
-    }
+
+    $reponseDesClubs = $bdd->query("SET NAMES 'utf8'");
+    $reponseDesClubs = $bdd->query("INSERT INTO `Club` (`Nom_Club`, `Url_Image_Club`, `FK_ID_Adresse`) VALUES ('$nomClub', '$urlImageClub', '$idAdresse')");
+
+    echo "<br /><br />";
 
     $bdd = null;
 }
