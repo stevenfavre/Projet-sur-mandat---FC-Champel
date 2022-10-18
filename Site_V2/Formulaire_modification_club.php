@@ -68,8 +68,8 @@ if (isset($nomClubModif) && isset($nomClub) && isset($actifClub)){
                             <div class="mb-3"><input class="form-control" type="file" id="Image_Club" name="Image_Club"></div> <!-- sources : https://www.w3schools.com/php/php_file_upload.asp -->
                             Statut
                             <select name="Actif_club" id="Actif_clubModif">
-                                <option value="0">Désactivé</option>
-                                <option value="1" selected="selected">Activé</option>
+                                <option value="0">0</option>
+                                <option value="1" selected="selected">1</option>
                             </select>
                             <br /><br />
                             <div><input class="btn btn-primary shadow d-block w-100" value='Envoyer' type="submit"></div>
