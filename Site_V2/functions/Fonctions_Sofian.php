@@ -9,7 +9,6 @@ function insertion_equipes($nomEquipe, $degreEquipe, $idClub)
 {
 
     $bdd = connectDB();
-    $bdd = connectDB();
     $sqlQuery = 'SELECT Nom_Equipe FROM Equipe WHERE Nom_Equipe like :nom';
     $req = $bdd->prepare($sqlQuery);
     $req->execute([
@@ -26,9 +25,6 @@ function insertion_equipes($nomEquipe, $degreEquipe, $idClub)
         echo "</font>";
         echo "<BR>";
     }
-
-
-
 
     $bdd = null;
 }
