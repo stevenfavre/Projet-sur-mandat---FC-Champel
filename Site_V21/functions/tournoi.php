@@ -18,9 +18,33 @@ function verificationDonneesTournois($Date_debut, $Date_fin, $Fk_ID_Salle)
     <?php
     } else {
         insertion_tournoi($Date_debut, $Date_fin, $Fk_ID_Salle); ?>
-<?php
+    <?php
     }
 }
+
+function verificationDonneesInscription($FK_ID_Tournoi, $FK_ID_Equipe)
+{
+    $bdd = connectDB();
+    $sql = "SELECT * FROM Inscription_Tournoi WHERE FK_ID_Tournoi LIKE :tournoi AND FK_ID_Equipe LIKE :equipe";
+    $req = $bdd->prepare($sql);
+    $req->execute([
+        'tournoi' => $FK_ID_Tournoi,
+        'equipe' => $FK_ID_Equipe,
+    ]);
+    $count = $req->rowCount();
+    if ($count > 0) { ?>
+        <script type="text/javascript">
+            alert("L'equipe sélectionné figure déjà dans la liste d'inscriptions pour le tournoi choisi ! ");
+        </script>
+    <?php
+    } else {
+        inscription_equipe_tournoi($FK_ID_Tournoi, $FK_ID_Equipe); ?>
+
+<?php
+        header("Location: afficher_demandes.php");
+    }
+}
+
 //ok
 function selection_salle()
 {
@@ -126,7 +150,7 @@ function afficher_Tournoi()
         t.ID_Tournoi, 
         t.Date_Debut_Tournoi, 
         t.Date_Fin_Tournoi, 
-        t.Actif_Tournoi FROM Tournoi AS t JOIN Salle AS s ON s.ID_Salle = t.FK_ID_Salle ORDER BY t.Date_Debut_Tournoi DESC";
+        t.Actif_Tournoi FROM Tournoi AS t JOIN Salle AS s ON s.ID_Salle = t.FK_ID_Salle WHERE Actif_Tournoi = 1 OR Actif_Tournoi = 2  ORDER BY t.Date_Debut_Tournoi DESC";
         $request = $bdd->prepare($sql);
         $request->execute();
         return  $request->fetchAll(PDO::FETCH_ASSOC);
@@ -170,12 +194,20 @@ function afficherDateFinTournoi($id_tournoi)
     }
     return $date;
 }
+
+function afficherSalle($id_tournoi)
+{
+    $salle = "Non existante";
+    foreach (selection_tournoi($id_tournoi) as $tournoi) {
+        $salle = $tournoi['FK_ID_Salle'];
+    }
+    return $salle;
+}
 //OK
 
 function afficher_date_tournoi()
 {
     echo  "<table class=\"table table-bordered\">
-  
     <tr class=\"bg-white\">
             <th scope=\"col\"><CENTER><h4 class=\"text-success\">Date tournoi"  . "</h4></CENTER></th>
             <th scope=\"col\"><CENTER><h4 class=\"text-success\"> Date fin" . "  " .  "</h4></CENTER></th>
@@ -196,13 +228,16 @@ function afficher_date_tournoi()
        <button type=\"submit\" class=\"btn btn-outline-danger\" name=\"submit\" style=\"padding: 0px 12px !important;\" value=\"" . $tournoi['ID_Tournoi'] . "-annuler\"><i class=\"fa-regular fa-trash-can\"></i></button>
        <a class=\"btn btn-outline-dark\" style=\"padding: 0px 12px !important;\" role=\"button\" href=\"match.php?id_tournoi=" .  $tournoi['ID_Tournoi'] . "\"><i class=\"fa-solid fa-magnifying-glass\"></i></a>
        <a class=\"btn btn-outline-warning\" style=\"padding: 0px 12px !important;\" role=\"button\" href=\"modifier_tournoi.php?id_tournoi=" .  $tournoi['ID_Tournoi'] . "\"><i class=\"fa-solid fa-pen\"</i></a></td></CENTER>";
+
         elseif ($tournoi['Actif_Tournoi'] == 2)
             echo "<tr><td><CENTER><p class=\"fw-bold\">" . "Tournoi du " . date("d.m.Y", strtotime($tournoi['Date_Debut_Tournoi'])) . "</p></td>
         <td><CENTER><p class=\"fw-bold\" id=\"h5Texte\">" . date("d.m.Y", strtotime($tournoi['Date_Fin_Tournoi'])) .  "</p></td>
         <td><CENTER><p class=\"fw-bold\" id=\"h5Texte\">" . $tournoi['Nom_Salle'] . "</p></td>
         <td><CENTER><p class=\"fw-bold \" id=\"h5Texte\">" . "Terminé " .  "<i class=\"fa-solid fa-exclamation\"></i></p></a></td>
         <td><CENTER><button type=\"submit\" class=\"btn btn-outline-danger\" name=\"submit\" style=\"padding: 0px 12px !important;\" value=\"" . $tournoi['ID_Tournoi'] . "-annuler\"><i class=\"fa-regular fa-trash-can\"></i></button>
-       <button type=\"submit\" class=\"btn btn-outline-success\" name=\"submit\" style=\"padding: 0px 12px !important;\" value=\"" . $tournoi['ID_Tournoi'] . "-activer\"><i class=\"fa-solid fa-check\"></i></button></td>";
+        <a class=\"btn btn-outline-dark\" style=\"padding: 0px 12px !important;\" role=\"button\" href=\"match.php?id_tournoi=" .  $tournoi['ID_Tournoi'] . "\"><i class=\"fa-solid fa-magnifying-glass\"></i></a>
+
+        <button type=\"submit\" class=\"btn btn-outline-success\" name=\"submit\" style=\"padding: 0px 12px !important;\" value=\"" . $tournoi['ID_Tournoi'] . "-activer\"><i class=\"fa-solid fa-check\"></i></button></td>";
         echo "</div>";
     }
 }
@@ -413,25 +448,6 @@ function update_terminer_logique($id_tournoi)
     }
 }
 
-
-
-
-//fonction permetant de faire une suppression physique d'un tournoi
-function delete_tournoi($idTournoi)
-{
-    $idTournoi = $_POST['ID_Tournoi'];
-
-    $bdd = connectDB();
-    $reponseClient = $bdd->query("SET NAMES 'utf8'");
-    $reponseClient = $bdd->query("DELETE FROM Tournoi WHERE ID_Tournoi = '$idTournoi'");
-
-    echo "Le tournoi a bien été supprimé.";
-    echo "<br /><br />";
-    echo "<a href='messages.php'>Retour à la page d'accueil...</a>";
-    return null;
-}
-
-
 //OK
 function inscription_equipe_tournoi($ID_Tournoi, $equipe)
 {
@@ -454,25 +470,26 @@ function inscription_equipe_tournoi($ID_Tournoi, $equipe)
 function selection_tournoi_incription()
 {
     $bdd = connectDB();
-    $bdd->query("SET NAMES 'utf8'");
 
-    $reponse = $bdd->query("SELECT * FROM Tournoi WHERE Actif_Tournoi = '1' ORDER BY Date_Debut_Tournoi ASC");
-    $reponse->setFetchMode(PDO::FETCH_BOTH);
-
-    while ($donnees = $reponse->fetch()) {
-        echo "<option value='" . $donnees['ID_Tournoi'] . "'>" . date("d.m.Y", strtotime($donnees['Date_Debut_Tournoi'])) . "</option>";
+    $sql = ("SELECT * FROM Tournoi WHERE Actif_Tournoi = '1' ORDER BY Date_Debut_Tournoi ASC");
+    $req = $bdd->prepare($sql);
+    $req->execute();
+    $reponse = $req->fetchAll();
+    foreach ($reponse as $data) {
+        echo "<option value=\"" . $data['ID_Tournoi'] . "\" selected>" . date("d.m.Y", strtotime($data['Date_Debut_Tournoi'])) . "</option>";
     }
-
-    $bdd = null;
 }
+
+
 //  Aidée par Fatma 
 function selection_equipe_incription()
 {
     $bdd = connectDB();
-    $sql = "SELECT * FROM `Equipe` WHERE ID_Equipe not in (SELECT FK_ID_Equipe FROM Inscription_Tournoi);";
+    $sql = "SELECT * FROM `Equipe` WHERE ID_Equipe  in (SELECT FK_ID_Equipe FROM Inscription_Tournoi);";
     $request = $bdd->prepare($sql);
     $request->execute();
     $reponse = $request->fetchAll();
+
     foreach ($reponse as $data) {
         if ($data['FK_ID_Equipe'] == 'FK_ID_Equipe') {
             echo "<option value=\"" . $data['ID_Equipe'] . "\">" . $data['Nom_Equipe'] . "</option>";
@@ -481,6 +498,8 @@ function selection_equipe_incription()
         }
     }
 }
+
+
 //ok
 function selection_equipe_incription1($id_tournoi)
 {
@@ -491,7 +510,7 @@ function selection_equipe_incription1($id_tournoi)
     $reponse = $request->fetchAll();
 
     foreach ($reponse as $data) {
-        echo "<center><a href=\"inscription_equipe.php?id_tournoi=" . $id_tournoi . "&FK_ID_Equipe=" . $data['ID_Equipe'] . "\">"   . $data['Nom_Equipe'] . "</a></br>";
+        echo "<center><a href=\"inscription_equipe.php?id_tournoi=" . $id_tournoi . "&FK_ID_Equipe=" . $data['ID_Equipe'] . "\">"   . $data['Nom_Equipe'] . "</a>&nbsp<i class=\"fa-solid fa-arrow-pointer\"></i></br>";
     }
 }
 
@@ -507,7 +526,7 @@ function selectionner_equipe_tournoi($id_tournoi)
 {
 
     $bdd = connectDB();
-    $sql = "SELECT * FROM Inscription_Tournoi WHERE FK_ID_Tournoi = $id_tournoi AND Statut_Inscription_Tournoi = 'validé' ORDER BY ID_Inscription_Tournoi DESC ";
+    $sql = "SELECT * FROM Inscription_Tournoi WHERE FK_ID_Tournoi = $id_tournoi ORDER BY ID_Inscription_Tournoi DESC ";
     $request = $bdd->prepare($sql);
     $request->execute();
     return $request->fetchAll(PDO::FETCH_ASSOC);
@@ -541,7 +560,7 @@ function afficher_toutes_inscriptions()
             echo "<tr><td><ul><h5 class=\"fw-bold\">" . date("d.m.Y", strtotime($inscription['Date_Debut_Tournoi'])) . "</h5></ul></td>
         <td><ul><h5 class=\"fw-bold\">" .  $inscription['Nom_Equipe'] . "</h5></ul></td> 
         <td><ul><h5 class=\"fw-bold\">" .  $inscription['Nom_Groupe'] . "</h5></ul></td>
-        <td><ul><h5 class=\"fw-bold\">  " .  $inscription['Statut_Inscription_Tournoi'] . "<i class=\"fa-solid fa-hourglass\"></i></h5></ul></td>
+        <td><ul><h5 class=\"fw-bold\">  " .  $inscription['Statut_Inscription_Tournoi'] . "</h5></ul></td>
         <td><ul><CENTER><button type=\"\" class=\"btn btn- bg-success\" name=\"submit\" style=\"padding: 0px 12px !important;\" value=\"" . $inscription['ID_Inscription_Tournoi'] . "-modifier\">Valider</button>
         <button type=\"\" class=\"btn btn-primary btn-sm\" name=\"submit\" style=\"padding: 0px 12px !important;\" value=\"" . $inscription['ID_Inscription_Tournoi'] . "-supprimer\">Refuser</button>
       </ul></td></tr>";
@@ -555,25 +574,67 @@ function afficher_toutes_inscriptions()
     }
 }
 
+function afficher_toutes_inscriptions_validees()
+{
+    echo  "<table class=\"table table-bordered\">
+        <th scope=\"col\"><CENTER><h5 class=\"fw-bold text-success mb-2\">Date du tournoi  " . "<i class=\"fa-regular fa-calendar-days\"></i></h5></CENTER></th>
+        <th scope=\"col\"><CENTER><h5 class=\"fw-bold text-success mb-2\">Equipe " . "<i class=\"fa-solid fa-people-group\"></i></h5></CENTER></th>
+        <th scope=\"col\"><CENTER><h5 class=\"fw-bold text-success mb-2\">Groupe " . "<i class=\"fa-solid fa-users-viewfinder\"></i></h5></CENTER></th>
+        <th scope=\"col\"><CENTER><h5 class=\"fw-bold text-success mb-2\">Statut " . "  " .  "<i class=\"fa-regular fa-pen-to-square\"></i></h5></CENTER></th>
+        <th scope=\"col\"><CENTER><h5 class=\"fw-bold text-success mb-2\">Options  " .  "<i class=\"fa-solid fa-gears\"></i></h5></CENTER></th>";
+
+    foreach (selectionnerInscription_v() as $inscription) {
+        echo "<div><a href=\"afficher_demandes.php?id_inscription_tournoi=" . $inscription['ID_Inscription_Tournoi'] . "\">";
+        echo "<tr><td><CENTER><h5 class=\"fw-\">" . date("d.m.Y", strtotime($inscription['Date_Debut_Tournoi'])) . "</h5></td>
+             <td><CENTER><h5 class=\"fw-\">" .  $inscription['Nom_Equipe'] . "</h5></td> 
+             <td><CENTER><h5 class=\"fw-\">" .  $inscription['Nom_Groupe'] . "</h5></td>
+            <td><CENTER><h5 class=\"fw- text-success mb-2\">  " .  $inscription['Statut_Inscription_Tournoi'] . "</h5></td>
+            <td><CENTER><button type=\"submit\" class=\"btn btn-warning btn-warning \" name=\"submit\" style=\"padding: 0px 12px !important;\" value=\"" . $inscription['ID_Inscription_Tournoi'] . "-annuler\">Annuler</button></td></tr>";
+        echo "</div>";
+    }
+}
+
+function afficher_toutes_inscriptions_en_attente()
+{
+    echo  "<table class=\"table table-bordered\"><thead class=\"thead-dark\"><tr>
+        <th scope=\"col\"><CENTER><h5 class=\"fw-bold text-success mb-2\">Date du tournoi  " . "<i class=\"fa-regular fa-calendar-days\"></i></h5></CENTER></th>
+        <th scope=\"col\"><CENTER><h5 class=\"fw-bold text-success mb-2\">Equipe " . "<i class=\"fa-solid fa-people-group\"></i></h5></CENTER></th>
+        <th scope=\"col\"><CENTER><h5 class=\"fw-bold text-success mb-2\">Groupe " . "<i class=\"fa-solid fa-users-viewfinder\"></i></h5></CENTER></th>
+        <th scope=\"col\"><CENTER><h5 class=\"fw-bold text-success mb-2\">Statut " . "  " .  "<i class=\"fa-regular fa-pen-to-square\"></i></h5></CENTER></th>
+        <th scope=\"col\"><CENTER><h5 class=\"fw-bold text-success mb-2\">Options " . "  " .  "<i class=\"fa-solid fa-gears\"></i></h5></CENTER></th>
+     </tr></thead>";
+
+    foreach (selectionnerInscription_a() as $inscription) {
+        echo "<div><a href=\"afficher_demandes.php?id_inscription_tournoi=" . $inscription['ID_Inscription_Tournoi'] . "\">";
+        echo "<tr><td><CENTER><h5 class=\"fw\">" . date("d.m.Y", strtotime($inscription['Date_Debut_Tournoi'])) . "</h5></td>
+        <td><CENTER><h5 class=\"fw\">" .  $inscription['Nom_Equipe'] . "</h5></td> 
+        <td><CENTER><h5 class=\"fw\">" .  $inscription['Nom_Groupe'] . "</h5></td>
+        <td><CENTER><h5 class=\"fw\">  " .  $inscription['Statut_Inscription_Tournoi'] . "</h5></td>
+        <td><CENTER><button type=\"\" class=\"btn btn-success btn-success\" name=\"submit\" style=\"padding: 0px 12px !important;\" value=\"" . $inscription['ID_Inscription_Tournoi'] . "-modifier\">Valider</button>
+        <button type=\"\" class=\"btn btn-danger btn-danger\" name=\"submit\" style=\"padding: 0px 12px !important;\" value=\"" . $inscription['ID_Inscription_Tournoi'] . "-supprimer\">Refuser</button>
+      </td></tr>";
+        echo "</div>";
+    }
+}
+
 function afficher_toutes_inscriptions_supprimees()
 {
     echo  "<table class=\"table table-bordered\"><thead class=\"thead-dark\"><tr>
-        <th scope=\"col\"><CENTER><h5 class=\"fw-bold text-success mb-2\">Tournoi  " . "<i class=\"fa-regular fa-calendar-days\"></i></h5></CENTER></th>
+        <th scope=\"col\"><CENTER><h5 class=\"fw-bold text-success mb-2\">Date du tournoi  " . "<i class=\"fa-regular fa-calendar-days\"></i></h5></CENTER></th>
         <th scope=\"col\"><CENTER><h5 class=\"fw-bold text-success mb-2\">Equipe " . "<i class=\"fa-solid fa-people-group\"></i></h5></CENTER></th>
-        <th scope=\"col\"><CENTER><h5 class=\"fw-bold text-success mb-2\"> Groupe " . "<i class=\"fa-solid fa-users-viewfinder\"></i></h5></CENTER></th>
-        <th scope=\"col\"><CENTER><h5 class=\"fw-bold text-success mb-2\"> Statut " . "  " .  "<i class=\"fa-regular fa-pen-to-square\"></i></h5></CENTER></th>
-        <th scope=\"col\"><CENTER><h5 class=\"fw-bold text-success mb-2\"> Options " . "  " .  "<i class=\"fa-solid fa-gears\"></i></h5></CENTER></th>
+        <th scope=\"col\"><CENTER><h5 class=\"fw-bold text-success mb-2\">Groupe " . "<i class=\"fa-solid fa-users-viewfinder\"></i></h5></CENTER></th>
+        <th scope=\"col\"><CENTER><h5 class=\"fw-bold text-success mb-2\">Statut " . "  " .  "<i class=\"fa-regular fa-pen-to-square\"></i></h5></CENTER></th>
+        <th scope=\"col\"><CENTER><h5 class=\"fw-bold text-success mb-2\">Options " . "  " .  "<i class=\"fa-solid fa-gears\"></i></h5></CENTER></th>
      </tr></thead>";
-    foreach (selectionnerInscription_all() as $inscription) {
+    foreach (selectionnerInscription_s() as $inscription) {
         echo "<div><a href=\"afficher_demandes_supprimer.php?id_inscription_tournoi=" . $inscription['ID_Inscription_Tournoi'] . "\">";
-        if ($inscription['Statut_Inscription_Tournoi'] == "supprimé")
-            echo "<tr><CENTER><td><ul><h5 class=\"fw-bold\">" . date("d.m.Y", strtotime($inscription['Date_Debut_Tournoi'])) . "</h5></ul></td>
-        <td><CENTER><ul><h5 class=\"fw-bold\">" .  $inscription['Nom_Equipe'] . "</h5></ul></td> 
-        <td><CENTER><ul><h5 class=\"fw-bold\">" .  $inscription['Nom_Groupe'] . "</h5></ul></td>
-        <td><CENTER><ul><h5 class=\"fw-bold text-danger\">  " .  $inscription['Statut_Inscription_Tournoi'] . "</h5></ul></td>
-        <td><ul><CENTER><button type=\"\" class=\"btn btn-primary bg-success\" name=\"submit\" style=\"padding: 0px 12px !important;\" value=\"" . $inscription['ID_Inscription_Tournoi'] .
-                "-modifier\">Valider</button>
-        </CENTER></ul></td></tr>";
+        echo "<tr><td><CENTER><h5 class=\"fw-\">" . date("d.m.Y", strtotime($inscription['Date_Debut_Tournoi'])) . "</h5></td>
+        <td><CENTER><h5 class=\"fw-\">" .  $inscription['Nom_Equipe'] . "</h5></td> 
+        <td><CENTER><h5 class=\"fw-\">" .  $inscription['Nom_Groupe'] . "</h5></td>
+        <td><CENTER><h5 class=\"fw- text-danger\">  " .  $inscription['Statut_Inscription_Tournoi'] . "</h5></td>
+        <td><CENTER><button type=\"\" class=\"btn btn btn-success\" name=\"submit\" style=\"padding: 0px 12px !important;\" value=\"" . $inscription['ID_Inscription_Tournoi'] .
+            "-modifier\">Valider</button>
+        </CENTER></td></tr>";
         echo "</div>";
     }
 }
@@ -685,7 +746,9 @@ function selectionnerInscriptionID($IdInscriptionTournois)
 {
     try {
         $bdd = connectDB();
-        $sql = "SELECT e.Nom_Equipe, e.Degres_Equipe, g.Nom_Groupe, c.Nom_Club, t.Date_Debut_Tournoi, Date_Inscription_Tournoi, Statut_Inscription_Tournoi  FROM Inscription_Tournoi AS i JOIN Equipe AS e ON e.ID_Equipe = i.FK_ID_Equipe JOIN Groupe as g ON g.ID_Groupe = e.FK_ID_Groupe JOIN Club as c ON c.ID_Club = e.FK_ID_Club JOIN Tournoi as t ON t.ID_Tournoi = i.FK_ID_Tournoi WHERE FK_ID_Equipe = '$IdInscriptionTournois'";
+        $sql = "SELECT e.Nom_Equipe, e.Degres_Equipe, g.Nom_Groupe, c.Nom_Club, t.Date_Debut_Tournoi, Date_Inscription_Tournoi, Statut_Inscription_Tournoi  
+        FROM Inscription_Tournoi AS i JOIN Equipe AS e ON e.ID_Equipe = i.FK_ID_Equipe JOIN Groupe as g ON g.ID_Groupe = e.FK_ID_Groupe JOIN Club as c ON c.ID_Club = e.FK_ID_Club 
+        JOIN Tournoi as t ON t.ID_Tournoi = i.FK_ID_Tournoi WHERE FK_ID_Equipe = '$IdInscriptionTournois'";
         $request = $bdd->prepare($sql);
         $request->execute();
         return $request->fetchAll(PDO::FETCH_ASSOC);
@@ -700,14 +763,15 @@ function selectionnerInscription_all()
         $sql = "SELECT e.Nom_Equipe, e.Degres_Equipe, 
         g.Nom_Groupe, 
         c.Nom_Club, 
-        t.Date_Debut_Tournoi, 
+        t.Date_Debut_Tournoi,
+        t.Actif_Tournoi, 
         ID_Inscription_Tournoi,
          Date_Inscription_Tournoi, 
          Statut_Inscription_Tournoi  FROM Inscription_Tournoi 
          AS i JOIN Equipe AS e ON e.ID_Equipe = i.FK_ID_Equipe 
          JOIN Groupe as g ON g.ID_Groupe = e.FK_ID_Groupe 
          JOIN Club as c ON c.ID_Club = e.FK_ID_Club 
-         JOIN Tournoi as t ON t.ID_Tournoi = i.FK_ID_Tournoi ORDER BY t.Date_Debut_Tournoi DESC";
+         JOIN Tournoi as t ON t.ID_Tournoi = i.FK_ID_Tournoi WHERE t.Actif_Tournoi = 1 ORDER BY t.Date_Debut_Tournoi DESC";
 
         $request = $bdd->prepare($sql);
         $request->execute();
@@ -715,6 +779,124 @@ function selectionnerInscription_all()
     } catch (\Throwable $e) {
         debug($e->getMessage());
     }
+}
+
+function selectionnerInscription_a()
+{
+    try {
+        $bdd = connectDB();
+        $sql = "SELECT e.Nom_Equipe, e.Degres_Equipe, 
+        g.Nom_Groupe, 
+        c.Nom_Club, 
+        t.Date_Debut_Tournoi,
+        t.Actif_Tournoi, 
+        ID_Inscription_Tournoi,
+         Date_Inscription_Tournoi, 
+         Statut_Inscription_Tournoi  FROM Inscription_Tournoi 
+         AS i JOIN Equipe AS e ON e.ID_Equipe = i.FK_ID_Equipe 
+         JOIN Groupe as g ON g.ID_Groupe = e.FK_ID_Groupe 
+         JOIN Club as c ON c.ID_Club = e.FK_ID_Club 
+         JOIN Tournoi as t ON t.ID_Tournoi = i.FK_ID_Tournoi 
+         WHERE t.Actif_Tournoi = 1 
+         AND Statut_Inscription_Tournoi = 'en attente'
+         ORDER BY t.Date_Debut_Tournoi DESC";
+
+        $request = $bdd->prepare($sql);
+        $request->execute();
+        return $request->fetchAll(PDO::FETCH_ASSOC);
+    } catch (\Throwable $e) {
+        debug($e->getMessage());
+    }
+}
+
+function selectionnerInscription_v()
+{
+    try {
+        $bdd = connectDB();
+        $sql = "SELECT e.Nom_Equipe, e.Degres_Equipe, 
+        g.Nom_Groupe, 
+        c.Nom_Club, 
+        t.Date_Debut_Tournoi,
+        t.Actif_Tournoi, 
+        ID_Inscription_Tournoi,
+         Date_Inscription_Tournoi, 
+         Statut_Inscription_Tournoi  FROM Inscription_Tournoi 
+         AS i JOIN Equipe AS e ON e.ID_Equipe = i.FK_ID_Equipe 
+         JOIN Groupe as g ON g.ID_Groupe = e.FK_ID_Groupe 
+         JOIN Club as c ON c.ID_Club = e.FK_ID_Club 
+         JOIN Tournoi as t ON t.ID_Tournoi = i.FK_ID_Tournoi 
+         WHERE t.Actif_Tournoi = 1 
+         AND Statut_Inscription_Tournoi = 'validé'
+         ORDER BY t.Date_Debut_Tournoi DESC";
+
+        $request = $bdd->prepare($sql);
+        $request->execute();
+        return $request->fetchAll(PDO::FETCH_ASSOC);
+    } catch (\Throwable $e) {
+        debug($e->getMessage());
+    }
+}
+
+function selectionnerInscription_s()
+{
+    try {
+        $bdd = connectDB();
+        $sql = "SELECT e.Nom_Equipe, e.Degres_Equipe, 
+        g.Nom_Groupe, 
+        c.Nom_Club, 
+        t.Date_Debut_Tournoi,
+        t.Actif_Tournoi, 
+        ID_Inscription_Tournoi,
+         Date_Inscription_Tournoi, 
+         Statut_Inscription_Tournoi  FROM Inscription_Tournoi 
+         AS i JOIN Equipe AS e ON e.ID_Equipe = i.FK_ID_Equipe 
+         JOIN Groupe as g ON g.ID_Groupe = e.FK_ID_Groupe 
+         JOIN Club as c ON c.ID_Club = e.FK_ID_Club 
+         JOIN Tournoi as t ON t.ID_Tournoi = i.FK_ID_Tournoi 
+         WHERE t.Actif_Tournoi = 1 
+         AND Statut_Inscription_Tournoi = 'supprimé'
+         ORDER BY t.Date_Debut_Tournoi DESC";
+
+        $request = $bdd->prepare($sql);
+        $request->execute();
+        return $request->fetchAll(PDO::FETCH_ASSOC);
+    } catch (\Throwable $e) {
+        debug($e->getMessage());
+    }
+}
+
+function selectionnerInscriptionSJ()
+{
+    try {
+        $bdd = connectDB();
+        $sql = "SELECT e.Nom_Equipe, e.Degres_Equipe, 
+        g.Nom_Groupe, 
+        c.Nom_Club, 
+        t.Date_Debut_Tournoi,
+        t.Actif_Tournoi, 
+        ID_Inscription_Tournoi,
+         Date_Inscription_Tournoi, 
+         Statut_Inscription_Tournoi  FROM Inscription_Tournoi 
+         AS i JOIN Equipe AS e ON e.ID_Equipe = i.FK_ID_Equipe 
+         JOIN Groupe as g ON g.ID_Groupe = e.FK_ID_Groupe 
+         JOIN Club as c ON c.ID_Club = e.FK_ID_Club 
+         JOIN Tournoi as t ON t.ID_Tournoi = i.FK_ID_Tournoi 
+         ";
+
+        $request = $bdd->prepare($sql);
+        $request->execute();
+        return $request->fetchAll(PDO::FETCH_ASSOC);
+    } catch (\Throwable $e) {
+        debug($e->getMessage());
+    }
+}
+function contientiNSCRIPTION($IdInscriptionTournois)
+{
+    $nomEquipe = "Inconnu";
+    foreach (selectionnerInscriptionSJ($IdInscriptionTournois) as $inscription) {
+        $nomEquipe = date("d-m-Y", strtotime($inscription['Date_Inscription_Tournoi']));
+    }
+    return  $nomEquipe;
 }
 
 function contientEquipeInscriteSANSID($IdInscriptionTournois)
@@ -797,5 +979,40 @@ function selectMatchPlaces3($id_tournoi)
         return $request->fetchAll(PDO::FETCH_ASSOC);
     } catch (\Throwable $e) {
         debug($e->getMessage());
+    }
+}
+
+function affichageAllTournoisTermines()
+{
+    // Pour chaque tournoi, les afficher de la manière suivante
+    foreach (selectAllTournoiTermines() as $tournoi) {
+        echo "<div class=\"col mb-4\">
+          <div><a href=\"feuille_tous_les_matchs.php?id_tournoi=" . $tournoi['ID_Tournoi'] . "\"><img class=\"rounded img-fluid shadow w-100 fit-cover\" src=\"assets/img/products/2173435-silhouette-joueur-de-football-tir-rapide-un-ballon-sur-un-fond-blanc-illustration-vectoriel.jpg\" style=\"height: 250px;\"></a>
+            <div class=\"py-4\">
+              <h4 class=\"fw-bold\">Tournoi du " . date("d.m.Y", strtotime($tournoi['Date_Debut_Tournoi'])) . "</h4>
+              <p class=\"text-muted\">Ce tournoi est organisé à la " . $tournoi['Nom_Salle'] . ".</p>
+            </div>
+          </div>
+        </div>";
+    }
+}
+
+function selectAllTournoiTermines()
+{
+    try {
+        $db = connectDB();
+        $sql = "SELECT s.Nom_Salle,
+        t.ID_Tournoi,  
+        t.Date_Debut_Tournoi
+         FROM `Tournoi` 
+         AS t JOIN Salle AS s ON s.ID_Salle = t.FK_ID_Salle
+         WHERE  Actif_Tournoi = 2 
+         ORDER BY `Date_Debut_Tournoi` ASC";
+        $request = $db->prepare($sql);
+        $request->execute();
+        return $request->fetchAll(PDO::FETCH_ASSOC);
+    } catch (\Throwable $e) {
+        echo "<script>alert(\"" . $e->getMessage() . "\");</script>";
+        debug();
     }
 }

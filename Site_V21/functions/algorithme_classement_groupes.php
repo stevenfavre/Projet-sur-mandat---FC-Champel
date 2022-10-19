@@ -15,24 +15,55 @@ function affichageGroupes($tournoi)
             <th scope=\"col\"><CENTER><h5 class=\" text-success mb-2\"> Classement </h5></CENTER></th></tr> 
    ";
 
+    if (isset($_SESSION["Groupe1"])) {
+        unset($_SESSION["Groupe1"]);
+    }
+    if (isset($_SESSION["Groupe2"])) {
+        unset($_SESSION["Groupe2"]);
+    }
+    if (isset($_SESSION["Groupe3"])) {
+        unset($_SESSION["Groupe3"]);
+    }
+    if (isset($_SESSION["Groupe4"])) {
+        unset($_SESSION["Groupe4"]);
+    }
+
+
     foreach (selectionnerTousLesGroupes($tournoi) as $groupes) {
+        $tabClassement = array();
         echo "<td><CENTER><h5 class=\"bold\"></br></br><a href=\"classement_tournoi.php?id_groupe=" . $groupes['ID_Groupe'] . "&id_tournoi=" . $tournoi . "\">" . $groupes['Nom_Groupe'] . "</a></CENTER></h5></td>";
         $q = 1;
         $id_groupe = $groupes['ID_Groupe'];
         $monTableauToutBeau = array();
         $db = connectDB();
-        $req = "SELECT DISTINCT  e.Nom_Equipe, e.Points_Equipe, g.Nom_Groupe
+        $req = "SELECT DISTINCT  e.ID_Equipe, e.Nom_Equipe, e.Points_Equipe, e.Difference_But_Equipe, g.Nom_Groupe
                   FROM Matchs AS m JOIN Equipe AS e ON e.ID_Equipe = m.FK_ID_Local OR e.ID_Equipe =  m.FK_ID_Visiteur
                   JOIN Groupe as g ON g.ID_Groupe = m.FK_ID_Groupe 
-                  WHERE  m.FK_ID_Groupe = $id_groupe AND m.FK_ID_Tournoi = $tournoi  ORDER BY e.Points_Equipe DESC ";
+                  WHERE  m.FK_ID_Groupe = $id_groupe AND m.FK_ID_Tournoi = $tournoi  
+                  ORDER BY e.Points_Equipe DESC,
+                    e.Difference_But_Equipe DESC ";
 
         foreach ($db->query($req) as $row) {
             $monTableauToutBeau[] = $row['Nom_Equipe'];
             $monTableauToutBeau[] = $row['Points_Equipe'];
+            if ($row["Nom_Groupe"] == "Groupe A") {
+                array_push($tabClassement, $row);
+                $_SESSION["Groupe1"] = $tabClassement;
+            } elseif ($row["Nom_Groupe"] == "Groupe B") {
+                array_push($tabClassement, $row);
+                $_SESSION["Groupe2"] = $tabClassement;
+            } elseif ($row["Nom_Groupe"] == "Groupe C") {
+                array_push($tabClassement, $row);
+                $_SESSION["Groupe3"] = $tabClassement;
+            } elseif ($row["Nom_Groupe"] == "Groupe D") {
+                array_push($tabClassement, $row);
+                $_SESSION["Groupe4"] = $tabClassement;
+            }
         }
         echo "<td><h5 class=\"bold\">" . "<center>" . $q++ . "  " . "<i class=\"fa-solid fa-trophy\"></i></center>" .
             " " . "<center>" .  $monTableauToutBeau[0];
-        echo "     |  " . "<i class=\"fa-regular fa-star\"></i>      " . $monTableauToutBeau[1];
+        echo "     | " . "<i class=\"fa-regular fa-star\"></i>      " . $monTableauToutBeau[1];
+
         echo "</h5>";
 
         echo "<h5 class=\"bold\">" . "<center>" . $q++ . "  " . "<i class=\"fa-solid fa-trophy\"></i></center>" .
@@ -50,6 +81,7 @@ function affichageGroupes($tournoi)
         echo "     |     " . "<i class=\"fa-regular fa-star\"></i>      " . $monTableauToutBeau[7];
         echo "</h5></td></br></tr>";
     }
+
     echo " </table>";
 }
 
@@ -122,19 +154,44 @@ function affichageResulatsQuartsFinal($id_match)
     }
 }
 
-function affichageResulatsQuartsFinal1($tournoi)
+function affichageResulatsGenerales($tournoi)
 {
-    $EquipeGagnagte = 0;
-    $EquipeGAGNATE = 0;
+    $hola = 1;
+    echo  "<tr><table class=\"table\"><thead class=\"thead-dark\">
+    <th scope=\"col\"><h5 class=\"fw-bold text-success mb-2\"> Match "  .  "</h5></th>
+            <th scope=\"col\"><h5 class=\"fw-bold text-success mb-2\"> Equipes " .  "<i class=\"fa-solid fa-people-group\"></i>" . " vs " .
+        "<i class=\"fa-solid fa-people-group\"></i></h5></th>
+            <th scope=\"col\"><h5 class=\"fw-bold text-success mb-2\"> Buts " .   "<i class=\"fa-regular fa-futbol\"></i></h5></th>
+            <th scope=\"col\"><h5 class=\"fw-bold text-success mb-2\"> Victoires " .  "<i class=\"fa-regular fa-pen-to-square\"></i></h5></th>
+            </tr>
+          </thead>";
+    foreach (selectionnerMatchsTous($tournoi) as $matchs) {
 
-    foreach (selectionnerMatchsQuarts($tournoi) as $matchs) {
         if ($matchs['But_Local_Match'] < $matchs['But_Visiteur_Match']) {
-            $EquipeGagnagte = $matchs['FK_ID_Local'];
-        } else if ($matchs['But_Visiteur_Match'] > $matchs['But_Local_Match']) {
-            $EquipeGAGNATE = $matchs['FK_ID_Visiteur'];
+            echo "<tbody><tr>
+                    <td><h5 class=\"bold\">"  . $matchs['Type_Match'] . "&nbsp" .   $hola++ . "</h5></td>
+                    <td><h5 class=\"bold\">"  .   contientNomEquipe($matchs['FK_ID_Local']) . " VS " .  contientNomEquipe($matchs['FK_ID_Visiteur']) . "</h5>
+                    <td><h5 class=\"bold\">"  .  $matchs['But_Local_Match'] . " vs " .  $matchs['But_Visiteur_Match'] . "</h5></td>
+                    <td><h5 class=\"bold\">"  .  "<i class=\"fa-solid fa-trophy\"></i>" . " " .  contientNomEquipe($matchs['FK_ID_Visiteur']) . "</h5></td>
+                    </tr>";
+        } else {
+            echo "<tr>
+                    <td><h5 class=\"bold\">"  . $matchs['Type_Match'] . "&nbsp" .  $hola++ . "</h5></td>
+                        <td><h5 class=\"bold\">"  .   contientNomEquipe($matchs['FK_ID_Local']) . " VS " .  contientNomEquipe($matchs['FK_ID_Visiteur']) . "</h5>
+                        <td><h5 class=\"bold\">"  .  $matchs['But_Local_Match'] . " vs " .  $matchs['But_Visiteur_Match'] . "</h5></td>
+                        <td><h5 class=\"bold\">"  . "<i class=\"fa-solid fa-trophy\"></i>" . " " . contientNomEquipe($matchs['FK_ID_Local']) . "</h5>
+                        </td></tr></tbody>";
         }
     }
 }
+
+
+
+
+
+
+
+
 
 function affichageResulatsDemiFinal($id_match)
 {
@@ -455,19 +512,29 @@ function affichageResulatsEquipes($id_groupe, $id_tournoi)
 {
     $hola = 1;
 
-    echo  "<tr><table class=\"table\"><thead class=\"thead-dark\">
-            <th scope=\"col\"><h5 class=\"fw-bold text-success mb-2\"> Match "  .  "</h5></th>
+    echo  "</br><tr><table class=\"table\"><thead class=\"thead-dark\">
+            </br><th scope=\"col\"><h5 class=\"fw-bold text-success mb-2\"> Match "  .  "</h5></th>
             <th scope=\"col\"><h5 class=\"fw-bold text-success mb-2\"> Equipes " .  "<i class=\"fa-solid fa-people-group\"></i>" . " vs " .
         "<i class=\"fa-solid fa-people-group\"></i></h5></th>
             <th scope=\"col\"><h5 class=\"fw-bold text-success mb-2\"> Buts " .   "<i class=\"fa-regular fa-futbol\"></i></h5></th>
             <th scope=\"col\"><h5 class=\"fw-bold text-success mb-2\"> Points " .  "<i class=\"fa-regular fa-star\"></i></h5></th>
+           
           </tr>
         </thead>";
+    $listeEquipe = [];
+    $butsMarques0 = 0;
+    $butsMarques1 = 0;
+    $butsMarques2 = 0;
+    $butsMarques3 = 0;
+    $butsEncaisse0 = 0;
+    $butsEncaisse1 = 0;
+    $butsEncaisse2 = 0;
+    $butsEncaisse3 = 0;
+    $differenceBut0 = 0;
+    $differenceBut1 = 0;
+    $differenceBut2 = 0;
+    $differenceBut3 = 0;
 
-    $t = 0;
-    $d = 0;
-    $butsMarquesL = 0;
-    $butsMarquesv = 0;
 
     foreach (selectionnerMatchsGroupe($id_groupe, $id_tournoi) as $matchs) {
         echo "<tbody>
@@ -479,63 +546,72 @@ function affichageResulatsEquipes($id_groupe, $id_tournoi)
              <td><h5 class=\"bold\">"  . "</h5></td>
           </tr></tbody>";
 
-
-
-
-        /*         if ($matchs['FK_ID_Local'] != $matchs['FK_ID_Local']) {
-            $butsMarquesL =  $matchs['But_Local_Match'];
+        if (!in_array(contientNomEquipe($matchs['FK_ID_Local']), $listeEquipe)) {
+            array_push($listeEquipe, contientNomEquipe($matchs['FK_ID_Local']));
         }
-        if ($matchs['FK_ID_Visiteur'] == contientIDEquipe($matchs['FK_ID_Visiteur'])) {
-            $butsMarquesv =  $matchs['But_Visiteur_Match'];
+        if (!in_array(contientNomEquipe($matchs['FK_ID_Visiteur']), $listeEquipe)) {
+            array_push($listeEquipe, contientNomEquipe($matchs['FK_ID_Visiteur']));
         }
-        if (contientIDEquipe($matchs['FK_ID_Local']) == $matchs['FK_ID_Visiteur']) {
-            $t = $butsMarquesL + $butsMarquesL;
-        } else {
-            $d += $butsMarquesv;
-        }
-
-        echo " | ID EQUIPE " . $matchs['FK_ID_Local'] . " ID EQUIPE DU PREMIER MATCH " . $matchs['FK_ID_Local'];
-        echo " | Buts en Local  " . $butsMarquesL . "TOTAL " . $t;
-        echo " | ID EQUIPE " . contientIDEquipe($matchs['FK_ID_Visiteur']);
-        echo " | Buts en Visiteur " . $butsMarquesv . "TOTAL " . $d . "</br>"; */
     }
-    //calculerButs($id_groupe, $id_tournoi);
+    foreach (selectionnerMatchsGroupe($id_groupe, $id_tournoi) as $matchs) {
+        if ($listeEquipe[0] == contientNomEquipe($matchs['FK_ID_Local'])) {
+            $butsMarques0 += $matchs['But_Local_Match'];
+            $butsEncaisse0 += $matchs['But_Visiteur_Match'];
+        }
+        if ($listeEquipe[0] == contientNomEquipe($matchs['FK_ID_Visiteur'])) {
+            $butsMarques0 += $matchs['But_Visiteur_Match'];
+            $butsEncaisse0 += $matchs['But_Local_Match'];
+        }
+        if ($listeEquipe[1] == contientNomEquipe($matchs['FK_ID_Local'])) {
+            $butsMarques1 += $matchs['But_Local_Match'];
+            $butsEncaisse1 += $matchs['But_Visiteur_Match'];
+        }
+        if ($listeEquipe[1] == contientNomEquipe($matchs['FK_ID_Visiteur'])) {
+            $butsMarques1 += $matchs['But_Visiteur_Match'];
+            $butsEncaisse1 += $matchs['But_Local_Match'];
+        }
+        if ($listeEquipe[2] == contientNomEquipe($matchs['FK_ID_Local'])) {
+            $butsMarques2 += $matchs['But_Local_Match'];
+            $butsEncaisse2 += $matchs['But_Visiteur_Match'];
+        }
+        if ($listeEquipe[2] == contientNomEquipe($matchs['FK_ID_Visiteur'])) {
+            $butsMarques2 += $matchs['But_Visiteur_Match'];
+            $butsEncaisse2 += $matchs['But_Local_Match'];
+        }
+        if ($listeEquipe[3] == contientNomEquipe($matchs['FK_ID_Local'])) {
+            $butsMarques3 += $matchs['But_Local_Match'];
+            $butsEncaisse3 += $matchs['But_Visiteur_Match'];
+        }
+        if ($listeEquipe[3] == contientNomEquipe($matchs['FK_ID_Visiteur'])) {
+            $butsMarques3 += $matchs['But_Visiteur_Match'];
+            $butsEncaisse3 += $matchs['But_Local_Match'];
+        }
+    }
+    '<br>';
+    $differenceBut0 = $butsMarques0 - $butsEncaisse0;
+    $differenceBut1 = $butsMarques1 - $butsEncaisse1;
+    $differenceBut2 = $butsMarques2 - $butsEncaisse2;
+    $differenceBut3 = $butsMarques3 - $butsEncaisse3;
+
+
+
+    updateButs($listeEquipe[0], $differenceBut0);
+    updateButs($listeEquipe[1], $differenceBut1);
+    updateButs($listeEquipe[2], $differenceBut2);
+    updateButs($listeEquipe[3], $differenceBut3);
 }
-/* 
-function calculerButs($id_groupe, $id_tournoi)
-{
-    $butsMarquesv = '';
-    foreach (selectionnerButs($id_groupe, $id_tournoi) as $matchs) {
-
-        if ($matchs['FK_ID_Local'] == $matchs['ID_Equipe']) {
-            $butsMarquesL =  $matchs['But_Local_Match'];
-        } elseif ($matchs['FK_ID_Visiteur'] == $matchs['ID_Equipe']) {
-            $butsMarquesv =  $matchs['But_Visiteur_Match'];
-        }
 
 
-        echo "|  Equipe" . $matchs['ID_Equipe'] . " | Total buts Local : " . $butsMarquesL . " |  " .
-            " |    Equipe" . $matchs['ID_Equipe'] . " |   Total buts Visiteur : " .  $butsMarquesv . " |  ";
-    }
-    //var_dump(selectionnerButs($id_groupe, $id_tournoi));
-
-
-    //updateButs($matchs['ID_Equipe'], $butsMarques, $id_tournoi, $id_groupe);
-} */
-
-/* function updateButs($id_equipe, $butsMarques)
+function updateButs($nom_equipe, $butsMarques)
 {
     $db = connectDB();
-    $sql = "UPDATE Equipe SET Total_Buts_Equipe = :butsMarques WHERE ID_Equipe =' . $id_equipe' ";
+    $sql = "UPDATE Equipe SET Difference_But_Equipe = :butMarque WHERE Nom_Equipe = :nomEquipe";
     $request = $db->prepare($sql);
     $request->execute([
-        'butsMarques' => $butsMarques
+        'nomEquipe' => $nom_equipe,
+        'butMarque' => $butsMarques
     ]);
-} */
-
-
-
-
+}
 
 function affichageResulatsEquipes2($id_groupe, $id_tournoi)
 {
@@ -544,7 +620,7 @@ function affichageResulatsEquipes2($id_groupe, $id_tournoi)
     foreach (selectionnerMatchsGroupe3($id_groupe, $id_tournoi) as $matchs) {
         echo  "<td><CENTER><h5 class=\"fw-bold\">" . $hola++ .
             "  " . "<i class=\"fa-solid fa-trophy\"></i>
-            </h5>" . " <h5 style='margin-left:70px;'>" .  $matchs['Nom_Equipe'] . " | Points " . $matchs['Points_Equipe'] . " </h5></td>";
+            </h5>" . " <h5 style='margin-left:70px;'>" .  $matchs['Nom_Equipe'] . "<br>Points " . $matchs['Points_Equipe']  . "<i class=\"fa-regular fa-star\"></i><br>  Différence de buts " . $matchs['Difference_But_Equipe'] . " </h5></td>";
     }
 }
 
@@ -721,10 +797,14 @@ function selectionnerMatchsGroupe3($id_groupe, $id_tournoi)
 {
     try {
         $db = connectDB();
-        $sql = "SELECT DISTINCT  e.Nom_Equipe, e.Points_Equipe, g.Nom_Groupe
+        $sql = "SELECT DISTINCT  e.Nom_Equipe, e.Points_Equipe, e.Difference_But_Equipe, g.Nom_Groupe
         FROM Matchs AS m JOIN Equipe AS e ON e.ID_Equipe = m.FK_ID_Local OR e.ID_Equipe =  m.FK_ID_Visiteur
         JOIN Groupe as g ON g.ID_Groupe = m.FK_ID_Groupe
-        WHERE  m.FK_ID_Groupe = $id_groupe AND FK_ID_Tournoi = $id_tournoi ORDER BY e.Points_Equipe DESC; ";
+        WHERE  m.FK_ID_Groupe = $id_groupe AND FK_ID_Tournoi = $id_tournoi 
+        ORDER BY e.Points_Equipe DESC,
+        e.Difference_But_Equipe DESC
+        ; ";
+
 
         $request = $db->prepare($sql);
         $request->execute();
@@ -893,6 +973,26 @@ function selectionnerTousLesGroupes($id_tournoi)
     }
 }
 
+function selectionnerMatchsEtClassement($id_tournoi)
+{
+    try {
+        $db = connectDB();
+        $sql = "SELECT DISTINCT g.ID_Groupe, g.Nom_Groupe
+        FROM Matchs AS m 
+        JOIN Equipe AS e ON e.ID_Equipe = m.FK_ID_Local OR e.ID_Equipe =  m.FK_ID_Visiteur
+        JOIN Groupe AS  g ON g.ID_Groupe = m.FK_ID_Groupe
+        JOIN Tournoi AS t ON t.ID_Tournoi = m.FK_ID_Tournoi
+
+        WHERE m.FK_ID_Tournoi = $id_tournoi ";
+
+        $request = $db->prepare($sql);
+        $request->execute();
+        return $request->fetchAll(PDO::FETCH_ASSOC);
+    } catch (\Throwable $e) {
+        debug($e->getMessage());
+    }
+}
+
 function selectionnerMatch()
 {
     try {
@@ -932,6 +1032,21 @@ function selectionnerMatchsQuarts($id_tournoi)
 
         $db = connectDB();
         $sql = "SELECT * FROM `Matchs` WHERE Type_Match = 'Quart de finale ' AND FK_ID_Tournoi = $id_tournoi ";
+
+        $request = $db->prepare($sql);
+        $request->execute();
+        return $request->fetchAll(PDO::FETCH_ASSOC);
+    } catch (\Throwable $e) {
+        debug($e->getMessage());
+    }
+}
+
+function selectionnerMatchsTous($id_tournoi)
+{
+    try {
+
+        $db = connectDB();
+        $sql = "SELECT * FROM `Matchs` WHERE  FK_ID_Tournoi = $id_tournoi ";
 
         $request = $db->prepare($sql);
         $request->execute();
