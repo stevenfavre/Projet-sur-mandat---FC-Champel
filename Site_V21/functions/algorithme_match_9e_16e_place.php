@@ -8,10 +8,10 @@ require_once('steven_fonctions.php');
 $id_tournoi = $_GET["id_tournoi"];
 $dateTournoi = getDateTournoi($id_tournoi);
 
-$groupeA = $_SESSION['GroupeUn'];
-$groupeB = $_SESSION['GroupeDeux'];
-$groupeC = $_SESSION['GroupeTrois'];
-$groupeD = $_SESSION['GroupeQuatre'];
+$groupeA = $_SESSION['Groupe1'];
+$groupeB = $_SESSION['Groupe2'];
+$groupeC = $_SESSION['Groupe3'];
+$groupeD = $_SESSION['Groupe4'];
 
 $heureDebut1 = calculDebut('13:00:00', 0, 11, 0);
 $heureFin1 = calculDebut($heureDebut1, 0, 11, 0);
@@ -142,67 +142,38 @@ function createMatch9A16ePlace($id_tournoi, $groupeA, $groupeB, $groupeC, $group
     $heureDebut24 = calculDebut($heureFin23, 0, 11, 0);
     $heureFin24 = calculDebut($heureDebut24, 0, 11, 0);
 
-    $matchUn = array(
-        ($groupeA[2]),
-        ($groupeD[3]),
-    );
-
     $idEquipe1 = 0;
-    foreach ($groupeA[2] as $equipe) {
-        $idEquipe1 = $equipe['ID_Equipe'];
-    }
+
+    $idEquipe1 = $groupeA[2][0];
+
 
     $idEquipe2 = 0;
-    foreach ($groupeD[3] as $equipe) {
-        $idEquipe2 = $equipe['ID_Equipe'];
-    }
+    $idEquipe2 = $groupeD[3][0];
 
-    $matchDeux = array(
-        ($groupeB[2]),
-        ($groupeC[3]),
-    );
 
     $idEquipe3 = 0;
-    foreach ($groupeB[2] as $equipe) {
-        $idEquipe3 = $equipe['ID_Equipe'];
-    }
+    $idEquipe3 = $groupeB[2][0];
+
 
     $idEquipe4 = 0;
-    foreach ($groupeC[3] as $equipe) {
-        $idEquipe4 = $equipe['ID_Equipe'];
-    }
+    $idEquipe4 = $groupeC[3][0];
 
-
-    $matchTrois = array(
-        ($groupeC[2]),
-        ($groupeB[3]),
-    );
 
     $idEquipe5 = 0;
-    foreach ($groupeC[2] as $equipe) {
-        $idEquipe5 = $equipe['ID_Equipe'];
-    }
+    $idEquipe5 = $groupeC[2][0];
+
 
     $idEquipe6 = 0;
-    foreach ($groupeB[3] as $equipe) {
-        $idEquipe6 = $equipe['ID_Equipe'];
-    }
+    $idEquipe6 = $groupeB[3][0];
 
-
-    $MatchQuatre = array(
-        ($groupeD[2]),
-        ($groupeA[3]),
-    );
 
     $idEquipe7 = 0;
-    foreach ($groupeD[2] as $equipe) {
-        $idEquipe7 = $equipe['ID_Equipe'];
-    }
+    $idEquipe7 = $groupeD[2][0];
+
 
     $idEquipe8 = 0;
-    foreach ($groupeA[3] as $equipe) {
-        $idEquipe8 = $equipe['ID_Equipe'];
-    }
+    $idEquipe8 = $groupeA[3][0];
+
 
 
     $bdd = connectDB();

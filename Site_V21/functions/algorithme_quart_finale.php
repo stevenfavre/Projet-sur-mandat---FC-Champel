@@ -9,10 +9,10 @@ $id_tournoi = $_GET["id_tournoi"];
 $dateTournoi = getDateTournoi($id_tournoi);
 
 
-$groupeA = $_SESSION['GroupeUn'];
-$groupeB = $_SESSION['GroupeDeux'];
-$groupeC = $_SESSION['GroupeTrois'];
-$groupeD = $_SESSION['GroupeQuatre'];
+$groupeA = $_SESSION['Groupe1'];
+$groupeB = $_SESSION['Groupe2'];
+$groupeC = $_SESSION['Groupe3'];
+$groupeD = $_SESSION['Groupe4'];
 
 
 $heureDebut1 = calculDebut('13:00:00', 0, 11, 0);
@@ -143,68 +143,38 @@ function createQuartFinale($id_tournoi, $groupeA, $groupeB, $groupeC, $groupeD, 
     $heureDebut24 = calculDebut($heureFin23, 0, 11, 0);
     $heureFin24 = calculDebut($heureDebut24, 0, 11, 0);
 
-
-    $quartFinaleUn = array(
-        ($groupeA[0]),
-        ($groupeD[1]),
-    );
-
     $idEquipe1 = 0;
-    foreach ($groupeA[0] as $equipe) {
-        $idEquipe1 = $equipe['ID_Equipe'];
-    }
+    $idEquipe1 = $groupeA[0][0];
+
 
     $idEquipe2 = 0;
-    foreach ($groupeD[1] as $equipe) {
-        $idEquipe2 = $equipe['ID_Equipe'];
-    }
+    $idEquipe2 = $groupeD[1][0];
 
-    $quartFinaleDeux = array(
-        ($groupeB[0]),
-        ($groupeC[1]),
-    );
+
 
     $idEquipe3 = 0;
-    foreach ($groupeB[0] as $equipe) {
-        $idEquipe3 = $equipe['ID_Equipe'];
-    }
+    $idEquipe3 = $groupeB[0][0];
+
 
     $idEquipe4 = 0;
-    foreach ($groupeC[1] as $equipe) {
-        $idEquipe4 = $equipe['ID_Equipe'];
-    }
+    $idEquipe4 = $groupeC[1][0];
 
-
-    $quartFinaleTrois = array(
-        ($groupeC[0]),
-        ($groupeB[1]),
-    );
 
     $idEquipe5 = 0;
-    foreach ($groupeC[0] as $equipe) {
-        $idEquipe5 = $equipe['ID_Equipe'];
-    }
+    $idEquipe5 = $groupeC[0][0];
+
 
     $idEquipe6 = 0;
-    foreach ($groupeB[1] as $equipe) {
-        $idEquipe6 = $equipe['ID_Equipe'];
-    }
+    $idEquipe6 = $groupeB[1][0];
 
-
-    $quartFinaleQuatre = array(
-        ($groupeD[0]),
-        ($groupeA[1]),
-    );
 
     $idEquipe7 = 0;
-    foreach ($groupeD[0] as $equipe) {
-        $idEquipe7 = $equipe['ID_Equipe'];
-    }
+    $idEquipe7 = $groupeD[0][0];
+
 
     $idEquipe8 = 0;
-    foreach ($groupeA[1] as $equipe) {
-        $idEquipe8 = $equipe['ID_Equipe'];
-    }
+    $idEquipe8 = $groupeA[1][0];
+
 
 
     $insertquartUn = insertQuart($dateTournoi, $heureDebut1, $heureFin1, "1", "0", $idEquipe1, $idEquipe2, $id_tournoi);
