@@ -6,6 +6,12 @@ $submit = null;
 if (isset($_POST['submit'])) {
   $submit = $_POST['submit'];
 }
+if ($submit == "ok") {
+  $FK_ID_Tournoi = $_POST['FK_ID_Tournoi'];
+  $FK_ID_Equipe = $_POST['FK_ID_Equipe'];
+  verificationDonneesInscription($FK_ID_Tournoi, $FK_ID_Equipe);
+  //header("Location: afficher_demandes.php");
+}
 
 
 
@@ -47,19 +53,10 @@ if (isset($_POST['submit'])) {
                 <?php selection_equipe_incription() ?>
               </select>
 
-
               <br /><br />
-              <div><button class="btn btn-primary" type="submit" name="submit" value="ok">S'inscrire</button>
-
-                <a class="btn btn-primary shadow" role="button" href="afficher_demandes.php">Revenir</a>
+              <div><button class="btn btn-primary" type="submit" name="submit" value="ok">Inscrire</button>
+                <a class="btn btn-primary shadow" role="button" href="afficher_demandes_v.php"><i class="fa-solid fa-arrow-left"></i></a>
               </div>
-              <?php if ($submit == "ok") {
-                $FK_ID_Tournoi = $_POST['FK_ID_Tournoi'];
-                $FK_ID_Equipe = $_POST['FK_ID_Equipe'];
-                inscription_equipe_tournoi($FK_ID_Tournoi, $FK_ID_Equipe);
-                echo "</br></br>";
-                echo "<h5 class=\"fw-bold text-success mb-2\">Vous avez une nouvelle inscription ! </h5>";
-              } ?>
             </form>
           </div>
         </div>

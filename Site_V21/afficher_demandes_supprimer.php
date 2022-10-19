@@ -10,6 +10,11 @@ if (!empty($_GET['submit'])) {
 
   if ($option == 'modifier') {
     update_statut_inscriptions($id_inscription);
+?>
+    <div class="alert alert-success" role="alert">
+      Inscription validée, déplacée vers 'Inscriptions validées'
+    </div>
+<?php
   } elseif ($option == 'annuler') {
     update_statut_equipes_en_attente($id_inscription);
   } elseif ($option == 'supprimer') {
@@ -24,7 +29,7 @@ if (!empty($_GET['submit'])) {
   <meta charset="utf-8">
   <script src="https://kit.fontawesome.com/5a023d1c0f.js" crossorigin="anonymous"></script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-  <title>Visualiser - Inscriptions</title>
+  <title>Visualiser - historique inscriptions</title>
   <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800&amp;display=swap">
   <link rel="stylesheet" href="assets/fonts/ionicons.min.css">
@@ -47,11 +52,21 @@ if (!empty($_GET['submit'])) {
           <form action="#" method="get">
             <table>
               <tbody>
-                <?php afficher_toutes_inscriptions_supprimees(); ?>
+                <?php 
+                
+                if (empty(selectionnerInscription_s())) {
+                  echo ' <tr<td><CENTER><h1 class="fw-bold text-danger">Aucune inscription supprimée</h1></td></tr>';
+                } else {
+                  afficher_toutes_inscriptions_supprimees();
+                }
+                
+                
+                
+                ?>
               </tbody>
             </table>
           </form>
-          <a class="btn btn-primary shadow" role="button" href="tournois.php">Revenir</a>
+          <a class="btn btn-primary shadow" role="button" href="afficher_demandes_v.php"><i class="fa-solid fa-arrow-left"></i></a>
         </div>
       </div>
   </section>

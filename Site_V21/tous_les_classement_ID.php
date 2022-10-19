@@ -47,23 +47,27 @@ function refreshSessionTournoi()
         <div class="row mb-5">
           <div class="col-md-8 col-xl-6 text-center mx-auto">
             <p class="fw-bold text-success mb-2">Classements</p>
-            <h2 class="fw-bold">Classement du tournoi</h2>
+            <h2 class="fw-bold">Tournoi du <?= date("d.m.Y", strtotime(afficherDateTournoi($_SESSION['id_tournoi']))) ?>&nbsp;</h2>
           </div>
         </div>
         <div class="row d-flex justify-content-center">
           <div class="col-md-5 col-xl-6">
             <form action="classement_tournoi.php" method="get">
 
-              <table class="table ">
+              <table class="table" style="margin-left:auto;">
                 <thead>
                   <tr>
-                    <th>Place</th>
-                    <th>Equipe</th>
+                    <th>
+                      <h1>Place</h1>
+                    </th>
+                    <th>
+                      <h1>Equipe</h1>
+                    </th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
-                    <td>1 place</td>
+                    <td>1 <i class="fa-solid fa-trophy"></i></td>
                     <td><?php gagnant4($_GET['id_tournoi']); ?></td>
                   </tr>
                   <tr class="">
@@ -151,7 +155,7 @@ function refreshSessionTournoi()
 
             </form>
             </br>
-            <a class="btn btn-primary shadow" href="match.php"><i class="fa-solid fa-arrow-left"></i></a>
+            <a href="javascript:history.go(-1)"><i class="fa-solid fa-arrow-left"></i></a>
             <?php
             ?>
           </div>

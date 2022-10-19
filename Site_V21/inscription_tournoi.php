@@ -1,20 +1,15 @@
 <?php
 include('./functions/dbconnection.php');
 include('./functions/tournoi.php');
-
-
-
-//echo $_POST['submit'];
-
 if (isset($_POST['submit'])) {
   $FK_ID_Tournoi = $_POST['FK_ID_Tournoi'];
   $FK_ID_Equipe = $_POST['FK_ID_Equipe'];
   inscription_equipe_tournoi($FK_ID_Tournoi, $FK_ID_Equipe);
+  header("Location: afficher_demandes.php");
 }
 ?>
 <!DOCTYPE html>
 <html lang="en">
-
 
 <head>
   <meta charset="utf-8">
@@ -39,7 +34,6 @@ if (isset($_POST['submit'])) {
         <div class="col-md-6 col-xl-4">
           <div>
             <form action="inscription_tournoi.php" class="p-3 p-xl-4" method="post">
-
               <p class="fw-bold text-success mb-2">Choisissez la date du tournoi auquel vous voulez participer</p>
               <select name="FK_ID_Tournoi" id="listeIdTournoi">
                 <?php selection_tournoi_incription($ID_Tournoi) ?>
@@ -49,13 +43,11 @@ if (isset($_POST['submit'])) {
               <select name="FK_ID_Equipe" id="listeIdTournoi">
                 <?php selection_equipe_incription($IdEquipe) ?>
               </select>
-
               <br /><br />
               <div><button class="btn btn-primary shadow d-block w-100" type="submit" name="submit">S'inscrire</button></div>
               <br /><br />
               <div><button class="btn btn-primary shadow d-block w-100" type="reset" name="reset">Annuler</button></div>
             </form>
-           
           </div>
         </div>
       </div>

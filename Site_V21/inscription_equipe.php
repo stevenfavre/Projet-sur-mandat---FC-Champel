@@ -63,7 +63,7 @@ function refreshSessionTournoi()
         <h6 style="padding-left: 83%;">
           <a class="btn btn-primary shadow" role="button" href="match.php"><i class="fa-solid fa-arrow-left"></i></a></br></br>
 
-          <button class="btn btn-primary" type="submit" name="submit" value="ok">Tout choisir</button>
+          <a class="btn btn-primary shadow" role="button" href="test.php?id_tournoi=<?php echo $_GET['id_tournoi'] ?>">Tout choisir</a>
 
           <!--  <a class="btn btn-primary shadow" role="button" href="testInscription.php?id_tournoi=<?php echo $_GET['id_tournoi'] ?>">Inscrire toutes les equipes</a> -->
 

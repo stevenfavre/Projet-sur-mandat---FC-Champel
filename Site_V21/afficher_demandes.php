@@ -14,6 +14,11 @@ if (!empty($_GET['submit'])) {
     update_statut_equipes_en_attente($id_inscription);
   } elseif ($option == 'supprimer') {
     update_statut_equipes_en_supprimer($id_inscription);
+?>
+    <script type="text/javascript">
+      alert("Inscription déplacé dans la corbeille  ! ");
+    </script>
+<?php
   }
 }
 ?>

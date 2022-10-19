@@ -1,6 +1,7 @@
 <?php
+include('./functions/dbconnection.php');
+include('./functions/tournoi.php');
 
-require_once './functions/steven_fonctions.php'
 
 ?>
 <!DOCTYPE html>
@@ -21,13 +22,15 @@ require_once './functions/steven_fonctions.php'
 
     <div class="row mb-5">
       <div class="col-md-8 col-xl-6 text-center mx-auto">
-        <h3 class="fw-bold text-success mb-2">Tous les tournois</h3>
+        <h3 class="fw-bold text-success mb-2">Historique tournois</h3>
         <br /><br />
         <p class="text-muted w-lg-50">Différents tournois gérés grâce à notre système.&nbsp;</p>
       </div>
     </div>
     <div class="row row-cols-1 row-cols-md-2 mx-auto" style="max-width: 900px;">
-      <?php affichageAllTournois(); ?>
+      <?php
+      affichageAllTournoisTermines();
+      ?>
     </div>
     </div>
   </section>

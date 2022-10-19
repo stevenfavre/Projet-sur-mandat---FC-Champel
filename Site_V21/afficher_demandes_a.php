@@ -1,26 +1,31 @@
 <?php
-error_reporting(E_ERROR | E_PARSE);
-
 include('./functions/dbconnection.php');
 include('./functions/tournoi.php');
-
 if (!empty($_GET['submit'])) {
   $_SESSION['submit'] = $_GET['submit'];
   $submit = filter_input(INPUT_GET, 'submit');
   $coupure = explode("-", $submit);
-  $id_tournoi = $coupure[0];
+  $id_inscription = $coupure[0];
   $option = $coupure[1];
-  $Salle = $coupure[2];
-  $DateDebut = $coupure[3];
-  $Datefin = $coupure[4];
-  if ($option == 'activer') {
-    update_activer_logique($id_tournoi);
+
+  if ($option == 'modifier') {
+    update_statut_inscriptions($id_inscription);
 ?>
     <div class="alert alert-success" role="alert">
-      Tournoi validé, déplacé vers 'Liste tournois'
+      <?php echo  " L'inscription du " .  contientiNSCRIPTION($id_inscription) . " a été validé !  " ?>
+
+    </div>
+  <?php
+  } elseif ($option == 'annuler') {
+    update_statut_equipes_en_attente($id_inscription);
+  } elseif ($option == 'supprimer') {
+    update_statut_equipes_en_supprimer($id_inscription);
+  ?>
+    <div class="alert alert-danger" role="alert">
+      <?php echo  " L'inscription du " .  contientiNSCRIPTION($id_inscription) . " a été supprimée !  " ?>
+
     </div>
 <?php
-
   }
 }
 ?>
@@ -31,7 +36,7 @@ if (!empty($_GET['submit'])) {
   <meta charset="utf-8">
   <script src="https://kit.fontawesome.com/5a023d1c0f.js" crossorigin="anonymous"></script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-  <title>Visualiser - Tournois</title>
+  <title>Visualiser - Inscriptions</title>
   <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800&amp;display=swap">
   <link rel="stylesheet" href="assets/fonts/ionicons.min.css">
@@ -44,40 +49,32 @@ if (!empty($_GET['submit'])) {
       <div class="container py-5">
         <div class="row mb-5">
           <div class="col-md-8 col-xl-6 text-center mx-auto">
-            <p class="fw-bold text-success mb-2">Tous les tournois supprimés</p>
-            <h1>Historique tournois supprimés</h1>
+            <p class="fw-bold text-success mb-2">Liste inscriptions en attente </p>
+            <h1>Inscriptions en attente - equipe</h1>
           </div>
         </div>
         <div class="row d-flex justify-content-center">
-          <div class="col-md-8 col-xl-8">
-            <form action="afficher_tournois_supprimer.php" method="get">
+          <div class="col-md-8 col-xl-10">
+            <form action="#" method="get">
               <table>
                 <tbody>
-
                   <?php
-                  if (empty(afficher_TournoiDelete())) {
-                    echo ' <tr<td><CENTER><h1 class="fw-bold text-danger">Aucun tournoi supprimé</h1></td></tr>';
+                  if (empty(selectionnerInscription_a())) {
+                    echo ' <tr<td><CENTER><h1 class="fw-bold">Aucune inscription en attente</h1></td></tr>';
                   } else {
-                    afficher_date_tournoi_supprime();
+                    afficher_toutes_inscriptions_en_attente();
                   }
-
                   ?>
-
                 </tbody>
               </table>
-
-
-
-
             </form>
-
-
-
-            <a class="btn btn-primary shadow" role="button" href="afficher_tournois.php"><i class="fa-solid fa-arrow-left"></i></a></p>
-
-
-
-
+            <a class="btn btn-primary shadow" role="button" href="afficher_demandes_v.php"><i class="fa-solid fa-arrow-left"></i></a>
+            <h6 style="padding-left: 80%;">
+              <a href="inscription_tournoi_equipe.php" class="fw-bold"><i class="fa-solid fa-plus"></i> Ajouter inscription </a>
+            </h6>
+            <h6 style="padding-left: 80%;">
+              <a href="afficher_demandes_supprimer.php" class="fw-bold"><i class="fa-regular fa-trash-can"></i> Historique inscriptions </a>
+            </h6>
           </div>
         </div>
       </div>
@@ -85,8 +82,7 @@ if (!empty($_GET['submit'])) {
     </div>
     </div>
   </section>
-  <?php include_once('default_pages/footer.php');
-  ?>
+  <?php include_once('default_pages/footer.php'); ?>
   <script src="assets/js/jquery.min.js"></script>
   <script src="assets/bootstrap/js/bootstrap.min.js"></script>
   <script src="assets/js/script.min.js"></script>

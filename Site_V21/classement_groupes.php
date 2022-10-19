@@ -26,41 +26,52 @@ if (!empty($_GET['submit'])) {
   <section class="py-5">
     <div class="container" style="width: 5000px;margin: auto;border: 5px solid #FF0000;">
       <div class="container py-5">
-          <div class="col-md-8 col-xl-6 text-center mx-auto">
-            <p class="fw-bold text-success mb-2">Tous les groupes</p>
-            <h1>Classement groupes</h1>
-          </div>
+        <div class="col-md-8 col-xl-6 text-center mx-auto">
+          <p class="fw-bold text-success mb-2">Tous les groupes</p>
+          <h1>Classement groupes</h1>
+        </div>
         <div class="row d-flex justify-content-center">
-       
+
           <div class="col-md-10 col-xl-7">
-        
+
 
             <form action="classement_groupes.php" method="get">
-          
 
-                  <?php
-                  affichageGroupes($_SESSION['id_tournoi']);
-                  ?>
-         
+
+              <?php
+              affichageGroupes($_SESSION['id_tournoi']);
+              ?>
+
               <?php
               if (empty($_GET['id_tournoi'])) { ?>
-              <table><tbody><td> <a class="btn btn-primary shadow" role="button" href="test2.php?id_tournoi=<?php echo $id_groupe1 ?>"><i class="fa-solid fa-arrows-rotate"></i></a>
-                <a class="btn btn-primary shadow" role="button" href="classement_groupes1.php?id_tournoi=<?php $_GET['id_tournoi'] ?>">Calculer points</a></td></tbody></table>
-                
+                <table>
+                  <tbody>
+                    <td> <a class="btn btn-primary shadow" role="button" href="test2.php?id_tournoi=<?php echo $id_groupe1 ?>"><i class="fa-solid fa-arrows-rotate"></i></a>
+                      <a class="btn btn-primary shadow" role="button" href="classement_groupes1.php?id_tournoi=<?php $_GET['id_tournoi'] ?>">Calculer points</a>
+                    </td>
+                  </tbody>
+                </table>
+
               <?php    } else { ?>
                 <a class="btn btn-primary shadow" role="button" href="test2.php?id_tournoi=<?php echo $_GET['id_tournoi'] ?>"><i class="fa-solid fa-arrows-rotate"></i></a>
                 <a class="btn btn-primary shadow" role="button" href="classement_groupes1.php?id_tournoi=<?php echo $_GET['id_tournoi'] ?>">Calculer points</a>
               <?php }
               ?>
+
+
             </form>
-              </br></br>
-            <table><tbody>
-              
-              <td>
-              <a class="btn btn-primary" role="button" href="./functions/algorithme_quart_finale.php?id_tournoi=<?php echo $_SESSION['id_tournoi'] ?>">Générer quarts de finale</a>&nbsp</td>
-           <td> &nbsp<a class="btn btn-primary" role="button" href="./functions/algorithme_match_9e_16e_place.php?id_tournoi=<?php echo $_SESSION['id_tournoi'] ?>">Générer matchs 9ème-16ème place</a>
-            </td>  </tbody></table>
-         
+            </br></br>
+            <table>
+              <tbody>
+
+                <td>
+                  <a class="btn btn-primary" role="button" href="./functions/algorithme_quart_finale.php?id_tournoi=<?php echo $_SESSION['id_tournoi'] ?>">Générer quarts de finale</a>&nbsp
+                </td>
+                <td> &nbsp<a class="btn btn-primary" role="button" href="./functions/algorithme_match_9e_16e_place.php?id_tournoi=<?php echo $_SESSION['id_tournoi'] ?>">Générer matchs 9ème-16ème place</a>
+                </td>
+              </tbody>
+            </table>
+
           </div>
         </div>
       </div>

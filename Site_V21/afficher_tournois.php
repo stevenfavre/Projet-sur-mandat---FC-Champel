@@ -15,10 +15,27 @@ if (!empty($_GET['submit'])) {
   $Datefin = $coupure[4];
   if ($option == 'activer') {
     update_activer_logique($id_tournoi);
+?>
+    <div class="alert alert-success" role="alert">
+      Le tournoi du <?php echo afficherDateTournoi($id_tournoi); ?> est activé !
+    </div>
+  <?php
   } elseif ($option == 'terminer') {
     update_terminer_logique($id_tournoi);
+  ?>
+    <div class="alert alert-dark" role="alert">
+      Le tournoi du <?php echo afficherDateTournoi($id_tournoi); ?> est terminé !
+    </div>
+
+  <?php
+
   } elseif ($option == 'annuler') {
     update_suppresion_logique($id_tournoi);
+  ?>
+    <div class="alert alert-danger" role="alert">
+      Le tournoi du <?php echo afficherDateTournoi($id_tournoi); ?> est supprimé ! Déplacée dans la corbeille
+    </div>
+<?php
   } elseif ($option == "modifier") {
     update_tournoi($id_tournoi, $DateDebut, $Datefin, $Salle);
   }
@@ -54,23 +71,23 @@ if (!empty($_GET['submit'])) {
               <table>
                 <tbody>
                   <?php
-                  afficher_date_tournoi();
+                  if (empty(afficher_Tournoi())) {
+                    echo ' <tr<td><CENTER><h1 class="fw-bold text-danger">Aucun tournoi</h1></td></tr>';
+                  } else {
+                    afficher_date_tournoi();
+                  }
+
                   ?>
                 </tbody>
               </table>
             </form>
             <a class="btn btn-primary shadow" role="button" href="tournois.php"><i class="fa-solid fa-arrow-left"></i></a>
-
             <h6 style="padding-left: 83%;">
               <a href="creer_tournoi.php" class="fw-bold"><i class="fa-solid fa-plus"></i>&nbsp&nbspCréer tournoi</a>
               </br></br>
               <a href="afficher_tournois_supprimer.php" class="fw-bold"><i class="fa-regular fa-trash-can"></i>&nbsp&nbspHistorique</a>
             </h6>
-
-
           </div>
-
-
         </div>
       </div>
     </div>
