@@ -14,16 +14,15 @@ $errorMessage = "Veuillez remplir tous les champs pour effectuer une modificatio
 //Cette partie vérifie si les champs à modifier ne sont pas vide, si les champs ne sont pas vide la fonction de modification s'applique.
 
 if (isset($idEquipe) && isset($nomEquipe) && isset($degreEquipe) && isset($actifEquipe)) {
-    if(!empty($idEquipe) && !empty($nomEquipe) && !empty($degreEquipe) && !empty($actifEquipe)){
+    if (!empty($idEquipe) && !empty($nomEquipe) && !empty($degreEquipe) && $actifEquipe != null) {
         modification_equipes($idEquipe, $nomEquipe, $degreEquipe, $actifEquipe);
-    }
-    elseif(empty($idEquipe) or empty($nomEquipe) or empty($degreEquipe) or empty($actifEquipe)){
+    } else {
         echo "<font color='#FF0000'>";  //sources : http://www.info-3000.com/phpmysql/validation/index.php
         echo $errorMessage;
         echo "</font>";
         echo "<BR>";
     }
-}  
+}
 
 
 ?>
@@ -47,7 +46,7 @@ if (isset($idEquipe) && isset($nomEquipe) && isset($degreEquipe) && isset($actif
             <div class="row mb-5">
                 <div class="col-md-8 col-xl-6 text-center mx-auto">
                     <p class="fw-bold text-success mb-2">Modification</p>
-                    <h2 class="fw-bold">Modifiez les informations de l'équipe</h2>
+                    <h2 class="fw-bold">Modifier les informations de l'équipe</h2>
                 </div>
             </div>
             <div class="row d-flex justify-content-center">
@@ -68,8 +67,8 @@ if (isset($idEquipe) && isset($nomEquipe) && isset($degreEquipe) && isset($actif
                             <div class="mb-3"><input class="form-control" type="text" id="Degres_EquipeModif" name="Degres_Equipe" placeholder="Degré de l'équipe"></div>
                             Statut
                             <select name="Actif_equipe" id="Actif_equipeModif">
-                                <option>0</option>
-                                <option selected="selected">1</option>
+                                <option value="0">Désactivé</option>
+                                <option value="1" selected="selected">Activé</option>
                             </select>
                             <br /><br />
                             <div><input class="btn btn-primary shadow d-block w-100" value='Envoyer' type="submit"></div>

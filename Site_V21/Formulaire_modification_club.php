@@ -11,7 +11,7 @@ $target_dir = "assets/img/team/"; //sources : https://www.php.net/manual/en/func
 $errorMessage = "Veuillez remplir tous les champs pour effectuer une modification !";
 
 
-if (isset($nomClubModif) && isset($nomClub) && isset($actifClub)){
+if (isset($nomClubModif) && isset($nomClub) && isset($actifClub)) {
     if (!empty($nomClubModif) && !empty($nomClub) && ($actifClub) != null) { //sources : https://www.php.net/manual/en/function.move-uploaded-file.php
         $target_file = $target_dir . basename($_FILES["Image_Club"]["name"]); //sources : https://www.php.net/manual/en/function.move-uploaded-file.php
         if (move_uploaded_file($_FILES["Image_Club"]["tmp_name"], $target_file)) //sources : https://www.php.net/manual/en/function.move-uploaded-file.php
@@ -47,7 +47,7 @@ if (isset($nomClubModif) && isset($nomClub) && isset($actifClub)){
             <div class="row mb-5">
                 <div class="col-md-8 col-xl-6 text-center mx-auto">
                     <p class="fw-bold text-success mb-2">Modification</p>
-                    <h2 class="fw-bold">Modifiez les informations du club</h2>
+                    <h2 class="fw-bold">Modifier les informations du club</h2>
                 </div>
             </div>
             <div class="row d-flex justify-content-center">
@@ -68,8 +68,8 @@ if (isset($nomClubModif) && isset($nomClub) && isset($actifClub)){
                             <div class="mb-3"><input class="form-control" type="file" id="Image_Club" name="Image_Club"></div> <!-- sources : https://www.w3schools.com/php/php_file_upload.asp -->
                             Statut
                             <select name="Actif_club" id="Actif_clubModif">
-                                <option value="0">0</option>
-                                <option value="1" selected="selected">1</option>
+                                <option value="0">Désactivé</option>
+                                <option value="1" selected="selected">Activé</option>
                             </select>
                             <br /><br />
                             <div><input class="btn btn-primary shadow d-block w-100" value='Envoyer' type="submit"></div>

@@ -40,7 +40,7 @@ if (isset($Nom_Equipe) && isset($Degres_Equipe)) {
             <div class="row mb-5">
                 <div class="col-md-8 col-xl-6 text-center mx-auto">
                     <p class="fw-bold text-success mb-2">Insertion</p>
-                    <h2 class="fw-bold">Insérez les équipes dans la base de données</h2>
+                    <h2 class="fw-bold">Insérer les équipes dans la base de données</h2>
                 </div>
             </div>
             <div class="row d-flex justify-content-center">

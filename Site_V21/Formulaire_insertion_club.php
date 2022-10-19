@@ -46,7 +46,7 @@ if (isset($nomClub) && isset($rueAdresse) && isset($localiteAdresse) && isset($n
             <div class="row mb-5">
                 <div class="col-md-8 col-xl-6 text-center mx-auto">
                     <p class="fw-bold text-success mb-2">Insertion</p>
-                    <h2 class="fw-bold">Insérez les clubs dans la base de données</h2>
+                    <h2 class="fw-bold">Insérer les clubs dans la base de données</h2>
                 </div>
             </div>
             <div class="row d-flex justify-content-center">
