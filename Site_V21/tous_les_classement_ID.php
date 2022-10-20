@@ -46,120 +46,207 @@ function refreshSessionTournoi()
       <div class="container py-5">
         <div class="row mb-5">
           <div class="col-md-8 col-xl-6 text-center mx-auto">
-            <p class="fw-bold text-success mb-2">Classements</p>
-            <h2 class="fw-bold">Tournoi du <?= date("d.m.Y", strtotime(afficherDateTournoi($_SESSION['id_tournoi']))) ?>&nbsp;</h2>
           </div>
         </div>
-        <div class="row d-flex justify-content-center">
-          <div class="col-md-5 col-xl-6">
-            <form action="classement_tournoi.php" method="get">
+        <CENTER>
+          <h1 class="fw-bold text-success mb-2">Classements du tournoi </h1>
 
-              <table class="table" style="margin-left:auto;">
-                <thead>
-                  <tr>
-                    <th>
-                      <h1>Place</h1>
-                    </th>
-                    <th>
-                      <h1>Equipe</h1>
-                    </th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>1 <i class="fa-solid fa-trophy"></i></td>
-                    <td><?php gagnant4($_GET['id_tournoi']); ?></td>
-                  </tr>
-                  <tr class="">
-                    <td>2 place</td>
-                    <td><?php gagnant3($_GET['id_tournoi']); ?></td>
+          <h2 class="fw- text-success">Tournoi du <?= date("d.m.Y", strtotime(afficherDateTournoi($_SESSION['id_tournoi']))) ?>&nbsp;</h2>
+          </br>
+          <div class="row d-flex justify-content-center">
+            <div class="col-md-5 col-xl-6">
+              <form action="classement_tournoi.php" method="get">
 
-                  </tr>
-                  <tr class="text">
-                    <td>3 place</td>
-                    <td><?php gagnant5($_GET['id_tournoi']); ?></td>
+                <table class="table" style="margin-left:auto;">
+                  <thead>
 
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>
+                        <CENTER>
+                          <h1>1 place <i class="fa-solid fa-trophy"></i></h1>
+                      </td>
+                      <td>
+                        <CENTER>
+                          <h1><?php gagnant4($_GET['id_tournoi']); ?></h1>
+                      </td>
+                    </tr>
+                    <tr class="">
+                      <td>
+                        <CENTER>
+                          <h2>2 place <i class="fa-solid fa-award"></i></h2>
+                      </td>
+                      <td>
+                        <CENTER>
+                          <h2><?php gagnant3($_GET['id_tournoi']); ?></h2>
+                      </td>
 
-                  </tr>
-                  <tr>
-                    <td>4 place</td>
-                    <td><?php gagnant6($_GET['id_tournoi']); ?></td>
-                  </tr>
-                  <tr class="">
-                    <td>5 place</td>
-                    <td><?php gagnant8($_GET['id_tournoi']); ?></td>
+                    </tr>
 
-                  </tr>
-                  <tr class="text">
-                    <td>6 place</td>
-                    <td><?php gagnant7($_GET['id_tournoi']); ?></td>
-
-
-                  </tr>
-                  <tr>
-                    <td>7 place</td>
-                    <td><?php gagnant10($_GET['id_tournoi']); ?></td>
-                  </tr>
-                  <tr class="">
-                    <td>8 place</td>
-                    <td><?php gagnant9($_GET['id_tournoi']); ?></td>
-
-                  </tr>
-                  <tr class="text">
-                    <td>9 place</td>
-                    <td><?php gagnant12($_GET['id_tournoi']); ?></td>
+                    <td>
+                      <CENTER>
+                        <h3>3 place <i class="fa-solid fa-medal"></i></h3>
+                    </td>
+                    <td>
+                      <CENTER>
+                        <h3><?php gagnant5($_GET['id_tournoi']); ?></h3>
+                    </td>
 
 
-                  </tr>
-                  <tr>
-                    <td>10 place</td>
-                    <td><?php gagnant11($_GET['id_tournoi']); ?></td>
-                  </tr>
-                  <tr class="">
-                    <td>11 place</td>
-                    <td><?php gagnant14($_GET['id_tournoi']); ?></td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <CENTER>
+                          <h3>4 place <i class="fa-solid fa-star"></i></h3>
+                      </td>
+                      <td>
+                        <CENTER>
+                          <h3><?php gagnant6($_GET['id_tournoi']); ?></h3>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <CENTER>
+                          <h3>5 place <i class="fa-solid fa-star-half-stroke"></i></h3>
+                      </td>
+                      <td>
+                        <CENTER>
+                          <h3><?php gagnant8($_GET['id_tournoi']); ?></h3>
+                      </td>
 
-                  </tr>
-                  <tr class="text">
-                    <td>12 place</td>
-                    <td><?php gagnant13($_GET['id_tournoi']); ?></td>
-
-
-                  </tr>
-                  <tr>
-                    <td>13 place</td>
-                    <td><?php gagnant16($_GET['id_tournoi']); ?></td>
-                  </tr>
-                  <tr class="">
-                    <td>14 place</td>
-                    <td><?php gagnant15($_GET['id_tournoi']); ?></td>
-
-                  </tr>
-                  <tr class="text">
-                    <td>15 place</td>
-                    <td><?php gagnant17($_GET['id_tournoi']); ?></td>
-
-
-                  </tr>
-
-
-                  <tr class="">
-                    <td>16 place</td>
-                    <td><?php gagnant18($_GET['id_tournoi']); ?></td>
-
-                  </tr>
-                </tbody>
-              </table>
+                    </tr>
+                    <tr>
+                      <td>
+                        <CENTER>
+                          <h4>6 place <i class="fa-regular fa-star"></i></h4>
+                      </td>
+                      <td>
+                        <CENTER>
+                          <h4><?php gagnant7($_GET['id_tournoi']); ?></h4>
+                      </td>
 
 
+                    </tr>
+                    <tr>
+                      <td>
+                        <CENTER>
+                          <h4>7 place </h4>
+                      </td>
+                      <td>
+                        <CENTER>
+                          <h4><?php gagnant10($_GET['id_tournoi']); ?></h4>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <CENTER>
+                          <h5>8 place</h5>
+                      </td>
+                      <td>
+                        <CENTER>
+                          <h5><?php gagnant9($_GET['id_tournoi']); ?></h5>
+                      </td>
 
-            </form>
-            </br>
-            <a href="javascript:history.go(-1)"><i class="fa-solid fa-arrow-left"></i></a>
-            <?php
-            ?>
+                    </tr>
+                    <tr>
+                      <td>
+                        <CENTER>
+                          <h5>9 place</h5>
+                      </td>
+                      <td>
+                        <CENTER>
+                          <h5><?php gagnant12($_GET['id_tournoi']); ?></h5>
+                      </td>
+
+
+                    </tr>
+                    <tr>
+                      <td>
+                        <CENTER>
+                          <h5>10 place</h5>
+                      </td>
+                      <td>
+                        <CENTER>
+                          <h5><?php gagnant11($_GET['id_tournoi']); ?></h5>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <CENTER>
+                          <h5>11 place</h5>
+                      </td>
+                      <td>
+                        <CENTER>
+                          <h5><?php gagnant14($_GET['id_tournoi']); ?></h5>
+                      </td>
+
+                    </tr>
+                    <tr>
+                      <td>
+                        <CENTER>
+                          <h5>12 place</h5>
+                      </td>
+                      <td>
+                        <CENTER>
+                          <h5><?php gagnant13($_GET['id_tournoi']); ?></h5>
+                      </td>
+
+
+                    </tr>
+                    <tr>
+                      <td>
+                        <CENTER>
+                          <h5>13 place</h5>
+                      </td>
+                      <td>
+                        <CENTER>
+                          <h5><?php gagnant16($_GET['id_tournoi']); ?></h5>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <CENTER>
+                          <h5>14 place</h5>
+                      </td>
+                      <td>
+                        <CENTER>
+                          <h5><?php gagnant15($_GET['id_tournoi']); ?></h5>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <CENTER>
+                          <h5>15 place</h5>
+                      </td>
+                      <td>
+                        <CENTER>
+                          <h5><?php gagnant17($_GET['id_tournoi']); ?></h5>
+                      </td>
+                    </tr>
+
+                    <tr>
+                      <td>
+                        <CENTER>
+                          <h5>16 place</h5>
+                      </td>
+                      <td>
+                        <CENTER>
+                          <h5><?php gagnant18($_GET['id_tournoi']); ?></h5>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+
+
+
+              </form>
+              </br>
+              <a href="javascript:history.go(-1)"><i class="fa-solid fa-arrow-left"></i></a>
+              <?php
+              ?>
+            </div>
           </div>
-        </div>
   </section>
 
   <?php include_once('default_pages/footer.php'); ?>
